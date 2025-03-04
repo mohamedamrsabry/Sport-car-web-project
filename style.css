@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+}
+
+
+.wall-image {
+    position: absolute; /* So it scrolls away normally */
+    top: 0;
+    width: 100vw;
+    height: 100vh; /* Full viewport height */
+    object-fit: cover;
+    z-index: 0;
+}
+.top-menu {
+    padding: 1px;
+    background-color: rgba(255, 255, 255, 0.495);
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 14px;
+    box-shadow: 0 10px 18px rgba(255, 255, 255, 0.557);
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+
+.objects-menu {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+
+
