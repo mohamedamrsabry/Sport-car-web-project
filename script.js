@@ -21,3 +21,8 @@ document.addEventListener("mousemove", (e) => {
     goldLight.style.top = `${e.clientY}px`;
 });
 
+
+
+
+
+
