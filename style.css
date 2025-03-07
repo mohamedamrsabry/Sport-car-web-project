@@ -44,10 +44,10 @@ nav {
     transform: translateX(-50%);
     top: 2rem;
     position: fixed;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.3) 10%, rgba(255, 255, 255, 0) 40%);
-    backdrop-filter: blur(10px);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.25) 10%, rgba(255, 255, 255, 0.05) 80%);
+    backdrop-filter: blur(15px);
     border-radius: 30px;
-    box-shadow: 0 6px 6px rgba(255, 255, 255, 0.139);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.08);
     z-index: 99;
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 
@@ -141,6 +141,7 @@ a:hover{
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 .trans-image img {
@@ -151,6 +152,10 @@ a:hover{
     top: 0;
     left: 0;
     z-index: 1; /* Image at the back */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
+
+    
 }
 
 .black-cover {
