@@ -88,3 +88,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    let counter = document.getElementById("speedCounter");
+    let audio = document.getElementById("engineSound");
+    let section = document.getElementById("revSection");
+    let speed = 0;
+    let revving = false; // Prevent multiple revs
+
+    // Start rev sequence when "W" is pressed
+    document.addEventListener("keydown", (event) => {
+        if (event.key.toLowerCase() === "w" && !revving) {
+            revving = true; // Prevent multiple starts
+            audio.play();
+            
+            let interval = setInterval(() => {
+                speed += 0.7;
+                counter.textContent = Math.floor(speed) + " km/h"; // Remove decimal
+                if (speed >= 325) clearInterval(interval);
+            }, 50);
+        }
+    });
+});
+
+
