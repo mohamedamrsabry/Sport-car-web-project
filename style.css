@@ -13,6 +13,7 @@ body {
     overflow-x: hidden; /* Prevents horizontal scrolling */
     width:100%;
     min-height: 500vh;
+    margin-top:80px;
 }
 
 /* Gold spotlight effect */
@@ -72,7 +73,7 @@ ul{
     display: flex;
     align-items: center;
     gap: 3rem;
-    margin: 0 auto; /* Keep it centered */
+    margin: 0 auto;
 }
 a{
     text-decoration: none;
@@ -112,6 +113,7 @@ a:hover{
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: -20px;
 }
 
 .logo {
@@ -148,7 +150,7 @@ a:hover{
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1; /* Ensure it's behind */
+    z-index: 1; /* Image at the back */
 }
 
 .black-cover {
@@ -162,6 +164,8 @@ a:hover{
     display: flex;
     align-items: center;
     justify-content: center;
+    mix-blend-mode: multiply; /* Creates blending effect */
+    transition: transform 1.5s ease-out, opacity 1.5s ease-out;
 }
 
 .text-overlay {
@@ -171,10 +175,8 @@ a:hover{
     text-transform: uppercase;
     position: relative;
     z-index: 3;
-    background: url('img/sport-cars-parade-race-highway.jpg');
-    background-size: cover;
-    background-position: center;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    transition: transform 1.5s ease-out, opacity 0.3s ease-out;
+    color: white; /* Just as a fallback */
+    mix-blend-mode: screen; /* Cuts out text to reveal the image */
+    transition: transform 1.5s ease-out, opacity 1.5s ease-out;
 }
+

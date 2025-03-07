@@ -18,7 +18,7 @@ document.body.appendChild(goldLight);
 
 document.addEventListener("mousemove", (e) => {
     goldLight.style.left = `${e.clientX}px`;
-    goldLight.style.top = `${e.clientY}px`;
+    goldLight.style.top = `${e.clientY}px`; 
 });
 
 document.addEventListener("DOMContentLoaded", () => {
