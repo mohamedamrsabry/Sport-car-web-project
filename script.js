@@ -88,24 +88,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+
 document.addEventListener("DOMContentLoaded", () => {
     let counter = document.getElementById("speedCounter");
     let audio = document.getElementById("engineSound");
-    let section = document.getElementById("revSection");
     let speed = 0;
-    let revving = false; // Prevent multiple revs
+    let revving = false;
+    let interval = null;
 
-    // Start rev sequence when "W" is pressed
+    // Start revving when "W" is pressed
     document.addEventListener("keydown", (event) => {
         if (event.key.toLowerCase() === "w" && !revving) {
-            revving = true; // Prevent multiple starts
+            revving = true;
             audio.play();
-            
-            let interval = setInterval(() => {
-                speed += 0.7;
-                counter.textContent = Math.floor(speed) + " km/h"; // Remove decimal
-                if (speed >= 325) clearInterval(interval);
+
+            interval = setInterval(() => {
+                if (speed < 325) {
+                    speed += 0.7;
+                    counter.textContent = Math.floor(speed) + " km/h";
+                }
             }, 50);
+        }
+    });
+
+    // Stop revving when "W" is released
+    document.addEventListener("keyup", (event) => {
+        if (event.key.toLowerCase() === "w") {
+            revving = false;
+            audio.pause();
+            audio.currentTime = 0;
+            speed = 0; // Reset speed
+            counter.textContent = "0 km/h";
+            clearInterval(interval);
         }
     });
 });
