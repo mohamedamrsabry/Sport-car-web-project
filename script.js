@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         isScrollingDown = deltaY > 0;
 
         if (isScrollingDown && scale < maxScale) { 
-            scale += 0.1;
+            scale += 5;
             textOverlay.style.transform = `scale(${scale})`;
 
             // Gradually decrease opacity based on scale

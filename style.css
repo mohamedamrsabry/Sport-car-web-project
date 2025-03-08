@@ -4,19 +4,17 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI',sans-serif;
-    
+
 }
 html{
     overflow-x: hidden;
 }
 body {
     background-color: black; /* Base background */
-    color: white;
     position: relative;
     overflow-x: hidden; /* Prevents horizontal scrolling */
     width:100%;
-    min-height: 500vh;
-    margin-top:80px;
+    min-height: 800vh;
 }
 
 /* Gold spotlight effect */
@@ -100,7 +98,6 @@ a::after{
 a:hover::after{
     width:100%;
     left:0;
-
 }
 a:hover{
     color:gold
@@ -139,12 +136,12 @@ a:hover{
 .trans-image {
     position: relative;
     width: 100%;
-    height: 90vh;
+    height: 120vh; /* Increase height to 100vh */
+    min-height: 120vh; /* Ensure it takes full viewport height */
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
 
 .trans-image img {
@@ -155,11 +152,10 @@ a:hover{
     top: 0;
     left: 0;
     z-index: 1; /* Image at the back */
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
-
-    
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
 }
+
 
 .black-cover {
     position: absolute;
@@ -237,12 +233,12 @@ font-size: 2rem;
 font-weight: bold;
 font-family: 'frontage';
 padding: 20px 40px;
-    border-radius: 10px;
-    text-align: center;
+border-radius: 10px;
+text-align: center;
     justify-content: center;
     position: absolute;
     color: goldenrod;
-    left: 29%;;
+    left: 29%;
 }
 .speed-counter {
     position: absolute;
