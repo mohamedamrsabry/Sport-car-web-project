@@ -12,14 +12,7 @@ window.addEventListener("scroll", () => {
     lastScrollY = window.scrollY;
 });
 
-const goldLight = document.createElement("div");
-goldLight.id = "gold-light";
-document.body.appendChild(goldLight);
 
-document.addEventListener("mousemove", (e) => {
-    goldLight.style.left = `${e.clientX}px`;
-    goldLight.style.top = `${e.clientY}px`; 
-});
 
 document.addEventListener("DOMContentLoaded", () => {
     const textOverlay = document.querySelector(".text-overlay");
@@ -34,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let isScrollingDown = true; 
 
     function lockScroll(lock) {
-        document.body.style.overflow = lock ? "hidden" : "auto";
+        document.documentElement.style.overflow = lock ? "hidden" : "auto";
         isLocked = lock;
     }
 
@@ -42,9 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const sectionRect = transImageSection.getBoundingClientRect();
         const windowHeight = window.innerHeight;
 
+        // Lock when reaching the section bottom
         if (sectionRect.bottom <= windowHeight && scale === 1) {
             lockScroll(true);
-        } else if (scale <= 1) {
+        } 
+        // Unlock when scaling is complete
+        else if (scale >= unlockScale) {
             lockScroll(false);
         }
     }
@@ -58,35 +54,33 @@ document.addEventListener("DOMContentLoaded", () => {
         isScrollingDown = deltaY > 0;
 
         if (isScrollingDown && scale < maxScale) { 
-            scale += 5;
+            scale = Math.min(maxScale, scale + 0.5);  // Gradual increase
             textOverlay.style.transform = `scale(${scale})`;
 
-            // Gradually decrease opacity based on scale
+            // Smooth opacity decrease
             opacity = Math.max(0, 1 - (scale - 1) / (maxScale - 1));
             textOverlay.style.opacity = opacity;
-            blackCover.style.opacity = opacity; // Makes black cover fade out gradually
+            blackCover.style.opacity = opacity;
 
-            if (scale >= maxScale) {
+            if (scale >= unlockScale) {
                 lockScroll(false);
             }
         } else if (!isScrollingDown) { 
-            scale -= 0.1;
-            scale = Math.max(1, scale);
+            scale = Math.max(1, scale - 0.3); // Smooth reduction
             textOverlay.style.transform = `scale(${scale})`;
 
-            // Gradually restore opacity when scrolling up
+            // Restore opacity smoothly
             opacity = Math.min(1, 1 - (scale - 1) / (maxScale - 1));
             textOverlay.style.opacity = opacity;
             blackCover.style.opacity = opacity;
 
             if (scale === 1) {
                 lockScroll(false);
-                textOverlay.style.opacity = "1";
-                blackCover.style.opacity = "1";
             }
         }
     });
 });
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -126,18 +120,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 var swiper = new Swiper(".vehicles-slider", {
-
-     // Disable dragging/swiping
-     allowTouchMove: false,
-     simulateTouch: false,
-     touchStartPreventDefault: true,
-
+    allowTouchMove: true,
+    simulateTouch: true,
+    touchStartPreventDefault: true,
     centeredSlides: true,
-    spaceBetween: 20,
     loop: true,
+    slidesPerView: 1.5, // Shows half of the next and previous slides
+    spaceBetween: 20, // Adjust spacing between slides
     autoplay: {
       delay: 9500,
       disableOnInteraction: false,
+    },
+    effect: "coverflow",
+    coverflowEffect: {
+      rotate: 0, // No rotation
+      stretch: 0, // No stretch
+      depth: 200, // Adjust depth for a 3D effect
+      modifier: 1,
+      slideShadows: false,
+      scale: 0.9, // Slightly smaller side slides
+      opacity: 0.5, // Make side slides less prominent
     },
     pagination: {
       el: ".swiper-pagination",
@@ -148,16 +150,5 @@ var swiper = new Swiper(".vehicles-slider", {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
     },
-    breakpoints: {
-      0: {
-        slidesPerView: 1,
-      },
-      768: {
-        slidesPerView: 2,
-      },
-      1024: {
-        slidesPerView: 3,
-      },
-    },
-   
   });
+  

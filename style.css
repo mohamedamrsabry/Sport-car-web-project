@@ -6,7 +6,7 @@
     font-family: 'Segoe UI',sans-serif;
 
 }
-html{
+html {
     overflow-x: hidden;
 }
 body {
@@ -14,25 +14,8 @@ body {
     position: relative;
     overflow-x: hidden; /* Prevents horizontal scrolling */
     width:100%;
-    min-height: 800vh;
+    
 }
-
-/* Gold spotlight effect */
-#gold-light {
-    position: fixed;
-    width: 200px; /* Slightly larger for a smooth glow */
-    height: 200px;
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, rgba(0, 0, 0, 0) 80%);
-    pointer-events: none;
-    border-radius: 50%;
-    filter: blur(40px); /* Soft glow effect */
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    opacity: 0.9; /* Ensures visibility */
-    transition: transform 0.1s ease-out, opacity 0.2s ease-in-out;
-}
-
-
 
 
 nav {
@@ -350,6 +333,16 @@ text-align: center;
 .swiper-pagination-bullet-active {
   background-color: gold !important;
 }
+.swiper-button-next {
+padding-right: 180px;
+padding-top: 180px;
+scale: 2;
+}
+.swiper-button-prev {
+padding-left: 180px;
+padding-top: 180px;
+scale: 2;
+}
 
 /* Footer Styling */
 footer {
@@ -415,7 +408,10 @@ footer {
     font-size: 20px;
     transition: 0.3s;
 }
-
+img {
+    max-width: 100%;
+    height: auto;
+}
 .social-icons a:hover {
     color: gold;
 }
