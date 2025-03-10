@@ -12,75 +12,36 @@ window.addEventListener("scroll", () => {
     lastScrollY = window.scrollY;
 });
 
+let scaleValue = 1;
+    let opacityValue = 1;
+    let scrollingEnabled = false;
 
+    window.addEventListener('wheel', (event) => {
+        if (!scrollingEnabled) {
+            event.preventDefault(); // Prevent native scrolling
+            
 
-document.addEventListener("DOMContentLoaded", () => {
-    const textOverlay = document.querySelector(".text-overlay");
-    const blackCover = document.querySelector(".black-cover");
-    const transImageSection = document.querySelector(".trans-image");
-
-    let scale = 1; 
-    let opacity = 1; 
-    const maxScale = 6; 
-    const unlockScale = 5; 
-    let isLocked = false; 
-    let isScrollingDown = true; 
-
-    function lockScroll(lock) {
-        document.documentElement.style.overflow = lock ? "hidden" : "auto";
-        isLocked = lock;
-    }
-
-    function checkScrollUnlock() {
-        const sectionRect = transImageSection.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-
-        // Lock when reaching the section bottom
-        if (sectionRect.bottom <= windowHeight && scale === 1) {
-            lockScroll(true);
-        } 
-        // Unlock when scaling is complete
-        else if (scale >= unlockScale) {
-            lockScroll(false);
-        }
-    }
-
-    window.addEventListener("scroll", checkScrollUnlock);
-
-    window.addEventListener("wheel", (e) => {
-        if (!isLocked) return;
-
-        let deltaY = e.deltaY;
-        isScrollingDown = deltaY > 0;
-
-        if (isScrollingDown && scale < maxScale) { 
-            scale = Math.min(maxScale, scale + 0.5);  // Gradual increase
-            textOverlay.style.transform = `scale(${scale})`;
-
-            // Smooth opacity decrease
-            opacity = Math.max(0, 1 - (scale - 1) / (maxScale - 1));
-            textOverlay.style.opacity = opacity;
-            blackCover.style.opacity = opacity;
-
-            if (scale >= unlockScale) {
-                lockScroll(false);
+            if (event.deltaY > 0) {
+                scaleValue = Math.min(scaleValue + event.deltaY * 0.005, 6);
+                opacityValue = Math.max(opacityValue - event.deltaY * 0.002, 0);
             }
-        } else if (!isScrollingDown) { 
-            scale = Math.max(1, scale - 0.3); // Smooth reduction
-            textOverlay.style.transform = `scale(${scale})`;
+            else {
+                scaleValue = Math.max(scaleValue + event.deltaY * 0.005, 1);
+                opacityValue = Math.min(opacityValue - event.deltaY * 0.002, 1);
+            }
 
-            // Restore opacity smoothly
-            opacity = Math.min(1, 1 - (scale - 1) / (maxScale - 1));
-            textOverlay.style.opacity = opacity;
-            blackCover.style.opacity = opacity;
 
-            if (scale === 1) {
-                lockScroll(false);
+            const cover = document.querySelector('.black-cover');
+            cover.style.transform = `scale(${scaleValue})`;
+            cover.style.opacity = opacityValue;
+
+            if (opacityValue <= 0) {
+                scrollingEnabled = true;
+                document.body.style.overflowY = 'auto'; 
+                cover.style.display = 'none'; 
             }
         }
-    });
-});
-
+    }, { passive: false });
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -89,13 +50,15 @@ document.addEventListener("DOMContentLoaded", () => {
     let speed = 0;
     let revving = false;
     let interval = null;
+    let text=document.querySelector(".start");
 
     // Start revving when "W" is pressed
     document.addEventListener("keydown", (event) => {
         if (event.key.toLowerCase() === "w" && !revving) {
             revving = true;
             audio.play();
-
+            text.style.backgroundColor="#0000008f";
+            text.textContent="-KEEP HOLDING W-";
             interval = setInterval(() => {
                 if (speed < 325) {
                     speed += 0.7;
@@ -110,6 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.key.toLowerCase() === "w") {
             revving = false;
             audio.pause();
+            text.style.backgroundColor="#0000003a";
+            text.textContent="-PRESS W TO START-";
             audio.currentTime = 0;
             speed = 0; // Reset speed
             counter.textContent = "0 km/h";
