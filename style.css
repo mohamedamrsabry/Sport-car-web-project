@@ -323,6 +323,34 @@ text-align: center;
 .swiper-pagination-bullet-active {
     background: gold !important; /* Gold when active */
 }
+
+/* Navigation button styles - more specific selectors */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: white !important;
+  font-size: 24px !important;
+}
+
+.swiper-button-next:active::after,
+.swiper-button-prev:active::after {
+  color: gold !important;
+}
+
+
+/* Pagination dash styles */
+.swiper-pagination-bullet {
+  width: 20px !important;
+  height: 4px !important;
+  border-radius: 0 !important;
+  background-color: white !important;
+  opacity: 1 !important;
+  margin: 0 5px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: gold !important;
+}
+
 /* Footer Styling */
 footer {
     

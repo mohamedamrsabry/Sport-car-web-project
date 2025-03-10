@@ -126,17 +126,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 var swiper = new Swiper(".vehicles-slider", {
-    grabCursor: true,
-    centeredSlides: true,  
+
+     // Disable dragging/swiping
+     allowTouchMove: false,
+     simulateTouch: false,
+     touchStartPreventDefault: true,
+
+    centeredSlides: true,
     spaceBetween: 20,
-    loop:true,
+    loop: true,
     autoplay: {
       delay: 9500,
       disableOnInteraction: false,
     },
     pagination: {
       el: ".swiper-pagination",
-      clickable:true,
+      clickable: true,
+      type: "bullets",
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
     },
     breakpoints: {
       0: {
@@ -149,4 +159,5 @@ var swiper = new Swiper(".vehicles-slider", {
         slidesPerView: 3,
       },
     },
+   
   });
