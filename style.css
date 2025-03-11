@@ -369,7 +369,6 @@ scale: 2;
 
 /* Footer Styling */
 .footer-container {
-  @@ -363,19 +370,32 @@ footer {
       max-width: 100vw;
       margin: auto;
       padding: 0 25px;
@@ -382,6 +381,7 @@ scale: 2;
       width: 25%;
       min-width: 250px;
       margin-bottom: 20px;
+  }
   footer {
       color: white;
       padding: 40px 0;
@@ -408,8 +408,7 @@ scale: 2;
       color: #ffca66;
   }
   
-  .footer-section p {
-  @@ -387,24 +407,10 @@ footer {
+  .footer-section p  {
       list-style: none;
       padding: 0;
   }
@@ -434,11 +433,7 @@ scale: 2;
       justify-content: center;
       gap: 15px;
   }
-  
-  @@ -413,20 +419,22 @@ footer {
-      font-size: 20px;
-      transition: 0.3s;
-  }
+
   
   .social-icons a:hover {
       color: #ffca66;
