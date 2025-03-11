@@ -239,7 +239,7 @@ a:hover{
 .vehicles .vehicles-slider{
     padding-bottom: 5rem;
     margin-top: -210px;
-    background-image: url(img/abstract-luxury-blur-dark-grey-black-gradient-used-as-background-studio-wall-display-your-pr.jpg);
+    background-image: url();
     background-size: cover;
     background-position: center -190px;
     background-repeat: no-repeat;
@@ -283,6 +283,33 @@ a:hover{
 .vehicles .vehicles-slider .swiper-slide-active .content{
     transform: scale(1);
 }
+.btn {
+    width: 130px;
+    height: 40px;
+    font-size: 1.1em;
+    cursor: pointer;
+    background-color: #0000001f;
+    color: #ffca66;
+    border: none;
+    border-radius: 5px;
+    transition: all .4s;
+   }
+   
+   .btn:hover {
+    border-radius: 5px;
+    transform: translateY(-10px);
+    box-shadow: 0 7px 0 -2px #ffca66,
+     0 15px 0 -4px #ffca66,
+     0 16px 10px -3px #ffca66;
+   }
+   
+   .btn:active {
+    transition: all 0.2s;
+    transform: translateY(-5px);
+    box-shadow: 0 2px 0 -2px #000000,
+     0 8px 0 -4px #000000,
+     0 12px 10px -3px #000000;
+   }
 
 .vehicles .vehicles-slider .swiper-slide-active img{
     transform: scale(1);    
@@ -292,6 +319,7 @@ a:hover{
 .vehicles .vehicles-slider .box .content h3{
     font-size: 2.5rem;
     color:#ffca66;
+    padding-bottom: 20px;
 }
 
 .vehicles .vehicles-slider .box .content .price{
@@ -329,6 +357,7 @@ a:hover{
 .swiper-pagination-bullet-active {
     background: #ffca66 !important; /* Gold when active */
 }
+/* From Uiverse.io by Mike11jr */ 
 
 /* Navigation button styles - more specific selectors */
 .swiper-button-next::after,
@@ -358,12 +387,12 @@ a:hover{
 }
 .swiper-button-next {
 padding-right: 180px;
-padding-top: 180px;
+padding-top: 200px;
 scale: 2;
 }
 .swiper-button-prev {
 padding-left: 180px;
-padding-top: 180px;
+padding-top: 200px;
 scale: 2;
 }
 
