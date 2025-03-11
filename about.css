@@ -160,3 +160,17 @@ footer {
     margin-top: 20px;
     font-size: 14px;
 }
+/* to change the font */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+.gold-text {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Apply the gold-text class to specific elements */
+.about-hero h1,
+.about-text h2,
+.box h3,
+.footer-section h3 {
+    font-family: 'Playfair Display', serif;
+}
