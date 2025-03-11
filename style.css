@@ -59,7 +59,7 @@ ul{
 a{
     text-decoration: none;
     color:rgb(255, 255, 255);
-    font-family: 'frontage';
+    font-family: 'Proxima Nova';
     font-weight: 500;
     position: relative;
     padding: 5px;
@@ -133,6 +133,11 @@ a:hover{
     z-index: 1; /* Image at the back */
     -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+}
+
+.rev img{
+    -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
 }
 
 .black-cover {
@@ -241,14 +246,20 @@ a:hover{
     position: relative;
     z-index: 1; 
 }
+
 .heading {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffffffcf;
+    text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700;
     font-family:'frontage';
     text-align: center;
     padding-top: 100px;
-    font-size: 6rem;
+    font-size: 4rem;
     position: relative;
     z-index: 10;
-    color: #ffca66; 
+    
 }
 
 .vehicles .vehicles-slider .box{
@@ -428,13 +439,220 @@ img {
     max-width: 100%;
     height: auto;
 }
-
-/* Footer Bottom */
-.footer-bottom {
-    text-align: center;
-    padding: 15px;
-    border-top: 2px solid #ffca66;
-    margin-top: 20px;
+.luxury-footer {
+    background-color: #111111;
+    color: #e6e6e6;
+    font-family: "Proxima Nova", "Helvetica Neue", sans-serif;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+  
+  .footer-primary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+  }
+  
+  /* Brand Section */
+  .footer-logo {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700;
+  }
+  
+  .footer-tagline {
+    font-size: 12px;
+    color: #a0a0a0;
+    margin-top: 5px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Contact Information */
+  .footer-info {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .footer-address, .footer-phone, .footer-email {
     font-size: 14px;
-}
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon {
+    margin-right: 6px;
+    opacity: 0.7;
+  }
+  
+  /* Navigation */
+  .footer-nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+  }
+  
+  .footer-nav a {
+    color: #e6e6e6;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+  
+  .footer-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #FFD700;
+    transition: width 0.3s ease;
+  }
+  
+  .footer-nav a:hover {
+    color: #fff;
+  }
+  
+  .footer-nav a:hover::after {
+    width: 100%;
+  }
+  
+  /* Social Links */
+  .footer-social {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .social-link {
+    color: #e6e6e6;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+  }
+  
+  .social-link:hover {
+    color: #FFD700;
+  }
+  
+  /* Newsletter */
+  .newsletter {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .newsletter input {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 8px 12px;
+    color: #fff;
+    font-family: "Proxima Nova", sans-serif;
+    transition: background-color 0.3s ease;
+    width: 180px;
+  }
+  
+  .newsletter input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .newsletter input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  .newsletter button {
+    background-color: #FFD700;
+    color: #111;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: "Proxima Nova", sans-serif;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+  }
+  
+  .newsletter button:hover {
+    background-color: #e6c300;
+  }
+  
+  /* Copyright Section */
+  .footer-secondary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #0a0a0a;
+    font-size: 13px;
+  }
+  
+  .footer-secondary p {
+    margin: 0;
+    color: #777;
+  }
+  
+  .legal-links {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .legal-links a {
+    color: #777;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .legal-links a:hover {
+    color: #fff;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 1200px) {
+    .footer-primary {
+      gap: 20px;
+      justify-content: center;
+    }
+    
+    .footer-brand, .footer-info, .footer-nav, .footer-social, .newsletter {
+      margin: 10px 20px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .footer-info {
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+    
+    .footer-nav ul {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .footer-social {
+      justify-content: center;
+    }
+    
+    .footer-secondary {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+    }
+  }
+
 

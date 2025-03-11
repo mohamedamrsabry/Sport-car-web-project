@@ -116,6 +116,7 @@ var swiper = new Swiper(".vehicles-slider", {
       prevEl: ".swiper-button-prev",
     },
   });
+<<<<<<< HEAD
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("nav ul li a").forEach(link => {
         link.addEventListener("click", function (event) {
@@ -129,4 +130,7 @@ var swiper = new Swiper(".vehicles-slider", {
         });
     });
 });
+=======
+  
+>>>>>>> ed92c99a075565949b79d0304634f0ce4a5d137b
   
