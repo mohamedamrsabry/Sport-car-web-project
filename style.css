@@ -257,6 +257,7 @@ a:hover{
     font-family:'frontage';
     text-align: center;
     padding-top: 100px;
+    top: -80px;
     font-size: 4rem;
     position: relative;
     z-index: 10;
