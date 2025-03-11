@@ -8,16 +8,31 @@
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <img src="logo.png" alt="Logo" class="nav-logo">
+    <nav> <!--Top menu-->
+        <img src="img/logo.png" alt="Logo" class="nav-logo">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="about.html" class="active">About Us</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Cars</a></li>
+            <li><a href="#vehicles">Best Selling</a></li>
+            <li><a href="quota.html" target="_blank">Request A Quota</a></li>
+            <li><a href="about.html" target="_blank">About Us</a><li>
         </ul>
     </nav>
+
+    <script>let lastScrollY = window.scrollY;
+        const navbar = document.querySelector("nav");
+        
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > lastScrollY) {
+                // Scrolling Down - Hide Navbar
+                navbar.classList.add("nav-hidden");
+            } else {
+                // Scrolling Up - Show Navbar
+                navbar.classList.remove("nav-hidden");
+            }
+            lastScrollY = window.scrollY;
+        });
+        </script>
 
     <!-- Hero Section -->
     <section class="about-hero">
@@ -52,14 +67,14 @@
             <div class="footer-section">
                 <h3>Contact Us</h3>
                 <p>Email: contact@StradaAuto.com</p>
-                <p>Phone: +123 456 7890</p>
+                <p>Hotline: 15873</p>
             </div>
             <div class="footer-section">
                 <h3>Follow Us on</h3>
                 <div class="social-icons">
-                    <a href="#">Facebook</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Twitter</a>
+                    <a href="https://www.facebook.com/"><img src="img/icons/facebook-logo-24.png" alt="Facebook"></a>
+                    <a href="https://www.instagram.com/"><img src="img/icons/instagram-logo-24.png" alt="Instagram"></a>
+                    <a href="https://www.linkedin.com/"><img src="img/icons/linkedin-logo-24.png" alt="Linkedin"></a>
                 </div>
             </div>
         </div>

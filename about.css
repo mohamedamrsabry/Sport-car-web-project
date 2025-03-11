@@ -25,23 +25,57 @@ nav {
     border-radius: 30px;
     box-shadow: 0 10px 20px rgba(255, 255, 255, 0.08);
     z-index: 99;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+
 }
 
-ul {
+/* When hidden, move up and fade out */
+.nav-hidden {
+    transform: translateX(-50%) translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+.nav-logo {
+    height: 50px; /* Bigger size */
+    width: auto;
+    margin-left: 30px; /* Push further left */
+}
+
+ul{
     list-style: none;
     display: flex;
+    justify-content: center;
     gap: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin: 0 auto;
 }
-
-a {
+a{
     text-decoration: none;
-    color: white;
+    color:rgb(255, 255, 255);
+    font-family: 'Proxima Nova';
     font-weight: 500;
+    position: relative;
+    padding: 5px;
     transition: color 0.3s ease;
 }
-
-a:hover, .active {
-    color: gold;
+a::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background:#ffca66;
+    bottom:0;
+    left: 50%;
+    transition: all 0.3s ease;
+}
+a:hover::after{
+    width:100%;
+    left:0;
+}
+a:hover{
+    color:#ffca66;
 }
 
 .about-hero {

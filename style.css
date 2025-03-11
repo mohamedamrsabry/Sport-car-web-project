@@ -75,6 +75,7 @@ a::after{
     left: 50%;
     transition: all 0.3s ease;
 }
+
 a:hover::after{
     width:100%;
     left:0;
@@ -377,10 +378,10 @@ footer {
 
 .footer-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     max-width: 100vw;
     margin: auto;
-    padding: 0 25px;
+    padding: 45px;
     justify-items: center;
     text-align: center;
 }
@@ -391,6 +392,7 @@ footer {
     padding: 40px 0;
     font-family: 'Exodusdisplay sharpen';
     background-color: #000; /* Optional: Add a background color to the footer */
+    
 }
 
 .footer-container {
@@ -399,24 +401,21 @@ footer {
     align-items: center;
     max-width: 100vw;
     margin: auto;
-    padding: 0 25px;
     text-align: center;
+    justify-content: center;
 }
 
 .footer-section h3 {
     font-size: 30px;
     margin-bottom: 35px;
+    padding: 0 170px;
+    white-space:nowrap;
     color: #ffca66;
-}
-
-.footer-section p {
-    font-size: 14px;
-    line-height: 1.6;
 }
 
 .footer-section ul {
     list-style: none;
-    padding: 0;
+    
 }
 /* Social Icons */
 .social-icons {
