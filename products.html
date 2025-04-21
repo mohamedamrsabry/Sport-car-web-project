@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STRADA AUTO - Brand Products</title>
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            margin-top: 100px;
+        }
+        
+        .product-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.5rem;
+            color: #ffca66;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .product-description {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-btn {
+            background-color: #ffca66;
+            color: black;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        .product-btn:hover {
+            background-color: white;
+        }
+        
+        .brand-header {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('img/brand-bg.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .brand-logo {
+            height: 100px;
+            margin-bottom: 1rem;
+        }
+        
+        .brand-title {
+            font-size: 3rem;
+            color: #ffca66;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="img/logo.png" alt="Logo" class="nav-logo">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#brand-logos">Cars</a></li>
+            <li><a href="#vehicles">Best Selling</a></li>
+            <li><a href="quota.html" target="_blank">Request A Quota</a></li>
+            <li><a href="about.html" target="_blank">About Us</a></li>
+        </ul>
+    </nav>
+
+    <section class="brand-header" id="brand-header">
+        <!-- Content will be filled by JavaScript -->
+    </section>
+
+    <div class="products-container" id="products-container">
+        <!-- Products will be loaded here by JavaScript -->
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h3>Address</h3>
+                <ul> <a href="https://www.google.com/maps/">OBOUR ROAD 50</a></ul>
+            </div>
+
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Cars</a></li>
+                    <li><a href="#">Calculator</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/"><img src="img/icons/facebook-logo-24.png" alt="Facebook"></a>
+                    <a href="https://www.instagram.com/"><img src="img/icons/instagram-logo-24.png" alt="Instagram"></a>
+                    <a href="https://www.linkedin.com/"><img src="img/icons/linkedin-logo-24.png" alt="Linkedin"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 STRADA AUTO. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Get brand from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const brand = urlParams.get('brand');
+        
+        // Product data for each brand
+        const brandProducts = {
+            "Rolls Royce": {
+                logo: "img/rolls.png",
+                bg: "img/rolls-bg.jpg",
+                products: [
+                    {
+                        name: "Phantom",
+                        price: "$450,000",
+                        image: "img/products/phantom.jpg",
+                        description: "The ultimate luxury sedan with handcrafted interiors and unparalleled comfort."
+                    },
+                    {
+                        name: "Cullinan",
+                        price: "$350,000",
+                        image: "img/products/cullinan.jpg",
+                        description: "Luxury SUV that redefines what it means to travel in supreme comfort."
+                    },
+                    {
+                        name: "Ghost",
+                        price: "$320,000",
+                        image: "img/products/ghost.jpg",
+                        description: "A more driver-focused Rolls-Royce with whisper-quiet cabin."
+                    }
+                ]
+            },
+            "Audi": {
+                logo: "img/audi_white_logo-removebg-preview.png",
+                bg: "img/audi-bg.jpg",
+                products: [
+                    {
+                        name: "R8 V10",
+                        price: "$150,000",
+                        image: "img/products/r8.jpg",
+                        description: "Audi's flagship supercar with a screaming V10 engine."
+                    },
+                    {
+                        name: "RS7",
+                        price: "$120,000",
+                        image: "img/products/rs7.jpg",
+                        description: "High-performance luxury sportsback with cutting-edge tech."
+                    },
+                    {
+                        name: "Q8",
+                        price: "$80,000",
+                        image: "img/products/q8.jpg",
+                        description: "Luxury SUV with sporty design and advanced quattro system."
+                    }
+                ]
+            },
+            // Add similar data for other brands...
+            "BMW": {
+                logo: "img/bmw-white-logo-removebg-preview.png",
+                bg: "img/bmw-bg.jpg",
+                products: [
+                    {
+                        name: "M5 Competition",
+                        price: "$110,000",
+                        image: "img/products/m5.jpg",
+                        description: "High-performance sedan with 617 horsepower."
+                    },
+                    {
+                        name: "i8",
+                        price: "$150,000",
+                        image: "img/products/i8.jpg",
+                        description: "Futuristic hybrid sports car with butterfly doors."
+                    },
+                    {
+                        name: "X7",
+                        price: "$90,000",
+                        image: "img/products/x7.jpg",
+                        description: "Flagship luxury SUV with spacious three-row seating."
+                    }
+                ]
+            }
+        };
+
+        // Load brand-specific content
+        if (brand && brandProducts[brand]) {
+            const brandData = brandProducts[brand];
+            
+            // Update header
+            document.getElementById('brand-header').innerHTML = `
+                <img src="${brandData.logo}" alt="${brand} Logo" class="brand-logo">
+                <h1 class="brand-title">${brand} Models</h1>
+                <p style="color: white;">Explore our selection of premium ${brand} vehicles</p>
+            `;
+            
+            // Update background
+            document.querySelector('.brand-header').style.background = `
+                linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('${brandData.bg}')
+            `;
+            
+            // Add products
+            const productsContainer = document.getElementById('products-container');
+            brandData.products.forEach(product => {
+                productsContainer.innerHTML += `
+                    <div class="product-card">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-price">${product.price}</p>
+                            <p class="product-description">${product.description}</p>
+                            <button class="product-btn" onclick="location.href='quota.html?car=${brand} ${product.name}'">Request Quote</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Update page title
+            document.title = `STRADA AUTO - ${brand} Vehicles`;
+        } else {
+            // If no valid brand, redirect to home
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
