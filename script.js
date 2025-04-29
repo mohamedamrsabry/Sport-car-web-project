@@ -11,7 +11,33 @@ window.addEventListener("scroll", () => {
     }
     lastScrollY = window.scrollY;
 });
+const sidebarToggle = document.getElementById('sidebarToggle');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
 
+const sections=document.querySelectorAll('section');
+const observer=new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold:0.1
+});
+
+sections.forEach(section => {
+    observer.observe(section);
+}
+);
+
+
+
+
+
+
+sidebarToggle.addEventListener('click', () => {
+    sidebarOverlay.classList.toggle('open');
+});
 let scaleValue = 1;
     let opacityValue = 1;
     let scrollingEnabled = false;
