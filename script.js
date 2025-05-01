@@ -72,6 +72,7 @@ let scaleValue = 1;
 
 document.addEventListener("DOMContentLoaded", () => {
     let counter = document.getElementById("speedCounter");
+    let video= document.getElementById("car-image");
     let audio = document.getElementById("engineSound");
     let speed = 0;
     let revving = false;
@@ -83,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.key.toLowerCase() === "w" && !revving) {
             revving = true;
             audio.play();
+            video.play();
             text.style.backgroundColor="#0000008f";
             text.textContent="-KEEP HOLDING W-";
             interval = setInterval(() => {
@@ -99,6 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.key.toLowerCase() === "w") {
             revving = false;
             audio.pause();
+            video.pause();
+            video.currentTime=0;
             text.style.backgroundColor="#0000003a";
             text.textContent="-PRESS W TO START-";
             audio.currentTime = 0;

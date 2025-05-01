@@ -3,446 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STRADA AUTO - Brand Products</title>
-    <link rel="icon" type="image/png" href="img/logo.png">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .products-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-            margin-top: 100px;
-        }
-        
-        .product-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .product-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .product-info {
-            padding: 1.5rem;
-        }
-        
-        .product-title {
-            font-size: 1.5rem;
-            color: #ffca66;
-            margin-bottom: 0.5rem;
-        }
-        
-        .product-price {
-            font-size: 1.2rem;
-            color: white;
-            margin-bottom: 1rem;
-        }
-        
-        .product-description {
-            color: #ccc;
-            margin-bottom: 1.5rem;
-        }
-        
-        .product-btn {
-            background-color: #ffca66;
-            color: black;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        
-        .product-btn:hover {
-            background-color: white;
-        }
-        
-        .brand-header {
-            text-align: center;
-            padding: 3rem 1rem;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('img/brand-bg.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .brand-logo {
-            height: 100px;
-            margin-bottom: 1rem;
-        }
-        
-        .brand-title {
-            font-size: 3rem;
-            color: #ffca66;
-        }
-    </style>
+    <title>STRADA HOUSE</title>
+    <link rel="icon" type="image/png" href="img/logo.png"> <!--page icon logo-->
+    <link rel="stylesheet" href="products.css">
+    <script src="products.js" defer></script>
 </head>
+
 <body>
-    <nav>
-        <img src="img/logo.png" alt="Logo" class="nav-logo">
+
+    <nav> <!--Top menu-->
+        <button class="sidebar-toggle" id="sidebarToggle" style="height: 80px;">☰</button>
+        <div class="sidebar-overlay" id="sidebarOverlay">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Cars</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#brand-logos">Cars</a></li>
-            <li><a href="#vehicles">Best Selling</a></li>
-            <li><a href="quota.html" target="_blank">Request A Quota</a></li>
-            <li><a href="about.html" target="_blank">About Us</a></li>
+        <img src="img/logo.png" alt="Logo" class="nav-logo">
         </ul>
     </nav>
-
-    <section class="brand-header" id="brand-header">
-        <!-- Content will be filled by JavaScript -->
+    
+    <section>
+        <div class="textt">
+            <h1 class="heading">EXPLORE</h1>
+            <h6 class="heading2">LUXURY VEHICLES HOUSED BY STRADA</h6>
+        </div>
     </section>
 
-    <div class="products-container" id="products-container">
-        <!-- Products will be loaded here by JavaScript -->
-    </div>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section about">
-                <h3>Address</h3>
-                <ul> <a href="https://www.google.com/maps/">OBOUR ROAD 50</a></ul>
-            </div>
-
-            <div class="footer-section links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Cars</a></li>
-                    <li><a href="#">Calculator</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section social">
-                <h3>Follow Us</h3>
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/"><img src="img/icons/facebook-logo-24.png" alt="Facebook"></a>
-                    <a href="https://www.instagram.com/"><img src="img/icons/instagram-logo-24.png" alt="Instagram"></a>
-                    <a href="https://www.linkedin.com/"><img src="img/icons/linkedin-logo-24.png" alt="Linkedin"></a>
-                </div>
-            </div>
+    <section>
+        <div class="filters">
+            <select id="makeFilter"><option value="">Select Make</option></select>
+            <select id="modelFilter"><option value="">Select Model</option></select>
+            <select id="yearFilter"><option value="">Select Year</option></select>
+            <button id="filter-button" class="filter-button" onclick="applyFilters()">EXPLORE LUXURY</button>
         </div>
+    </section>
 
-        <div class="footer-bottom">
-            <p>&copy; 2025 STRADA AUTO. All Rights Reserved.</p>
-        </div>
-    </footer>
+        <div class="car-list" id="carList"></div>
+    
 
-    <script>
-        // Get brand from URL parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        const brand = urlParams.get('brand');
-        
-        // Product data for each brand
-        const brandProducts = {
-            "Rolls Royce": {
-                logo: "img/rolls.png",
-                bg: "img/rolls-bg.jpg",
-                products: [
-                    {
-                        name: "Phantom",
-                        price: "$450,000",
-                        image: "img/products/phantom.jpg",
-                        description: "The ultimate luxury sedan with handcrafted interiors and unparalleled comfort."
-                    },
-                    {
-                        name: "Cullinan",
-                        price: "$350,000",
-                        image: "img/products/cullinan.jpg",
-                        description: "Luxury SUV that redefines what it means to travel in supreme comfort."
-                    },
-                    {
-                        name: "Ghost",
-                        price: "$320,000",
-                        image: "img/products/ghost.jpg",
-                        description: "A more driver-focused Rolls-Royce with whisper-quiet cabin."
-                    }
-                ]
-            },
-            "Audi": {
-                logo: "img/audi_white_logo-removebg-preview.png",
-                bg: "img/audi-bg.jpg",
-                products: [
-                    {
-                        name: "R8 V10 Performance Quattro",
-                        price: "$150,000",
-                        image: "img/products/r8.jpg",
-                        description: "Audi's flagship supercar with a screaming V10 engine."
-                    },
-                    {
-                        name: "RS7 Sportback Performance",
-                        price: "$120,000",
-                        image: "img/products/rs7.jpg",
-                        description: "High-performance luxury sportsback with cutting-edge tech."
-                    },
-                    {
-                        name: "RS6 Avant Performance",
-                        price: "$80,000",
-                        image: "img/products/q8.jpg",
-                        description: "Luxury SUV with sporty design and advanced quattro system."
-                    },
-                    {
-                        name: "RS Q8",
-                        price: "$100,000",
-                        image: "img/products/rs q8.jpg",
-                        description: "The most powerful SUV in Audi's lineup."
-                    },
-                    {
-                        name: "A8 L 60 TFSI",
-                        price: "$90,000",
-                        image: "img/products/a8.jpg",
-                        description: "Flagship luxury sedan with spacious three-row seating."
-                    }
-                ]
-            },
-            // Add similar data for other brands...
-            "BMW": {
-                logo: "img/bmw-white-logo-removebg-preview.png",
-                bg: "img/bmw-bg.jpg",
-                products: [
-                    {
-                        name: "M5 Competition (F90)",
-                        price: "$110,000",
-                        image: "img/products/m5 f90.jpg",
-                        description: "High-performance sedan with 617 horsepower."
-                    },
-                    {
-                        name: "M4 Competition (G82)",
-                        price: "$150,000",
-                        image: "img/products/m4 g82.jpg",
-                        description: "Futuristic hybrid sports car with butterfly doors."
-                    },
-                    {
-                        name: "M3 Competition (G80)",
-                        price: "$90,000",
-                        image: "img/products/m3 g80.jpg",
-                        description: "Flagship luxury SUV with spacious three-row seating."
-                    },
-                    {
-                        name: "M5 (G90)",
-                        price: "$150,000",
-                        image: "img/products/m5 g90.jpg",
-                        description: "Futuristic hybrid sports car with butterfly doors."
-                    },
-                    {
-                        name: "M4 Competition (F82)",
-                        price: "$150,000",
-                        image: "img/products/m4 f82.jpg",
-                        description: "Futuristic hybrid sports car with butterfly doors."
-                    }
-
-                ]
-            },
-            "Mercedes": {
-                logo: "img/image-removebg-preview.png",
-                bg: "img/mercedes-bg.jpg",
-                products: [
-                    {
-                        name: "AMG GT 63 S E Performance",
-                        price: "$120,000",
-                        image: "img/products/s-class.jpg",
-                        description: "Luxury sedan with advanced technology and comfort."
-                    },
-                    {
-                        name: "AMG SL 63 S E Performance",
-                        price: "$150,000",
-                        image: "img/products/g-class.jpg",
-                        description: "Iconic luxury SUV with off-road capabilities."
-                    },
-                    {
-                        name: "Maybach S 680 4MATIC",
-                        price: "$80,000",
-                        image: "img/products/e-class.jpg",
-                        description: "Luxury sedan with a perfect blend of performance and comfort."
-                    },
-                    {
-                        name: "AMG ONE",
-                        price: "$200,000",
-                        image: "img/products/cls.jpg",
-                        description: "High-performance hypercar with F1 technology."
-                    },
-                    {
-                        name: "AMG G 63",
-                        price: "$250,000",
-                        image: "img/products/g-class.jpg",
-                        description: "Luxury SUV with off-road capabilities."
-                    }
-                ]
-            },
-            "Ferrari": {
-                logo: "img/ferrari_white_logo-removebg-preview.png",
-                bg: "img/ferrari-bg.jpg",
-                products: [
-                    {
-                        name: "Purosangue",
-                        price: "$350,000",
-                        image: "img/products/purosangue.jpg",
-                        description: "Ferrari's first SUV with a powerful V12 engine."
-                    },
-                    {
-                        name: "SF90 Stradale",
-                        price: "$500,000",
-                        image: "img/products/sf90.jpg",
-                        description: "Hybrid supercar with 986 horsepower."
-                    },
-                    {
-                        name: "812 Superfast",
-                        price: "$350,000",
-                        image: "img/products/812.jpg",
-                        description: "Powerful V12 engine with stunning design."
-                    }
-                ]
-            },
-            "Lamborghini": {
-                logo: "img/lambo_logo_white-removebg-preview.png",
-                bg: "img/lamborghini-bg.jpg",
-                products: [
-                    {
-                        name: "Aventador SVJ",
-                        price: "$500,000",
-                        image: "img/products/aventador.jpg",
-                        description: "Ultimate V12 supercar with track-focused performance."
-                    },
-                    {
-                        name: "Urus Performante",
-                        price: "$250,000",
-                        image: "img/products/urus.jpg",
-                        description: "Luxury SUV with supercar performance."
-                    },
-                    {
-                        name: "Revuelto",
-                        price: "$400,000",
-                        image: "img/products/revuelto.jpg",
-                        description: "Hybrid supercar with cutting-edge technology."
-                    }
-                ]
-            },
-            "Porsche": {
-                logo: "img/porsche_white_logo-removebg-preview.png",
-                bg: "img/porsche-bg.jpg",
-                products: [
-                    {
-                        name: "911 Turbo S",
-                        price: "$200,000",
-                        image: "img/products/911.jpg",
-                        description: "Iconic sports car with turbocharged performance."
-                    },
-                    {
-                        name: "Cayenne GTS",
-                        price: "$120,000",
-                        image: "img/products/cayenne.jpg",
-                        description: "Luxury SUV with sporty design and advanced technology."
-                    },
-                    {
-                        name: "Panamera Turbo S E-Hybrid",
-                        price: "$250,000",
-                        image: "img/products/panamera.jpg",
-                        description: "Luxury sedan with hybrid technology and performance."
-                    }
-                ]
-            },
-            "McLaren": {
-                logo: "img/image-removebg-preview(1).png",
-                bg: "img/mclaren-bg.jpg",
-                products: [
-                    {
-                        name: "750S",
-                        price: "$300,000",
-                        image: "img/products/750s.jpg",
-                        description: "High-performance supercar with lightweight design."
-                    },
-                    {
-                        name: "Artura",
-                        price: "$200,000",
-                        image: "img/products/artura.jpg",
-                        description: "Hybrid supercar with cutting-edge technology."
-                    },
-                    {
-                        name: "P1",
-                        price: "$1,000,000",
-                        image: "img/products/p1.jpg",
-                        description: "Limited edition hypercar with F1 technology."
-                    }
-                ]
-            },
-            "Bentley": {
-                logo: "img/bentley.png",
-                bg: "img/bentley-bg.jpg",
-                products: [
-                    {
-                        name: "Bentayga Speed",
-                        price: "$300,000",
-                        image: "img/products/bentayga.jpg",
-                        description: "Luxury SUV with unparalleled performance."
-                    },
-                    {
-                        name: "Continental GT Speed",
-                        price: "$250,000",
-                        image: "img/products/continental.jpg",
-                        description: "Luxury coupe with stunning design and performance."
-                    },
-                    {
-                        name: "Flying Spur Speed",
-                        price: "$350,000",
-                        image: "img/products/flying spur.jpg",
-                        description: "Luxury sedan with a perfect blend of performance and comfort."
-                    }
-                ]
-            }
-        };
-
-        // Load brand-specific content
-        if (brand && brandProducts[brand]) {
-            const brandData = brandProducts[brand];
-            
-            // Update header
-            document.getElementById('brand-header').innerHTML = `
-                <img src="${brandData.logo}" alt="${brand} Logo" class="brand-logo">
-                <h1 class="brand-title">${brand} Models</h1>
-                <p style="color: white;">Explore our selection of premium ${brand} vehicles</p>
-            `;
-            
-            // Update background
-            document.querySelector('.brand-header').style.background = `
-                linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                url('${brandData.bg}')
-            `;
-            
-            // Add products
-            const productsContainer = document.getElementById('products-container');
-            brandData.products.forEach(product => {
-                productsContainer.innerHTML += `
-                    <div class="product-card">
-                        <img src="${product.image}" alt="${product.name}" class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-title">${product.name}</h3>
-                            <p class="product-price">${product.price}</p>
-                            <p class="product-description">${product.description}</p>
-                            <button class="product-btn" onclick="location.href='quota.html?car=${brand} ${product.name}'">Request Quote</button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            // Update page title
-            document.title = `STRADA AUTO - ${brand} Vehicles`;
-        } else {
-            // If no valid brand, redirect to home
-            window.location.href = 'index.html';
-        }
-    </script>
 </body>
 </html>
