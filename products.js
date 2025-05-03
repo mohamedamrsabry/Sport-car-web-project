@@ -352,6 +352,8 @@ const cars = [
           <p><strong>Mileage (KM):</strong> ${car.mileage}</p>
           <p><strong>Exterior Color:</strong> ${car.color}</p>
         </div>
+        <button class="btn">Check Out
+                    </button>
       `;
       container.appendChild(card);
     });
@@ -426,7 +428,7 @@ function populateFilters() {
 }
 
 function fillOptions(selectElement, options) {
-    selectElement.innerHTML = '<option value="">Select</option>'; // Clear existing options
+    selectElement.innerHTML = '<option value="">Select Make</option>'; // Clear existing options
     options.forEach(option => {
         const opt = document.createElement("option");
         opt.value = option;
