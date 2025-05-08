@@ -34,7 +34,10 @@ sidebarToggle.addEventListener('click', () => {
     sidebarOverlay.classList.toggle('open');
 });
 
-const cars = [
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const cars = [
     {
       id: 1,
       make: "Mercedes-Benz",
@@ -506,39 +509,25 @@ const cars = [
       doors: 4
     }
   ];
+
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
   
+  // Get the 'id' query parameter from the URL
+  const carId = parseInt(getQueryParam("id"));
 
-// Utility to get query parameter from URL
-function getCarIndexFromURL() {
-  const params = new URLSearchParams(window.location.search);
-  return parseInt(params.get('id'));
-}
-
-// Display the car details
-function displayCarDetails(car) {
-  document.getElementById('car-title').textContent = `${car.make} ${car.model}`;
-  document.getElementById('car-price').textContent = `${car.price}`;
-
+ 
   
+  // Find the car with the corresponding ID
+  const car = cars.find(c => c.id === carId);
 
-  document.getElementById('car-specs').innerHTML = `
-    <ul>
-      <li><strong>Year:</strong> ${car.year}</li>
-      <li><strong>Mileage:</strong> ${car.mileage} km</li>
-      <li><strong>Color:</strong> ${car.color}</li>
-      <li><strong>Condition:</strong> ${car.condition}</li>
-    </ul>
-  `;
-}
-
-// On page load
-document.addEventListener('DOMContentLoaded', () => {
-  const index = getCarIndexFromURL();
-
-  if (!isNaN(index) && index >= 0 && index < cars.length) {
-    displayCarDetails(cars[index]);
+  if (car) {
+    // Set the page title to the car make and model
+    document.title = `${car.make} ${car.model}`;
   } else {
-    document.getElementById('car-container').innerHTML = '<p>Car not found.</p>';
+    // Set a default title if the car is not found
+    document.title = "Car Not Found";
   }
 });
-
