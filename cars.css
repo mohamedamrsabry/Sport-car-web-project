@@ -181,14 +181,44 @@ a:hover{
     flex-wrap:wrap;
     justify-content:center;
     gap:25px;                     /* NEW  tighter gap */
-    padding:15px;                 /* NEW  less padding */
+    padding:15px;    
+    position:relative;                       /* create containing block */
+    overflow:hidden;              /* NEW  less padding */
   }
+
+/* paint the image with a dark tint */
+.grid::before{
+    content:"";
+    position:absolute;
+    inset:0;                                 /* stretch to all edges   */
+    background:url("img/image_fx_\ \(9\).png") center/cover no-repeat ;
+    filter:brightness(.25);                  /* dim so squares pop     */
+    z-index:-1;                              /* sit behind real content*/
+
+     border-radius:12px; 
+     transform:scale(1.05);    
+}
   .square{
     width:clamp(260px,40vw,420px);
     aspect-ratio:1/1;
     position:relative;
   }
-  
+/* ─── image panel: keep old width + square ratio ─── */
+.grid > .square:first-child{
+    width:clamp(260px,40vw,420px);
+    aspect-ratio:1/1;
+    flex:0 0 auto;          /* don’t grow */
+}
+
+/* ─── specs panel: no fixed width, may grow ─── */
+.grid > .square:last-child{
+    width:auto;             /* ← removes the clamp */
+    aspect-ratio:auto;      /* height = content    */
+    flex:1 1 600px;         /* start at 600px, grow into free space */
+    max-width:900px;        /* (optional upper bound) */
+    display:flex;           /* so wrapper can stretch full height   */
+}
+.grid > .square:last-child .spec-wrapper{flex:1;}  /* fill the box */
   /* ─── swiper (image) ───────────────────────── */
   .swiper,
   .swiper img{
@@ -212,11 +242,12 @@ a:hover{
   /* ─── specs square ─────────────────────────── */
   .spec-wrapper{
     background:#343435;                  /* light-grey panel */
-    color:#d4af37;
+    color:#ffffff;
     border:1px solid #ffca66;
     padding:26px 30px 24px;
     border-radius:4px;
-    box-shadow:none;                     /* flat, like sample */
+    box-shadow:none;  
+    text-align: center;                   /* flat, like sample */
 }
 .spec-wrapper h2{
     font-size:1rem;
@@ -287,15 +318,64 @@ a:hover{
   }
 
   /* ─── A. bigger horizontal gap on desktop ─── */
-@media(min-width:901px){          /* only when the 2 squares sit side-by-side */
-    .grid{
-      gap:300px;                   
-    }
-  }
+@media (min-width:901px){
+   .grid{
+      column-gap:300px;   /* big space left–right (when they sit side-by-side) */
+      row-gap:40px;       /* small space top–bottom */
+   }
+}
   
   /* ─── B. more vertical space between spec rows ─── */
   .spec-grid{
     row-gap:30px;                  /* was 12px */
   }
+  .similar{
+   margin:40px auto;
+   max-width:1200px;
+   padding:0 20px;
+}
+.similar h2{
+   color:#fff;
+   font-size:1.8rem;
+   margin-bottom:18px;
+   letter-spacing:.5px;
+}
 
-  /* ───────── 1. HIDE / RE-STYLE SWIPER PAGINATION BULLETS ───────── */
+/* card look inside the swiper-slide */
+.sim-card{
+   background:#181818;
+   border:1px solid #444;
+   border-radius:8px;
+   overflow:hidden;
+   box-shadow:0 3px 8px rgba(0,0,0,.35);
+}
+.sim-card img{
+   width:100%;height:180px;object-fit:cover;
+}
+.sim-card .info{
+   padding:14px 16px 20px;
+   color:#fff;font-size:.85rem;
+}
+.sim-card .info h3{
+   font-size:1rem;margin:0 0 6px;
+   text-transform:uppercase;
+}
+.sim-card .price{color:#ffca66;font-weight:700;margin-bottom:12px}
+.sim-card .btn{
+   display:inline-block;
+   padding:8px 20px;
+   font-size:.8rem;
+   border:1px solid #ffca66;
+   color:#ffca66;
+   background:none;
+   border-radius:4px;
+   cursor:pointer;
+   transition:.25s;
+}
+.sim-card .btn:hover{background:#ffca66;color:#000}
+
+/* size / spacing for the carousel */
+.similarSwiper{padding-bottom:4px}          /* space under slides */
+.sim-prev,.sim-next{color:#fff}             /* arrow colour */
+
+

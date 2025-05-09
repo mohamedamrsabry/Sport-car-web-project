@@ -966,6 +966,7 @@ const cars = [
   /* a) get ?id= */
   const id   = +new URLSearchParams(location.search).get('id');
   const car  = cars.find(c => c.id === id);
+  renderSimilarCars(car);    // <<< add this line
 
   if (!car){
       document.getElementById('car-title').textContent = 'Car not found';
@@ -979,9 +980,10 @@ const cars = [
   document.getElementById('price').textContent = car.price;   // NEW
 
   /* c) folder & image list */
-  const folder = `${car.make} ${car.model}`;           // exact folder name
+  const folder = `${car.make} ${car.model}`;           
   const files  = [`${folder}.jpg`, 'A.jpg', 'B.jpg', 'C.jpg'];
   const imgSet = files.map(f => buildURL(folder, f));
+  imgSet.push('img/products/info.jpg'); 
 
   /* d) inject slides + thumbs */
   const slides = document.getElementById('slide-wrapper');
@@ -1029,4 +1031,43 @@ const cars = [
   });
 
 })();
+
+function renderSimilarCars(currentCar){
+   // cars[] is the big array you already loaded
+   const similar = cars.filter(c => c.make === currentCar.make && c.id !== currentCar.id);
+
+   const wrap = document.getElementById('similar-wrapper');
+   wrap.innerHTML = '';
+
+   similar.forEach(c => {
+      const slide = document.createElement('div');
+      slide.className = 'swiper-slide';
+
+      slide.innerHTML = `
+         <div class="sim-card">
+           <img src="${c.image}" alt="${c.make} ${c.model}">
+           <div class="info">
+             <h3>${c.year} ${c.make.toUpperCase()} ${c.model.toUpperCase()}</h3>
+             <div class="price">${c.price}</div>
+             <button class="btn" onclick="location.href='cars.html?id=${c.id}'">VIEW DETAILS →</button>
+           </div>
+         </div>`;
+      wrap.appendChild(slide);
+   });
+
+   /* init Swiper (destroy first if already exists) */
+   if(window.simSwiper){ window.simSwiper.destroy(true,true); }
+   window.simSwiper = new Swiper('.similarSwiper',{
+        slidesPerView:1.2,
+        spaceBetween:20,
+        navigation:{nextEl:'.sim-next',prevEl:'.sim-prev'},
+        breakpoints:{
+           600:{slidesPerView:2.2},
+           900:{slidesPerView:3}
+        }
+   });
+}
+
+
+
 
