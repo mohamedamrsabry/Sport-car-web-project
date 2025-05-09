@@ -1,8 +1,27 @@
-body{
-    background-color: black;
-}
+/* ─── variables ────────────────────────────── */
+:root{
+    --gold : #d4af37;
+    --white: #f8f8f8;
+    --black: #000;
+  
+    /* height of the fixed nav (top=20px + 90px logo + some air) */
+    --nav-h: 160px;               /* NEW  tweak if you resize the logo */
+  }
 
-nav {
+  /* ─── global reset ─────────────────────────── */
+  *{box-sizing:border-box}
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+  
+    padding-top:var(--nav-h);     /* NEW  pushes everything below the nav */
+  }
+  
+  
+  /* keep your existing NAV rules exactly as they were */
+  nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -18,7 +37,6 @@ nav {
     box-shadow: 0 10px 20px rgba(255, 255, 255, 0.08);
     z-index: 99;
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-
 }
 
 /* When hidden, move up and fade out */
@@ -88,7 +106,14 @@ a:hover{
     transform: translateX(-100%); /* Hidden off-screen */
     transition: transform 0.3s ease;
 }
-
+.car-image{
+    width: 100vw;  /* Ensures full width */
+    height: 100vh; /* Ensures full height */
+    object-fit: cover; /* Covers the section without distortion */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 .sidebar-overlay ul {
     list-style: none;
     padding: 0;
@@ -128,4 +153,149 @@ a:hover{
 .sidebar-overlay.open {
     transform: translateX(0); /* Slide into view */
 }
+  
+  /* (your UL / A / sidebar rules stay untouched) */
+  
+  
+  /* ─── title strip ──────────────────────────── */
+  #car-title{
+    text-align:center;
+    font-size:2.6rem;             /* slightly smaller */
+    font-weight:700;
+    color:var(--gold);
+    margin-top: 50px;
+    letter-spacing:1px;
+    margin:0;                     /* NO top margin any more */
+    padding:10px 15px 5px;
+  }
+  .price-tag{
+    text-align:center;
+    font-size:2rem;          /* huge */
+    font-weight:700;
+    color:#ffca66;
+    margin:6px 0 18px;
+  }
+  /* ─── two-square grid ──────────────────────── */
+  .grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:25px;                     /* NEW  tighter gap */
+    padding:15px;                 /* NEW  less padding */
+  }
+  .square{
+    width:clamp(260px,40vw,420px);
+    aspect-ratio:1/1;
+    position:relative;
+  }
+  
+  /* ─── swiper (image) ───────────────────────── */
+  .swiper,
+  .swiper img{
+    width:100%;height:100%;
+    object-fit:cover;
+    border-radius:10px;
+  }
+  .thumbs{
+    margin-top:10px;              /* reduced */
+    display:flex;gap:6px;justify-content:center;
+  }
+  .thumbs img{
+    width:65px;height:65px;
+    object-fit:cover;
+    border:2px solid transparent;
+    border-radius:6px;
+    cursor:pointer;transition:.2s;
+  }
+  .thumbs img.active,.thumbs img:hover{border-color:var(--gold)}
+  
+  /* ─── specs square ─────────────────────────── */
+  .spec-wrapper{
+    background:#343435;                  /* light-grey panel */
+    color:#d4af37;
+    border:1px solid #ffca66;
+    padding:26px 30px 24px;
+    border-radius:4px;
+    box-shadow:none;                     /* flat, like sample */
+}
+.spec-wrapper h2{
+    font-size:1rem;
+    font-weight:700;
+    margin:0 0 18px;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+    border-bottom:1px solid #000;
+    padding-bottom:6px;
+}
 
+/* ───── Specs grid – 4 equal columns (Label/Value · Label/Value) ─ */
+.spec-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);   /* L V | L V */
+    column-gap:24px;
+    row-gap:12px;
+    font-size:.85rem;
+    text-transform:uppercase;
+}
+
+/* label (odd cells)  */
+.spec-grid .label{
+    font-weight:700;
+}
+
+/* value (even cells) */
+.spec-grid .value{
+    font-weight:500;
+    text-transform:none;   /* keep normal case for values */
+}
+  /* ──────────────────────────────────────────────
+   GLOBAL override for every Swiper on the page
+   ──────────────────────────────────────────── */
+.swiper{
+    /* colour & size the library uses for its arrow glyphs */
+    --swiper-navigation-color: rgba(255,255,255,.85);  /* ← white, 85 % */
+    --swiper-navigation-size : 16px;                   /* glyph size     */
+}
+
+/* hide pagination dots (if you don’t want them) */
+.swiper-pagination{display:none!important}
+
+/* arrow buttons – no disc, small hit-area */
+.swiper-button-prev,
+.swiper-button-next{
+    width:26px;
+    height:26px;
+    background:none;
+    border:none;
+    outline:none;
+    transition:.2s;
+}
+
+/* optional hover / keyboard focus tweaks */
+.swiper-button-prev:hover,
+.swiper-button-next:hover{
+    --swiper-navigation-color:#fff;     /* solid white on hover */
+}
+.swiper-button-prev:focus-visible,
+.swiper-button-next:focus-visible{
+    outline:2px solid #fff;
+}
+  /* ─── mobile stack ─────────────────────────── */
+  @media(max-width:900px){
+    .grid{flex-direction:column;align-items:center}
+    .square{width:min(90vw,400px);}
+  }
+
+  /* ─── A. bigger horizontal gap on desktop ─── */
+@media(min-width:901px){          /* only when the 2 squares sit side-by-side */
+    .grid{
+      gap:300px;                   
+    }
+  }
+  
+  /* ─── B. more vertical space between spec rows ─── */
+  .spec-grid{
+    row-gap:30px;                  /* was 12px */
+  }
+
+  /* ───────── 1. HIDE / RE-STYLE SWIPER PAGINATION BULLETS ───────── */

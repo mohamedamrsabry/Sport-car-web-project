@@ -13,6 +13,9 @@ window.addEventListener("scroll", () => {
 });
 const sidebarToggle = document.getElementById('sidebarToggle');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
+sidebarToggle.addEventListener('click', () => {
+    sidebarOverlay.classList.toggle('open');
+});
 
 const sections=document.querySelectorAll('section');
 const observer=new IntersectionObserver((entries) => {
@@ -31,13 +34,6 @@ sections.forEach(section => {
 );
 
 
-
-
-
-
-sidebarToggle.addEventListener('click', () => {
-    sidebarOverlay.classList.toggle('open');
-});
 let scaleValue = 1;
     let opacityValue = 1;
     let scrollingEnabled = false;

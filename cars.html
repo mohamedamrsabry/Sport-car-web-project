@@ -6,6 +6,9 @@
     <title></title>
     <link rel="icon" type="image/png" href="img/logo.png">
     <link rel="stylesheet" href="cars.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+
 </head>
 <body>
     <nav> <!--Top menu-->
@@ -22,6 +25,34 @@
         <img src="img/logo.png" alt="Logo" class="nav-logo">
         </ul>
     </nav>
-    <script src="cars.js"></script>
+
+    <div id="car-title">Loading…</div>
+    <div id="price" class="price-tag"></div>   <!-- NEW -->
+ <!-- Two-square layout -->
+ <section class="grid">
+    <!-- Slider square -->
+    <div class="square">
+        <div class="swiper mainSwiper">
+            <div class="swiper-wrapper" id="slide-wrapper"></div>
+        
+            <!-- NEW Arrows -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <div class="thumbs" id="thumb-wrapper"></div>
+    </div>
+
+    <!-- Specs square -->
+    <div class="square">
+        <div class="spec-wrapper">
+            <h2>Specifications</h2>
+            <div class="spec-grid" id="spec-grid"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Lib + page logic -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="cars.js"></script>
 </body>
 </html>

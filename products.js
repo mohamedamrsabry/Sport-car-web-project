@@ -13,6 +13,9 @@ window.addEventListener("scroll", () => {
 });
 const sidebarToggle = document.getElementById('sidebarToggle');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
+sidebarToggle.addEventListener('click', () => {
+    sidebarOverlay.classList.toggle('open');
+});
 
 const sections=document.querySelectorAll('section');
 const observer=new IntersectionObserver((entries) => {
@@ -29,9 +32,23 @@ sections.forEach(section => {
     observer.observe(section);
 }
 );
-sidebarToggle.addEventListener('click', () => {
-    sidebarOverlay.classList.toggle('open');
+const divs=document.querySelectorAll('div');
+const observers=new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold:0.1
 });
+
+divs.forEach(div => {
+    observers.observe(div);
+}
+);
+
+
 
 const cars = [
   {
@@ -42,7 +59,7 @@ const cars = [
     price: "80,000,000 EGP",
     mileage: 12,
     condition: "New",
-    image: "img/products/mercedes benz amg one/mercedes benz amg one.jpg",
+    image: "img/products/Mercedes-Benz AMG ONE/Mercedes-Benz AMG ONE.jpg",
     exteriorColor: "Silver",
     interiorColor: "Black",
     engine: "1.6L V6 hybrid",
@@ -57,7 +74,7 @@ const cars = [
     price: "5,000,000 EGP",
     mileage: 7,
     condition: "New",
-    image: "img/products/porche cayenne gts/porche cayenne gts.jpg",
+    image: "img/products/Porsche Cayenne GTS/Porsche Cayenne GTS.jpg",
     exteriorColor: "White",
     interiorColor: "Black",
     engine: "4.0L V8 twin-turbo",
@@ -486,50 +503,67 @@ const cars = [
     doors: 4
   }
 ];
+// create one IntersectionObserver at top of file
+const revealObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);      // animate only once
+      }
+    });
+  },
+  { threshold: 0.1 }
+);
 
-  
-  
-  // Dynamically render car cards
-  function renderCars(carList) {
-    const container = document.getElementById("carList");
-    container.innerHTML = ""; // Clear previous entries
-    carList.forEach((car) => {
-      const card = document.createElement("div");
-      card.className = "car-card";
-      card.innerHTML = `
+// observe anything that is already present and should animate
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ----------  renderCars  ---------- */
+function renderCars(carList) {
+  const container = document.getElementById("carList");
+  container.innerHTML = "";
+  carList.forEach(car => {
+    const card = document.createElement("div");
+    card.className = "car-card reveal";   // starts hidden
+    card.innerHTML = `
         <img src="${car.image}" alt="${car.make} ${car.model}" />
         <h3>${car.year} ${car.make.toUpperCase()} ${car.model.toUpperCase()}</h3>
         <p><strong>${car.price}</strong> (inc.VAT)</p>
         <div class="details">
           <p><strong>Model Year:</strong> ${car.year}</p>
           <p><strong>Mileage (KM):</strong> ${car.mileage}</p>
-          <p><strong>Exterior Color:</strong> ${car.color}</p>
+          <p><strong>Exterior Color:</strong> ${car.exteriorColor}</p>
         </div>
         <button class="btn" onclick="location.href='cars.html?id=${car.id}'">Check Out</button>`;
-      container.appendChild(card);
-    });
-  }
-  
+    container.appendChild(card);
+
+    revealObserver.observe(card);         // now it will animate
+  });
+}
+  function parsePrice(priceStr){
+    return Number(priceStr.replace(/[^0-9]/g, ""));
+}
   
   function applyFilters() {
-    const make = document.getElementById("makeFilter").value;
+    // Existing dropdown values
+    const make  = document.getElementById("makeFilter").value;
     const model = document.getElementById("modelFilter").value;
-    const year = document.getElementById("yearFilter").value;
+    const year  = document.getElementById("yearFilter").value;
 
-    // Update the URL with the selected filters
-    const urlParams = new URLSearchParams();
-    if (make) urlParams.set("make", make); // Use lowercase "make"
-    if (model) urlParams.set("model", model);
-    if (year) urlParams.set("year", year);
-    const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
-    history.pushState(null, "", newUrl);
+    // NEW: price-range values (default 0 → Infinity)
+    const priceFrom = +document.getElementById("priceFrom").value || 0;
+    const priceTo   = +document.getElementById("priceTo").value   || Infinity;
 
-    // Filter the cars based on the selected filters
-    const filtered = cars.filter(car =>
-        (!make || car.make === make) &&
-        (!model || car.model === model) &&
-        (!year || car.year.toString() === year)
-    );
+    // Apply every active filter
+    const filtered = cars.filter(car => {
+        const priceNum = parsePrice(car.price);   // helper from Step-3
+        return (!make  || car.make  === make)  &&
+               (!model || car.model === model) &&
+               (!year  || car.year.toString() === year) &&
+               priceNum >= priceFrom &&
+               priceNum <= priceTo;
+    });
 
     renderCars(filtered);
 }
