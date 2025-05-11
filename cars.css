@@ -243,6 +243,7 @@ a:hover{
   .spec-wrapper{
     background:#343435;                  /* light-grey panel */
     color:#ffffff;
+    font-family: 'frontage';
     border:1px solid #ffca66;
     padding:26px 30px 24px;
     border-radius:4px;
@@ -250,8 +251,9 @@ a:hover{
     text-align: center;                   /* flat, like sample */
 }
 .spec-wrapper h2{
-    font-size:1rem;
+    font-size:2rem;
     font-weight:700;
+    color:#ffca66;
     margin:0 0 18px;
     letter-spacing:.4px;
     text-transform:uppercase;
@@ -340,7 +342,38 @@ a:hover{
    margin-bottom:18px;
    letter-spacing:.5px;
 }
+.enquire-btn{
+  text-align: center;
+  padding:50px;
+  
+}
+.enquire-button{
+  font-size: 2rem;
+  font-family: 'frontage';
+  padding: 20px 120px;
+  background-color: black;
+  color:#f2f1ee;
+  border:1px solid #ffca66;
+  transition: background-color 0.3s ease;
+  transition: all .4s;
+}
 
+ 
+ .enquire-button:hover {
+  border-radius: 5px;
+  transform: translateY(-10px);
+  box-shadow: 0 7px 0 -2px #ffca66,
+   0 15px 0 -4px #ffca66,
+   0 16px 10px -3px #ffca66;
+ }
+ 
+ .enquirer-button:active {
+  transition: all 0.2s;
+  transform: translateY(-5px);
+  box-shadow: 0 2px 0 -2px #000000,
+   0 8px 0 -4px #000000,
+   0 12px 10px -3px #000000;
+ }
 /* card look inside the swiper-slide */
 .sim-card{
    background:#181818;
