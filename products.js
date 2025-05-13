@@ -1,21 +1,4 @@
-let lastScrollY = window.scrollY;
-const navbar = document.querySelector("nav");
 
-window.addEventListener("scroll", () => {
-    if (window.scrollY > lastScrollY) {
-        // Scrolling Down - Hide Navbar
-        navbar.classList.add("nav-hidden");
-    } else {
-        // Scrolling Up - Show Navbar
-        navbar.classList.remove("nav-hidden");
-    }
-    lastScrollY = window.scrollY;
-});
-const sidebarToggle = document.getElementById('sidebarToggle');
-const sidebarOverlay = document.getElementById('sidebarOverlay');
-sidebarToggle.addEventListener('click', () => {
-    sidebarOverlay.classList.toggle('open');
-});
 
 const sections=document.querySelectorAll('section');
 const observer=new IntersectionObserver((entries) => {

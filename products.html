@@ -11,20 +11,7 @@
 
 <body>
 
-    <nav> <!--Top menu-->
-        <button class="sidebar-toggle" id="sidebarToggle" style="height: 80px;">☰</button>
-        <div class="sidebar-overlay" id="sidebarOverlay">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Cars</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-        <ul>
-        <img src="img/logo.png" alt="Logo" class="nav-logo">
-        </ul>
-    </nav>
+    <div data-include="/partials/nav.html"></div>
     
     <section>
         <div class="textt">
@@ -53,39 +40,9 @@
         <div class="car-list" id="carList"></div>
 
 
-    <footer> <!--footer section-->
-        <div class="footer-container">
-            <div class="footer-section about">
-                <h3>Address</h3>
-                <ul> <a href="https://www.google.com/maps/">OBOUR ROAD 50</a></ul>
-            </div>
+    <div data-include="/partials/footer.html"></div>
 
-            <div class="footer-section links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="products.html">Cars</a></li>
-                    <li><a href="#">Calculator</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <br>
-            <br>
-            
-
-            <div class="footer-section social">
-                <h3>Follow Us</h3>
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/"><img src="img/icons/facebook-logo-24.png" alt="Facebook"></a>
-                    <a href="https://www.instagram.com/"><img src="img/icons/instagram-logo-24.png" alt="Instagram"></a>
-                    <a href="https://www.linkedin.com/"><img src="img/icons/linkedin-logo-24.png" alt="Linkedin"></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2025 STRADA AUTO. All Rights Reserved.</p>
-        </div>
-    </footer>
+    <script src="nav.js"></script>
+    <script src="loader.js" type="module"></script>
 </body>
 </html>

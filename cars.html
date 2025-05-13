@@ -11,20 +11,7 @@
 
 </head>
 <body>
-    <nav> <!--Top menu-->
-        <button class="sidebar-toggle" id="sidebarToggle" style="height: 80px;">☰</button>
-        <div class="sidebar-overlay" id="sidebarOverlay">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Cars</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-        <ul>
-        <img src="img/logo.png" alt="Logo" class="nav-logo">
-        </ul>
-    </nav>
+  <div data-include="/partials/nav.html"></div>
 
     <div id="car-title">Loading…</div>
 
@@ -34,7 +21,7 @@
  <!-- Two-square layout -->
  <section class="grid">
     <!-- Slider square -->
-    <div class="square">
+    <div class="square"> 
         <div class="swiper mainSwiper">
             <div class="swiper-wrapper" id="slide-wrapper"></div>
         
@@ -119,8 +106,12 @@
   </div>
 </section>
 
+ <div data-include="/partials/footer.html"></div>
+
 <!-- Lib + page logic -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="cars.js"></script>
+<script src="nav.js"></script>
+<script src="loader.js" type="module"></script>
 </body>
 </html>

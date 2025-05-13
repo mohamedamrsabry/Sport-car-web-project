@@ -1,22 +1,4 @@
-let lastScrollY = window.scrollY;
-const navbar = document.querySelector("nav");
 
-window.addEventListener("scroll", () => {
-    if (window.scrollY > lastScrollY) {
-        // Scrolling Down - Hide Navbar
-        navbar.classList.add("nav-hidden");
-    } else {
-        // Scrolling Up - Show Navbar
-        navbar.classList.remove("nav-hidden");
-    }
-    lastScrollY = window.scrollY;
-});
-const sidebarToggle = document.getElementById('sidebarToggle');
-const sidebarOverlay = document.getElementById('sidebarOverlay');
-
-sidebarToggle.addEventListener('click', () => {
-    sidebarOverlay.classList.toggle('open');
-});
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -497,9 +479,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/******************************************************************
-  1. DATA ARRAY  (edit / add cars freely)
-******************************************************************/
+
 const cars = [
   {
     id: 1,
@@ -954,9 +934,7 @@ const cars = [
   }
 ];
 
-/******************************************************************
-  2. PAGE-POPULATION LOGIC
-******************************************************************/
+
 (function(){
 
   /* helper: encode each path segment */
@@ -978,7 +956,13 @@ const cars = [
   document.getElementById('car-title').textContent =
         `${car.make} ${car.model}`;
   document.getElementById('price').textContent = car.price;   // NEW
-
+  
+const enquireBtn = document.getElementById('enquire-button');
+enquireBtn.addEventListener('click', () => {
+  const url =
+    `quota.html?brand=${encodeURIComponent(car.make)}&model=${encodeURIComponent(car.model)}`;
+  location.href = url;
+});
   /* c) folder & image list */
   const folder = `${car.make} ${car.model}`;           
   const files  = [`${folder}.jpg`, 'A.jpg', 'B.jpg', 'C.jpg'];
