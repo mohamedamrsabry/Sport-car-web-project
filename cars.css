@@ -1,10 +1,8 @@
 /* ─── variables ────────────────────────────── */
 :root{
-    --gold : #d4af37;
+    --gold : #b6a15a;
     --white: #f8f8f8;
     --black: #000;
-  
-    /* height of the fixed nav (top=20px + 90px logo + some air) */
     --nav-h: 160px;               /* NEW  tweak if you resize the logo */
   }
 
@@ -74,7 +72,7 @@ a::after{
     position: absolute;
     width: 0;
     height: 2px;
-    background:#ffca66;
+    background:#b6a15a;
     bottom:0;
     left: 50%;
     transition: all 0.3s ease;
@@ -86,7 +84,7 @@ a:hover::after{
 }
 
 a:hover{
-    color:#ffca66;
+    color:#b6a15a;
 }
 
 /* Sidebar overlay (hidden by default) */
@@ -127,7 +125,7 @@ a:hover{
 
 .sidebar-overlay ul li a {
     text-decoration: none;
-    color: #ffca66;
+    color: #b6a15a;
     font-size: 2rem; /* Larger font size */
     transition: color 0.3s ease;
 }
@@ -153,28 +151,28 @@ a:hover{
 .sidebar-overlay.open {
     transform: translateX(0); /* Slide into view */
 }
-  
-  /* (your UL / A / sidebar rules stay untouched) */
-  
+
   
   /* ─── title strip ──────────────────────────── */
   #car-title{
     text-align:center;
-    font-size:2.6rem;             /* slightly smaller */
+    font-size:3rem;             /* slightly smaller */
     font-weight:700;
     color:var(--gold);
     margin-top: 50px;
+    font-family: 'frontage';
     letter-spacing:1px;
-    margin:0;                     /* NO top margin any more */
-    padding:10px 15px 5px;
+    margin:5;   
+    padding:10px 15px 50px;
+
   }
   .price-tag{
     text-align:center;
     font-size:2rem;          /* huge */
     font-weight:700;
-    color:#ffca66;
-    margin:6px 0 18px;
+    color:#b6a15a;
   }
+  
   /* ─── two-square grid ──────────────────────── */
   .grid{
     display:flex;
@@ -194,7 +192,6 @@ a:hover{
     background:url("img/image_fx_\ \(9\).png") center/cover no-repeat ;
     filter:brightness(.25);                  /* dim so squares pop     */
     z-index:-1;                              /* sit behind real content*/
-
      border-radius:12px; 
      transform:scale(1.05);    
 }
@@ -242,7 +239,6 @@ a:hover{
   /* ─── specs square ─────────────────────────── */
   .spec-wrapper{
     background:#343435;                  /* light-grey panel */
-    color:#ffffff;
     font-family: 'frontage';
     border:1px solid #ffca66;
     padding:26px 30px 24px;
@@ -250,14 +246,16 @@ a:hover{
     box-shadow:none;  
     text-align: center;                   /* flat, like sample */
 }
+
 .spec-wrapper h2{
     font-size:2rem;
     font-weight:700;
-    color:#ffca66;
+    color: #000000;
+    text-shadow: 0 0 1px #b6a15a, 0 0 5px #b6a15a;
     margin:0 0 18px;
     letter-spacing:.4px;
     text-transform:uppercase;
-    border-bottom:1px solid #000;
+    border-bottom:3px solid #000;
     padding-bottom:6px;
 }
 
@@ -290,7 +288,7 @@ a:hover{
     --swiper-navigation-size : 16px;                   /* glyph size     */
 }
 
-/* hide pagination dots (if you don’t want them) */
+
 .swiper-pagination{display:none!important}
 
 /* arrow buttons – no disc, small hit-area */
@@ -345,7 +343,6 @@ a:hover{
 .enquire-btn{
   text-align: center;
   padding:50px;
-  
 }
 .enquire-button{
   font-size: 2rem;
@@ -353,18 +350,21 @@ a:hover{
   padding: 20px 120px;
   background-color: black;
   color:#f2f1ee;
-  border:1px solid #ffca66;
+  border:1px solid #b6a15a;
   transition: background-color 0.3s ease;
   transition: all .4s;
+
 }
 
  
  .enquire-button:hover {
   border-radius: 5px;
   transform: translateY(-10px);
-  box-shadow: 0 7px 0 -2px #ffca66,
-   0 15px 0 -4px #ffca66,
-   0 16px 10px -3px #ffca66;
+  box-shadow: 0 7px 0 -2px #b6a15a,
+   0 15px 0 -4px #b6a15a,
+   0 16px 10px -3px #b6a15a;
+     cursor: pointer;
+
  }
  
  .enquirer-button:active {
@@ -393,22 +393,161 @@ a:hover{
    font-size:1rem;margin:0 0 6px;
    text-transform:uppercase;
 }
-.sim-card .price{color:#ffca66;font-weight:700;margin-bottom:12px}
+.sim-card .price{color:#b6a15a;font-weight:700;margin-bottom:12px}
 .sim-card .btn{
    display:inline-block;
    padding:8px 20px;
    font-size:.8rem;
-   border:1px solid #ffca66;
-   color:#ffca66;
+   border:1px solid #b6a15a;
+   color:#b6a15a;
    background:none;
    border-radius:4px;
    cursor:pointer;
    transition:.25s;
 }
-.sim-card .btn:hover{background:#ffca66;color:#000}
+.sim-card .btn:hover{background:#b6a15a;color:#000}
 
 /* size / spacing for the carousel */
 .similarSwiper{padding-bottom:4px}          /* space under slides */
 .sim-prev,.sim-next{color:#fff}             /* arrow colour */
 
 
+
+/* ─────────  COLOR TOKENS  ───────── */
+:root{
+  /* desaturated gold gradient so it blends, not screams */
+  --gold-1:#b6a15a;
+  --gold-2:#d5c06b;
+
+  --black:#000;
+  --black-2:#111;          /* slightly lighter for cards */
+  --text-body:#f0f0f0;     /* light grey for readability on black */
+}
+
+/* ─────────  SECTION WRAPPER  ───────── */
+.luxury--bg{
+  background:var(--black);
+  color:var(--text-body);
+  padding:1rem 1rem;
+  text-align:center;
+  font-family:"Poppins",sans-serif;
+}
+
+/* container keeps content narrow on big screens */
+.luxury--container{
+  max-width:1280px;
+  margin:0 auto;
+}
+
+/* ─────────  GOLD GRADIENT TEXT  ───────── */
+@supports (-webkit-background-clip:text){
+  .grad-gold{
+    background:linear-gradient(110deg,var(--gold-1),var(--gold-2));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:transparent;               /* fallback for older browsers */
+  }
+}
+
+/* ─────────  TYPOGRAPHY  ───────── */
+.luxury--title{
+  font-size:clamp(2.3rem,4vw + 1rem,3.9rem);
+  font-weight:600;
+  letter-spacing:.03em;
+  margin-bottom:1.2rem;
+}
+.luxury--subtitle{
+  max-width:900px;
+  margin:0 auto 4rem;
+  font-size:clamp(1rem,1vw + .45rem,1.3rem);
+  line-height:1.6;
+}
+.card--title{
+  font-size:1.9rem;
+  font-weight:600;
+  margin-bottom:1.25rem;
+}
+
+/* Apply gradient-gold to both headings */
+.luxury--title, .card--title{
+  background:linear-gradient(110deg,var(--gold-1),var(--gold-2));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;     /* non-webkit fallback */
+}
+
+/* ─────────  CARD GRID  ───────── */
+.luxury--cards{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:2.2rem;
+}
+
+/* ─────────  CARD  ───────── */
+.luxury--card{
+  position:relative;
+  background:var(--black-2);
+  border:1px solid rgba(213,192,107,.35);   /* faint gold rim */
+  border-radius:8px;
+  padding:3rem 2.1rem;
+  flex:1 1 300px;
+  max-width:380px;
+
+  /* white multi-layer glow */
+  box-shadow:
+      0  4px   6px  rgba(255,255,255,.06),
+      0 12px  20px  rgba(255,255,255,.05),
+      0 28px  55px  rgba(255,255,255,.04);
+
+  /* entrance position (down & slightly smaller) */
+  opacity:0;
+  transform:translateY(50px) scale(.96);
+  transition:
+      opacity .6s ease-out,
+      transform .55s ease,
+      box-shadow .5s ease;
+  will-change:transform,box-shadow,opacity;
+}
+
+/* glassy highlight overlay */
+.luxury--card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(130deg,
+              rgba(255,255,255,.18) 0%,
+              rgba(255,255,255,0) 60%);
+  mix-blend-mode:overlay;
+  opacity:.2;
+  pointer-events:none;
+  transition:opacity .35s ease;
+}
+
+/* card body text */
+.card--text{
+  font-size:1.1rem;
+  line-height:1.65;
+  color:var(--text-body);
+}
+
+/* ─────────  ENTER VIEWPORT (from IntersectionObserver JS) ───────── */
+.luxury--card.in-view{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+/* ─────────  HOVER / FOCUS  ───────── */
+.luxury--card:hover,
+.luxury--card:focus-visible{
+  transform:translateY(-20px) scale(1.05);
+  box-shadow:
+      0  8px  12px rgba(255,255,255,.08),
+      0 24px  38px rgba(255,255,255,.07),
+      0 46px  75px rgba(255,255,255,.06),
+      0  0   28px rgba(213,192,107,.25); /* subtle gold halo */
+}
+
+.luxury--card:hover::before{
+  opacity:.45;
+}

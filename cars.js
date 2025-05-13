@@ -1070,4 +1070,20 @@ function renderSimilarCars(currentCar){
 
 
 
+/* Simple intersection/fade-in.
+   Add once, it will work for as many "luxury--card"s as you have. */
+(function () {
+  const cards = document.querySelectorAll('.luxury--card');
 
+  const reveal = () => {
+    cards.forEach(card => {
+      const top = card.getBoundingClientRect().top;
+      if (top < window.innerHeight - 120) {
+        card.classList.add('in-view');
+      }
+    });
+  };
+
+  reveal();                    // run on load
+  window.addEventListener('scroll', reveal);
+})();
