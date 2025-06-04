@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions</title>
+        <script src="/js/terms.js" defer></script>
+    <link rel="icon" type="image/png" href="/partials/img/logo.png"> <!--page icon logo-->
+    <style>
+
+       *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: black; 
+    position: relative;
+    overflow-x: hidden; 
+    width:100%;
+    color: white;
+}
+        nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    width: 100%;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: fixed;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.25) 10%, rgba(255, 255, 255, 0.05) 80%);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.08);
+    z-index: 99;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* When hidden, move up and fade out */
+.nav-hidden {
+    transform: translateX(-50%) translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+.nav-logo {
+    height: 90px; /* Bigger size */
+    width: auto;
+}
+
+ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin: 0 auto;
+}
+a{
+    text-decoration: none;
+    color:rgb(255, 255, 255);
+    font-family: 'Proxima Nova';
+    font-weight: 500;
+    position: relative;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+a::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background:#b6a15a;
+    bottom:0;
+    left: 50%;
+    transition: all 0.3s ease;
+}
+
+a:hover::after{
+    width:100%;
+    left:0;
+}
+
+a:hover{
+    color:#b6a15a;
+}
+
+/* Sidebar overlay (hidden by default) */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Transparent black background */
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transform: translateX(-100%); /* Hidden off-screen */
+    transition: transform 0.3s ease;
+}
+.sidebar-overlay ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.sidebar-overlay ul li {
+    margin: 1rem 0;
+}
+
+.sidebar-overlay ul li a {
+    text-decoration: none;
+    color: #b6a15a;
+    font-size: 2rem; /* Larger font size */
+    transition: color 0.3s ease;
+}
+
+.sidebar-overlay ul li a:hover {
+    color: #fff;
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 101;
+}
+
+/* Sidebar open state */
+.sidebar-overlay.open {
+    transform: translateX(0); /* Slide into view */
+}
+
+
+        h1{
+            text-align: center;
+            padding: 50px;
+            margin-top: 150px;
+            font-family:'frontage';
+            font-size: 3rem;
+        }
+        p{
+            word-spacing: 5px;
+            line-height: 50px;
+            margin-top: 50px;
+            margin: 50px;
+        }
+        footer {
+  background-color: #111;
+  color: #fff;
+  padding: 40px 20px 20px;
+  text-align: center;
+  padding: 50px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1 1 220px;
+  min-width: 220px;
+}
+
+.footer-section h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #fff;
+  font-family: 'frontage';
+}
+
+.footer-section p, 
+.footer-section li, 
+.footer-section a {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #ccc;
+  margin-bottom: 10px;
+  text-decoration: none;
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+}
+.footer-section.contact p{
+    padding: 17px;
+}
+.footer-section a:hover {
+  color: #fff;
+}
+
+.footer-section.links ul {
+  display: flex;
+  flex-direction: column; /* Ensure links are aligned vertically */
+  gap: 12px; /* Space out the list items */
+}
+
+.footer-section.links li {
+  margin-bottom: 8px; /* Optional: Adjusts the space between the items */
+}
+
+.footer-section .logo {
+  max-width: 70px;
+  margin-bottom: 15px;
+
+}
+
+.subscribe input[type="email"] {
+  padding: 10px;
+  width: 100%;
+  margin: 10px 0;
+  border: none;
+  border-radius: 4px;
+}
+
+.subscribe button {
+  padding: 10px 20px;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.subscribe button:hover {
+  background-color: #666;
+}
+
+.social-icons {
+  margin-top: 15px;
+}
+
+.social-icons img {
+  width: 24px;
+  margin-right: 10px;
+  filter: brightness(0) invert(1);
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+  text-align: center;
+  padding: 20px 0 0;
+  margin-top: 20px;
+  color: #aaa;
+  font-size: 13px;
+}
+
+    </style>
+</head>
+
+<body>
+    <div data-include="/partials/nav.html"></div>
+
+    <h1>PRIVACY AND COOKIE POLICY</h1>
+    <p>The website is owned and operated by The Elite Cars LLC and/or its affiliates and subsidiaries (together "we" or "us"). The Elite Cars LLC is the data controller of the personal information it processes unless otherwise stated and is a limited liability company incorporated under the laws of the United Arab Emirates, and its registered office is at PO Box 393316, Dubai, United Arab Emirates. We take your privacy very seriously and therefore want you to know how your data is collected, used, shared, and stored, which is described in this Privacy and Cookie Policy.
+
+This Privacy and Cookie Policy applies if you use our services, or if you contact us or we contact you about them, which may include, but is not limited to:
+
+•	Using any of our platforms including, but not limited to, www.theelitecars.com website;
+
+•	General inquiries;
+
+•	Involvement in any recruitment processes; and
+
+•	Customer service channels associated with our services, and/or products.
+
+
+
+Data Collection and use
+
+
+We (and our authorized service providers) collect information supplied by you via the website, other websites operated by us, or any of our website customer service channels including without limitation on the phone, via email, via WhatsApp, or our Live Chat feature (where available). We and such service providers also collect information when you visit our website, other websites operated by us, or from third parties authorized to share your information with us. We and our authorized service providers may collect some of this information even if you are not a registered user or do not place an order. 
+
+This information may include:
+
+•	Contact and personal details such as name, address, phone number, email address, date of birth, gender, and nationality;
+
+•	Website statistical information such as your location, the URL you use to access the website, browser or device type/unique fingerprint, your computer's IP address and domain type, which pages you visited, search terms you entered, and items you clicked on;
+
+•	Where you provide the information of a third party to us, you are confirming that you have their consent to do so.
+
+
+
+Credit/Debit Card 
+
+
+All credit/debit card details and personally identifiable information will NOT be stored, sold, shared, rented, or leased to any third parties.
+
+
+
+How we collect your information
+
+
+Most of the personal information we process is provided to us directly by you for one of the following reasons and we will only use your personal information in accordance with applicable data protection law.
+
+•	You have made a complaint or inquiry to us;
+
+•	You have made an information request to us;
+
+•	You subscribe to receive communications from us; and
+
+•	We may also receive personal information indirectly, in some circumstances.
+
+
+
+How we use your information
+
+
+We (and/or the entities or companies listed in the "Whom may we share information with" section below) may use your information for the following purposes:
+
+•	To assist you with your customer service queries or provide information you have requested;
+
+•	To provide you with a personalized or improved website experience;
+
+•	For analytical or statistical purposes;
+
+•	To improve our service offering or website;
+
+•	To combine it with information we already hold lawfully through other sources;
+
+•	To protect our rights, safety, or the safety of others including fraud prevention; and
+
+•	For any purpose required by law or regulation.
+
+
+
+We may offer a Live Chat feature and/or the ability to communicate with us via WhatsApp to assist you with queries you may have. Where available we may record and store all chat conversations. These transcripts are only accessed for customer service purposes.
+
+
+
+Where we store your information
+
+
+When you give us your information it could be transferred, stored, or processed in a location outside the United Arab Emirates, as further described in the section "Whom may we share information with".
+
+
+
+Whom may we share information with
+
+
+We may share your information with any of the following:
+
+•	Our group companies;
+
+•	Carefully selected third parties with whom we have a relationship and who may contact you or utilize your data only for reasons pre-agreed with us, including marketing and re-marketing;
+
+•	Service providers who perform services on our behalf, such as information technology, website maintenance, surveys, and market research or advertising and marketing;
+
+•	Our professional services providers such as legal, audit, financial, and insurance advisers;
+
+•	Any assignee, successor operator, or prospective purchaser of the Website or us; and
+
+•	Any legal, regulatory, law enforcement, government, or municipal bodies.
+
+
+
+We use data processors who are third parties who provide elements of services for us. Our internal policy is to use reasonable endeavors to seek to have arrangements in place with our data processors to protect your data.
+
+
+
+In some circumstances, we are legally obliged to share information. For example, under a court order or where we cooperate with other supervisory authorities in handling complaints or investigations. We might also share information with other regulatory bodies in order to further their, or our, objectives.
+
+
+
+Cookies
+
+
+Our website uses first-party cookies (very small files that are sent by us to your computer or other access devices) and other similar technologies which we can access when you visit our website in the future. We may also use third-party cookies.
+
+
+
+There are five types of cookies:
+
+
+
+Website functionality cookies
+
+These cookies enable you to browse the Website and use our features such as shopping baskets
+
+
+
+Website analytics cookies
+
+We use these cookies to anonymously measure and analyze how our customers use the website. This allows us to continuously improve our website and your browsing experience.
+
+
+
+Customer preference cookies
+
+When browsing online, the website will remember your preferences (for example your username, language, or location). This makes your browsing experience simpler, easier, and more personal to you.
+
+
+
+Targeting cookies or advertising cookies
+
+These cookies are used to deliver adverts relevant to you. Additionally, they limit the number of times you see an advertisement as well as help us measure the effectiveness of our advertising campaigns.
+
+
+
+Third-party service provider cookies
+
+We may work with third-party companies whom we authorize to place third-party cookies, web beacons, or similar technologies for storing information on the website. These service providers help us to provide you with a better, faster, and safer experience. These service providers may use these technologies in the ways described above and in addition, may help us and you to avoid fraud.
+
+
+
+By using our website, you agree that we and they can place these types of cookies on your device and access them whenever you visit the website or other websites operated by us.
+
+
+
+If you want to delete any cookies that are already on your computer, please refer to the help and support area on your internet browser for instructions on how to locate the file or directory that stores cookies.
+
+
+
+Please note that by deleting cookies or disabling future cookies you may not be able to access certain areas or features of our website.
+
+ 
+
+Opting out of Certain Communications
+
+
+Whenever you receive a communication from us (which may be by email, SMS, push notification, telephone, or direct mail), you will be given an opportunity to unsubscribe. Additionally, you can change your marketing preferences at any time by contacting us as described above. Even if you unsubscribe, we will still contact you to deliver transactional and administrative information related to you.
+
+
+
+If you unsubscribe, we will change the way we use your data but any accounts you have with us, any of our affiliates and/or group companies, or our (and/or our affiliates and/or group companies') third-party providers will remain active.
+
+
+
+If you choose to opt back in at any time, your most recent action will prevail.
+
+
+
+Requests
+
+
+You may make the following requests to us and we will do our best to accommodate such requests, where possible: 
+
+•	Access your data – request a copy of your personal information that we process about you;
+
+•	Rectify your data – request us to amend or update your personal information where it is inaccurate or incomplete;
+
+•	Erase your data – request us to delete your personal information, in certain circumstances;
+
+•	Restrict your data – request us to restrict the processing of your information in certain circumstances; and
+
+•	Object to the use of your data – at any time, object to us processing your personal information where it is based exclusively on our legitimate interests (see above) or for direct marketing purposes.
+
+
+
+If you request that your data, be erased, note that we keep a record of how you have used the services, but this information cannot be linked back to you and we retain any information required by law.
+
+
+
+Please contact us at info@theelitecars.com if you wish to make a request.
+
+
+
+If you remain dissatisfied, you can make a complaint about the way we process your personal information to us at info@theelitecars.com. 
+
+
+
+Please note that if or when you contact us, we may require additional information from you in order or deal with your request.
+
+
+
+Security
+
+
+Information you provide to us via our website is stored on secure servers.
+
+
+
+We have implemented various steps to safeguard the integrity of our information technology infrastructure, including implementing authentication, monitoring, auditing, and encryption technology. Security measures have been integrated into the design, implementation, and day-to-day operations of the website as part of our continuing commitment to the security of electronic content and the electronic transmission of information. Despite such efforts, generally, the transmission of information via the internet is not completely secure and its security can never be guaranteed. Any transmission of data via our website is therefore carried out at your own risk.
+
+
+
+Data Retention
+
+
+We will keep your data for as long as required in order to:
+
+•	Manage and administer your account and provide the other relevant products or services anticipated by this Privacy and Cookies Policy, including, but not limited to, marketing;
+
+•	Personalize our products, services, and communications with you and/or;
+
+•	Comply with the applicable record retention required by law; and
+
+•	In determining how long to retain your data we will take into account our legal obligations and regulatory requirements.
+
+
+
+Google Analytics
+
+
+The Website uses Google Analytics, a web analytics service provided by Google, Inc. ("Google"). Google Analytics uses "cookies", which are text files placed on your computer to help the Website analyze how visitors use the site. The information generated by the cookie about your use of the Website (including your IP address) will be transmitted to and stored by Google on servers in the United States. Google will use this information for the purpose of evaluating your use of the Website, compiling reports on Website activity for website operators, and providing other services relating to Website activity and internet usage. Google may also transfer this information to third parties where required to do so by law, or where such third parties process the information on Google's behalf. Google will not associate your IP address with any other data held by Google. You may refuse the use of cookies by selecting the appropriate settings on your browser, however, please note that if you do this you may not be able to use the full functionality of this Website. By using this Website, you consent to the processing of data about you by Google in the manner and for the purposes set out above.
+
+
+
+Link to Third-Party Websites
+
+
+This Privacy and Cookie Policy does not apply to third-party websites to which the Website may link and we are not responsible for the privacy and cookie practices of those websites or for any information you submit to those websites via the Website. Please be sure to read their privacy and cookie policies separately to ensure you are comfortable. If you are a Facebook and/or LinkedIn member or a member of another The Elite Cars LLC website, the data collected via such websites will be subject to the Terms and Conditions of the relevant website (as applicable) save that we may combine your data collected through the Website with that other data.
+
+
+
+Notifications of Changes
+
+
+Please note that our Privacy and Cookie Policy is updated from time to time and that you will be bound by the most recent update of the policy appearing on our website. Where it is practicable, we may notify you by email of any significant changes. However, it is, therefore, your responsibility to continue to check our Privacy and Cookie Policy for updates.
+
+
+
+Contacting Us
+
+
+This Privacy Policy sets out in broad terms how we handle your personal information and safeguard our privacy. If you have any questions relating to our Privacy Policy, contact us at
+
+Telephone number: 800-5-ELITE (35483)
+
+Email: info@theelitecars.com</p>
+<div data-include="/partials/footer.html"></div>
+
+    <script src="/js/nav.js"></script>
+    <script src="/js/loader.js" type="module"></script>
+</body>
+
+</html>

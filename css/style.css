@@ -1,0 +1,371 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: black; 
+    position: relative;
+    overflow-x: hidden; 
+    width:100%;
+}
+section{
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+section.visible{
+    opacity: 1;
+    transform: translateY(0);
+}
+    
+.brand-logos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8rem;
+    width: 100vw; /* Full width of the viewport */
+    margin-left: 0; /* Remove left margin */
+    margin-right: 0; /* Remove right margin */
+    margin-top: -20px;
+}
+.brand-logos a:hover::after{
+    display: none;
+}
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    width: 120px; 
+    height: auto; 
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.logo:hover img {
+    filter: brightness(1);
+    transform: scale(1.1);
+    
+}
+
+.trans-image {
+    position: relative;
+    width: 100%;
+    height: 120vh; /* Increase height to 100vh */
+    min-height: 120vh; /* Ensure it takes full viewport height */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.trans-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Image at the back */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+}
+
+.rev img{
+    -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+}
+
+.black-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    mix-blend-mode: multiply; /* Creates blending effect */
+    transform: scale(1);
+    opacity: 1;
+}
+
+
+.text-overlay {
+    font-size: 12rem; /* Default size */
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 3;
+    color: white; /* Just as a fallback */
+    mix-blend-mode: screen; /* Cuts out text to reveal the image */
+}
+.intro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 2rem;
+    text-align: center;
+    
+}
+.intro-heading{
+    padding: 20px;
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: 'Exodusdisplay sharpen';
+    color: #ffca66;
+}
+.rev {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.car-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+.start {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Exodusdisplay sharpen';
+    padding: 20px 40px;
+    border-radius: 10px;
+    background-color: #0000003a;
+    text-align: center;
+    color: #ffffff;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.speed-counter {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    font-weight: bold;
+    font-family: 'Exodusdisplay sharpen';
+    color:#742b2b;
+    padding: 20px 40px;
+    border-radius: 10px;
+}
+
+.vehicles .vehicles-slider{
+    padding-bottom: 5rem;
+    margin-top: -210px;
+    background-size: cover;
+    background-position: center -190px;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 1; 
+}
+
+.heading {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-shadow: 0 0 10px #ffca66, 0 0 15px #ffca66;
+    font-family:'frontage';
+    text-align: center;
+    padding-top: 150px;
+    font-size: 4rem;
+    position: relative;
+    z-index: 10;
+    top:-80px
+    
+}
+.heading2 {
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #000000;
+    text-shadow: 0 0 10px #ffca66, 0 0 15px #ffca66;
+    font-family:'frontage';
+    text-align: center;
+    padding-top: 50px;
+    font-size: 2rem;
+    position: relative;
+    z-index: 10;
+    top:-80px
+    
+}
+.image-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .image-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .overlay-button {
+    position: absolute;
+    top: 50%;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 50px;
+    border-radius: 5px;
+  }
+
+  .overlay-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+.vehicles .vehicles-slider .box{
+    text-align: center;
+    
+}
+
+.vehicles .vehicles-slider .box img{
+    width:100%;
+    transform: scale(.8);
+    opacity: .5;
+}
+
+.vehicles .vehicles-slider .box .content{
+    padding-top: 1rem;
+    transform: scale(0);
+    
+}
+
+.vehicles .vehicles-slider .swiper-slide-active .content{
+    transform: scale(1);
+}
+.btn {
+    width: 130px;
+    height: 40px;
+    font-size: 1.1em;
+    cursor: pointer;
+    background-color: #0000001f;
+    color: #ffca66;
+    border: none;
+    border-radius: 5px;
+    transition: all .4s;
+   }
+   
+   .btn:hover {
+    border-radius: 5px;
+    transform: translateY(-10px);
+    box-shadow: 0 7px 0 -2px #ffca66,
+     0 15px 0 -4px #ffca66,
+     0 16px 10px -3px #ffca66;
+   }
+   
+   .btn:active {
+    transition: all 0.2s;
+    transform: translateY(-5px);
+    box-shadow: 0 2px 0 -2px #000000,
+     0 8px 0 -4px #000000,
+     0 12px 10px -3px #000000;
+   }
+
+.vehicles .vehicles-slider .swiper-slide-active img{
+    transform: scale(1);    
+    opacity: 1;
+}
+
+.vehicles .vehicles-slider .box .content h3{
+    font-size: 2.5rem;
+    color:#ffca66;
+    padding-bottom: 20px;
+}
+
+.vehicles .vehicles-slider .box .content .price{
+    font-size: 2.2rem;
+    color:#ffca66;
+    padding:1rem 0;
+    font-weight: bolder;
+}
+
+.vehicles .vehicles-slider .box .content .price span{
+    color:var(--light-color);
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+.vehicles .vehicles-slider .box .content p{
+    font-size: 1.6rem;
+    color:#ffca66;
+    padding: 1rem 0;
+    padding-top: 1.5rem;
+    border-top: var(--border);
+}
+
+.vehicles .vehicles-slider .box .content span{
+    font-size: 1rem;
+    color:var(--yellow);
+    padding:0 .5rem;
+}
+
+.swiper-pagination-bullet {
+    background-color: white; /* Default white */
+    opacity: 1; /* Ensure visibility */
+}
+
+.swiper-pagination-bullet-active {
+    background: #ffca66 !important; /* Gold when active */
+}
+
+
+/* Navigation button styles - more specific selectors */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: white !important;
+  font-size: 24px !important;
+}
+
+.swiper-button-next:active::after,
+.swiper-button-prev:active::after {
+  color: #ffca66 !important;
+}
+
+
+/* Pagination dash styles */
+.swiper-pagination-bullet {
+  width: 20px !important;
+  height: 4px !important;
+  border-radius: 0 !important;
+  background-color: rgba(255, 255, 255, 0.518)  !important;
+  opacity: 1 !important;
+  margin: 0 5px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ffca66 !important;
+}
+.swiper-button-next {
+padding-right: 180px;
+padding-top: 200px;
+scale: 2;
+}
+.swiper-button-prev {
+padding-left: 180px;
+padding-top: 200px;
+scale: 2;
+}
+

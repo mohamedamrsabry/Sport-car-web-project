@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+
+
+.about-hero {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: url('/partials/img/hero-bg.jpg') no-repeat center center/cover;
+}
+
+.about-hero h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    color: gold;
+}
+
+.about-hero p {
+    font-size: 1.5rem;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 10%;
+    gap: 3rem;
+}
+
+.about-text {
+    max-width: 600px;
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    color: gold;
+    margin-bottom: 1rem;
+}
+
+.about-text p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.about-img {
+    width: 400px;
+    border-radius: 10px;
+}
+
+.mission-vision {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 3rem 10%;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.box {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.box h3 {
+    font-size: 2rem;
+    color: gold;
+    margin-bottom: 1rem;
+}
+
+.box p {
+    font-size: 1.2rem;
+}
+

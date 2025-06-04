@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions</title>
+        <script src="/js/terms.js" defer></script>
+    <link rel="icon" type="image/png" href="/partials/img/logo.png"> <!--page icon logo-->
+    <style>
+
+       *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: black; 
+    position: relative;
+    overflow-x: hidden; 
+    width:100%;
+    color: white;
+}
+        nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    width: 100%;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: fixed;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.25) 10%, rgba(255, 255, 255, 0.05) 80%);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.08);
+    z-index: 99;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* When hidden, move up and fade out */
+.nav-hidden {
+    transform: translateX(-50%) translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+.nav-logo {
+    height: 90px; /* Bigger size */
+    width: auto;
+}
+
+ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin: 0 auto;
+}
+a{
+    text-decoration: none;
+    color:rgb(255, 255, 255);
+    font-family: 'Proxima Nova';
+    font-weight: 500;
+    position: relative;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+a::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background:#b6a15a;
+    bottom:0;
+    left: 50%;
+    transition: all 0.3s ease;
+}
+
+a:hover::after{
+    width:100%;
+    left:0;
+}
+
+a:hover{
+    color:#b6a15a;
+}
+
+/* Sidebar overlay (hidden by default) */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Transparent black background */
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transform: translateX(-100%); /* Hidden off-screen */
+    transition: transform 0.3s ease;
+}
+.sidebar-overlay ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.sidebar-overlay ul li {
+    margin: 1rem 0;
+}
+
+.sidebar-overlay ul li a {
+    text-decoration: none;
+    color: #b6a15a;
+    font-size: 2rem; /* Larger font size */
+    transition: color 0.3s ease;
+}
+
+.sidebar-overlay ul li a:hover {
+    color: #fff;
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 101;
+}
+
+/* Sidebar open state */
+.sidebar-overlay.open {
+    transform: translateX(0); /* Slide into view */
+}
+
+
+        h1{
+            text-align: center;
+            padding: 50px;
+            margin-top: 150px;
+            font-family:'frontage';
+            font-size: 3rem;
+        }
+        p{
+            word-spacing: 5px;
+            line-height: 50px;
+            margin-top: 50px;
+            margin: 50px;
+        }
+        footer {
+  background-color: #111;
+  color: #fff;
+  padding: 40px 20px 20px;
+  text-align: center;
+  padding: 50px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1 1 220px;
+  min-width: 220px;
+}
+
+.footer-section h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #fff;
+  font-family: 'frontage';
+}
+
+.footer-section p, 
+.footer-section li, 
+.footer-section a {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #ccc;
+  margin-bottom: 10px;
+  text-decoration: none;
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+}
+.footer-section.contact p{
+    padding: 17px;
+}
+.footer-section a:hover {
+  color: #fff;
+}
+
+.footer-section.links ul {
+  display: flex;
+  flex-direction: column; /* Ensure links are aligned vertically */
+  gap: 12px; /* Space out the list items */
+}
+
+.footer-section.links li {
+  margin-bottom: 8px; /* Optional: Adjusts the space between the items */
+}
+
+.footer-section .logo {
+  max-width: 70px;
+  margin-bottom: 15px;
+
+}
+
+.subscribe input[type="email"] {
+  padding: 10px;
+  width: 100%;
+  margin: 10px 0;
+  border: none;
+  border-radius: 4px;
+}
+
+.subscribe button {
+  padding: 10px 20px;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.subscribe button:hover {
+  background-color: #666;
+}
+
+.social-icons {
+  margin-top: 15px;
+}
+
+.social-icons img {
+  width: 24px;
+  margin-right: 10px;
+  filter: brightness(0) invert(1);
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+  text-align: center;
+  padding: 20px 0 0;
+  margin-top: 20px;
+  color: #aaa;
+  font-size: 13px;
+}
+
+    </style>
+</head>
+
+<body>
+    <div data-include="/partials/nav.html"></div>
+
+    <h1>TERMS AND CONDITIONS</h1>
+    <p>THE ELITE CARS LLC, a company incorporated in the United Arab Emirates, having its registered office at P.O. Box 393316, Dubai, UAE, and, its subsidiaries and affiliated companies, as the case may be (hereinafter, “The Elite Cars LLC”, “we”, “us” or “our”), operates and maintains (as the case may be) this website and any related mobile applications (collectively referred to as the “Platforms”) and all the information, communications, software, scripting, photos, text, video, graphics, music, sounds, images and other materials and services found on the Platforms (collectively the ”Content”) are for the use of our customers, employees and members of the general public and only for the lawful purposes described below.
+
+The Platforms are provided as a service to you and are intended to allow you and other users to browse and order products and other goods or services ("Products") offered for sale on the Platforms ("Services"). The Elite Cars LLC reserves the right to delete, modify, or supplement the content of the Platforms at any time for any reason without prior notification, and will use reasonable efforts to include up-to-date and accurate information on the Platforms.
+
+The terms and words 'you', 'your', or 'Buyer' shall mean and include a natural or legal person(s) who has or have agreed to these Terms.
+
+NOTWITHSTANDING ANY ORAL OR WRITTEN INFORMATION, OPINIONS, EVALUATIONS, DESCRIPTIONS, OR CONSULTATIONS OF ANY KIND FURNISHED BY THE ELITE CARS LLC TO THE CONTRARY, YOU SPECIFICALLY AGREE TO THE TERMS SET FORTH BELOW.
+
+PLEASE READ THESE TERMS OF USE CAREFULLY BEFORE USING ANY OF THE PLATFORMS.
+
+
+
+1.    TERMS AND CONDITIONS
+
+
+1.	These Terms and Conditions (the "Terms") are between The Elite Cars LLC and you as an end user of the Platforms and the Services. Changes in law or changes in The Elite Cars LLC’s business may require changes to be made to the Terms from time to time, so The Elite Cars LLC encourages you to review the Terms periodically for any such changes. It is also your responsibility to carefully read, agree with and accept the Terms and Platforms’ Privacy Policy (the "Privacy Policy") on each occasion you use the Platforms and your continued use of the Platforms shall signify your acceptance to be bound by the latest Terms and Privacy Policy. If you do not agree to (or cannot comply with) any of the Terms, do not use the Platforms.
+
+
+
+2.    USER CONDUCT AND CONTENT
+
+
+1.	You agree to comply with all legal requirements of the applicable jurisdiction(s) with regard to your use of the Platforms, and you acknowledge that you are entirely responsible for ensuring your own familiarity with such requirements and your own compliance with the same.
+
+
+
+2.	The Platforms may at times provide opportunities for users to post reviews and other comments, questions, suggestions, or other information ("User Content") on or through these Platforms by e-mail or telephone, or otherwise as may be disclosed, submitted or offered in connection with your use of the Platforms. You warrant that any such User Content submitted by you to the Platforms is original (and does not infringe the intellectual property rights of others), and you hereby grant The Elite Cars LLC a perpetual, irrevocable, non-exclusive, royalty-free, transferable right and license to use such User Content however The Elite Cars LLC desires, including without limitation, to copy, modify, delete in its entirety, adapt, publish, translate, create derivative works from and/or sell and/or distribute such User Content and/or incorporate such User Content into any form, medium or technology throughout the world, without any further recourse to you, and you hereby waive any moral rights in such User Content. You agree that you will not post any content that is contrary to morality, defamatory, inflammatory, that infringes intellectual property rights, or that may otherwise breach common decency or be contrary to law.
+
+
+
+3.	The Elite Cars LLC will be entitled to use, reproduce, disclose, modify, adapt, create derivative works from, publish, display and distribute any User Content you submit for any purpose whatsoever, without restriction and without compensating you in any way. The Elite Cars LLC is and shall be under no obligation (1) to maintain any User Content in confidence; (2) to pay to user any compensation for any User Content; or (3) to respond to any User Content.
+
+
+
+4.	You agree that any User Content submitted by you to the Platforms will not violate the Terms or any right of any third party, including without limitation, copyright, trademark, privacy, or other personal or proprietary right/s, and will not cause injury to any person or entity. You further agree that no User Content submitted by you to the Platforms will be or contain libelous or otherwise unlawful, threatening, abusive, or obscene material, or contain software viruses, political campaigning, commercial solicitation, chain letters, mass mailings, or any form of "spam".
+
+
+
+5.	The Elite Cars LLC does not regularly review posted User Content but does reserve the right (but not the obligation) to monitor and edit or remove any User Content submitted to the Platforms. You grant The Elite Car
+
+
+
+3.    ORDER, PRICING, AND PAYMENT
+
+
+1.	The Services shall include:
+
+(i)	The provision to you of the Platforms to purchase any Products;
+
+(ii)	Where applicable, delivering your purchased Products or procuring a logistics The Elite Cars LLC is experienced with collection and transportation to deliver your purchased Products to you ("Logistics Supplier");
+
+(iii)	Where applicable, providing appointment times for the collection or completion of the Products; and
+
+(iv)	The Elite Cars LLC customer support, enabling you to contact The Elite Cars LLC at info@theelitecars.com with any queries that you may have in relation to your purchased Product/s.
+
+
+
+2.	The Elite Cars LLC may not accept your order for Products if:
+
+(i)	The item/s is/are out of stock;
+
+(ii)	The service is no longer provided by The Elite Cars LLC for any reason;
+
+(iii)	The Elite Cars LLC is unable to obtain authorization for your payment;
+
+(iv)	Shipping restrictions apply to a particular Product;
+
+(v)	The Elite Cars LLC finds a Product or pricing error; or
+
+(vi)	For any other reason at The Elite Cars LLC’s sole discretion. In any of these situations, The Elite Cars LLC will inform you that your order has not been accepted, will not process your payment, and will not be liable to you or any third party by reason of our decision to decline processing an order, or unwinding or suspending any transaction after processing has begun. 
+
+
+
+3.	The Buyer agrees to pay the full amount payable for the Product as indicated during the order process, including any related charges incurred with that order. 
+
+
+
+4.	The Elite Cars LLC follows a strict policy regarding transferring any amounts to The Elite Cars LLC, and The Elite Cars LLC shall not accept any amounts (including Deposit and/or total price) from any third party except for the bank financing the purchase in any case.
+
+
+
+5.	The Elite Cars LLC has a strict policy regarding transferring any amounts paid for the purchase of the Vehicle, and it is not permissible to transfer the payments to purchase a different Vehicle.
+
+
+
+6.	All cheques and bank transfers are subject to clearance fees and all other bank-related fees; i.e., the total price is exclusive of any bank fees, processing fees, exchange rate fluctuations, transfer fees, etc. The Buyer shall be solely responsible and liable for ensuring such fees are paid in full.
+
+
+
+7.	The Buyer shall be solely responsible and liable for all the charges, costs, expenses, etc., associated with the valuation, inspection, and registration of the Vehicle, including costs associated with the Salik, delivery, storage, and any other fees accrued for the purchase and registration of the Vehicle.
+
+
+
+8.	There may be errors in transmission resulting in the interruption of your purchase, you agree to cooperate with The Elite Cars LLC to resolve such issues, and you agree that The Elite Cars LLC shall have full discretion to determine the appropriate resolution in such cases.
+
+ 
+
+9.	All credit/debit card payments are subject to validation by the issuer. If the issuer of your card refuses to authorize payment, The Elite Cars LLC will cancel your order and contact you for an alternative method of payment. The Elite Cars LLC cannot be held responsible if this should result in a delay in dispatching your goods/Products or completing your order.
+
+ 
+
+10.	All billing and registration information provided must be truthful and accurate. Providing any untruthful or inaccurate information constitutes a breach of these Terms. By confirming your purchase at the end of the process, you agree to accept and pay for the item/s requested.
+
+
+
+11.	Offers and deals in the showroom and on The Elite Cars LLC’s electronic platforms may not relate to the Vehicle.
+
+
+
+12.	Offers and deals may be posted by The Elite Cars LLC or on behalf of third-party suppliers upon or after the Vehicle reservation and The Elite Cars LLC shall not be responsible or liable in any manner whatsoever to provide such offers and deals to the Buyer.
+
+
+
+13.	Certain orders may constitute improper use of the Platforms and their Services. The Elite Cars LLC reserves the right, at its sole discretion, to refuse or cancel any order for any reason.
+
+ 
+
+14.	In the event that a Product is listed at an incorrect price due to an error in pricing, The Elite Cars LLC shall have the right, at its sole discretion, to refuse or cancel any orders placed for that Product. In the event that a Product is mispriced, The Elite Cars LLC may, at its discretion, either contact you for instructions or cancel your order and notify you of such cancellation.
+
+ 
+
+15.	The Elite Cars LLC will use reasonable endeavors to provide you with attractive prices on the Platforms as well as in its stores, however, sometimes the price on the Platforms will not match the price in a store.
+
+
+
+16.	You agree that in the event of any taxes being increased or levied or introduced by the government authorities in the jurisdiction where any member company of The Elite Cars LLC is incorporated and/or tax resident, The Elite Cars LLC reserves the right to charge the tax at the prevailing rate in respect of any sale made under the Platforms. The user shall pay the amount of any such tax as an addition to the invoice value.
+
+ 
+
+17.	The Elite Cars LLC reserves the right, at its sole discretion, to limit the number of items purchased per person per household or per order. These restrictions may be applicable to orders placed by the same user, the same credit card, and also to orders that use the same billing and/or shipping address.
+
+
+
+4.    INSURANCE
+
+
+The Buyer shall bear all the insurance cost of the Vehicle.
+
+
+
+5.    VEHICLE CONDITION & INSPECTION
+
+
+1.	The Buyer shall be responsible for inspecting the Vehicle and ensuring that there are no undeclared flaws and/or defects to the Vehicle.
+
+
+
+2.	Any inspections requested by the Buyer shall be conducted only at a testing facility approved by the relevant authority governing roads and transportation or the Vehicle dealer ("Dealer"). No unauthorized third-party inspections shall be performed. 
+
+
+
+3.	The Elite Cars LLC shall perform the inspection process at the expense of the Buyer regardless of the outcome of the inspection, including the case in which the Buyer decides not to proceed with the purchase of the Vehicle.
+
+
+
+4.	No additional repairs, improvements, or upgrades shall be added/made to the Vehicle unless mentioned in writing in these Terms.
+
+
+
+5.	The Vehicle has been approved and accepted by the Buyer in its current as-is condition with all its flaws and defects (if any). In any case, the Buyer shall bear full responsibility for the Vehicle from the moment it is registered in their name. Any defect in the Vehicle that occurs after registration and before delivery shall be the Buyer's responsibility and liability.
+
+
+
+6.    VEHICLE DETAILS
+
+
+1.	Details of the Vehicle from the Dealer and/or the relevant authority governing roads and transportation are true and provided to the Buyer by The Elite Cars LLC as received, and the Buyer hereby agrees, accepts, and acknowledges that The Elite Cars LLC shall not be under any obligation to verify or investigate the accuracy or authenticity of any/all information and details of the Vehicle, including but not limited to the Chassis Number, Model, Manufacturing Year, Type and any information whatsoever as provided by the Dealer and/or the relevant authority governing roads and transportation. The relevant authority governing roads and transportation, customs, freight forwarders, and/or the Dealer are entirely liable for the same, including any false or misleading information provided to the Buyer in relation to the Vehicle. 
+
+
+
+2.	The Buyer hereby indemnifies The Elite Cars LLC against any misinformation pertinent to the Vehicle in the event the information provided from the Dealer or the relevant authority governing roads and transportation is incorrect or if no history is available for the Vehicle and in such case, the Buyer shall not be entitled to the right to a refund for any amount they might have paid in relation to the Vehicle to The Elite Cars LLC and shall directly claim compensation from the relevant defaulting party.
+
+
+
+7.    SHIPPING & COLLECTION
+
+
+1.	For The Elite Cars LLC to arrange to deliver any Products that you have purchased to you, you shall be solely responsible for providing the correct and accurate delivery details.
+
+ 
+
+2.	The Elite Cars LLC is not responsible for any delays in the shipping of your ordered and purchased Product(s), lost or missing Product/s, or the incorrect delivery of the Product(s) to you, which is due to your fault or due to inaccurate, false or incomplete information provided by you.
+
+ 
+
+3.	For any Products to be provided at one of The Elite Cars LLC locations, you will be responsible to attend the relevant location on the date and at the time specified and agreed by you on the Platforms. Failure by you to do so will result in the forfeiture of the deposit as indicated for the relevant Product.
+
+ 
+
+4.	Risk of loss and title for the Products that you purchase on the Platforms pass to you upon delivery or collection by you of your purchased Products by The Elite Cars LLC or the logistics supplier.
+
+ 
+
+8.    TERMINATION, REFUND, AND RETURNS
+
+
+1.	General, for all purchases made by users on the Platforms:
+
+(i)	The Elite Cars LLC has a strict no refund and no return policy for any Vehicle.
+
+(ii)	Unless otherwise specified, Products purchased, whether goods sold or services rendered, by any of these The Elite Cars LLC companies are not refundable after the user’s electronic confirmation of the purchase is complete.
+
+(iii)	The Elite Cars LLC shall be entitled to terminate these Terms and neither the Deposit and/nor any amounts paid shall be refundable in the event the Buyer cancels the transaction, the financing process from the bank is rejected, the Buyer is unable to pay the total price of the Vehicle in accordance with Clause 3.3 of these Terms, the Buyer is unable to provide The Elite Cars LLC with the documents necessary to complete the registration process, unable to remove the restrictions imposed on the Buyer by the competent authorities that prevent the completion of the registration, it is apparent that the Buyer is buying the Vehicle as a broker or a retailer, and accordingly, a request to change the Buyer's name for the registration is given to The Elite Cars LLC, or the Buyer violates any Clause of these Terms.
+
+(iv)	Without prejudice to any other remedy and/or entitlement that The Elite Cars LLC may be entitled to pursue against and/or claim from the Buyer under these Terms and/or any applicable laws, The Elite Cars LLC shall have the right to obtain fair compensation in the event of the termination of these Terms for any reason which at the minimum shall be equivalent to all fees, expenses and losses resulting from the termination, including losses resulting from selling the Vehicle to a third party at a price less than the total price. 
+
+(v)	The termination of these Terms under this Clause shall be considered as termination by mutual consent for the purpose of Article 267 of the UAE Federal Law No. 5 of 1985.
+
+
+
+9.    MOBILE SERVICES
+
+
+If you access the Websites via your mobile device, we do not currently charge for this access. Please note that your carrier’s normal rates and fees such as data charges will still apply.
+
+
+
+10.    PRIVACY
+
+
+In the course of your use of the Platforms, we will collect certain information from you, and shall be done in accordance with the Privacy Policy. Please go through the Privacy Policy available on the Platforms.
+
+
+
+11.    WARRANTY & SERVICING
+
+
+1.	All Vehicles and accessories are sold in an as-is condition with no guarantee or warranty offered by The Elite Cars LLC including all visible and hidden defects, damages, or repairs and The Elite Cars LLC shall not be responsible or liable for any current or future defects and damages that may occur. 
+
+
+
+2.	The Vehicle shall not be eligible for any guarantee, warranty, or service by The Elite Cars LLC and any warranty provided or sold with the Vehicle shall be strictly between the Buyer and the third party providing such warranty, guarantee, or service, and the same shall not be between the Buyer and The Elite Cars LLC. 
+
+
+
+3.	In the event the Vehicle has a warranty coverage and/or guarantee and/or a service contract from third-party suppliers for a limited to a specific period and/or specific technical matters, the provider of such services shall bear the responsibility and/or liability for the same and The Elite Cars LLC shall not in any manner be responsible for or liable to any warranty, guarantee and service claims whatsoever including claims for rejection of any warranty, guarantee or service including its expiry date by third parties.
+
+
+
+4.	The Buyer shall not hold The Elite Cars LLC liable whatsoever for any requirements imposed by the warranty, guarantee, and service provider. In the event the warranty, guarantee, or service provider refuses, fails to, or does not provide the Buyer with a policy, The Elite Cars LLC, its management, or operational team shall not be held liable for any reason whatsoever.
+
+
+
+5.	The Vehicle shall be sold without any service policy by The Elite Cars LLC and any service contract provided or sold is strictly between the Buyer and the Service Provider and it is at the service provider's sole discretion and responsibility in relation to such service and The Elite Cars LLC shall not be responsible for any acts, omissions, performance and/or details of the same, including the duration of the warranty, guarantee or service, its technical scope, and conditions.
+
+
+
+6.	The guarantee, warranty, or service may include a period clause from the date of purchasing the Vehicle, and this Clause implies from the date of purchasing the Vehicle for the first user or from the date of its purchase by The Elite Cars LLC from the supplier or agent, and this does not imply from the date the Buyer purchased it from The Elite Cars LLC. This Clause is applicable to the case of selling new Vehicles and The Elite Cars LLC shall not be responsible for the elapsed period from the date of purchasing the Vehicle from the Dealer.
+
+
+
+7.	It is the sole responsibility of the Buyer to follow the guarantee, warranty, and service provider's instructions including but not limited to any terms and conditions by the guarantee, warranty, and service provider.
+
+
+
+8.	The Elite Cars LLC shall not be liable in the event the third-party guarantee, warranty, and service contract providers refuse to honor the Agreement or face bankruptcy or closure and the Buyer shall have no right to follow any lawful methods in this regard against The Elite Cars LLC.
+
+
+
+9.	Vehicle sold may require immediate servicing and The Elite Cars LLC may, at its sole discretion and without assumption of obligation on its part, recommend to the Buyer a service provider for their vehicles. In all events The Elite Cars LLC shall not in any manner whatsoever be responsible nor liable should the service provider choose to reject the contract coverage, reject to provide the services, or for any issue accrued between the Buyer and service provider at any time and for any reason whatsoever.
+
+
+
+10.	Any dealership information provided such as history, warranty, and service contracts are verbally communicated by the first owner or dealerships to The Elite Cars LLC. Thus, The Elite Cars LLC does not guarantee the accuracy of such information and such information must be verified by the Buyer.
+
+
+
+12.    DISCLAIMER OF WARRANTIES
+
+
+1.	To the fullest extent permissible by law, The Elite Cars LLC does not warrant that the Platforms or any of the Services or Products available through it will be uninterrupted or free from errors, or that the Services will meet any particular criteria of performance or quality. There may be delays, omissions, interruptions, and inaccuracies in materials or Services available through the Platforms.
+
+ 
+
+2.	The Elite Cars LLC makes no representation or warranties about the accuracy, completeness, timeliness, reliability, or non-infringement of any content on the Platforms or Services available through it.
+
+ 
+
+3.	Although The Elite Cars LLC intends to take reasonable steps to prevent the introduction of viruses, worms, or other malicious code to the Platforms,  The Elite Cars LLC does not represent or warrant that the Platforms, Services, features, or materials that may be available through the Platforms, are free from such destructive features. The Elite Cars LLC is not liable for any damages or harm attributable to such features.
+
+ 
+
+4.	Electronic transmissions of data including the internet are public media and any use of such media is public, not private. Information related to or arising from such use is either public or the property of those collecting the information and not personal or private information. The Elite Cars LLC does not warrant and cannot ensure the security or confidentiality of any information you transmit to the Platforms. Accordingly, any information you transmit to the Platforms is transmitted at your own risk.
+
+  
+
+13.    LIMITATION OF LIABILITY AND INDEMNITY 
+
+
+1.	Nothing in these Terms is intended to affect your rights under the law. The use of the Platforms or any of the Services or Products is at your own risk, and unless otherwise stated in these Terms, you assume full responsibility and risk of loss resulting from your use of the Platforms or any of the Services or Products.
+
+ 
+
+2.	By using the Platforms, you agree, to the fullest extent permitted by law, to indemnify and hold The Elite Cars LLC, its directors, officers, employees, affiliates, agents, contractors, and licensors harmless with respect to any claims arising out of your breach of these Terms, your use of the Platforms or any of the Services, your non-compliance with applicable laws or regulations in the jurisdiction in which you are accessing the Platforms or the Services, or any action taken by The Elite Cars LLC as part of its investigation of a suspected violation of these Terms or as a result of its finding or decision that a violation of these Terms has occurred. You agree to defend, indemnify and hold harmless The Elite Cars LLC and its affiliates from and against any and all claims, losses, costs, and expenses, including attorneys' fees, arising from or related to your use of the Platforms or any breach by you of these Terms.
+
+ 
+
+3.	Under no circumstances and under no legal or equitable theory, whether in tort, contract, strict liability, or otherwise shall The Elite Cars LLC or any of its affiliates, employees, directors, officers, agents, vendors, or suppliers be liable to you or to any other person for any indirect, special, incidental or consequential losses or damages of any nature, including without limitation, losses for lost profits, loss of goodwill, loss of data, work stoppage, business interruption, accuracy of results, or computer failure or malfunction, even if an authorised representative from The Elite Cars LLC has been advised or should have known of the possibility of such losses, arising out of or in connection with (i) the use or inability to use the Platforms; (ii) your use of or reliance on the Platforms, any information, hyperlinks or content contained therein, or services included on or otherwise made available to you through the Platforms; (iii) your provision of information, personal or otherwise, to The Elite Cars LLC; (iv) the provision of Services by The Elite Cars LLC; (v) acts or negligence on the part of The Elite Cars LLC; (vi) the sale, purchase, transportation, delivery, use or disposal of any product, or service associated with the Platforms or available through other sites linked to the Platforms, or any loss suffered by or harm to any person or property in any way relating to or caused in whole or in part by your use of the Platforms or any service or product, associated with the Platforms; or (vii) any taxes attributable to the relating to any service or product associated with the Platforms.
+
+
+
+4.	The information provided on the website is for reference purposes only and shall not be treated as evidence for matters relating to court or disputes or for valuation purposes.
+
+
+
+14.    HANDOVER 
+
+
+1.	The Vehicle sold shall be handed over to the Buyer at The Elite Cars LLC’s premises. Moreover, upon the Buyer's request, The Elite Cars LLC shall arrange for the delivery of the Vehicle to the Buyer's location of choice at the latter's sole cost and expense.
+
+
+
+2.	The Elite Cars LLC shall conduct the registration of the Vehicle and transfer the ownership to the Buyer on behalf of the Buyer and at the sole cost and expense of the Buyer. The Buyer shall provide all the necessary documents and sufficient timing to The Elite Cars LLC to undertake such work.
+
+
+
+3.	The Elite Cars LLC has the right to suspend delivery of the Vehicle in the event that the Buyer violates any of these Terms, and the suspension shall remain in place until the Buyer's breach is fixed.
+
+
+
+15.    INTELLECTUAL PROPERTY RIGHTS
+
+
+1.	Any video and/or photo footage taken of the Vehicle may be shown and posted publicly on social media and other online portals of The Elite Cars LLC as a form of advertising.
+
+
+
+2.	The Buyer shall have no right whatsoever to use any of The Elite Cars LLC’s trademarks without The Elite Cars LLC’s prior written consent and all rights that are not expressly granted to the Buyer in these Terms are reserved and retained by The Elite Cars LLC.
+
+
+
+3.	Any content including videos, images, and information about the Vehicle granted to The Elite Cars LLC can be used, produced, distributed, and shared by The Elite Cars LLC internally and externally with any Digital Platforms or with third parties and The Elite Cars LLC can prepare derivative works or copies, and display the content for promotion and redistribution in any form whatsoever in future without any need to obtain prior consent from the Buyer or objection from the Buyer or any consideration to the Buyer for the same.
+
+
+
+4.	The Elite Cars LLC has the right to keep the Buyer's data, use it, and share it with any third party for the purpose of completing the sale process and registration, and The Elite Cars LLC has the right to communicate with the Buyer in the future through the means of communication provided by the Buyer for the purposes of advertising and publicity unless the Buyer requests (in writing) otherwise.
+
+
+
+16.    GENERAL
+
+
+1.	Any links or references to other online websites ("hyperlinks") contained on the Platforms are provided by The Elite Cars LLC merely as a convenience to you and other users of the Platforms, and The Elite Cars LLC is not responsible for the content or operation of any such linked sites, or liable, directly or indirectly, for the privacy practices or the content of such linked sites. Any hyperlinks to such linked websites should in no way be construed as an endorsement, representation(s), or promotion by The Elite Cars LLC as to the content, representations, accuracy, products, or services found or otherwise described in such linked websites. Use of these linked websites is done at your own risk and with consequences.
+
+ 
+
+2.	The Elite Cars LLC reserves the right to correct any errors or omissions in the Platforms and to improve the contents at any time without notice. If you rely on the Platforms and any materials or Services available through them, you do so entirely at your own risk. Furthermore, The Elite Cars LLC reserves the right to alter, limit or discontinue the provision of any of the Services contained on the Platforms at any time without prior notice to you.
+
+ 
+
+3.	The Elite Cars LLC may terminate or suspend your access to all or part of the Platforms, without notice, for any conduct that The Elite Cars LLC, in its sole discretion, believes is in violation of these Terms or any applicable law or is harmful to the interests of The Elite Cars LLC or a third party. Notwithstanding such termination or suspension, you will continue to be subject to clauses of these Terms. Except as otherwise expressly stated in these Terms, The Elite Cars LLC shall not be liable to you or to any third party for any modification, termination, suspension, or discontinuation of the Platforms.
+
+ 
+
+4.	The Elite Cars LLC may use cookies, or other technologies, on the Platforms. Cookies are small files or records that The Elite Cars LLC may place on your web browser for collecting information about your activities on the Platforms, preparing reports, assessing trends, and otherwise monitoring the way in which the Platforms are being used. This is intended to enhance convenience for you, and to assist The Elite Cars LLC to run an efficient operation. By accepting these Terms, you confirm your consent to The Elite Cars LLC’s use of cookies, and other such technologies, for these purposes.
+
+ 
+
+5.	You are prohibited from violating or attempting to violate the security of the Platforms, including, without limitation, (a) accessing data not intended for such user or logging onto a server or an account which the user is not authorized to access; (b) attempting to probe, scan or test the vulnerability of a system or network or to breach security or authentication measures without proper authorization; (c) attempting to interfere with service to any user, host or network, including, without limitation, via means of submitting a virus to the Platforms, overloading, "flooding," "spamming," "mailbombing" or "crashing;" (d) sending unsolicited email, including promotions and/or advertising of products or Services; or (e) forging any TCP/IP packet header or any part of the header information in any email or newsgroup posting. Violations of system or network security may result in civil or criminal liability.
+
+
+
+6.	As part of our order processing procedures, we screen all received orders for fraud or other types of unauthorized or illegal activity. We reserve the right to refuse to process an order due to suspected fraud or unauthorized or illegal activity. If such is the case, we may terminate your order. We also reserve the right to cancel any accounts or refuse to ship to certain addresses due to suspected fraud or unauthorized or illegal activity. We take these measures to protect our customers as well as ourselves from fraud or other unauthorized or illegal activity.
+
+
+
+7.	You understand that by using the Platforms or any Services provided on the Platforms, you may encounter content that may be deemed by some to be offensive, indecent, or objectionable, which content may or may not be identified as such. You agree to use the Platforms and any service at your sole risk and that The Elite Cars LLC and its affiliates shall have no liability to you for content that may be deemed offensive, indecent, or objectionable.
+
+ 
+
+8.	You acknowledge that the purchased goods licensed or sold on the Platforms, which may include technology and software, are subject to the customs and export control laws and regulations of the United Arab Emirates and may also be subject to the customs and export laws and regulations of the country in which the products are manufactured and/or received. By purchasing, downloading, or using technology or software from the Platforms, you agree to abide by the applicable laws, rules, and regulations and you represent and warrant that you will not transfer, by electronic transmission or otherwise, the software or technology in violation of the law.
+
+
+
+9.	The products displayed on the Website can be ordered and exported within the UAE and other countries. The currency displayed on www.theelitecars.com is subject to differ according to the country’s IP address. Reference to any products, services, processes, or other information by trade name, trademark, manufacturer, supplier, or otherwise does not constitute or imply endorsement, sponsorship, or recommendation thereof by The Elite Cars LLC. All information presented by The Elite Cars LLC is designed to be used for informational purposes only.
+
+
+
+10.	If you are not a consumer, you confirm that you have the authority to bind any business on whose behalf you use the Platforms.
+
+ 
+
+11.	Your unauthorized use of the Platforms may give rise to a claim for damages and/or be a criminal offense.
+
+   
+
+12.	If you do not agree to (or cannot comply with) any of these Terms, do not use these Platforms.
+
+ 
+
+13.	The Elite Cars LLC shall be not held liable for any delay or failure in performance of any part of these Terms from any cause beyond our control and without our fault or negligence, such as acts of God, acts of civil or military authority, current laws and regulations and changes thereto, embargoes, epidemics, pandemics, war, terrorist acts, riots, insurrections, fires, explosions, earthquakes, nuclear accidents, floods, strikes, power blackouts, volcanic action, political unrest, other major environmental disturbances, unusually severe weather conditions, acts of hackers and other illegal activities of third parties, inability to secure products or Services of other persons or transportation facilities, or acts or omissions of transportation or telecommunications common carriers or acts, omissions, overloading or slowdowns over the internet or any third party internet service providers.
+
+
+
+14.	No agency, partnership, joint venture, employee-employer, or franchiser-franchisee relationship is intended or created by these Terms.
+
+
+
+15.	Unless otherwise agreed in writing, these Terms and the documents referred to in this Agreement contain the whole Agreement between The Elite Cars LLC and the Buyer supersede all previous agreements between the Parties relating to the transaction.
+
+
+
+16.	Any notice or other communication to be given under these Terms shall be in writing and in the English language and shall be sent by email to The Elite Cars LLC’s official email mentioned in these Terms.
+
+
+
+17.	The Elite Cars LLC shall have the right to assign or transfer these Terms or any part thereof to a third party and the Buyer shall consent to such assignment or transfer. On the other hand, the Buyer shall have no right to assign or transfer these Terms or any part thereof to any third party. 
+
+
+
+18.	In the event any provision in these Terms becomes invalid, unenforceable, void, or illegal for any reason whatsoever, such invalidity shall not affect or invalidate any other part of these Terms which shall remain valid and binding on the Parties, the invalid provision being severable from the remaining provisions of these Terms.
+
+
+
+17.    GOVERNING LAW AND DISPUTE
+
+
+1. 	Any dispute or claim relating in any way to these Terms with The Elite Cars LLC or any products or services sold by The Elite Cars LLC shall be governed by the laws of the UAE.
+
+
+
+2.	The Courts of Dubai (excluding DIFC Court) shall have exclusive jurisdiction on any dispute pertaining to this Agreement.
+
+
+
+18.    CONTACT
+
+
+1.	All communication to The Elite Cars LLC must be sent via email to info@theelitecars.com.
+
+
+
+2.	Unless otherwise specified by The Elite Cars LLC, any other method of communication or Agreement with The Elite Cars LLC shall be deemed void.
+
+</p>
+<div data-include="/partials/footer.html"></div>
+
+    <script src="/js/nav.js"></script>
+    <script src="/js/loader.js" type="module"></script>
+</body>
+
+</html>
