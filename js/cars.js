@@ -944,7 +944,7 @@ const cars = [
   /* a) get ?id= */
   const id   = +new URLSearchParams(location.search).get('id');
   const car  = cars.find(c => c.id === id);
-  renderSimilarCars(car);    // <<< add this line
+  renderSimilarCars(car);  
 
   if (!car){
       document.getElementById('car-title').textContent = 'Car not found';
@@ -967,7 +967,7 @@ enquireBtn.addEventListener('click', () => {
   const folder = `${car.make} ${car.model}`;           
   const files  = [`${folder}.jpg`, 'A.jpg', 'B.jpg', 'C.jpg'];
   const imgSet = files.map(f => buildURL(folder, f));
-  imgSet.push('img/products/info.jpg'); 
+  imgSet.push('/partials/img/products/info.jpg'); 
 
   /* d) inject slides + thumbs */
   const slides = document.getElementById('slide-wrapper');
