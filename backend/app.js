@@ -5,15 +5,41 @@ const connectDB = require('./config/db');
 const cors = require('cors');
 const Car = require('./models/car');
 const carData = require('./carData');
-
+const path = require('path'); 
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
 app.get('/', (req, res) => {
-  res.send('Backend is working!');
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+});
+
+
+const htmlPages = [
+  'about', 
+  'admin', 
+  'privacy', 
+  'products', 
+  'quota', 
+  'terms',
+  'car-list' // Special name to avoid conflict with /cars API
+];
+
+htmlPages.forEach(page => {
+  const ext = page === 'admin' ? '.htm' : '.html';
+  app.get(`/${page}`, (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', `${page}${ext}`));
+    console.log('Serving:', filePath); // 👈 DEBUG LINE
+
+  });
+});
+
+app.get('/car-list', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'cars.html'));
 });
 
 app.get('/cars', async (req, res) => {
