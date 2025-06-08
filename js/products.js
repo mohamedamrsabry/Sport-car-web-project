@@ -186,6 +186,7 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
+
 // Initialize page
 window.onload = () => {
     populateFilters(); // Populate the dropdowns first
