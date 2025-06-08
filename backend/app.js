@@ -33,8 +33,6 @@ htmlPages.forEach(page => {
   const ext = page === 'admin' ? '.htm' : '.html';
   app.get(`/${page}`, (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', `${page}${ext}`));
-    console.log('Serving:', filePath); // 👈 DEBUG LINE
-
   });
 });
 
