@@ -26,7 +26,7 @@ const htmlPages = [
   'products', 
   'quota', 
   'terms',
-  'car-list' // Special name to avoid conflict with /cars API
+  'car-list'
 ];
 
 htmlPages.forEach(page => {
@@ -47,7 +47,7 @@ app.get('/cars', async (req, res) => {
   } catch (err) {
     res.status(500).send('Server error');
   }
-});
+}); 
 // Create a new car
 app.post('/cars', async (req, res) => {
   try {

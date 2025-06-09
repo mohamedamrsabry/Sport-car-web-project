@@ -1,0 +1,203 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+
+
+.about-hero {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: url('/public/partials/img/hero-bg.jpg') no-repeat center center/cover;
+}
+
+.about-hero h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    color: gold;
+}
+
+.about-hero p {
+    font-size: 1.5rem;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 10%;
+    gap: 3rem;
+}
+
+.about-text {
+    max-width: 600px;
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    color: gold;
+    margin-bottom: 1rem;
+}
+
+.about-text p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.about-img {
+    width: 700px;
+
+    border-radius: 10px;
+}
+
+.mission-vision {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 3rem 10%;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.box {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.box h3 {
+    font-size: 2rem;
+    color: gold;
+    margin-bottom: 1rem;
+}
+
+.box p {
+    font-size: 1.2rem;
+}
+/* Timeline Styling */
+.company-history {
+    padding: 80px 0;
+    background-color:black;
+    text-align: center;
+}
+
+.history-subtitle {
+    color:grey;
+    margin-bottom: 50px;
+    font-size: 1.2rem;
+}
+
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    background-color: #d4af37; /* Gold color */
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1.5px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #d4af37;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    top: 15px;
+    z-index: 1;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+    padding-right: 70px;
+}
+
+.timeline-item:nth-child(odd)::after {
+    right: -10px;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    text-align: left;
+    padding-left: 70px;
+}
+
+.timeline-item:nth-child(even)::after {
+    left: -10px;
+}
+
+.timeline-date {
+    color: #d4af37;
+    font-weight: bold;
+    font-size: 1.2rem;                         
+    margin-bottom: 5px;
+}
+
+.timeline-content {
+    padding: 20px;
+    background-color:#696969;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.timeline-content h3 {
+    margin-top: 0;
+    color:yellow;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .timeline::after {
+        left: 31px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+        text-align: left;
+    }
+    
+    .timeline-item:nth-child(even) {
+        left: 0;
+    }
+    
+    .timeline-item::after {
+        left: 21px;
+    }
+    
+    .timeline-item:nth-child(odd)::after,
+    .timeline-item:nth-child(even)::after {
+        left: 21px;
+    }
+}
+
