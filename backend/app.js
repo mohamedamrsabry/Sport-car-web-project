@@ -30,7 +30,7 @@ const htmlPages = [
 ];
 
 htmlPages.forEach(page => {
-  const ext = page === 'admin' ? '.htm' : '.html';
+  const ext = page === 'admin' ? '.html' : '.html';
   app.get(`/${page}`, (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', `${page}${ext}`));
   });

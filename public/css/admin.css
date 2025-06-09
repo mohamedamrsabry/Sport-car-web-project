@@ -5,29 +5,42 @@
         }
 
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --success: #27ae60;
-            --warning: #f39c12;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --gray: #95a5a6;
-            --border: #bdc3c7;
-            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --primary: #000000;        /* Black */
+            --secondary: #ffca66;      /* Dark gray for contrast */
+            --accent: #ffca66;         /* Gold */
+            --success: #27ae60;        /* Keep green for success */
+            --warning: #f39c12;        /* Keep orange warning or change if you want */
+            --light: #ffca66;          /* Light goldish/cream for backgrounds */
+            --dark: #000000;           /* Black */
+            --gray: #ffca66;
+            --border: #b8860b;         /* Dark gold/brown border */
+            --card-shadow: 0 4px 12px rgba(255, 202, 102, 0.3); /* subtle gold shadow */
+            --login-bg: url('/partials/img/image_fx_ (9).png');
         }
+
 
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f5f7fa;
-            color: #333;
+            color: ffca66;
             line-height: 1.6;
         }
         
         #loginModal .modal {
             max-width: 450px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: modalSlideIn 0.5s ease-out;
         }
-
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
         #loginModal .modal-body {
             padding-bottom: 5px;
         }
@@ -51,17 +64,18 @@
             padding: 0 25px 25px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             margin-bottom: 25px;
+            justify-content: center;
         }
-
-        .logo i {
+        .logo-image {
+            width: 80px;
+            height: 80px;
+            
+            object-fit: contain;
+        }
+                .logo i {
             font-size: 28px;
             margin-right: 12px;
             color: var(--secondary);
-        }
-
-        .logo h1 {
-            font-size: 24px;
-            font-weight: 600;
         }
 
         .nav-links {
@@ -187,7 +201,7 @@
 
         .icon-red {
             background: rgba(231, 76, 60, 0.15);
-            color: var(--accent);
+            color: red;
         }
 
         .stat-info h3 {
@@ -247,9 +261,9 @@
         }
 
         .btn-primary:hover {
-            background: #2980b9;
+            background: #000000;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 4px 8px #ffc96696;
         }
 
         .btn-danger {
@@ -328,7 +342,7 @@
         }
 
         .delete-btn {
-            background: var(--accent);
+            background: red;
         }
 
         .view-btn {
@@ -357,7 +371,28 @@
             visibility: hidden;
             transition: all 0.3s;
         }
+        .modal-overlay.login-bg {
+            background: var(--login-bg) center/cover no-repeat;
+            background-attachment: fixed;
+        }
+        .modal-overlay.login-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
 
+        .modal-overlay.login-bg .modal {
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 202, 102, 0.3);
+        }
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
