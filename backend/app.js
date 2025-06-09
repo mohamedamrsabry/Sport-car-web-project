@@ -51,6 +51,12 @@ app.get('/cars', async (req, res) => {
 // Create a new car
 app.post('/cars', async (req, res) => {
   try {
+    // Check if ID already exists
+    const existingCar = await Car.findOne({ id: req.body.id });
+    if (existingCar) {
+      return res.status(400).json({ message: 'Car with this ID already exists' });
+    }
+    
     const newCar = new Car(req.body);
     const savedCar = await newCar.save();
     res.status(201).json(savedCar);
