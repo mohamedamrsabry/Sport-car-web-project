@@ -30,12 +30,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // Build image paths
       const buildURL = (folder, file) => 
-        `/public/partials/img/products/${encodeURIComponent(folder)}/${encodeURIComponent(file)}`;
+        `/partials/img/products/${encodeURIComponent(folder)}/${encodeURIComponent(file)}`;
 
       const folder = `${car.make} ${car.model}`;
       const files = [`${folder}.jpg`, "A.jpg", "B.jpg", "C.jpg"];
       const imgSet = files.map(f => buildURL(folder, f));
-      imgSet.push("/public/partials/img/products/info.jpg");
+      imgSet.push("/partials/img/products/info.jpg");
 
       // Create image slides
       const slides = document.getElementById("slide-wrapper");

@@ -19,7 +19,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: url('/public/partials/img/hero-bg.jpg') no-repeat center center/cover;
+    background: url('/partials/img/hero-bg.jpg') no-repeat center center/cover;
 }
 
 .about-hero h1 {

@@ -55,7 +55,7 @@
     content:"";
     position:absolute;
     inset:0;                                 /* stretch to all edges   */
-    background:url("/public/partials/img/image_fx_\ \(9\).png") center/cover no-repeat ;
+    background:url("/partials/img/image_fx_\ \(9\).png") center/cover no-repeat ;
     filter:brightness(.25);                  /* dim so squares pop     */
     z-index:-1;                              /* sit behind real content*/
      border-radius:12px; 
