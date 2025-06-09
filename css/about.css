@@ -162,6 +162,7 @@ body {
     margin-bottom: 5px;
 }
 
+
 .timeline-content {
     padding: 20px;
     background-color:#696969;
@@ -171,7 +172,7 @@ body {
 
 .timeline-content h3 {
     margin-top: 0;
-    color:yellow;
+    color:#d4af37;
 }
 
 /* Responsive Design */
@@ -198,6 +199,77 @@ body {
     .timeline-item:nth-child(odd)::after,
     .timeline-item:nth-child(even)::after {
         left: 21px;
+    }
+}
+/* CSS Code (add to about.css) */
+.cta-section {
+    padding: 60px 20px;
+    background-color: black;
+}
+
+.cta-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.cta-box {
+    background:white ;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 3px solid #d4af37;
+}
+
+.cta-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.cta-icon {
+    margin-bottom: 20px;
+}
+
+.cta-box h3 {
+    color: #222;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.cta-box p {
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #d4af37;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #b38f2b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cta-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-box {
+        max-width: 400px;
+        margin: 0 auto;
     }
 }
 
