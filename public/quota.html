@@ -3,196 +3,602 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury Car Quote Request</title>
+    <title>STRADA Auto - Request a Quota</title>
     <link rel="icon" type="image/png" href="/partials/img/logo.ico"> 
-    <style>
+   <style>
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family:sans-serif;
         }
+
         body {
-            background-color: black;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.4;
+            color: #333333;
             min-height: 100vh;
-            padding: 20px;
-            background-image: url(/partials/img/image_fx_\ \(9\).png);
+            position: relative;
+            overflow-x: hidden;
+ 
         }
-        .container {
-            max-width: 600px;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0.25) 10%, rgba(255, 255, 255, 0.05) 80%);
-            backdrop-filter: blur(15px);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
-            text-align: center;
+
+        /* Background image with blur effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/partials/img/image_fx_\ \(9\).png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            z-index: -2;
         }
-        h2 {
-            color: #ffca66;
-            margin-bottom: 20px;
+
+        /* Dark overlay for better readability */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.158);
+            z-index: -1;
         }
+
+        /* Main container styles - centered box */
+        .quote-container {
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 25px;
+            background-color: rgba(0, 0, 0, 0.192);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Form now uses single column layout with compact spacing */
+        .quote-form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .form-group {
+            width: 100%;
+        }
+
         label {
-            font-weight: bold;
             display: block;
-            margin-top: 15px;
-            text-align: left;
-            color: white;
+            margin-bottom: 3px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 12px;
         }
+        
         input, select, textarea {
             width: 100%;
-            padding: 12px;
-            margin-top: 5px;
+            padding: 8px;
+            border: none;
+            font-size: 14px;
             border: none;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.1);
-            color: white;
-            outline: none;
+            color: #ffffff;
+            transition: all 0.3s ease;
         }
-        select {
-            background-color: rgb(156, 152, 152);
+        textarea {
+            min-height: 50px;
+            resize: vertical;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.788);
+        }
+        select:focus{
+            color: black;
         }
         input::placeholder, textarea::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.788);
         }
-        button {
-            background-color: #ffca66;
-            color: black;
-            padding: 12px;
-            border: none;
-            width: 100%;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 20px;
-            transition: 0.3s;
-        }
-        button:hover {
-            background-color: white;
-            color: black;
-        }
+
+        /* Loading spinner */
         .loading {
-            color: #ffca66;
-            margin: 20px 0;
-            font-style: italic;
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #d4af37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
         }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success message styles */
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.95);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .success-message h2 {
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .success-message p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #cccccc;
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        /* Error message styles */
+        .error-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(139, 0, 0, 0.95);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .error-message h2 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .error-icon {
+            font-size: 3rem;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            background-color: #d4af37;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Overlay for messages */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: none;
+        }
+        
+        .submit-btn {
+            background-color: #d4af37;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px auto 0;
+            width: 100%;
+            max-width: 150px;
+        }
+        
+        .submit-btn:hover:not(:disabled) {
+            background-color: #b38f2b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .page-header h1 {
+            color: #ffffff;
+            margin-bottom: 5px;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        
+        .page-header p {
+            color: #cccccc;
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        /* Debug info styles */
+        .debug-info {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 14px;
+            display: none;
+        }
+
+        /* Car data loading indicator */
+        .car-loading {
+            color: #d4af37;
+            font-style: italic;
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+            .quote-container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .quote-form {
+                gap: 6px;
+            }
+
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+
+            .page-header p {
+                font-size: 12px;
+            }
+
+            input, select, textarea {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quote-container {
+                margin: 15px;
+                padding: 15px;
+            }
+
+            .page-header h1 {
+                font-size: 1.3rem;
+            }
+
+            .quote-form {
+                gap: 5px;
+            }
+        }
+
+        /* Custom scrollbar removed as no scrolling needed */
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Request a Quote for Your Dream Car</h2>
-        <form id="quoteForm" action="/index.html" method="get">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+    <div class="quote-container">
+        <div class="page-header">
+            <h1>Request a Quota</h1>
+            <p>Get a personalized quota for your dream luxury vehicle</p>
+        </div>
+        
+        <div class="car-loading" id="carLoading">Loading car data...</div>
+        
+        <form class="quote-form" id="quoteForm" action="http://localhost:8080/submit-quote.php" method="POST">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            </div>
             
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
             
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
             
-            <label for="car">Select a Car</label>
-            <select id="car" name="car" onchange="updateModels()" required>
-                <option value="">Select a Car Brand</option>
-                <!-- Brands will be populated dynamically -->
-            </select>
+            <div class="form-group">
+                <label for="car">Select a Car Brand</label>
+                <select id="car" name="car" onchange="updateModels()" required>
+                    <option value="">Select a Car Brand</option>
+                </select>
+            </div>
             
-            <label for="model">Select a Model</label>
-            <select id="model" name="model" required>
-                <option value="">Select a Model</option>
-            </select>
+            <div class="form-group full-width">
+                <label for="model">Select a Model</label>
+                <select id="model" name="model" required>
+                    <option value="">Select a Model</option>
+                </select>
+            </div>
 
-            <label for="message">Additional Details</label>
-            <textarea id="message" name="message" rows="4" placeholder="Enter any special requests or details"></textarea>
+            <div class="form-group full-width">
+                <label for="message">Additional Details</label>
+                <textarea id="message" name="message" rows="4" placeholder="Enter any special requests, preferred color, financing options, or other details..."></textarea>
+            </div>
             
-            <button type="submit">Request Quote</button>
+            <div class="form-group full-width" style="text-align: center;">
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span id="submitText">Request Quota</span>
+                    <div class="loading" id="loading"></div>
+                </button>
+            </div>
         </form>
-        <div id="loading" class="loading" style="display: none;">Loading car data...</div>
-    </div>
 
-    <script>
-        let cars = []; // This will store our fetched cars
+        <!-- Debug Information -->
+        <div class="debug-info" id="debugInfo">
+            <strong>Debug Information:</strong>
+            <div id="debugContent"></div>
+        </div>
 
-        // Fetch cars from backend when page loads
-        document.addEventListener('DOMContentLoaded', async () => {
-            const loadingElement = document.getElementById('loading');
-            loadingElement.style.display = 'block';
-            
-            try {
-                const response = await fetch("http://localhost:3000/cars");
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                cars = await response.json();
-                
-                // Populate brands dropdown
-                populateBrands();
-                
-                // Check for URL parameters to pre-select brand/model
-                const params = new URLSearchParams(location.search);
-                const brand = params.get('brand'); 
-                const model = params.get('model');  
+        <!-- Success Message -->
+        <div class="overlay" id="overlay"></div>
+        <div class="success-message" id="successMessage">
+            <div class="success-icon">✓</div>
+            <h2>Quota Request Submitted Successfully!</h2>
+            <p>Thank you for your interest in STRADA Auto.</p>
+            <p>We'll prepare a detailed quota and send it to your email within 24 hours.</p>
+            <p>Redirecting you to our homepage...</p>
+        </div>
 
-                if (brand) {
-                    document.getElementById('car').value = brand;
-                    updateModels();
-                    
-                    if (model) {
-                        // Need to wait for models to populate
-                        setTimeout(() => {
-                            document.getElementById('model').value = model;
-                        }, 100);
-                    }
-                }
-            } catch (error) {
-                console.error('Error fetching car data:', error);
-                alert('Failed to load car data. Please try again later.');
-            } finally {
-                loadingElement.style.display = 'none';
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage">
+            <div class="error-icon">✗</div>
+            <h2>Something went wrong!</h2>
+            <p id="errorText">There was an error processing your request. Please try again.</p>
+            <button class="close-btn" onclick="closeError()">Close</button>
+        </div>
+
+        <script>
+            let cars = []; // This will store our fetched cars
+
+            // Function to show debug info
+            function showDebugInfo(message) {
+                const debugInfo = document.getElementById('debugInfo');
+                const debugContent = document.getElementById('debugContent');
+                debugContent.innerHTML = message;
+                debugInfo.style.display = 'block';
             }
-        });
 
-        // Populate the brands dropdown with unique car makes
-        function populateBrands() {
-            const brandSelect = document.getElementById('car');
-            
-            // Get unique brands
-            const brands = [...new Set(cars.map(car => car.make))].sort();
-            
-            brands.forEach(brand => {
-                const option = document.createElement('option');
-                option.value = brand;
-                option.textContent = brand;
-                brandSelect.appendChild(option);
+            // Fetch cars from backend when page loads
+            document.addEventListener('DOMContentLoaded', async () => {
+                const loadingElement = document.getElementById('carLoading');
+                loadingElement.style.display = 'block';
+                
+                try {
+                    const response = await fetch("http://localhost:3000/cars");
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    cars = await response.json();
+                    
+                    // Populate brands dropdown
+                    populateBrands();
+                    
+                    // Check for URL parameters to pre-select brand/model
+                    const params = new URLSearchParams(location.search);
+                    const brand = params.get('brand'); 
+                    const model = params.get('model');  
+
+                    if (brand) {
+                        document.getElementById('car').value = brand;
+                        updateModels();
+                        
+                        if (model) {
+                            // Need to wait for models to populate
+                            setTimeout(() => {
+                                document.getElementById('model').value = model;
+                            }, 100);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error fetching car data:', error);
+                    showDebugInfo('Error loading car data: ' + error.message);
+                } finally {
+                    loadingElement.style.display = 'none';
+                }
             });
-        }
 
-        // Update models dropdown based on selected brand
-        function updateModels() {
-            const brandSelect = document.getElementById('car');
-            const modelSelect = document.getElementById('model');
-            const brand = brandSelect.value;               
+            // Populate the brands dropdown with unique car makes
+            function populateBrands() {
+                const brandSelect = document.getElementById('car');
+                
+                // Get unique brands
+                const brands = [...new Set(cars.map(car => car.make))].sort();
+                
+                brands.forEach(brand => {
+                    const option = document.createElement('option');
+                    option.value = brand;
+                    option.textContent = brand;
+                    brandSelect.appendChild(option);
+                });
+            }
 
-            modelSelect.innerHTML = '<option value="">Select a Model</option>'; // reset
+            // Update models dropdown based on selected brand
+            function updateModels() {
+                const brandSelect = document.getElementById('car');
+                const modelSelect = document.getElementById('model');
+                const brand = brandSelect.value;               
 
-            if (!brand) return;
+                modelSelect.innerHTML = '<option value="">Select a Model</option>'; // reset
 
-            // Filter models for the selected brand
-            const brandModels = cars
-                .filter(car => car.make === brand)
-                .map(car => car.model);
+                if (!brand) return;
 
-            // Add models to dropdown
-            brandModels.forEach(model => {
-                const option = document.createElement('option');
-                option.value = model;
-                option.textContent = model;
-                modelSelect.appendChild(option);
+                // Filter models for the selected brand
+                const brandModels = cars
+                    .filter(car => car.make === brand)
+                    .map(car => car.model);
+
+                // Add models to dropdown
+                brandModels.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    modelSelect.appendChild(option);
+                });
+            }
+
+            // Handle form submission
+            document.getElementById('quoteForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = document.getElementById('submitBtn');
+                const submitText = document.getElementById('submitText');
+                const loading = document.getElementById('loading');
+                
+                // Show loading state
+                submitBtn.disabled = true;
+                submitText.style.display = 'none';
+                loading.style.display = 'inline-block';
+                
+                // Collect form data
+                const formData = new FormData(this);
+                
+                // Debug: Show what we're sending
+                let debugMsg = 'Sending data to: submit-quote.php<br>';
+                for (let [key, value] of formData.entries()) {
+                    debugMsg += `${key}: ${value}<br>`;
+                }
+                showDebugInfo(debugMsg);
+                
+                // Send AJAX request
+                fetch('http://localhost:8080/submit-quote.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    console.log('Response headers:', response.headers);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    return response.text(); // Get as text first to debug
+                })
+                .then(text => {
+                    console.log('Raw response:', text);
+                    showDebugInfo(debugMsg + '<br><strong>Raw Response:</strong><br>' + text);
+                    
+                    // Try to parse as JSON
+                    let data;
+                    try {
+                        data = JSON.parse(text);
+                    } catch (e) {
+                        throw new Error('Invalid JSON response: ' + text);
+                    }
+                    
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    submitText.style.display = 'inline';
+                    loading.style.display = 'none';
+                    
+                    if (data.success) {
+                        // Show success message
+                        document.getElementById('overlay').style.display = 'block';
+                        document.getElementById('successMessage').style.display = 'block';
+                        
+                        // Reset form
+                        this.reset();
+                        // Reset dropdowns
+                        document.getElementById('model').innerHTML = '<option value="">Select a Model</option>';
+                        
+                        // Redirect to homepage after 5 seconds
+                        setTimeout(function() {
+                            window.location.href = '/index.html';
+                        }, 5000);
+                    } else {
+                        // Show error message
+                        document.getElementById('errorText').textContent = data.message || 'There was an error processing your request. Please try again.';
+                        document.getElementById('overlay').style.display = 'block';
+                        document.getElementById('errorMessage').style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    submitText.style.display = 'inline';
+                    loading.style.display = 'none';
+                    
+                    // Show detailed error message
+                    let errorMessage = 'Error: ' + error.message;
+                    showDebugInfo(debugMsg + '<br><strong>Error:</strong><br>' + errorMessage);
+                    
+                    document.getElementById('errorText').textContent = errorMessage;
+                    document.getElementById('overlay').style.display = 'block';
+                    document.getElementById('errorMessage').style.display = 'block';
+                });
             });
-        }
-    </script>
+
+            function closeError() {
+                document.getElementById('overlay').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'none';
+            }
+
+            // Close messages when clicking overlay
+            document.getElementById('overlay').addEventListener('click', function() {
+                this.style.display = 'none';
+                document.getElementById('successMessage').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'none';
+            });
+        </script>
+    </div>
 </body>
 </html>

@@ -1,9 +1,27 @@
 <style>
+.video-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.footer-container {
+    position: relative;
+    z-index: 2;
+}
+
+
 footer {
   background-color: #111;
   color: #fff;
-  padding: 50px 20px 20px; /* Single consistent padding */
+  padding: 50px 20px 20px;
   text-align: center;
+  position: relative;
 }
 
 .footer-container {
@@ -14,7 +32,6 @@ footer {
   max-width: 1200px;
   margin: 0 auto;
 }
-
 
 .footer-section {
   flex: 1 1 220px;
@@ -40,33 +57,36 @@ footer {
   align-self: center;
   text-align: center;
 }
+
 .footer-section.contact p {
-  padding: 0; /* Or make all sections have the same padding */
+  padding: 0;
 }
+
 .footer-section a:hover {
   color: #fff;
 }
 
 .footer-section.links ul {
   display: flex;
-  flex-direction: column; /* Ensure links are aligned vertically */
-  gap: 12px; /* Space out the list items */
+  flex-direction: column;
+  gap: 12px;
   margin-right: 0px;
 }
 
 .footer-section.links li {
-  margin-bottom: 8px; /* Optional: Adjusts the space between the items */
+  margin-bottom: 8px;
 }
 
 .footer-section .logo {
   max-width: 70px;
   margin-bottom: 15px;
-  display: block;           /* Add this */
-  margin-left: auto;        /* Add this */
-  margin-right: auto;       /* Add this */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
+
 .footer-section.about {
-  text-align: center;       /* Add this if not already applied */
+  text-align: center;
 }
 
 .subscribe input[type="email"] {
@@ -108,61 +128,82 @@ footer {
   color: #aaa;
   font-size: 13px;
 }
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    color: red ;
+}
+
+.footer-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 </style>
 
 <footer>
-    <div class="footer-container">
-      <!-- About Us -->
-      <div class="footer-section about">
-        <h3>ABOUT US</h3>
-        <img src="/partials/img/logo.png" alt="Strada Auto Logo" class="logo">
-        <p>
-          Strada Auto, a premium dealership specializing in luxury automotive brands,
-          offers a seamless and exceptional car-buying experience. With headquarters
-          in OBOUR ROAD 50, our presence ensures accessibility and convenience for our clients.
-        </p>
-        <p>
-          <a href="/terms.html">Terms & Conditions</a> | <a href="/privacy.html">Privacy Policy</a>
-        </p>
-      </div>
+<div class="video-background">
+    <video autoplay muted loop playsinline class="footer-video">
+        <source src="public/partials/vids/project_car_video.mp4" type="video/mp4">
+    </video>
+</div>
 
-      <!-- Contact Us -->
-      <div class="footer-section contact">
-        <h3>CONTACT US</h3>
-        <p><strong>Strada Auto Showroom</strong></p>
-        <p>📍 OBOUR ROAD 50</p>
-        <p>📞 01226699307</p>
-        <p>📱 WhatsApp: 01226699307</p>
-        <p>📧 info@stradaauto.com</p>
-      </div>
+<div class="footer-container">
+  <!-- About Us -->
+  <div class="footer-section about">
+    <h3>ABOUT US</h3>
+    <img src="/partials/img/logo.png" alt="Strada Auto Logo" class="logo">
+    <p>
+      Strada Auto, a premium dealership specializing in luxury automotive brands,
+      offers a seamless and exceptional car-buying experience. With headquarters
+      in OBOUR ROAD 50, our presence ensures accessibility and convenience for our clients.
+    </p>
+    <p>
+      <a href="/terms.html">Terms & Conditions</a> | <a href="/privacy.html">Privacy Policy</a>
+    </p>
+  </div>
 
-      <!-- Quick Links -->
-      <div class="footer-section links">
-        <h3>QUICK LINKS</h3>
-        <ul>
-          <li><a href="/about.html">What We Do</a></li>
-          <li><a href="/products.html">Brands Housed by Strada</a></li>
-          <li><a href="#">Top</a></li>
-        </ul>
-      </div>
+  <!-- Contact Us -->
+  <div class="footer-section contact">
+    <h3>CONTACT US</h3>
+    <p><strong>Strada Auto Showroom</strong></p>
+    <p>📍 OBOUR ROAD 50</p>
+    <p>📞 01226699307</p>
+    <p>📱 WhatsApp: 01226699307</p>
+    <p>📧 info@stradaauto.com</p>
+  </div>
 
-      
+  <!-- Quick Links -->
+  <div class="footer-section links">
+    <h3>QUICK LINKS</h3>
+    <ul>
+      <li><a href="/about.html">What We Do</a></li>
+      <li><a href="/products.html">Brands Housed by Strada</a></li>
+      <li><a href="#">Top</a></li>
+    </ul>
+  </div>
 
-      <!-- Subscribe -->
-      <div class="footer-section subscribe">
-        <h3>SUBSCRIBE</h3>
-        <p>Subscribe to our Newsletter to stay updated with the latest news and deals.</p>
-        <input type="email" placeholder="Your Email Address">
-        <button>SUBSCRIBE</button>
-        <div class="social-icons">
-          <a href="#"><img src="/partials/img/icons/facebook-logo-24.png" alt="Facebook"></a>
-          <a href="#"><img src="/partials/img/icons/instagram-logo-24.png" alt="Instagram"></a>
-          <a href="#"><img src="/partials/img/icons/linkedin-logo-24.png" alt="LinkedIn"></a>
-        </div>
-      </div>
+  <!-- Subscribe -->
+  <div class="footer-section subscribe">
+    <h3>SUBSCRIBE</h3>
+    <p>Subscribe to our Newsletter to stay updated with the latest news and deals.</p>
+    <input type="email" placeholder="Your Email Address">
+    <button>SUBSCRIBE</button>
+    <div class="social-icons">
+      <a href="#"><img src="/partials/img/icons/facebook-logo-24.png" alt="Facebook"></a>
+      <a href="#"><img src="/partials/img/icons/instagram-logo-24.png" alt="Instagram"></a>
+      <a href="#"><img src="/partials/img/icons/linkedin-logo-24.png" alt="LinkedIn"></a>
     </div>
-  
-    <div class="footer-bottom">
-      <p>&copy; 2025 STRADA AUTO. All Rights Reserved.</p>
-    </div>
-  </footer>
+  </div>
+</div>
+
+<div class="footer-bottom">
+  <p>&copy; 2025 STRADA AUTO. All Rights Reserved.</p>
+</div>
+</footer>
