@@ -551,7 +551,7 @@ scale: 2;
     display: block;
 }
 
-.overlay-button {
+.overlay-button  left-align {
     position: absolute;
     top: 50%;
     left: 10%; /* Changed from 50% to 10% for left alignment */
@@ -567,7 +567,6 @@ scale: 2;
 }
 
 .overlay-button:hover {
-    background-color: rgba(255, 255, 255, 0.9);
-    color: black;
-    border-color: black;
+    border-radius: 1px;
+    border:1px solid white;
 }
