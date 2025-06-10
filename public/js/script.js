@@ -173,45 +173,4 @@ var swiper = new Swiper(".vehicles-slider", {
 
 
 
-  // Subscription form handling
-document.getElementById('subscribeForm')?.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const emailInput = document.getElementById('subscribeEmail');
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const messageDiv = document.getElementById('subscribeMessage');
-    
-    const originalBtnText = submitBtn.textContent;
-    submitBtn.textContent = 'Sending...';
-    submitBtn.disabled = true;
-    
-    try {
-        const response = await fetch('/api/subscribe', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: emailInput.value })
-        });
-        
-        const result = await response.json();
-        
-        messageDiv.style.display = 'block';
-        messageDiv.textContent = result.message;
-        messageDiv.style.color = result.success ? '#4CAF50' : '#F44336';
-        
-        if (result.success) {
-            emailInput.value = '';
-            setTimeout(() => {
-                messageDiv.style.display = 'none';
-            }, 5000);
-        }
-    } catch (error) {
-        messageDiv.style.display = 'block';
-        messageDiv.textContent = 'Network error. Please try again later.';
-        messageDiv.style.color = '#F44336';
-    } finally {
-        submitBtn.textContent = originalBtnText;
-        submitBtn.disabled = false;
-    }
-});
+  
