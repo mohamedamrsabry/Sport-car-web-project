@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STRADA Auto - Schedule a Visit</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         /* Reset and base styles */
         * {
@@ -19,23 +18,7 @@
             color: #333;
             min-height: 100vh;
             position: relative;
-        }
-
-        /* Background image with blur effect */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('partials/img/image_fx_\ \(9\).png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            filter: blur(8px);
-            z-index: -2;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         /* Dark overlay for better readability */
@@ -102,6 +85,23 @@
             background-color: rgba(255, 255, 255, 1);
         }
 
+        /* Loading spinner */
+        .loading {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #d4af37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Success message styles */
         .success-message {
             position: fixed;
@@ -138,7 +138,48 @@
             margin-bottom: 20px;
         }
 
-        /* Overlay for success message */
+        /* Error message styles */
+        .error-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(139, 0, 0, 0.95);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .error-message h2 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .error-icon {
+            font-size: 3rem;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            background-color: #d4af37;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Overlay for messages */
         .overlay {
             position: fixed;
             top: 0;
@@ -161,12 +202,22 @@
             font-weight: 600;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
         }
         
-        .submit-btn:hover {
+        .submit-btn:hover:not(:disabled) {
             background-color: #b38f2b;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
         }
         
         .page-header {
@@ -185,6 +236,17 @@
             color: #cccccc;
             font-size: 18px;
             font-weight: 400;
+        }
+
+        /* Debug info styles */
+        .debug-info {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 14px;
+            display: none;
         }
 
         /* Responsive design */
@@ -224,16 +286,13 @@
     </style>
 </head>
 <body>
-    <!-- Include your navigation partial -->
-    <!--#include virtual="partials/nav.html" -->
-
     <div class="schedule-container">
         <div class="page-header">
             <h1>Schedule Your Showroom Visit</h1>
             <p>Experience our luxury vehicles in person at our state-of-the-art showroom</p>
         </div>
         
-        <form class="schedule-form" id="scheduleForm">
+        <form class="schedule-form" id="scheduleForm" action="http://localhost:8080/submit-visit.php" method="POST">
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
@@ -282,9 +341,18 @@
             </div>
             
             <div class="form-group full-width" style="text-align: center;">
-                <button type="submit" class="submit-btn">Schedule My Visit</button>
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span id="submitText">Schedule My Visit</span>
+                    <div class="loading" id="loading"></div>
+                </button>
             </div>
         </form>
+
+        <!-- Debug Information -->
+        <div class="debug-info" id="debugInfo">
+            <strong>Debug Information:</strong>
+            <div id="debugContent"></div>
+        </div>
 
         <!-- Success Message -->
         <div class="overlay" id="overlay"></div>
@@ -292,27 +360,133 @@
             <div class="success-icon">✓</div>
             <h2>Appointment Scheduled Successfully!</h2>
             <p>Thank you for scheduling your showroom visit with STRADA Auto.</p>
-            <p>Please wait for a confirmation email with all the details.</p>
+            <p>A confirmation email has been sent to your email address with all the details.</p>
             <p>Redirecting you to our About Us page...</p>
         </div>
 
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage">
+            <div class="error-icon">✗</div>
+            <h2>Something went wrong!</h2>
+            <p id="errorText">There was an error processing your request. Please try again.</p>
+            <button class="close-btn" onclick="closeError()">Close</button>
+        </div>
+
         <script>
+            // Set minimum date to today
+            document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+            // Function to show debug info
+            function showDebugInfo(message) {
+                const debugInfo = document.getElementById('debugInfo');
+                const debugContent = document.getElementById('debugContent');
+                debugContent.innerHTML = message;
+                debugInfo.style.display = 'block';
+            }
+
             document.getElementById('scheduleForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Show success message
-                document.getElementById('overlay').style.display = 'block';
-                document.getElementById('successMessage').style.display = 'block';
+                const submitBtn = document.getElementById('submitBtn');
+                const submitText = document.getElementById('submitText');
+                const loading = document.getElementById('loading');
                 
-                // Redirect to about us page after 4 seconds
-                setTimeout(function() {
-                    window.location.href = 'about.html';
-                }, 4000);
+                // Show loading state
+                submitBtn.disabled = true;
+                submitText.style.display = 'none';
+                loading.style.display = 'inline-block';
+                
+                // Collect form data
+                const formData = new FormData(this);
+                
+                // Debug: Show what we're sending
+                let debugMsg = 'Sending data to: submit-visit.php<br>';
+                for (let [key, value] of formData.entries()) {
+                    debugMsg += `${key}: ${value}<br>`;
+                }
+                showDebugInfo(debugMsg);
+                
+                // Send AJAX request
+                fetch('http://localhost:8080/submit-visit.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    console.log('Response headers:', response.headers);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    return response.text(); // Get as text first to debug
+                })
+                .then(text => {
+                    console.log('Raw response:', text);
+                    showDebugInfo(debugMsg + '<br><strong>Raw Response:</strong><br>' + text);
+                    
+                    // Try to parse as JSON
+                    let data;
+                    try {
+                        data = JSON.parse(text);
+                    } catch (e) {
+                        throw new Error('Invalid JSON response: ' + text);
+                    }
+                    
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    submitText.style.display = 'inline';
+                    loading.style.display = 'none';
+                    
+                    if (data.success) {
+                        // Show success message
+                        document.getElementById('overlay').style.display = 'block';
+                        document.getElementById('successMessage').style.display = 'block';
+                        
+                        // Reset form
+                        this.reset();
+                        
+                        // Redirect to about us page after 5 seconds
+                        setTimeout(function() {
+                            window.location.href = 'about.html';
+                        }, 5000);
+                    } else {
+                        // Show error message
+                        document.getElementById('errorText').textContent = data.message || 'There was an error processing your request. Please try again.';
+                        document.getElementById('overlay').style.display = 'block';
+                        document.getElementById('errorMessage').style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    submitText.style.display = 'inline';
+                    loading.style.display = 'none';
+                    
+                    // Show detailed error message
+                    let errorMessage = 'Error: ' + error.message;
+                    showDebugInfo(debugMsg + '<br><strong>Error:</strong><br>' + errorMessage);
+                    
+                    document.getElementById('errorText').textContent = errorMessage;
+                    document.getElementById('overlay').style.display = 'block';
+                    document.getElementById('errorMessage').style.display = 'block';
+                });
+            });
+
+            function closeError() {
+                document.getElementById('overlay').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'none';
+            }
+
+            // Close messages when clicking overlay
+            document.getElementById('overlay').addEventListener('click', function() {
+                this.style.display = 'none';
+                document.getElementById('successMessage').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'none';
             });
         </script>
     </div>
-
-    <!-- Include your footer partial -->
-    <!--#include virtual="partials/footer.html" -->
 </body>
 </html>
