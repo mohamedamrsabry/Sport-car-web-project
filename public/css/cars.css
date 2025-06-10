@@ -32,12 +32,18 @@
     padding:10px 15px 50px;
 
   }
-  .price-tag{
-    text-align:center;
-    font-size:6rem;          /* huge */
-    font-weight:700;
-    color:#b6a15a;
-  }
+.price-tag{
+    text-align: center;
+    font-size: 6rem;
+    font-weight: 700;
+    color: #b6a15a;
+    
+    /* NEW: Force it to be on its own line and take full width */
+    display: block;
+    width: 100%;
+    clear: both;
+    margin: 20px 0;  /* Add some vertical spacing */
+}
   
   /* ─── two-square grid ──────────────────────── */
   .grid{
