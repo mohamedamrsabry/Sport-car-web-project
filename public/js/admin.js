@@ -10,6 +10,12 @@ const loginBtn = document.getElementById('loginBtn');
 const mainContainer = document.querySelector('.container');
 const modal = document.getElementById('carModal');
 
+// Image upload elements
+const dragDropArea = document.getElementById('dragDropArea');
+const imageInput = document.getElementById('imageInput');
+const uploadedImages = document.getElementById('uploadedImages');
+let selectedImages = [];
+
 // Initially hide the main content
 mainContainer.style.display = 'none';
 
@@ -33,6 +39,76 @@ loginBtn.addEventListener('click', () => {
         showToast('Invalid credentials', 'error');
     }
 });
+
+// Image upload functionality
+function setupImageUpload() {
+    // Click to browse files
+    dragDropArea.addEventListener('click', () => {
+        imageInput.click();
+    });
+    
+    // File input change
+    imageInput.addEventListener('change', (e) => {
+        handleFiles(e.target.files);
+    });
+    
+    // Drag and drop events
+    dragDropArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dragDropArea.classList.add('drag-over');
+    });
+    
+    dragDropArea.addEventListener('dragleave', () => {
+        dragDropArea.classList.remove('drag-over');
+    });
+    
+    dragDropArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dragDropArea.classList.remove('drag-over');
+        handleFiles(e.dataTransfer.files);
+    });
+}
+
+function handleFiles(files) {
+    const fileArray = Array.from(files);
+    const imageFiles = fileArray.filter(file => file.type.startsWith('image/'));
+    
+    if (imageFiles.length > 4) {
+        showToast('Please select maximum 4 images', 'error');
+        return;
+    }
+    
+    selectedImages = imageFiles;
+    displayImagePreviews();
+}
+
+function displayImagePreviews() {
+    uploadedImages.innerHTML = '';
+    
+    selectedImages.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const imagePreview = document.createElement('div');
+            imagePreview.className = 'image-preview';
+            
+            const labels = ['Main', 'A', 'B', 'C'];
+            
+            imagePreview.innerHTML = `
+                <img src="${e.target.result}" alt="Preview ${index + 1}">
+                <button class="remove-image" onclick="removeImage(${index})">&times;</button>
+                <div class="image-label">${labels[index] || `Image ${index + 1}`}</div>
+            `;
+            
+            uploadedImages.appendChild(imagePreview);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function removeImage(index) {
+    selectedImages.splice(index, 1);
+    displayImagePreviews();
+}
 
 // Close modal when clicking outside (but prevent closing for login modal)
 modal.addEventListener('click', (e) => {
@@ -65,7 +141,8 @@ const API_ENDPOINTS = {
     CREATE_CAR: `${API_URL}/cars`,
     GET_CAR: (id) => `${API_URL}/cars/${id}`,
     UPDATE_CAR: (id) => `${API_URL}/cars/${id}`,
-    DELETE_CAR: (id) => `${API_URL}/cars/${id}`
+    DELETE_CAR: (id) => `${API_URL}/cars/${id}`,
+    UPLOAD_IMAGES: `${API_URL}/upload-images`
 };
 
 // Initialize the page
@@ -75,6 +152,9 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.addEventListener('click', closeModal);
     cancelBtn.addEventListener('click', closeModal);
     saveCarBtn.addEventListener('click', saveCar);
+    
+    // Setup image upload
+    setupImageUpload();
     
     // Close modal when clicking outside (but prevent closing for login modal)
     modal.addEventListener('click', (e) => {
@@ -164,6 +244,8 @@ function openAddCarModal() {
     currentCarId = null;
     modalTitle.textContent = 'Add New Car';
     carForm.reset();
+    selectedImages = [];
+    uploadedImages.innerHTML = '';
     openModal();
 }
 
@@ -195,7 +277,10 @@ function editCar(id) {
             document.getElementById('engine').value = car.engine || '';
             document.getElementById('horsepower').value = car.horsepower || '';
             document.getElementById('doors').value = car.doors || '';
-            document.getElementById('image').value = car.image || '';
+            
+            // Clear image selection for editing
+            selectedImages = [];
+            uploadedImages.innerHTML = '';
             
             openModal();
             showLoading(false);
@@ -255,8 +340,39 @@ function deleteCar(id) {
     }
 }
 
+// Upload images to server
+async function uploadImages(make, model) {
+    if (selectedImages.length === 0) {
+        throw new Error('No images selected');
+    }
+    
+    if (selectedImages.length !== 4) {
+        throw new Error('Please select exactly 4 images');
+    }
+    
+    const formData = new FormData();
+    formData.append('make', make);
+    formData.append('model', model);
+    
+    selectedImages.forEach((file, index) => {
+        formData.append('images', file);
+    });
+    
+    const response = await fetch(API_ENDPOINTS.UPLOAD_IMAGES, {
+        method: 'POST',
+        body: formData
+    });
+    
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to upload images');
+    }
+    
+    return await response.json();
+}
+
 // Save car (add or update)
-function saveCar() {
+async function saveCar() {
     if (!carForm.checkValidity()) {
         carForm.reportValidity();
         return;
@@ -274,83 +390,77 @@ function saveCar() {
         return;
     }
     
-    const carData = {
-        id: parseInt(carId),
-        make: make,
-        model: model,
-        year: parseInt(year),
-        price: price,
-        mileage: parseInt(document.getElementById('mileage').value) || 0,
-        condition: document.getElementById('condition').value,
-        exteriorColor: document.getElementById('exteriorColor').value.trim(),
-        interiorColor: document.getElementById('interiorColor').value.trim(),
-        engine: document.getElementById('engine').value.trim(),
-        horsepower: parseInt(document.getElementById('horsepower').value) || 0,
-        doors: parseInt(document.getElementById('doors').value) || 4,
-        image: document.getElementById('image').value.trim()
-    };
+    // For new cars, validate images
+    if (!currentCarId && selectedImages.length !== 4) {
+        showToast('Please upload exactly 4 images for the car', 'error');
+        return;
+    }
     
     showLoading(true);
     
-    if (currentCarId) {
-        // Update existing car
-        fetch(API_ENDPOINTS.UPDATE_CAR(currentCarId), {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(carData)
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(err => {
-                    throw new Error(err.message || `HTTP error! status: ${response.status}`);
-                });
-            }
-            return response.json();
-        })
-        .then(data => {
-            fetchCars();
-            showToast('Car updated successfully!', 'success');
-            closeModal();
-        })
-        .catch(error => {
-            console.error('Error updating car:', error);
-            showToast('Failed to update car: ' + error.message, 'error');
-        })
-        .finally(() => {
-            showLoading(false);
-        });
-    } else {
-        // Add new car
-        fetch(API_ENDPOINTS.CREATE_CAR, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(carData)
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(err => {
-                    throw new Error(err.message || `HTTP error! status: ${response.status}`);
-                });
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Car added successfully:', data);
-            fetchCars();
-            showToast('Car added successfully!', 'success');
-            closeModal();
-        })
-        .catch(error => {
-            console.error('Error adding car:', error);
-            showToast('Failed to add car: ' + error.message, 'error');
-        })
-        .finally(() => {
-            showLoading(false);
-        });
+    try {
+        let imagePath = '';
+        
+        // Upload images for new cars
+        if (!currentCarId && selectedImages.length > 0) {
+            const uploadResult = await uploadImages(make, model);
+            imagePath = uploadResult.mainImagePath;
+        }
+        
+        const carData = {
+            id: parseInt(carId),
+            make: make,
+            model: model,
+            year: parseInt(year),
+            price: price,
+            mileage: parseInt(document.getElementById('mileage').value) || 0,
+            condition: document.getElementById('condition').value,
+            exteriorColor: document.getElementById('exteriorColor').value.trim(),
+            interiorColor: document.getElementById('interiorColor').value.trim(),
+            engine: document.getElementById('engine').value.trim(),
+            horsepower: parseInt(document.getElementById('horsepower').value) || 0,
+            doors: parseInt(document.getElementById('doors').value) || 4,
+            image: imagePath || '' // Use uploaded image path or keep existing
+        };
+        
+        let response;
+        
+        if (currentCarId) {
+            // Update existing car
+            response = await fetch(API_ENDPOINTS.UPDATE_CAR(currentCarId), {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(carData)
+            });
+        } else {
+            // Add new car
+            response = await fetch(API_ENDPOINTS.CREATE_CAR, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(carData)
+            });
+        }
+        
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || `HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        
+        fetchCars();
+        showToast(currentCarId ? 'Car updated successfully!' : 'Car added successfully!', 'success');
+        closeModal();
+        
+    } catch (error) {
+        console.error('Error saving car:', error);
+        showToast('Failed to save car: ' + error.message, 'error');
+    } finally {
+        showLoading(false);
     }
 }
 
@@ -371,6 +481,10 @@ function openModal() {
 function closeModal() {
     modal.classList.remove('active');
     document.body.style.overflow = 'auto';
+    selectedImages = [];
+    if (uploadedImages) {
+        uploadedImages.innerHTML = '';
+    }
 }
 
 // Show toast notification
