@@ -3,7 +3,7 @@
         'name' => 'strada-auto/email-service',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a268d41ed3e8b8a723c65b3c64f0cd7eb5d9a656',
+        'reference' => '68e8f0d6a6d8a78b06743e0b4cda9d440e56d12b',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'strada-auto/email-service' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a268d41ed3e8b8a723c65b3c64f0cd7eb5d9a656',
+            'reference' => '68e8f0d6a6d8a78b06743e0b4cda9d440e56d12b',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -6,7 +6,7 @@
     <title>STRADA Auto - Schedule a Visit</title>
     <style>
         /* Reset and base styles */
-        * {
+       * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -18,7 +18,23 @@
             color: #333;
             min-height: 100vh;
             position: relative;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Background image with blur effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('partials/img/image_fx_\ \(9\).png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(8px);
+            z-index: -2;
         }
 
         /* Dark overlay for better readability */
