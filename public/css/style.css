@@ -433,7 +433,7 @@ scale: 2;
   overflow: hidden;
 
   /* ← only this box gets the background image */
-  background-image: url('/path/to/your/background.jpg');
+  background-image: url('../partials/img/install.png');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
