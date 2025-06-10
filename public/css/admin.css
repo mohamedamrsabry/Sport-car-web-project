@@ -1,3 +1,10 @@
+        @font-face {
+  font-family: 'FrontageRegular';
+  src: url('../partials/fonts/Frontage-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
         * {
             margin: 0;
             padding: 0;

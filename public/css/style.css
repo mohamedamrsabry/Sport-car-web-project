@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'FrontageRegular';
+  src: url('../partials/fonts/Frontage-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 *{
     margin: 0;
@@ -470,7 +476,8 @@ scale: 2;
 }
 
 .installment-info .btn.know-more {
-  background-color: #d4af37;
+  background-color: #000000;
+  border: 1px solid white;
   color: #fff;
   padding: .5rem 1.5rem;
   border-radius: 25px;
@@ -505,10 +512,21 @@ scale: 2;
   display: block;
   width: 100%;
   text-align: center;
-  background-color: #d4af37;
+  background-color: #000000;
   color: #fff;
+  border: 1px solid white;
   padding: .75rem;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.installment-form .btn.calculate-btn:hover {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: #000000;
+  color: #fff;
   border: none;
+  padding: .75rem;
   border-radius: 25px;
   cursor: pointer;
 }
