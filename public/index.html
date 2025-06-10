@@ -182,6 +182,41 @@
     </div>
 
 </section>
+    <section class="installment">
+  <div class="installment-bg">
+    <h2>Calculate your car installment</h2>
+    <div class="installment-container">
+      <div class="installment-info">
+        <h3>Installment up to 8 years</h3>
+        <p>Get 0% APR for 96 months on all Models</p>
+        <a href="#" class="btn know-more">Know More</a>
+      </div>
+      <form id="installmentForm" class="installment-form">
+        <div class="form-row">
+          <label>Car Brand</label>
+          <select id="brandSelect"><option value="">Choose…</option></select>
+        </div>
+        <div class="form-row">
+          <label>Car Model</label>
+          <select id="modelSelect"><option value="">Choose…</option></select>
+        </div>
+        <div class="form-row">
+          <label>Down Payment (%)</label>
+          <input type="number" id="downPayment" value="2" min="0" max="100">
+        </div>
+        <div class="form-row">
+          <label>Number of Months</label>
+          <select id="termSelect"><option value="12">12</option><!-- etc --></select>
+        </div>
+        <div class="form-row">
+          <label>Job Title</label>
+          <input type="text" id="jobTitle" value="Technical">
+        </div>
+        <button type="button" class="btn calculate-btn">Calculate Your Installment</button>
+      </form>
+    </div>
+  </div>
+</section>
     
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 <section>
