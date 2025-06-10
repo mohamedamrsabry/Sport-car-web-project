@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Installment Calculator</title>
+    <link rel="icon" type="image/png" href="/partials/img/logo.ico"> <!--page icon logo-->
     <style>
         * {
             margin: 0;
@@ -13,7 +14,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f0f1e);
+            background: url('/partials/img/install.png');
             color: white;
             min-height: 100vh;
             padding: 20px;
@@ -373,72 +374,279 @@
     </div>
 
     <script>
-        const carModels = {
-            toyota: ['Camry', 'Corolla', 'RAV4', 'Highlander', 'Prius', 'Yaris'],
-            honda: ['Civic', 'Accord', 'CR-V', 'Pilot', 'HR-V', 'Odyssey'],
-            nissan: ['Altima', 'Sentra', 'Rogue', 'Pathfinder', 'Murano', 'Kicks'],
-            hyundai: ['Elantra', 'Sonata', 'Tucson', 'Santa Fe', 'Accent', 'Palisade'],
-            kia: ['Forte', 'Optima', 'Sportage', 'Sorento', 'Rio', 'Telluride'],
-            mazda: ['Mazda3', 'Mazda6', 'CX-5', 'CX-9', 'MX-5', 'CX-30'],
-            ford: ['Focus', 'Fusion', 'Escape', 'Explorer', 'F-150', 'Mustang'],
-            chevrolet: ['Cruze', 'Malibu', 'Equinox', 'Traverse', 'Silverado', 'Camaro']
-        };
+        let cars = []; // This will store our fetched cars
 
-        const carPrices = {
-            'Camry': 750000, 'Corolla': 660000, 'RAV4': 840000, 'Highlander': 1050000, 'Prius': 720000, 'Yaris': 540000,
-            'Civic': 690000, 'Accord': 780000, 'CR-V': 810000, 'Pilot': 990000, 'HR-V': 630000, 'Odyssey': 960000,
-            'Altima': 720000, 'Sentra': 570000, 'Rogue': 780000, 'Pathfinder': 1020000, 'Murano': 930000, 'Kicks': 600000,
-            'Elantra': 600000, 'Sonata': 690000, 'Tucson': 750000, 'Santa Fe': 840000, 'Accent': 480000, 'Palisade': 990000,
-            'Forte': 570000, 'Optima': 720000, 'Sportage': 750000, 'Sorento': 900000, 'Rio': 510000, 'Telluride': 1050000,
-            'Mazda3': 660000, 'Mazda6': 750000, 'CX-5': 810000, 'CX-9': 1050000, 'MX-5': 810000, 'CX-30': 690000,
-            'Focus': 570000, 'Fusion': 720000, 'Escape': 750000, 'Explorer': 990000, 'F-150': 900000, 'Mustang': 840000,
-            'Cruze': 600000, 'Malibu': 690000, 'Equinox': 750000, 'Traverse': 930000, 'Silverado': 960000, 'Camaro': 780000
-        };
-
-        function toggleInfo() {
-            const info = document.getElementById('expandableInfo');
-            info.classList.toggle('expanded');
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const response = await fetch("http://localhost:3000/cars");
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
+        cars = await response.json();
 
-        function updateModels() {
-            const brand = document.getElementById('carBrand').value;
-            const modelSelect = document.getElementById('carModel');
-            
-            modelSelect.innerHTML = '<option value="">Choose...</option>';
-            
-            if (brand && carModels[brand]) {
-                carModels[brand].forEach(model => {
-                    const option = document.createElement('option');
-                    option.value = model;
-                    option.textContent = model;
-                    modelSelect.appendChild(option);
-                });
+        // Populate brands dropdown with fetched data
+        populateBrands();
+
+        // Check for URL parameters to pre-select brand/model
+        const params = new URLSearchParams(location.search);
+        const brand = params.get('brand');
+        const model = params.get('model');
+
+        if (brand) {
+            document.getElementById('carBrand').value = brand;
+            updateModels();
+
+            if (model) {
+                // Need to wait for models to populate
+                setTimeout(() => {
+                    document.getElementById('carModel').value = model;
+                }, 100);
             }
         }
+    } catch (error) {
+        console.error('Error fetching car data:', error);
+        // Fall back to hardcoded data if fetch fails
+        console.log('Falling back to hardcoded car data');
+        useHardcodedData();
+    }
+});
 
-        function calculateInstallment() {
-            const model = document.getElementById('carModel').value;
-            const downPaymentPercent = parseFloat(document.getElementById('downPayment').value) || 0;
-            const months = parseInt(document.getElementById('months').value);
-            const jobTitle = document.getElementById('jobTitle').value;
+// Populate the brands dropdown with unique car makes from fetched data
+function populateBrands() {
+    const brandSelect = document.getElementById('carBrand');
+    
+    if (!brandSelect || !cars.length) return;
 
-            if (!model || !jobTitle) {
-                alert('Please fill in all required fields');
-                return;
-            }
+    // Clear existing options except the first one
+    brandSelect.innerHTML = '<option value="">Choose...</option>';
 
-            const carPrice = carPrices[model] || 750000;
-            const downPaymentAmount = (carPrice * downPaymentPercent) / 100;
-            const loanAmount = carPrice - downPaymentAmount;
-            const monthlyPayment = loanAmount / months;
+    // Get unique brands from fetched data
+    const brands = [...new Set(cars.map(car => car.make))].sort();
 
-            document.getElementById('monthlyPayment').textContent = 'EGP ' + monthlyPayment.toLocaleString('en-US', {maximumFractionDigits: 0});
-            document.getElementById('totalAmount').textContent = 'EGP ' + carPrice.toLocaleString();
-            document.getElementById('downPaymentAmount').textContent = 'EGP ' + downPaymentAmount.toLocaleString('en-US', {maximumFractionDigits: 0});
-            document.getElementById('loanAmount').textContent = 'EGP ' + loanAmount.toLocaleString('en-US', {maximumFractionDigits: 0});
+    brands.forEach(brand => {
+        const option = document.createElement('option');
+        option.value = brand.toLowerCase(); // Keep consistent with existing format
+        option.textContent = brand;
+        brandSelect.appendChild(option);
+    });
+}
 
-            document.getElementById('resultSection').classList.add('show');
+// Update models dropdown based on selected brand using fetched data
+function updateModels() {
+    const brand = document.getElementById('carBrand').value;
+    const modelSelect = document.getElementById('carModel');
+    
+    modelSelect.innerHTML = '<option value="">Choose...</option>';
+    
+    if (!brand || !cars.length) return;
+
+    // Filter models for the selected brand from fetched data
+    const brandModels = cars
+        .filter(car => car.make.toLowerCase() === brand.toLowerCase())
+        .map(car => car.model);
+
+    // Remove duplicates and sort
+    const uniqueModels = [...new Set(brandModels)].sort();
+
+    // Add models to dropdown
+    uniqueModels.forEach(model => {
+        const option = document.createElement('option');
+        option.value = model;
+        option.textContent = model;
+        modelSelect.appendChild(option);
+    });
+}
+
+// Get car price from fetched data
+function getCarPrice(model) {
+    if (!cars.length) return 750000; // Default fallback
+
+    const selectedCar = cars.find(car => car.model === model);
+    
+    if (!selectedCar) return 750000;
+
+    // Try different common property names for price
+    let carPrice = 0;
+    
+    if (selectedCar.price) {
+        carPrice = parseFloat(selectedCar.price.toString().replace(/[,$]/g, ''));
+    } else if (selectedCar.Price) {
+        carPrice = parseFloat(selectedCar.Price.toString().replace(/[,$]/g, ''));
+    } else if (selectedCar.cost) {
+        carPrice = parseFloat(selectedCar.cost.toString().replace(/[,$]/g, ''));
+    } else if (selectedCar.value) {
+        carPrice = parseFloat(selectedCar.value.toString().replace(/[,$]/g, ''));
+    } else {
+        carPrice = 750000; // Default fallback
+        console.log('No price found for selected car, using default price');
+        console.log('Available car properties:', Object.keys(selectedCar));
+    }
+
+    // Ensure we have valid numbers
+    if (isNaN(carPrice) || carPrice <= 0) {
+        carPrice = 750000; // Default fallback
+    }
+
+    return carPrice;
+}
+
+// Fallback to hardcoded data if fetch fails
+function useHardcodedData() {
+    const carModels = {
+        toyota: ['Camry', 'Corolla', 'RAV4', 'Highlander', 'Prius', 'Yaris'],
+        honda: ['Civic', 'Accord', 'CR-V', 'Pilot', 'HR-V', 'Odyssey'],
+        nissan: ['Altima', 'Sentra', 'Rogue', 'Pathfinder', 'Murano', 'Kicks'],
+        hyundai: ['Elantra', 'Sonata', 'Tucson', 'Santa Fe', 'Accent', 'Palisade'],
+        kia: ['Forte', 'Optima', 'Sportage', 'Sorento', 'Rio', 'Telluride'],
+        mazda: ['Mazda3', 'Mazda6', 'CX-5', 'CX-9', 'MX-5', 'CX-30'],
+        ford: ['Focus', 'Fusion', 'Escape', 'Explorer', 'F-150', 'Mustang'],
+        chevrolet: ['Cruze', 'Malibu', 'Equinox', 'Traverse', 'Silverado', 'Camaro']
+    };
+
+    // Convert hardcoded data to match expected format
+    cars = [];
+    Object.keys(carModels).forEach(make => {
+        carModels[make].forEach(model => {
+            cars.push({
+                make: make.charAt(0).toUpperCase() + make.slice(1),
+                model: model,
+                price: getHardcodedPrice(model)
+            });
+        });
+    });
+
+    populateBrands();
+}
+
+// Get hardcoded prices (fallback)
+function getHardcodedPrice(model) {
+    const carPrices = {
+        'Camry': 750000, 'Corolla': 660000, 'RAV4': 840000, 'Highlander': 1050000, 'Prius': 720000, 'Yaris': 540000,
+        'Civic': 690000, 'Accord': 780000, 'CR-V': 810000, 'Pilot': 990000, 'HR-V': 630000, 'Odyssey': 960000,
+        'Altima': 720000, 'Sentra': 570000, 'Rogue': 780000, 'Pathfinder': 1020000, 'Murano': 930000, 'Kicks': 600000,
+        'Elantra': 600000, 'Sonata': 690000, 'Tucson': 750000, 'Santa Fe': 840000, 'Accent': 480000, 'Palisade': 990000,
+        'Forte': 570000, 'Optima': 720000, 'Sportage': 750000, 'Sorento': 900000, 'Rio': 510000, 'Telluride': 1050000,
+        'Mazda3': 660000, 'Mazda6': 750000, 'CX-5': 810000, 'CX-9': 1050000, 'MX-5': 810000, 'CX-30': 690000,
+        'Focus': 570000, 'Fusion': 720000, 'Escape': 750000, 'Explorer': 990000, 'F-150': 900000, 'Mustang': 840000,
+        'Cruze': 600000, 'Malibu': 690000, 'Equinox': 750000, 'Traverse': 930000, 'Silverado': 960000, 'Camaro': 780000
+    };
+    
+    return carPrices[model] || 750000;
+}
+
+// Enhanced toggle info function
+function toggleInfo() {
+    const info = document.getElementById('expandableInfo');
+    info.classList.toggle('expanded');
+}
+
+// Enhanced calculate installment function
+function calculateInstallment() {
+    const brand = document.getElementById('carBrand').value;
+    const model = document.getElementById('carModel').value;
+    const downPaymentPercent = parseFloat(document.getElementById('downPayment').value) || 0;
+    const months = parseInt(document.getElementById('months').value);
+    const jobTitle = document.getElementById('jobTitle').value;
+
+    // Validation with custom modal-like alert
+    if (!brand || !model) {
+        showValidationMessage('Please select both car brand and model');
+        return;
+    }
+
+    if (!jobTitle) {
+        showValidationMessage('Please enter your job title');
+        return;
+    }
+
+    if (!months) {
+        showValidationMessage('Please select the number of months');
+        return;
+    }
+
+    // Get car price from fetched data or fallback
+    const carPrice = getCarPrice(model);
+    const downPaymentAmount = (carPrice * downPaymentPercent) / 100;
+    const loanAmount = carPrice - downPaymentAmount;
+    const monthlyPayment = loanAmount / months;
+
+    // Update the existing result display
+    document.getElementById('monthlyPayment').textContent = 'EGP ' + monthlyPayment.toLocaleString('en-US', {maximumFractionDigits: 0});
+    document.getElementById('totalAmount').textContent = 'EGP ' + carPrice.toLocaleString();
+    document.getElementById('downPaymentAmount').textContent = 'EGP ' + downPaymentAmount.toLocaleString('en-US', {maximumFractionDigits: 0});
+    document.getElementById('loanAmount').textContent = 'EGP ' + loanAmount.toLocaleString('en-US', {maximumFractionDigits: 0});
+
+    // Show the result section with animation
+    document.getElementById('resultSection').classList.add('show');
+
+    // Scroll to results smoothly
+    document.getElementById('resultSection').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'nearest'
+    });
+
+    // Debug information
+    console.log('Calculation Details:', {
+        brand: brand,
+        model: model,
+        carPrice: carPrice,
+        downPaymentPercent: downPaymentPercent,
+        downPaymentAmount: downPaymentAmount,
+        loanAmount: loanAmount,
+        months: months,
+        monthlyPayment: monthlyPayment,
+        jobTitle: jobTitle
+    });
+}
+
+// Custom validation message function (styled to match the design)
+function showValidationMessage(message) {
+    // Remove existing validation message if any
+    const existingMessage = document.querySelector('.validation-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+
+    // Create validation message element
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'validation-message';
+    messageDiv.innerHTML = `
+        <div style="
+            background: rgba(231, 76, 60, 0.9);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.3s ease-out;
+        ">
+            <strong>⚠️ ${message}</strong>
+        </div>
+    `;
+
+    // Add animation styles
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+    `;
+    document.head.appendChild(style);
+
+    // Insert before the calculate button
+    const calculateBtn = document.querySelector('.calculate-btn');
+    calculateBtn.parentNode.insertBefore(messageDiv, calculateBtn);
+
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        if (messageDiv.parentNode) {
+            messageDiv.style.animation = 'slideIn 0.3s ease-out reverse';
+            setTimeout(() => messageDiv.remove(), 300);
+        }
+    }, 5000);
+}
     </script>
 </body>
 </html>
