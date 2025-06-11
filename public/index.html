@@ -3,15 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STRADA AUTO - Premium Luxury Car Dealership | Dubai, UAE</title>
-    <meta name="description" content="STRADA AUTO - Dubai's premier luxury car dealership featuring Rolls-Royce, Ferrari, Lamborghini, Bentley, and more. Professional sales, financing, and after-sales service.">
-    <meta name="keywords" content="luxury cars Dubai, premium car dealership, Rolls Royce Dubai, Ferrari dealership, Lamborghini sales, luxury car financing">
-    <link rel="icon" type="image/png" href="/partials/img/logo.ico">
+    <title>STRADA AUTO</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/script.js" defer></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
     <link rel="stylesheet" href="/css/cookies.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Neumorphic Card Styles */
+        .card {
+            width: 190px;
+            height: 254px;
+            border-radius: 30px;
+            background: #212121;
+            box-shadow: 15px 15px 30px rgb(25, 25, 25),
+                        -15px -15px 30px rgb(60, 60, 60);
+        }
+        
+        /* Custom neumorphic cards for different sections */
+        .stat-card {
+            background: #212121 !important;
+            border-radius: 30px !important;
+            box-shadow: 15px 15px 30px rgb(25, 25, 25),
+                        -15px -15px 30px rgb(60, 60, 60) !important;
+            border: none !important;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card h3 {
+            color: #ffca66 !important;
+        }
+        
+        .stat-card p {
+            color: #ccc !important;
+        }
+        
+        .service-card {
+            background: #212121 !important;
+            border-radius: 30px !important;
+            box-shadow: 15px 15px 30px rgb(25, 25, 25),
+                        -15px -15px 30px rgb(60, 60, 60) !important;
+            border: none !important;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-card h3 {
+            color: #ffca66 !important;
+        }
+        
+        .service-card p {
+            color: #ccc !important;
+        }
+        
+        .contact-card {
+            background: #212121 !important;
+            border-radius: 30px !important;
+            box-shadow: 15px 15px 30px rgb(25, 25, 25),
+                        -15px -15px 30px rgb(60, 60, 60) !important;
+            border: none !important;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-card h3 {
+            color: #ffca66 !important;
+        }
+        
+        .contact-card p {
+            color: #ccc !important;
+        }
+        
+        /* Adjust icon colors for better contrast */
+        .stat-card i,
+        .service-card i,
+        .contact-card i {
+            color: #ffca66 !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -23,8 +105,7 @@
         <div class="black-cover">
             <div class="scroll-container">
                 <h1 class="text-overlay">STRADA AUTO</h1>
-                <p class="hero-subtitle">Dubai's Premier Luxury Automotive Experience</p>
-                <div class="hero-stats">
+                    <div class="hero-stats">
                     <div class="stat">
                         <span class="stat-number">15+</span>
                         <span class="stat-label">Years Experience</span>
@@ -52,30 +133,30 @@
                     <p style="margin-bottom: 30px; color: white; line-height: 1.7;">Our state-of-the-art showroom in the heart of Cairo showcases an exclusive collection of supercars, luxury , and bespoke vehicles. With our team of certified automotive experts and comprehensive after-sales support, we ensure every client receives personalized service that exceeds expectations.</p>
                     
                     <div class="certifications" style="margin-top: 40px;">
-                        <h4 style="font-size: 1.3rem; margin-bottom: 20px; color: gold;">Our Certifications & Memberships:</h4>
+                        <h4 style="font-size: 1.3rem; margin-bottom: 20px; color: #ffca66;">Our Certifications & Memberships:</h4>
                         <ul style="list-style: none; padding: 0;">
-                            <li style="margin-bottom: 10px; color: white;"><i class="fas fa-certificate" style="color: gold; margin-right: 10px;"></i> Egypt Chamber of Commerce Member</li>
-                            <li style="margin-bottom: 10px; color: white;"><i class="fas fa-certificate" style="color: gold; margin-right: 10px;"></i> EGP Ministry of Economy Licensed</li>
-                            <li style="margin-bottom: 10px; color: white;"><i class="fas fa-certificate" style="color: gold; margin-right: 10px;"></i> ISO 9001:2015 Quality Management</li>
-                            <li style="margin-bottom: 10px; color: white;"><i class="fas fa-certificate" style="color: gold; margin-right: 10px;"></i> Authorized Dealer Network Partner</li>
+                            <li style="margin-bottom: 10px; color: white;"><i class="fas fa-certificate" style="color: #ffca66; margin-right: 10px;"></i> Egypt Chamber of Commerce Member</li>
+                            <li style="margin-bottom: 10px; color: white;"><i class="fas fa-certificate" style="color: #ffca66; margin-right: 10px;"></i> EGP Ministry of Economy Licensed</li>
+                            <li style="margin-bottom: 10px; color: white;"><i class="fas fa-certificate" style="color: #ffca66; margin-right: 10px;"></i> ISO 9001:2015 Quality Management</li>
+                            <li style="margin-bottom: 10px; color: white;"><i class="fas fa-certificate" style="color: #ffca66; margin-right: 10px;"></i> Authorized Dealer Network Partner</li>
                         </ul>
                     </div>
                 </div>
                 <div class="intro-stats" style="display: flex; flex-direction: column; gap: 25px;">
-                    <div class="stat-card" style="background: white; padding: 25px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                        <i class="fas fa-trophy" style="font-size: 2rem; color: gold; margin-bottom: 15px; display: block;"></i>
-                        <h3 style="font-size: 1.2rem; margin-bottom: 8px; color: #333;">Award Winning</h3>
-                        <p style="color: #666; margin: 0;">Best Luxury Dealer 2023</p>
+                    <div class="stat-card" style="padding: 25px; text-align: center;">
+                        <i class="fas fa-trophy" style="font-size: 2rem; margin-bottom: 15px; display: block;"></i>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 8px;">Award Winning</h3>
+                        <p style="margin: 0;">Best Luxury Dealer 2023</p>
                     </div>
-                    <div class="stat-card" style="background: white; padding: 25px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                        <i class="fas fa-shield-alt" style="font-size: 2rem; color: gold; margin-bottom: 15px; display: block;"></i>
-                        <h3 style="font-size: 1.2rem; margin-bottom: 8px; color: #333;">Warranty</h3>
-                        <p style="color: #666; margin: 0;">Comprehensive Coverage</p>
+                    <div class="stat-card" style="padding: 25px; text-align: center;">
+                        <i class="fas fa-shield-alt" style="font-size: 2rem; margin-bottom: 15px; display: block;"></i>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 8px;">Warranty</h3>
+                        <p style="margin: 0;">Comprehensive Coverage</p>
                     </div>
-                    <div class="stat-card" style="background: white; padding: 25px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                        <i class="fas fa-tools" style="font-size: 2rem; color: gold; margin-bottom: 15px; display: block;"></i>
-                        <h3 style="font-size: 1.2rem; margin-bottom: 8px; color: #333;">Service Center</h3>
-                        <p style="color: #666; margin: 0;">Factory Trained Technicians</p>
+                    <div class="stat-card" style="padding: 25px; text-align: center;">
+                        <i class="fas fa-tools" style="font-size: 2rem; margin-bottom: 15px; display: block;"></i>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 8px;">Service Center</h3>
+                        <p style="margin: 0;">Factory Trained Technicians</p>
                     </div>
                 </div>
             </div>
@@ -86,39 +167,42 @@
     <section class="professional-services" style="padding: 80px 0; background: black;">
         <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
             <div class="section-header" style="text-align: center; margin-bottom: 60px;">
-                <h2 style="font-size: 2.5rem; margin-bottom: 15px; color: gold;">Professional Services</h2>
+                <h2 style="font-size: 2.5rem; margin-bottom: 15px; color: #ffca66;">Professional Services</h2>
                 <p style="font-size: 1.1rem; color: white;">Comprehensive automotive solutions tailored to your needs</p>
             </div>
-            <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
-                <div class="service-card" style="background: #f8f9fa; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #e9ecef;">
-                    <i class="fas fa-car" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
-                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #333;">Sales & Consultation</h3>
-                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">Expert guidance in selecting your perfect luxury vehicle with personalized consultation and market insights.</p>
-                    <ul style="list-style: none; padding: 0; color: #555; text-align: left;">
+            <div class="services-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                <div class="service-card" style="padding: 30px; text-align: center;">
+                    <i class="fas fa-car" style="font-size: 2.5rem; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px;">Sales & Consultation</h3>
+                    <p style="margin-bottom: 20px; line-height: 1.6;">Expert guidance in selecting your perfect luxury vehicle with personalized consultation and market insights.</p>
+                    <ul style="list-style: none; padding: 0; text-align: left;">
                       
                     </ul>
                 </div>
-                <div class="service-card" style="background: #f8f9fa; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #e9ecef;">
-                    <i class="fas fa-calculator" style="font-size: 2.5rem; color:gold; margin-bottom: 20px; display: block;"></i>
-                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #333;">Financing Solutions</h3>
-                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">Flexible financing options with competitive rates and terms tailored to your financial requirements.</p>
-                    <ul style="list-style: none; padding: 0; color: #555; text-align: left;">
+                <div class="service-card" style="padding: 30px; text-align: center;">
+                    <i class="fas fa-calculator" style="font-size: 2.5rem; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px;">Financing Solutions</h3>
+                    <p style="margin-bottom: 20px; line-height: 1.6;">Flexible financing options with competitive rates and terms tailored to your financial requirements.</p>
+                    <ul style="list-style: none; padding: 0; text-align: left;">
                         
                     </ul>
                 </div>
-                <div class="service-card" style="background: #f8f9fa; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #e9ecef;">
-                    <i class="fas fa-wrench" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
-                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: black;">After-Sales Support</h3>
-                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">Professional maintenance and repair services by factory-trained technicians using genuine parts.</p>
-                    <ul style="list-style: none; padding: 0; color: white; text-align: left;">
+                <div class="service-card" style="padding: 30px; text-align: center;">
+                    <i class="fas fa-wrench" style="font-size: 2.5rem; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px;">After-Sales Support</h3>
+                    <p style="margin-bottom: 20px; line-height: 1.6;">Professional maintenance and repair services by factory-trained technicians using genuine parts.</p>
+                    <ul style="list-style: none; padding: 0; text-align: left;">
                         
                     </ul>
                 </div>
-                <div class="service-card" style="background: #f8f9fa; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #e9ecef;">
-                    <i class="fas fa-exchange-alt" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
-                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #333;">Trade & Consignment</h3>
-                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">Professional vehicle appraisal and consignment services for seamless vehicle transitions.</p>
-                    <ul style="list-style: none; padding: 0; color: #555; text-align: left;">
+            </div>
+            <!-- Second row with centered Trade & Consignment card -->
+            <div style="display: flex; justify-content: center; margin-top: 30px;">
+                <div class="service-card" style="padding: 30px; text-align: center; width: calc(33.333% - 20px); max-width: 350px;">
+                    <i class="fas fa-exchange-alt" style="font-size: 2.5rem; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px;">Trade & Consignment</h3>
+                    <p style="margin-bottom: 20px; line-height: 1.6;">Professional vehicle appraisal and consignment services for seamless vehicle transitions.</p>
+                    <ul style="list-style: none; padding: 0; text-align: left;">
                        
                     </ul>
                 </div>
@@ -358,38 +442,41 @@
     </section>
 
     <!-- Contact Information -->
-    <section class="contact-info" style="padding: 80px 0; background: #1a1a1a; color: white;">
+     <section class="contact-info" style="padding: 80px 0; background: #000000; color: white;">
         <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
             <div class="section-header" style="text-align: center; margin-bottom: 60px;">
                 <h2 style="font-size: 2.5rem; margin-bottom: 15px; color: #fff;">Visit Our Showroom</h2>
                 <p style="font-size: 1.1rem; color: #ccc;">Experience luxury automotive excellence in person</p>
             </div>
-            <div class="contact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px;">
-                <div class="contact-card" style="background: #2a2a2a; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #333;">
-                    <i class="fas fa-map-marker-alt" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
-                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #fff;">Showroom Location</h3>
-                    <p style="color: #ccc; line-height: 1.6;">Obour Road<br>
+            <div class="contact-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px;">
+                <div class="contact-card" style="padding: 30px; text-align: center;">
+                    <i class="fas fa-map-marker-alt" style="font-size: 2.5rem; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px;">Showroom Location</h3>
+                    <p style="line-height: 1.6;">Obour Road<br>
                     Obour, Cairo, Egypt<br>
                     P.O. Box 12345</p>
                 </div>
-                <div class="contact-card" style="background: #2a2a2a; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #333;">
-                    <i class="fas fa-clock" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
-                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #fff;">Business Hours</h3>
-                    <p style="color: #ccc; line-height: 1.6;">Sunday - Thursday: 9:00 AM - 8:00 PM<br>
+                <div class="contact-card" style="padding: 30px; text-align: center;">
+                    <i class="fas fa-clock" style="font-size: 2.5rem; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px;">Business Hours</h3>
+                    <p style="line-height: 1.6;">Sunday - Thursday: 9:00 AM - 8:00 PM<br>
                     Friday - Saturday: 2:00 PM - 10:00 PM<br>
                     <em>Appointments recommended</em></p>
                 </div>
-                <div class="contact-card" style="background: #2a2a2a; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #333;">
-                    <i class="fas fa-phone" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
-                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #fff;">Contact Information</h3>
-                    <p style="color: #ccc; line-height: 1.6;">Sales: +021270723373<br>
+                <div class="contact-card" style="padding: 30px; text-align: center;">
+                    <i class="fas fa-phone" style="font-size: 2.5rem; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px;">Contact Information</h3>
+                    <p style="line-height: 1.6;">Sales: +021270723373<br>
                     Service: +0212158745625<br>
                     Email: info@stradaauto.ae</p>
                 </div>
-                <div class="contact-card" style="background: #2a2a2a; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #333;">
-                    <i class="fas fa-users" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
-                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #fff;">Professional Team</h3>
-                    <p style="color: #ccc; line-height: 1.6;">Certified Sales Consultants<br>
+            </div>
+            <!-- Second row with centered Professional Team card -->
+            <div style="display: flex; justify-content: center; margin-top: 30px;">
+                <div class="contact-card" style="padding: 30px; text-align: center; width: calc(33.333% - 20px); max-width: 350px;">
+                    <i class="fas fa-users" style="font-size: 2.5rem; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px;">Professional Team</h3>
+                    <p style="line-height: 1.6;">Certified Sales Consultants<br>
                     Factory-Trained Technicians<br>
                     Multilingual Support Available</p>
                 </div>
@@ -462,7 +549,6 @@
             </div>
         </div>
     </div>
-
     <!-- Car Rev Section -->
     <section class="rev" id="revSection">
         <div class="car-container">
