@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/script.js" defer></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+    <!-- If you added CSS to a separate file -->
+<link rel="stylesheet" href="/css/cookies.css">
 
 </head>
 <body>
@@ -180,6 +182,7 @@
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
     </div>
+ 
 
 </section>
     <section class="installment">
@@ -236,7 +239,66 @@
             <h6 class="heading2">Our Fastest Car</h6>
         </div>
     </section>
+     <!-- Cookie Consent Overlay - Add this before closing </body> tag -->
+<div class="cookie-consent-overlay" id="cookieConsentOverlay">
+    <div class="cookie-consent-popup">
+        <div class="cookie-icon">🍪</div>
+        <h2>We Value Your Privacy</h2>
+        <p>
+            STRADA AUTO uses cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. 
+            By clicking "Accept All", you consent to our use of cookies for these purposes.
+        </p>
+        
+        <div class="cookie-buttons">
+            <button class="cookie-btn accept" onclick="acceptAllCookies()">Accept All</button>
+            <button class="cookie-btn decline" onclick="declineCookies()">Decline</button>
+            <button class="cookie-btn settings" onclick="toggleSettings()">Settings</button>
+        </div>
 
+        <!-- Cookie Settings Panel -->
+        <div class="cookie-settings" id="cookieSettings">
+            <div class="cookie-category">
+                <div class="cookie-toggle">
+                    <div>
+                        <h4>Essential Cookies</h4>
+                        <p>Required for basic site functionality</p>
+                    </div>
+                    <div class="toggle-switch active" data-required="true">
+                        <span class="sr-only">Essential cookies (required)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cookie-category">
+                <div class="cookie-toggle">
+                    <div>
+                        <h4>Analytics Cookies</h4>
+                        <p>Help us understand how visitors interact with our website</p>
+                    </div>
+                    <div class="toggle-switch" onclick="toggleCookie(this, 'analytics')">
+                        <span class="sr-only">Analytics cookies</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cookie-category">
+                <div class="cookie-toggle">
+                    <div>
+                        <h4>Marketing Cookies</h4>
+                        <p>Used to deliver relevant advertisements and track ad performance</p>
+                    </div>
+                    <div class="toggle-switch" onclick="toggleCookie(this, 'marketing')">
+                        <span class="sr-only">Marketing cookies</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cookie-buttons" style="margin-top: 20px;">
+                <button class="cookie-btn accept" onclick="saveCustomSettings()">Save Preferences</button>
+            </div>
+        </div>
+    </div>
+</div>
     <section class="rev" id="revSection"> <!-- car rev section -->
         
         <div class="car-container">
@@ -262,5 +324,6 @@
     <script src="/js/nav.js"></script>
     <script src="/js/loader.js" type="module"></script>
     <script src="/js/newsletter.js"></script>
+    <script src="/js/cookies.js"></script>
 </body>
 </html>
