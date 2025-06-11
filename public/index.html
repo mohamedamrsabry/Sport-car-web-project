@@ -202,15 +202,24 @@
         </div>
         <div class="form-row">
           <label>Down Payment (%)</label>
-          <input type="number" id="downPayment" value="2" min="0" max="100">
+          <input type="number" id="downPayment" placeholder="%" min="0" max="100">
         </div>
         <div class="form-row">
           <label>Number of Months</label>
-          <select id="termSelect"><option value="12">12</option><!-- etc --></select>
+          <select id="termSelect">
+            <option value="12">12 months</option>
+            <option value="24">24 months</option>
+            <option value="36">36 months</option>
+            <option value="48">48 months</option>
+            <option value="60">60 months</option>
+            <option value="72">72 months</option>
+            <option value="84">84 months</option>
+            <option value="96">96 months</option>
+        </select>
         </div>
         <div class="form-row">
           <label>Job Title</label>
-          <input type="text" id="jobTitle" value="Technical">
+          <input type="text" id="jobTitle" placeholder="Professor, Engineer, etc.">
         </div>
         <button type="button" class="btn calculate-btn">Calculate Your Installment</button>
       </form>
@@ -252,5 +261,6 @@
     <div data-include="/partials/footer.html"></div>
     <script src="/js/nav.js"></script>
     <script src="/js/loader.js" type="module"></script>
+    <script src="/js/newsletter.js"></script>
 </body>
 </html>

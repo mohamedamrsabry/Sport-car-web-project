@@ -304,15 +304,7 @@
             <div class="form-group">
                 <label for="carBrand">Car Brand</label>
                 <select id="carBrand" onchange="updateModels()">
-                    <option value="">Choose...</option>
-                    <option value="toyota">Toyota</option>
-                    <option value="honda">Honda</option>
-                    <option value="nissan">Nissan</option>
-                    <option value="hyundai">Hyundai</option>
-                    <option value="kia">Kia</option>
-                    <option value="mazda">Mazda</option>
-                    <option value="ford">Ford</option>
-                    <option value="chevrolet">Chevrolet</option>
+     
                 </select>
             </div>
 
@@ -493,14 +485,7 @@ function getCarPrice(model) {
 // Fallback to hardcoded data if fetch fails
 function useHardcodedData() {
     const carModels = {
-        toyota: ['Camry', 'Corolla', 'RAV4', 'Highlander', 'Prius', 'Yaris'],
-        honda: ['Civic', 'Accord', 'CR-V', 'Pilot', 'HR-V', 'Odyssey'],
-        nissan: ['Altima', 'Sentra', 'Rogue', 'Pathfinder', 'Murano', 'Kicks'],
-        hyundai: ['Elantra', 'Sonata', 'Tucson', 'Santa Fe', 'Accent', 'Palisade'],
-        kia: ['Forte', 'Optima', 'Sportage', 'Sorento', 'Rio', 'Telluride'],
-        mazda: ['Mazda3', 'Mazda6', 'CX-5', 'CX-9', 'MX-5', 'CX-30'],
-        ford: ['Focus', 'Fusion', 'Escape', 'Explorer', 'F-150', 'Mustang'],
-        chevrolet: ['Cruze', 'Malibu', 'Equinox', 'Traverse', 'Silverado', 'Camaro']
+
     };
 
     // Convert hardcoded data to match expected format
@@ -521,14 +506,7 @@ function useHardcodedData() {
 // Get hardcoded prices (fallback)
 function getHardcodedPrice(model) {
     const carPrices = {
-        'Camry': 750000, 'Corolla': 660000, 'RAV4': 840000, 'Highlander': 1050000, 'Prius': 720000, 'Yaris': 540000,
-        'Civic': 690000, 'Accord': 780000, 'CR-V': 810000, 'Pilot': 990000, 'HR-V': 630000, 'Odyssey': 960000,
-        'Altima': 720000, 'Sentra': 570000, 'Rogue': 780000, 'Pathfinder': 1020000, 'Murano': 930000, 'Kicks': 600000,
-        'Elantra': 600000, 'Sonata': 690000, 'Tucson': 750000, 'Santa Fe': 840000, 'Accent': 480000, 'Palisade': 990000,
-        'Forte': 570000, 'Optima': 720000, 'Sportage': 750000, 'Sorento': 900000, 'Rio': 510000, 'Telluride': 1050000,
-        'Mazda3': 660000, 'Mazda6': 750000, 'CX-5': 810000, 'CX-9': 1050000, 'MX-5': 810000, 'CX-30': 690000,
-        'Focus': 570000, 'Fusion': 720000, 'Escape': 750000, 'Explorer': 990000, 'F-150': 900000, 'Mustang': 840000,
-        'Cruze': 600000, 'Malibu': 690000, 'Equinox': 750000, 'Traverse': 930000, 'Silverado': 960000, 'Camaro': 780000
+
     };
     
     return carPrices[model] || 750000;
