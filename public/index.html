@@ -3,264 +3,491 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STRADA AUTO</title>
-    <link rel="icon" type="image/png" href="/partials/img/logo.ico"> <!--page icon logo-->
+    <title>STRADA AUTO - Premium Luxury Car Dealership | Dubai, UAE</title>
+    <meta name="description" content="STRADA AUTO - Dubai's premier luxury car dealership featuring Rolls-Royce, Ferrari, Lamborghini, Bentley, and more. Professional sales, financing, and after-sales service.">
+    <meta name="keywords" content="luxury cars Dubai, premium car dealership, Rolls Royce Dubai, Ferrari dealership, Lamborghini sales, luxury car financing">
+    <link rel="icon" type="image/png" href="/partials/img/logo.ico">
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/script.js" defer></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
-
+    <link rel="stylesheet" href="/css/cookies.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <div data-include="/partials/nav.html"></div>
 
-   <section class="trans-image id="top"> <!-- animated scrolling -->
-    <img src="/partials/img/rrorder.png" alt="All cars">
-    <div class="black-cover">
-        <div class="scroll-container">
-            <h1 class="text-overlay">STRADA AUTO</h1>
-        </div>
-    </div>
-</section>
-<section>
-    <div class="textt">
-        <h1 class="heading">BRANDS</h1>
-        <h6 class="heading2">HOUSED BY STRADA</h6>
-    </div>
-</section>
-<section class="brand-logos" id="brand-logos">
-    <div class="logo">
-        <a href="/products.html?make=Rolls-Royce">
-            <img src="/partials/img/rolls.png" alt="Rolls Royce">
-        </a>
-    </div>
-    <div class="logo">
-        <a href="/products.html?make=Audi">
-            <img src="/partials/img/audi_white_logo-removebg-preview.png" alt="Audi">
-        </a>
-    </div>
-    <div class="logo">
-        <a href="/products.html?make=BMW">
-            <img src="/partials/img/bmw-white-logo-removebg-preview.png" alt="BMW">
-        </a>
-    </div>
-    <div class="logo">
-        <a href="/products.html?make=Lamborghini">
-            <img src="/partials/img/lambo_logo_white-removebg-preview.png" alt="Lamborghini">
-        </a>
-    </div>
-    <div class="logo">
-        <a href="/products.html?make=Ferrari">
-            <img src="/partials/img/ferrari_white_logo-removebg-preview.png" alt="Ferrari">
-        </a>
-    </div>
-    <div class="logo">
-        <a href="/products.html?make=Bentley">
-            <img src="/partials/img/bentley.png" alt="Bentley">
-        </a>
-    </div>
-    <div class="logo">
-        <a href="/products.html?make=Porsche">
-            <img src="/partials/img/porsche_white_logo-removebg-preview.png" alt="Porsche">
-        </a>
-    </div>
-    <div class="logo">
-        <a href="/products.html?make=McLaren">
-            <img src="/partials/img/image-removebg-preview(1).png" alt="McLaren">
-        </a>
-    </div>
-    <div class="logo">
-        <a href="/products.html?make=Mercedes-Benz">
-            <img src="/partials/img/image-removebg-preview.png" alt="Mercedes">
-        </a>
-    </div>
-</section>
-<section class="vehicles" id="vehicles"> <!--swiper section-->
-        
-    <h1 class="heading"> STRADA HEAT</h1>
-    <h6 class="heading2">THE BEST OF EACH</h6>
-   
-    
-
-    <div class="swiper vehicles-slider">
-
-        <div class="swiper-wrapper">
-
-            <div class="swiper-slide box">
-                <img src="/partials/img/best-sellers/911.webp" alt="">
-                <div class="content">
-                    <h3>Porsche 911 turbo s</h3>
-                    <button class="btn" onclick="location.href='cars.html?id=16'">Check Out</button>
-                    
+    <!-- Hero Section -->
+    <section class="trans-image" id="top">
+        <img src="/partials/img/rrorder.png" alt="Luxury Cars Collection - STRADA AUTO">
+        <div class="black-cover">
+            <div class="scroll-container">
+                <h1 class="text-overlay">STRADA AUTO</h1>
+                <p class="hero-subtitle">Dubai's Premier Luxury Automotive Experience</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">2000+</span>
+                        <span class="stat-label">Satisfied Clients</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">9</span>
+                        <span class="stat-label">Premium Brands</span>
+                    </div>
                 </div>
             </div>
-
-            <div class="swiper-slide box">
-                <img src="/partials/img/best-sellers/bent gt.webp" alt="">
-                <div class="content">
-                    <h3>Bentley continental gt</h3>
-                    
-                    <button class="btn" onclick="location.href='cars.html?id=10'">Check Out
-                    </button>
-                </div>
-            </div>
-
-            <div class="swiper-slide box">
-                <img src="/partials/img/best-sellers/f812.webp" alt="">
-                <div class="content">
-                    <h3>Ferrari 812 superfast</h3>
-                    
-                    <button class="btn" onclick="location.href='cars.html?id=20'">Check Out
-                    </button>
-                </div>
-            </div>
-
-            <div class="swiper-slide box">
-                <img src="/partials/img/best-sellers/gt63.webp" alt="">
-                <div class="content">
-                    <h3>Mercedes gt63 se performance</h3>
-                    
-                    <button class="btn" onclick="location.href='cars.html?id=29'">Check Out
-                    </button>
-                </div>
-            </div>
-
-            <div class="swiper-slide box">
-                <img src="/partials/img/best-sellers/lambo revuelto.webp" alt="">
-                <div class="content">
-                    <h3>Lamborghini revuelto</h3>
-                    
-                    <button class="btn" onclick="location.href='cars.html?id=21'">Check Out
-                    </button>
-                </div>
-            </div>
-
-            <div class="swiper-slide box">
-                <img src="/partials/img/best-sellers/bmw-m5-cs.webp" alt="">
-                <div class="content">
-                    <h3>BMW M5 competition f90</h3>
-                   
-                    <button class="btn" onclick="location.href='cars.html?id=11'">Check Out
-                    </button>
-                </div>
-            </div>
-            
-            <div class="swiper-slide box">
-                <img src="/partials/img/best-sellers/mc750.webp" alt="">
-                <div class="content">
-                    <h3>Mclaren 750s</h3>
-                
-                    <button class="btn" onclick="location.href='cars.html?id=24'">Check Out
-                    </button>
-                </div>
-            </div>
-            
-            <div class="swiper-slide box">
-                <img src="/partials/img/best-sellers/r8.webp" alt="">
-                <div class="content">
-                    <h3> Audi R8</h3>
-                    
-                    <button class="btn" onclick="location.href='cars.html?id=13'">Check Out
-                    </button>
-                </div>
-            </div>
-            
-            <div class="swiper-slide box">
-                <img src="/partials/img/best-sellers/rolls.webp" alt="">
-                <div class="content">
-                    <h3>Rolls Royce Phantom</h3>
-                    
-                    <button class="btn" onclick="location.href='cars.html?id=7'">Check Out
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
-
-</section>
-    <section class="installment">
-  <div class="installment-bg">
-    <h2>Calculate your car installment</h2>
-    <div class="installment-container">
-      <div class="installment-info">
-        <h3>Installment up to 8 years</h3>
-        <p>Get 0% APR for 96 months on all Models</p>
-        <a href="installment.html" class="btn know-more">Know More</a>
-      </div>
-      <form id="installmentForm" class="installment-form">
-        <div class="form-row">
-          <label>Car Brand</label>
-          <select id="brandSelect"><option value="">Choose…</option></select>
-        </div>
-        <div class="form-row">
-          <label>Car Model</label>
-          <select id="modelSelect"><option value="">Choose…</option></select>
-        </div>
-        <div class="form-row">
-          <label>Down Payment (%)</label>
-          <input type="number" id="downPayment" placeholder="%" min="0" max="100">
-        </div>
-        <div class="form-row">
-          <label>Number of Months</label>
-          <select id="termSelect">
-            <option value="12">12 months</option>
-            <option value="24">24 months</option>
-            <option value="36">36 months</option>
-            <option value="48">48 months</option>
-            <option value="60">60 months</option>
-            <option value="72">72 months</option>
-            <option value="84">84 months</option>
-            <option value="96">96 months</option>
-        </select>
-        </div>
-        <div class="form-row">
-          <label>Job Title</label>
-          <input type="text" id="jobTitle" placeholder="Professor, Engineer, etc.">
-        </div>
-        <button type="button" class="btn calculate-btn">Calculate Your Installment</button>
-      </form>
-    </div>
-  </div>
-</section>
-    
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-<section>
-       
-
-        <div class="textt">
-            <h1 class="heading">EXPERIENCE</h1>
-            <h6 class="heading2">Our Fastest Car</h6>
         </div>
     </section>
 
-    <section class="rev" id="revSection"> <!-- car rev section -->
-        
+    <!-- Company Introduction -->
+    <section class="company-intro" style="padding: 80px 0; background: black;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="intro-content" style="display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: start;">
+                <div class="intro-text">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 30px; color: white;">Welcome to STRADA AUTO</h2>
+                    <p class="lead" style="font-size: 1.2rem; margin-bottom: 25px; color:white; line-height: 1.8;">Established in 2009, STRADA AUTO has become Egypt's most trusted name in luxury automotive sales and services. We specialize in curating the world's finest vehicles from prestigious manufacturers, offering an unparalleled experience in luxury car ownership.</p>
+                    <p style="margin-bottom: 30px; color: white; line-height: 1.7;">Our state-of-the-art showroom in the heart of Cairo showcases an exclusive collection of supercars, luxury , and bespoke vehicles. With our team of certified automotive experts and comprehensive after-sales support, we ensure every client receives personalized service that exceeds expectations.</p>
+                    
+                    <div class="certifications" style="margin-top: 40px;">
+                        <h4 style="font-size: 1.3rem; margin-bottom: 20px; color: gold;">Our Certifications & Memberships:</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 10px; color: white;"><i class="fas fa-certificate" style="color: gold; margin-right: 10px;"></i> Egypt Chamber of Commerce Member</li>
+                            <li style="margin-bottom: 10px; color: white;"><i class="fas fa-certificate" style="color: gold; margin-right: 10px;"></i> EGP Ministry of Economy Licensed</li>
+                            <li style="margin-bottom: 10px; color: white;"><i class="fas fa-certificate" style="color: gold; margin-right: 10px;"></i> ISO 9001:2015 Quality Management</li>
+                            <li style="margin-bottom: 10px; color: white;"><i class="fas fa-certificate" style="color: gold; margin-right: 10px;"></i> Authorized Dealer Network Partner</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="intro-stats" style="display: flex; flex-direction: column; gap: 25px;">
+                    <div class="stat-card" style="background: white; padding: 25px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <i class="fas fa-trophy" style="font-size: 2rem; color: gold; margin-bottom: 15px; display: block;"></i>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 8px; color: #333;">Award Winning</h3>
+                        <p style="color: #666; margin: 0;">Best Luxury Dealer 2023</p>
+                    </div>
+                    <div class="stat-card" style="background: white; padding: 25px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <i class="fas fa-shield-alt" style="font-size: 2rem; color: gold; margin-bottom: 15px; display: block;"></i>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 8px; color: #333;">Warranty</h3>
+                        <p style="color: #666; margin: 0;">Comprehensive Coverage</p>
+                    </div>
+                    <div class="stat-card" style="background: white; padding: 25px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <i class="fas fa-tools" style="font-size: 2rem; color: gold; margin-bottom: 15px; display: block;"></i>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 8px; color: #333;">Service Center</h3>
+                        <p style="color: #666; margin: 0;">Factory Trained Technicians</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Services -->
+    <section class="professional-services" style="padding: 80px 0; background: black;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 15px; color: gold;">Professional Services</h2>
+                <p style="font-size: 1.1rem; color: white;">Comprehensive automotive solutions tailored to your needs</p>
+            </div>
+            <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+                <div class="service-card" style="background: #f8f9fa; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #e9ecef;">
+                    <i class="fas fa-car" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #333;">Sales & Consultation</h3>
+                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">Expert guidance in selecting your perfect luxury vehicle with personalized consultation and market insights.</p>
+                    <ul style="list-style: none; padding: 0; color: #555; text-align: left;">
+                      
+                    </ul>
+                </div>
+                <div class="service-card" style="background: #f8f9fa; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #e9ecef;">
+                    <i class="fas fa-calculator" style="font-size: 2.5rem; color:gold; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #333;">Financing Solutions</h3>
+                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">Flexible financing options with competitive rates and terms tailored to your financial requirements.</p>
+                    <ul style="list-style: none; padding: 0; color: #555; text-align: left;">
+                        
+                    </ul>
+                </div>
+                <div class="service-card" style="background: #f8f9fa; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #e9ecef;">
+                    <i class="fas fa-wrench" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: black;">After-Sales Support</h3>
+                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">Professional maintenance and repair services by factory-trained technicians using genuine parts.</p>
+                    <ul style="list-style: none; padding: 0; color: white; text-align: left;">
+                        
+                    </ul>
+                </div>
+                <div class="service-card" style="background: #f8f9fa; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #e9ecef;">
+                    <i class="fas fa-exchange-alt" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #333;">Trade & Consignment</h3>
+                    <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">Professional vehicle appraisal and consignment services for seamless vehicle transitions.</p>
+                    <ul style="list-style: none; padding: 0; color: #555; text-align: left;">
+                       
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section>
+        <div class="textt">
+            <h1 class="heading">LUXURY BRANDS</h1>
+            <h6 class="heading2">AUTHORIZED DEALER NETWORK</h6>
+        </div>
+    </section>
+    
+    <section class="brand-logos" id="brand-logos">
+        <div class="logo">
+            <a href="/products.html?make=Rolls-Royce">
+                <img src="/partials/img/rolls.png" alt="Rolls Royce Authorized Dealer">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="/products.html?make=Audi">
+                <img src="/partials/img/audi_white_logo-removebg-preview.png" alt="Audi Premium Partner">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="/products.html?make=BMW">
+                <img src="/partials/img/bmw-white-logo-removebg-preview.png" alt="BMW M Performance Dealer">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="/products.html?make=Lamborghini">
+                <img src="/partials/img/lambo_logo_white-removebg-preview.png" alt="Lamborghini Official Dealer">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="/products.html?make=Ferrari">
+                <img src="/partials/img/ferrari_white_logo-removebg-preview.png" alt="Ferrari Authorized Dealer">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="/products.html?make=Bentley">
+                <img src="/partials/img/bentley.png" alt="Bentley Motors Dealer">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="/products.html?make=Porsche">
+                <img src="/partials/img/porsche_white_logo-removebg-preview.png" alt="Porsche Center Partner">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="/products.html?make=McLaren">
+                <img src="/partials/img/image-removebg-preview(1).png" alt="McLaren Automotive Partner">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="/products.html?make=Mercedes-Benz">
+                <img src="/partials/img/image-removebg-preview.png" alt="Mercedes-AMG Performance Center">
+            </a>
+        </div>
+    </section>
+
+    <!-- Featured Vehicles -->
+    <section class="vehicles" id="vehicles">
+        <h1 class="heading">FEATURED COLLECTION</h1>
+        <h6 class="heading2">CURATED EXCELLENCE</h6>
+
+        <div class="swiper vehicles-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide box">
+                    <img src="/partials/img/best-sellers/911.webp" alt="Porsche 911 Turbo S">
+                    <div class="content">
+                        <h3>Porsche 911 Turbo S</h3>
+                        <p class="vehicle-specs">650 HP • 0-100: 2.7s • Top Speed: 330 km/h</p>
+                        <button class="btn" onclick="location.href='cars.html?id=16'">View Details</button>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="/partials/img/best-sellers/bent gt.webp" alt="Bentley Continental GT">
+                    <div class="content">
+                        <h3>Bentley Continental GT</h3>
+                        <p class="vehicle-specs">626 HP • Handcrafted Luxury • All-Wheel Drive</p>
+                        <button class="btn" onclick="location.href='cars.html?id=10'">View Details</button>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="/partials/img/best-sellers/f812.webp" alt="Ferrari 812 Superfast">
+                    <div class="content">
+                        <h3>Ferrari 812 Superfast</h3>
+                        <p class="vehicle-specs">800 HP • V12 Engine • Ferrari DNA</p>
+                        <button class="btn" onclick="location.href='cars.html?id=20'">View Details</button>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="/partials/img/best-sellers/gt63.webp" alt="Mercedes-AMG GT 63 S E Performance">
+                    <div class="content">
+                        <h3>Mercedes-AMG GT 63 S E Performance</h3>
+                        <p class="vehicle-specs">831 HP • Hybrid Power • Track Performance</p>
+                        <button class="btn" onclick="location.href='cars.html?id=29'">View Details</button>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="/partials/img/best-sellers/lambo revuelto.webp" alt="Lamborghini Revuelto">
+                    <div class="content">
+                        <h3>Lamborghini Revuelto</h3>
+                        <p class="vehicle-specs">1015 HP • V12 Hybrid • Next Generation</p>
+                        <button class="btn" onclick="location.href='cars.html?id=21'">View Details</button>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="/partials/img/best-sellers/bmw-m5-cs.webp" alt="BMW M5 Competition F90">
+                    <div class="content">
+                        <h3>BMW M5 Competition F90</h3>
+                        <p class="vehicle-specs">625 HP • M TwinPower Turbo • Ultimate Driving Machine</p>
+                        <button class="btn" onclick="location.href='cars.html?id=11'">View Details</button>
+                    </div>
+                </div>
+                
+                <div class="swiper-slide box">
+                    <img src="/partials/img/best-sellers/mc750.webp" alt="McLaren 750S">
+                    <div class="content">
+                        <h3>McLaren 750S</h3>
+                        <p class="vehicle-specs">750 HP • Carbon Fiber • Track Focused</p>
+                        <button class="btn" onclick="location.href='cars.html?id=24'">View Details</button>
+                    </div>
+                </div>
+                
+                <div class="swiper-slide box">
+                    <img src="/partials/img/best-sellers/r8.webp" alt="Audi R8 V10 Plus">
+                    <div class="content">
+                        <h3>Audi R8 V10 Plus</h3>
+                        <p class="vehicle-specs">610 HP • Naturally Aspirated V10 • Quattro AWD</p>
+                        <button class="btn" onclick="location.href='cars.html?id=13'">View Details</button>
+                    </div>
+                </div>
+                
+                <div class="swiper-slide box">
+                    <img src="/partials/img/best-sellers/rolls.webp" alt="Rolls-Royce Phantom">
+                    <div class="content">
+                        <h3>Rolls-Royce Phantom</h3>
+                        <p class="vehicle-specs">563 HP • Bespoke Luxury • Magic Carpet Ride</p>
+                        <button class="btn" onclick="location.href='cars.html?id=7'">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <!-- Enhanced Installment Section -->
+    <section class="installment">
+        <div class="installment-bg">
+            <div class="installment-header">
+                <h2>Professional Financing Solutions</h2>
+                <p>Competitive rates and flexible terms designed for luxury vehicle financing</p>
+            </div>
+            <div class="installment-container">
+                <div class="installment-info">
+                    <h3>Financing Benefits</h3>
+                    <div class="benefits-list">
+                        <div class="benefit">
+                            <i class="fas fa-percentage"></i>
+                            <div>
+                                <h4>0% APR Available</h4>
+                                <p>Special promotional rates on select models</p>
+                            </div>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <h4>Extended Terms</h4>
+                                <p>Up to 96 months for qualified buyers</p>
+                            </div>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-handshake"></i>
+                            <div>
+                                <h4>Trade-In Value</h4>
+                                <p>Maximum value for your current vehicle</p>
+                            </div>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4>Protection Plans</h4>
+                                <p>Comprehensive warranty and insurance options</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="installment.html" class="btn know-more">Learn More About Financing</a>
+                </div>
+                <form id="installmentForm" class="installment-form">
+                    <h3>Calculate Your Investment</h3>
+                    <div class="form-row">
+                        <label>Car Brand</label>
+                        <select id="brandSelect"><option value="">Choose Brand…</option></select>
+                    </div>
+                    <div class="form-row">
+                        <label>Car Model</label>
+                        <select id="modelSelect"><option value="">Choose Model…</option></select>
+                    </div>
+                    <div class="form-row">
+                        <label>Down Payment (%)</label>
+                        <input type="number" id="downPayment" placeholder="20%" min="0" max="100" value="20">
+                    </div>
+                    <div class="form-row">
+                        <label>Financing Term</label>
+                        <select id="termSelect">
+                            <option value="12">12 months</option>
+                            <option value="24">24 months</option>
+                            <option value="36">36 months</option>
+                            <option value="48" selected>48 months</option>
+                            <option value="60">60 months</option>
+                            <option value="72">72 months</option>
+                            <option value="84">84 months</option>
+                            <option value="96">96 months</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label>Professional Background</label>
+                        <input type="text" id="jobTitle" placeholder="e.g., Executive, Entrepreneur, Professional">
+                    </div>
+                    <button type="button" class="btn calculate-btn">Calculate Monthly Payment</button>
+                    <p class="disclaimer">*Rates and terms subject to credit approval. Contact us for personalized offers.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="contact-info" style="padding: 80px 0; background: #1a1a1a; color: white;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 15px; color: #fff;">Visit Our Showroom</h2>
+                <p style="font-size: 1.1rem; color: #ccc;">Experience luxury automotive excellence in person</p>
+            </div>
+            <div class="contact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px;">
+                <div class="contact-card" style="background: #2a2a2a; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #333;">
+                    <i class="fas fa-map-marker-alt" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #fff;">Showroom Location</h3>
+                    <p style="color: #ccc; line-height: 1.6;">Obour Road<br>
+                    Obour, Cairo, Egypt<br>
+                    P.O. Box 12345</p>
+                </div>
+                <div class="contact-card" style="background: #2a2a2a; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #333;">
+                    <i class="fas fa-clock" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #fff;">Business Hours</h3>
+                    <p style="color: #ccc; line-height: 1.6;">Sunday - Thursday: 9:00 AM - 8:00 PM<br>
+                    Friday - Saturday: 2:00 PM - 10:00 PM<br>
+                    <em>Appointments recommended</em></p>
+                </div>
+                <div class="contact-card" style="background: #2a2a2a; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #333;">
+                    <i class="fas fa-phone" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #fff;">Contact Information</h3>
+                    <p style="color: #ccc; line-height: 1.6;">Sales: +021270723373<br>
+                    Service: +0212158745625<br>
+                    Email: info@stradaauto.ae</p>
+                </div>
+                <div class="contact-card" style="background: #2a2a2a; padding: 30px; border-radius: 10px; text-align: center; border: 1px solid #333;">
+                    <i class="fas fa-users" style="font-size: 2.5rem; color: gold; margin-bottom: 20px; display: block;"></i>
+                    <h3 style="font-size: 1.4rem; margin-bottom: 15px; color: #fff;">Professional Team</h3>
+                    <p style="color: #ccc; line-height: 1.6;">Certified Sales Consultants<br>
+                    Factory-Trained Technicians<br>
+                    Multilingual Support Available</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    
+    <section>
+        <div class="textt">
+            <h1 class="heading">EXPERIENCE</h1>
+            <h6 class="heading2">Performance Demonstration</h6>
+        </div>
+    </section>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent-overlay" id="cookieConsentOverlay">
+        <div class="cookie-consent-popup">
+            <div class="cookie-icon">🍪</div>
+            <h2>We Value Your Privacy</h2>
+            <p>STRADA AUTO uses cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies for these purposes.</p>
+            
+            <div class="cookie-buttons">
+                <button class="cookie-btn accept" onclick="acceptAllCookies()">Accept All</button>
+                <button class="cookie-btn decline" onclick="declineCookies()">Decline</button>
+                <button class="cookie-btn settings" onclick="toggleSettings()">Settings</button>
+            </div>
+
+            <div class="cookie-settings" id="cookieSettings">
+                <div class="cookie-category">
+                    <div class="cookie-toggle">
+                        <div>
+                            <h4>Essential Cookies</h4>
+                            <p>Required for basic site functionality</p>
+                        </div>
+                        <div class="toggle-switch active" data-required="true">
+                            <span class="sr-only">Essential cookies (required)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cookie-category">
+                    <div class="cookie-toggle">
+                        <div>
+                            <h4>Analytics Cookies</h4>
+                            <p>Help us understand how visitors interact with our website</p>
+                        </div>
+                        <div class="toggle-switch" onclick="toggleCookie(this, 'analytics')">
+                            <span class="sr-only">Analytics cookies</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cookie-category">
+                    <div class="cookie-toggle">
+                        <div>
+                            <h4>Marketing Cookies</h4>
+                            <p>Used to deliver relevant advertisements and track ad performance</p>
+                        </div>
+                        <div class="toggle-switch" onclick="toggleCookie(this, 'marketing')">
+                            <span class="sr-only">Marketing cookies</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cookie-buttons" style="margin-top: 20px;">
+                    <button class="cookie-btn accept" onclick="saveCustomSettings()">Save Preferences</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Car Rev Section -->
+    <section class="rev" id="revSection">
         <div class="car-container">
-            <video alt="Car" id="car-image" class="car-image" muted>
+            <video alt="Car Performance Demo" id="car-image" class="car-image" muted>
                 <source src="/partials/vids/ferrarispeed.mp4" type="video/mp4">
                 Your browser does not support the video tag.
-                </video>
-            <h6 class="start">-PRESS W TO START-</h6>
+            </video>
+            <h6 class="start">-PRESS W TO START ENGINE-</h6>
             <div class="speed-counter" id="speedCounter">0 km/h</div>
         </div>
         <audio id="engineSound" src="/partials/audio/audio.mp3" preload="auto"></audio>
     </section>
  
     <div class="video-container">
-    <video autoplay muted loop>
-        <source src="/partials/vids/discover.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <button class="overlay-button left-align" onclick="location.href='/about.html'">DISCOVER &#8594</button>
-</div>
+        <video autoplay muted loop>
+            <source src="/partials/vids/discover.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button class="overlay-button left-align" onclick="location.href='/about.html'">DISCOVER MORE &#8594;</button>
+    </div>
 
     <div data-include="/partials/footer.html"></div>
     <script src="/js/nav.js"></script>
     <script src="/js/loader.js" type="module"></script>
     <script src="/js/newsletter.js"></script>
+    <script src="/js/cookies.js"></script>
 </body>
 </html>
