@@ -32,12 +32,8 @@ body {
 .about-hero h1 {
     font-size: 4rem;
     font-weight: bold;
-<<<<<<< HEAD
     color: #d4af37;
-=======
-    color: gold;
     font-family: 'FrontageRegular';
->>>>>>> cdde3969967be2bc85a17c526d496b1cf506270d
 }
 
 .about-hero p {

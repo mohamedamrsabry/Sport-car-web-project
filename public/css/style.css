@@ -113,6 +113,7 @@ section.visible{
     text-transform: uppercase;
     position: relative;
     z-index: 3;
+    font-family: 'FrontageRegular';
     color: white; /* Just as a fallback */
     mix-blend-mode: screen; /* Cuts out text to reveal the image */
 }
@@ -530,12 +531,6 @@ scale: 2;
   border-radius: 25px;
   cursor: pointer;
 }
-
-
-
-
-
-
 
 .video-container {
     position: relative;
