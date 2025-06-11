@@ -50,15 +50,14 @@ section.visible{
 }
 
 .logo img {
-    width: 120px; 
-    height: auto; 
+    width: 120px;
+    height: auto;
     transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
 }
 
 .logo:hover img {
     filter: brightness(1);
     transform: scale(1.1);
-    
 }
 
 .trans-image {
@@ -107,15 +106,16 @@ section.visible{
 
 
 .text-overlay {
-    font-size: 12rem; /* Default size */
+    font-size: 12rem;
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
     position: relative;
     z-index: 3;
     font-family: 'FrontageRegular';
-    color: white; /* Just as a fallback */
-    mix-blend-mode: screen; /* Cuts out text to reveal the image */
+    color: white;
+    mix-blend-mode: screen;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .intro{
     display: flex;
@@ -189,20 +189,19 @@ section.visible{
 }
 
 .heading {
-    font-size: 24px;
+    font-size: 4rem;
     font-weight: 700;
     letter-spacing: 1px;
     color: #ffffff;
-    text-shadow: 0 0 10px #ffca66, 0 0 15px #ffca66;
-    font-family:'FrontageRegular';
+    text-shadow: 0 0 10px #ffca66;
+    font-family: 'FrontageRegular';
     text-align: center;
     padding-top: 150px;
-    font-size: 4rem;
     position: relative;
     z-index: 10;
-    top:-80px
-    
+    top: -80px;
 }
+
 .heading2 {
     font-weight: 400;
     letter-spacing: 1px;
@@ -245,19 +244,43 @@ section.visible{
   }
 .vehicles .vehicles-slider .box{
     text-align: center;
-    
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.vehicles .vehicles-slider .box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 202, 102, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.vehicles .vehicles-slider .box:hover::before {
+    left: 100%;
 }
 
 .vehicles .vehicles-slider .box img{
     width:100%;
-    transform: scale(.8);
-    opacity: .5;
+    transform: scale(0.8);
+    opacity: 0.5;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: grayscale(50%);
 }
 
 .vehicles .vehicles-slider .box .content{
     padding-top: 1rem;
     transform: scale(0);
-    
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .vehicles .vehicles-slider .swiper-slide-active .content{
@@ -272,28 +295,51 @@ section.visible{
     color: #ffca66;
     border: none;
     border-radius: 5px;
-    transition: all .4s;
-   }
-   
-   .btn:hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 202, 102, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
     border-radius: 5px;
     transform: translateY(-10px);
     box-shadow: 0 7px 0 -2px #ffca66,
      0 15px 0 -4px #ffca66,
      0 16px 10px -3px #ffca66;
-   }
+}
    
-   .btn:active {
+.btn:active {
     transition: all 0.2s;
     transform: translateY(-5px);
     box-shadow: 0 2px 0 -2px #000000,
      0 8px 0 -4px #000000,
      0 12px 10px -3px #000000;
-   }
+}
 
 .vehicles .vehicles-slider .swiper-slide-active img{
     transform: scale(1);    
     opacity: 1;
+    filter: grayscale(0%);
 }
 
 .vehicles .vehicles-slider .box .content h3{
@@ -335,7 +381,8 @@ section.visible{
 }
 
 .swiper-pagination-bullet-active {
-    background: #ffca66 !important; /* Gold when active */
+    background-color: #ffca66 !important;
+    transform: scale(1.2);
 }
 
 
@@ -605,36 +652,39 @@ scale: 2;
   background: rgba(0, 0, 0, 0.7);
   padding: 2.5rem;
   border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(255, 202, 102, 0.1);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(255, 202, 102, 0.2);
   cursor: pointer;
 }
 
+.review-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 202, 102, 0.1) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.review-card:hover::after {
+    opacity: 1;
+}
+
 .review-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 24px rgba(255, 202, 102, 0.15);
-  border: 1px solid rgba(255, 202, 102, 0.4);
-  background: rgba(0, 0, 0, 0.8);
-}
-
-.review-card::before {
-  content: '"';
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-family: var(--font-secondary);
-  font-size: 4rem;
-  color: rgba(255, 202, 102, 0.1);
-  line-height: 1;
-  transition: all 0.4s ease;
-}
-
-.review-card:hover::before {
-  transform: scale(1.2);
-  color: rgba(255, 202, 102, 0.2);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 202, 102, 0.4);
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .reviewer-image {
@@ -762,4 +812,332 @@ scale: 2;
 
 .review-card:nth-child(3) {
   animation-delay: 0.4s;
-} 
+}
+
+/* Enhanced Hero Stats Transitions */
+.hero-stats .stat {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-stats .stat:hover {
+    transform: translateY(-5px);
+}
+
+/* Enhanced Swiper Navigation Transitions */
+.swiper-button-next,
+.swiper-button-prev {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    transform: scale(1.2);
+}
+
+/* Cool Pagination Effects */
+.swiper-pagination-bullet {
+    width: 20px !important;
+    height: 4px !important;
+    border-radius: 0 !important;
+    background-color: rgba(255, 255, 255, 0.518) !important;
+    opacity: 1 !important;
+    margin: 0 5px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #ffca66 !important;
+    box-shadow: 0 0 10px rgba(255, 202, 102, 0.5);
+    transform: scale(1.2);
+}
+
+/* Enhanced Swiper Navigation */
+.swiper-button-next,
+.swiper-button-prev {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.7;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+/* Cool Button Effects */
+.btn {
+    width: 130px;
+    height: 40px;
+    font-size: 1.1em;
+    cursor: pointer;
+    background-color: #0000001f;
+    color: #ffca66;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 202, 102, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    border-radius: 5px;
+    transform: translateY(-10px);
+    box-shadow: 0 7px 0 -2px #ffca66,
+                0 15px 0 -4px #ffca66,
+                0 16px 10px -3px #ffca66;
+}
+
+/* Enhanced Service Card Effects */
+.service-card {
+    background: #212121 !important;
+    border-radius: 30px !important;
+    box-shadow: none !important;
+    border: none !important;
+    color: white;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 202, 102, 0.1),
+        transparent
+    );
+    transform: translateX(-100%);
+    transition: 0.5s;
+}
+
+.service-card:hover::before {
+    transform: translateX(100%);
+}
+
+.service-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: none !important;
+}
+
+/* Cool Stat Card Effects */
+.stat-card {
+    background: #212121 !important;
+    border-radius: 30px !important;
+    box-shadow: none !important;
+    border: none !important;
+    color: white;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card i {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-card:hover i {
+    transform: scale(1.2) rotate(10deg);
+    color: #ffca66 !important;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: none !important;
+}
+
+/* Cool Pagination Effects */
+.swiper-pagination-bullet {
+    width: 20px !important;
+    height: 4px !important;
+    border-radius: 0 !important;
+    background-color: rgba(255, 255, 255, 0.518) !important;
+    opacity: 1 !important;
+    margin: 0 5px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #ffca66 !important;
+    transform: scale(1.2);
+}
+
+/* Enhanced Contact Card Effects */
+.contact-card {
+    background: #212121 !important;
+    border-radius: 30px !important;
+    box-shadow: none !important;
+    border: none !important;
+    color: white;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 202, 102, 0.1),
+        transparent
+    );
+    transform: translateX(-100%);
+    transition: 0.5s;
+}
+
+.contact-card:hover::before {
+    transform: translateX(100%);
+}
+
+.contact-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: none !important;
+}
+
+.contact-card i {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-card:hover i {
+    transform: scale(1.2) rotate(10deg);
+    color: #ffca66 !important;
+}
+
+.contact-card:hover h3 {
+    color: #ffca66 !important;
+}
+
+.contact-card:hover p {
+    color: #ffffff !important;
+}
+
+/* Enhanced Stat Card Effects for Company Intro */
+.intro-stats .stat-card {
+    background: #212121 !important;
+    border-radius: 30px !important;
+    box-shadow: none !important;
+    border: none !important;
+    color: white;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.intro-stats .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 202, 102, 0.1),
+        transparent
+    );
+    transform: translateX(-100%);
+    transition: 0.5s;
+}
+
+.intro-stats .stat-card:hover::before {
+    transform: translateX(100%);
+}
+
+.intro-stats .stat-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: none !important;
+}
+
+.intro-stats .stat-card i {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.intro-stats .stat-card:hover i {
+    transform: scale(1.2) rotate(10deg);
+    color: #ffca66 !important;
+}
+
+.intro-stats .stat-card:hover h3 {
+    color: #ffca66 !important;
+}
+
+.intro-stats .stat-card:hover p {
+    color: #ffffff !important;
+}
+
+/* Remove white shadows from all cards */
+.service-card,
+.contact-card,
+.stat-card,
+.intro-stats .stat-card {
+    background: #212121 !important;
+    border-radius: 30px !important;
+    box-shadow: none !important;
+    border: none !important;
+    color: white;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card:hover,
+.contact-card:hover,
+.stat-card:hover,
+.intro-stats .stat-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: none !important;
+}
+
+/* Remove white shadows from review cards */
+.review-card {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 202, 102, 0.2);
+    cursor: pointer;
+}
+
+.review-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 202, 102, 0.4);
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* ... existing code ... */ 
