@@ -1,5 +1,12 @@
 // Newsletter subscription handler
+let newsletterInitialized = false; // Flag to prevent multiple initializations
+
 function initNewsletter() {
+    // Prevent multiple initializations
+    if (newsletterInitialized) {
+        return;
+    }
+    
     const newsletterForm = document.getElementById('newsletterForm');
     const subscribeBtn = document.getElementById('subscribeBtn');
     const subscribeText = document.getElementById('subscribeText');
@@ -66,6 +73,9 @@ function initNewsletter() {
                 showNewsletterMessage('error', 'There was an error processing your subscription. Please try again later.');
             });
         });
+        
+        // Mark as initialized
+        newsletterInitialized = true;
     }
 
     function resetSubscribeButton() {
