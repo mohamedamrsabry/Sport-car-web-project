@@ -33,7 +33,7 @@
     font-weight:700;
     color:var(--gold);
     margin-top: 50px;
-    font-family: 'frontage';
+    font-family: 'FrontageRegular';
     letter-spacing:1px;
     margin:5;   
     padding:10px 15px 50px;
@@ -118,7 +118,7 @@
   /* ─── specs square ─────────────────────────── */
   .spec-wrapper{
     background:#343435;                  /* light-grey panel */
-    font-family: 'frontage';
+    font-family: 'FrontageRegular';
     border:1px solid #ffca66;
     padding:26px 30px 24px;
     border-radius:4px;
@@ -225,7 +225,7 @@
 }
 .enquire-button{
   font-size: 2rem;
-  font-family: 'frontage';
+  font-family: 'FrontageRegular';
   padding: 20px 120px;
   background-color: black;
   color:#f2f1ee;

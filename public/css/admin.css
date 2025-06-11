@@ -137,6 +137,7 @@
             font-size: 28px;
             color: var(--dark);
             font-weight: 600;
+            font-family: 'FrontageRegular';
         }
 
         .user-info {
@@ -215,6 +216,7 @@
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 5px;
+            font-family: 'FrontageRegular';
         }
 
         .stat-info p {
@@ -242,6 +244,7 @@
             font-size: 22px;
             font-weight: 600;
             color: var(--dark);
+            font-family: 'FrontageRegular';
         }
 
         .btn {
@@ -433,6 +436,7 @@
             font-size: 24px;
             color: var(--dark);
             font-weight: 600;
+            font-family: 'FrontageRegular';
         }
 
         .close-btn {

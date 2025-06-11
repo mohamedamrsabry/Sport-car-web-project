@@ -32,7 +32,12 @@ body {
 .about-hero h1 {
     font-size: 4rem;
     font-weight: bold;
+<<<<<<< HEAD
     color: #d4af37;
+=======
+    color: gold;
+    font-family: 'FrontageRegular';
+>>>>>>> cdde3969967be2bc85a17c526d496b1cf506270d
 }
 
 .about-hero p {
@@ -55,6 +60,7 @@ body {
     font-size: 2.5rem;
     color: #d4af37;
     margin-bottom: 1rem;
+    font-family: 'FrontageRegular';
 }
 
 .about-text p {
@@ -87,6 +93,7 @@ body {
     font-size: 2rem;
     color: #d4af37;
     margin-bottom: 1rem;
+    font-family: 'FrontageRegular';
 }
 
 .box p {
@@ -180,6 +187,7 @@ body {
 .timeline-content h3 {
     margin-top: 0;
     color:#d4af37;
+    font-family: 'FrontageRegular';
 }
 
 /* Responsive Design */
@@ -245,6 +253,7 @@ body {
     color: #222;
     margin-bottom: 15px;
     font-size: 1.4rem;
+    font-family: 'FrontageRegular';
 }
 
 .cta-box p {
