@@ -3,10 +3,12 @@ const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
 const Car = require('./models/car');
+const Contact = require('./models/contact');
 const carData = require('./carData');
 const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
+const Rating = require('./models/rating');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -192,6 +194,82 @@ app.delete('/cars/:id', async (req, res) => {
         res.json({ message: 'Car and associated images deleted' });
     } catch (err) {
         res.status(400).json({ message: err.message });
+    }
+});
+
+// Contact form submission
+app.post('/api/contact', async (req, res) => {
+    try {
+        const { firstName, lastName, email, phone, message, carOfInterest } = req.body;
+        
+        // Basic validation
+        if (!firstName || !lastName || !email || !phone || !message) {
+            return res.status(400).json({ message: 'Please fill in all required fields' });
+        }
+
+        const contact = new Contact({
+            firstName,
+            lastName,
+            email,
+            phone,
+            message,
+            carOfInterest
+        });
+
+        await contact.save();
+        res.status(201).json({ message: 'Contact form submitted successfully' });
+    } catch (err) {
+        console.error('Contact submission error:', err);
+        res.status(500).json({ message: 'Error submitting contact form' });
+    }
+});
+
+// Get all contact submissions (admin only)
+app.get('/api/contacts', async (req, res) => {
+    try {
+        const contacts = await Contact.find().sort({ createdAt: -1 });
+        res.json(contacts);
+    } catch (err) {
+        res.status(500).json({ message: 'Error fetching contacts' });
+    }
+});
+
+// Update contact status (admin only)
+app.put('/api/contacts/:id', async (req, res) => {
+    try {
+        const { status } = req.body;
+        const contact = await Contact.findByIdAndUpdate(
+            req.params.id,
+            { status },
+            { new: true }
+        );
+        
+        if (!contact) {
+            return res.status(404).json({ message: 'Contact not found' });
+        }
+        
+        res.json(contact);
+    } catch (err) {
+        res.status(500).json({ message: 'Error updating contact status' });
+    }
+});
+
+// Rate Us endpoint
+app.post('/api/rate', async (req, res) => {
+    try {
+        const { name, rating, message } = req.body;
+        if (!name || !rating) {
+            return res.status(400).json({ message: 'Name and rating are required.' });
+        }
+        if (isNaN(rating) || rating < 1 || rating > 5) {
+            return res.status(400).json({ message: 'Rating must be a number between 1 and 5.' });
+        }
+        const newRating = new Rating({ name, rating, message });
+        await newRating.save();
+        res.status(201).json({ message: 'Thank you for your rating!' });
+    } catch (err) {
+        console.error('Rating submission error:', err);
+        res.status(500).json({ message: 'Error submitting rating.' });
     }
 });
 
