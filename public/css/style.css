@@ -4,7 +4,12 @@
   font-weight: normal;
   font-style: normal;
 }
-
+@font-face {
+  font-family: 'mont';
+  src: url('../partials/fonts/Montserrat.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 *{
     margin: 0;
     padding: 0;
@@ -17,6 +22,7 @@ body {
     position: relative;
     overflow-x: hidden; 
     width:100%;
+    font-family: 'mont';
 }
 section{
     opacity: 0;
@@ -127,12 +133,15 @@ section.visible{
     text-align: center;
     
 }
+.intro-text{
+    color: #000000;
+    text-shadow: 0 0 10px #d4af37, 0 0 15px #d4af37;
+}
 .intro-heading{
     padding: 20px;
     font-size: 3rem;
     font-weight: bold;
-    font-family: 'Exodusdisplay sharpen';
-    color: #ffca66;
+    color: #d4af37;
 }
 .rev {
     position: relative;
@@ -154,7 +163,6 @@ section.visible{
 .start {
     font-size: 2rem;
     font-weight: bold;
-    font-family: 'Exodusdisplay sharpen';
     padding: 20px 40px;
     border-radius: 10px;
     background-color: #0000003a;
@@ -172,7 +180,6 @@ section.visible{
     transform: translate(-50%, -50%);
     font-size: 4rem;
     font-weight: bold;
-    font-family: 'Exodusdisplay sharpen';
     color:#742b2b;
     padding: 20px 40px;
     border-radius: 10px;
@@ -193,7 +200,7 @@ section.visible{
     font-weight: 700;
     letter-spacing: 1px;
     color: #ffffff;
-    text-shadow: 0 0 10px #ffca66;
+    text-shadow: 0 0 10px #d4af37;
     font-family: 'FrontageRegular';
     text-align: center;
     padding-top: 150px;
@@ -206,7 +213,7 @@ section.visible{
     font-weight: 400;
     letter-spacing: 1px;
     color: #000000;
-    text-shadow: 0 0 10px #ffca66, 0 0 15px #ffca66;
+    text-shadow: 0 0 10px #d4af37, 0 0 15px #d4af37;
     font-family:'FrontageRegular';
     text-align: center;
     padding-top: 50px;
@@ -256,12 +263,6 @@ section.visible{
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 202, 102, 0.2),
-        transparent
-    );
     transition: 0.5s;
 }
 
@@ -292,7 +293,7 @@ section.visible{
     font-size: 1.1em;
     cursor: pointer;
     background-color: #0000001f;
-    color: #ffca66;
+    color: #d4af37;
     border: none;
     border-radius: 5px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -307,12 +308,6 @@ section.visible{
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 202, 102, 0.2),
-        transparent
-    );
     transition: 0.5s;
 }
 
@@ -323,9 +318,9 @@ section.visible{
 .btn:hover {
     border-radius: 5px;
     transform: translateY(-10px);
-    box-shadow: 0 7px 0 -2px #ffca66,
-     0 15px 0 -4px #ffca66,
-     0 16px 10px -3px #ffca66;
+    box-shadow: 0 7px 0 -2px #d4af37,
+     0 15px 0 -4px #d4af37,
+     0 16px 10px -3px #d4af37;
 }
    
 .btn:active {
@@ -344,13 +339,13 @@ section.visible{
 
 .vehicles .vehicles-slider .box .content h3{
     font-size: 2.5rem;
-    color:#ffca66;
+    color:#d4af37;
     padding-bottom: 20px;
 }
 
 .vehicles .vehicles-slider .box .content .price{
     font-size: 2.2rem;
-    color:#ffca66;
+    color:#d4af37;
     padding:1rem 0;
     font-weight: bolder;
 }
@@ -363,7 +358,7 @@ section.visible{
 
 .vehicles .vehicles-slider .box .content p{
     font-size: 1.6rem;
-    color:#ffca66;
+    color:#d4af37;
     padding: 1rem 0;
     padding-top: 1.5rem;
     border-top: var(--border);
@@ -381,7 +376,7 @@ section.visible{
 }
 
 .swiper-pagination-bullet-active {
-    background-color: #ffca66 !important;
+    background-color: #d4af37 !important;
     transform: scale(1.2);
 }
 
@@ -395,7 +390,7 @@ section.visible{
 
 .swiper-button-next:active::after,
 .swiper-button-prev:active::after {
-  color: #ffca66 !important;
+  color: #d4af37 !important;
 }
 
 
@@ -410,7 +405,7 @@ section.visible{
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #ffca66 !important;
+  background-color: #d4af37 !important;
 }
 .swiper-button-next {
 padding-right: 180px;
@@ -632,13 +627,15 @@ scale: 2;
 }
 
 .reviews-header .luxury-heading {
-  color: #ffca66;
-  text-shadow: 0 0 10px #ffca66, 0 0 15px #ffca66;
+  color: #d4af37;
+  text-shadow: 0 0 10px #d4af37, 0 0 15px #d4af37;
+  font-family: 'FrontageRegular';
 }
 
 .reviews-header .luxury-subheading {
-  color: #ffca66;
+  color: #d4af37;
   opacity: 0.8;
+  font-family: 'FrontageRegular';
 }
 
 .reviews-grid {
@@ -709,15 +706,13 @@ scale: 2;
 }
 
 .reviewer-name {
-  font-family: var(--font-secondary);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-xl);
   margin: 0;
-  color: #ffca66;
+  color: #d4af37;
 }
 
 .review-date {
-  font-family: var(--font-primary);
   font-size: var(--font-size-sm);
   color: rgba(255, 202, 102, 0.6);
   margin: 0.25rem 0 0;
@@ -725,7 +720,7 @@ scale: 2;
 }
 
 .review-rating {
-  color: #ffca66;
+  color: #d4af37;
   font-size: 1.4rem;
   margin: 1rem 0;
   letter-spacing: 2px;
@@ -738,7 +733,6 @@ scale: 2;
 }
 
 .review-content {
-  font-family: var(--font-primary);
   font-size: var(--font-size-base);
   line-height: var(--line-height-relaxed);
   color: rgba(255, 202, 102, 0.9);
@@ -753,7 +747,6 @@ scale: 2;
 }
 
 .review-model {
-  font-family: var(--font-secondary);
   font-style: italic;
   color: rgba(255, 202, 102, 0.7);
   margin-top: 1.5rem;
@@ -823,16 +816,6 @@ scale: 2;
     transform: translateY(-5px);
 }
 
-/* Enhanced Swiper Navigation Transitions */
-.swiper-button-next,
-.swiper-button-prev {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-    transform: scale(1.2);
-}
 
 /* Cool Pagination Effects */
 .swiper-pagination-bullet {
@@ -846,23 +829,12 @@ scale: 2;
 }
 
 .swiper-pagination-bullet-active {
-    background-color: #ffca66 !important;
+    background-color: #d4af37 !important;
     box-shadow: 0 0 10px rgba(255, 202, 102, 0.5);
     transform: scale(1.2);
 }
 
-/* Enhanced Swiper Navigation */
-.swiper-button-next,
-.swiper-button-prev {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0.7;
-}
 
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-    transform: scale(1.2);
-    opacity: 1;
-}
 
 /* Cool Button Effects */
 .btn {
@@ -871,7 +843,7 @@ scale: 2;
     font-size: 1.1em;
     cursor: pointer;
     background-color: #0000001f;
-    color: #ffca66;
+    color: #d4af37;
     border: none;
     border-radius: 5px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -902,9 +874,9 @@ scale: 2;
 .btn:hover {
     border-radius: 5px;
     transform: translateY(-10px);
-    box-shadow: 0 7px 0 -2px #ffca66,
-                0 15px 0 -4px #ffca66,
-                0 16px 10px -3px #ffca66;
+    box-shadow: 0 7px 0 -2px #d4af37,
+                0 15px 0 -4px #d4af37,
+                0 16px 10px -3px #d4af37;
 }
 
 /* Enhanced Service Card Effects */
@@ -963,7 +935,7 @@ scale: 2;
 
 .stat-card:hover i {
     transform: scale(1.2) rotate(10deg);
-    color: #ffca66 !important;
+    color: #d4af37 !important;
 }
 
 .stat-card:hover {
@@ -983,11 +955,11 @@ scale: 2;
 }
 
 .swiper-pagination-bullet-active {
-    background-color: #ffca66 !important;
+    background-color: #d4af37 !important;
     transform: scale(1.2);
 }
 
-/* Enhanced Contact Card Effects */
+
 .contact-card {
     background: #232323;
     border-radius: 20px;
@@ -1005,7 +977,7 @@ scale: 2;
     margin-bottom: 0;
 }
 .contact-card h3 {
-    color: #ffca66;
+    color: #d4af37;
     font-size: 1.2rem;
     font-weight: 700;
     margin: 0 0 8px 0;
@@ -1014,7 +986,7 @@ scale: 2;
     gap: 10px;
 }
 .contact-card i {
-    color: #ffca66;
+    color: #d4af37;
     font-size: 1.3rem;
     margin-right: 8px;
 }
@@ -1083,11 +1055,11 @@ scale: 2;
 
 .intro-stats .stat-card:hover i {
     transform: scale(1.2) rotate(10deg);
-    color: #ffca66 !important;
+    color: #d4af37 !important;
 }
 
 .intro-stats .stat-card:hover h3 {
-    color: #ffca66 !important;
+    color: #d4af37 !important;
 }
 
 .intro-stats .stat-card:hover p {
@@ -1117,7 +1089,7 @@ scale: 2;
     box-shadow: none !important;
 }
 
-/* Remove white shadows from review cards */
+
 .review-card {
     background: rgba(0, 0, 0, 0.7);
     padding: 2.5rem;
@@ -1157,7 +1129,7 @@ scale: 2;
 .contact-section .section-header h2 {
     font-size: 2.5rem;
     margin-bottom: 15px;
-    color: #ffca66;
+    color: #d4af37;
 }
 
 .contact-section .section-header p {
@@ -1181,13 +1153,13 @@ scale: 2;
     background: #212121;
     padding: 40px;
     border-radius: 30px;
-    box-shadow: 15px 15px 30px rgb(25, 25, 25), -15px -15px 30px rgb(60, 60, 60);
+
 }
 
 .contact-form label {
     display: block;
     margin-bottom: 8px;
-    color: #ffca66;
+    color: #d4af37;
 }
 
 .contact-form input,
@@ -1208,7 +1180,7 @@ scale: 2;
 .contact-form button[type="submit"] {
     width: 100%;
     padding: 15px;
-    background: #ffca66;
+    background: #d4af37;
     color: black;
     border: none;
     border-radius: 8px;
@@ -1227,7 +1199,7 @@ scale: 2;
     }
 }
 
-/* Full-width Rate Us Section Styles */
+
 .rate-section {
     padding: 80px 0;
     background: #181818;
@@ -1244,7 +1216,7 @@ scale: 2;
 .rate-section .section-header h2 {
     font-size: 2.5rem;
     margin-bottom: 10px;
-    color: #ffca66;
+    color: #d4af37;
 }
 .rate-section .section-header p {
     font-size: 1.1rem;
@@ -1253,35 +1225,25 @@ scale: 2;
 .rate-section .rate-form {
     background: #232323;
     border-radius: 20px;
-    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.35);
     padding: 32px 32px 24px 32px;
     color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-height: 80px;
-    transition: box-shadow 0.3s;
+ 
     gap: 0;
 }
-@media (max-width: 768px) {
-    .rate-section .container {
-        max-width: 100%;
-        padding: 0 8px;
-    }
-    .rate-section .rate-form {
-        padding: 16px 8px 12px 8px;
-    }
-}
 
-/* Star Rating Widget Styles  */
+
 .rate-form .star-rating .star.selected,
 .rate-form .star-rating .star.hovered,
 .star-rating .star.selected,
 .star-rating .star.hovered,
 .star.selected,
 .star.hovered {
-    color: #ffca66 !important;
-    text-shadow: 0 0 6px #ffca6699;
+    color: #d4af37 !important;
+    text-shadow: 0 0 6px #d4af37;
 }
 .star-rating .star,
 .rate-form .star-rating .star {
@@ -1302,13 +1264,13 @@ scale: 2;
     box-sizing: border-box;
     background: #232323;
     border-radius: 20px;
-    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.35);
+
     padding: 28px 32px 18px 32px;
     color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: box-shadow 0.3s;
+    
     gap: 0;
 }
 .rate-form.contact-card h3 {
@@ -1317,7 +1279,7 @@ scale: 2;
     text-align: center;
 }
 .rate-form.contact-card label {
-    color: #ffca66;
+    color: #d4af37;
     font-weight: 500;
     margin-bottom: 8px;
     margin-top: 12px;
@@ -1345,8 +1307,8 @@ scale: 2;
 .rate-form.contact-card input[type="email"]:focus,
 .rate-form.contact-card textarea:focus {
     outline: none;
-    border: 1.5px solid #ffca66;
-    box-shadow: 0 0 0 2px #ffca6633;
+    border: 1.5px solid #d4af37;
+
 }
 .rate-form.contact-card textarea {
     min-height: 90px;
@@ -1361,7 +1323,7 @@ scale: 2;
 .rate-form.contact-card button[type="submit"] {
     width: 100%;
     padding: 14px 0;
-    background: #ffca66;
+    background: #d4af37;
     color: #232323;
     border: none;
     border-radius: 8px;
@@ -1376,20 +1338,7 @@ scale: 2;
     background: #e6b555;
     color: #181818;
 }
-@media (max-width: 900px) {
-    .rate-form.contact-card {
-        width: 100%;
-        max-width: 100%;
-        padding: 20px 8px 12px 8px;
-        min-height: 0;
-    }
-    .rate-form.contact-card input[type="text"],
-    .rate-form.contact-card input[type="email"],
-    .rate-form.contact-card textarea {
-        min-width: 0;
-        max-width: 100%;
-    }
-}
+
 
 .rate-form.contact-card label[for="rateName"] {
     margin-bottom: 8px;
@@ -1426,7 +1375,7 @@ scale: 2;
     background: #232323;
     border-radius: 18px;
     padding: 36px 32px 28px 32px;
-    box-shadow: 0 8px 40px 0 rgba(0,0,0,0.45);
+
     min-width: 320px;
     max-width: 90vw;
     text-align: center;
@@ -1436,10 +1385,10 @@ scale: 2;
 #contact-modal .modal-message {
     font-size: 1.2rem;
     margin-bottom: 24px;
-    color: #ffca66;
+    color: #d4af37;
 }
 #contact-modal .modal-close {
-    background: #ffca66;
+    background: #d4af37;
     color: #232323;
     border: none;
     border-radius: 8px;
@@ -1452,3 +1401,76 @@ scale: 2;
 #contact-modal .modal-close:hover {
     background: #e6b555;
 } 
+
+        .card {
+            width: 190px;
+            height: 254px;
+            border-radius: 30px;
+            background: #212121;
+    
+        }
+        .stat-card {
+            background: #212121 !important;
+            border-radius: 30px !important;
+            border: none !important;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card h3 {
+            color: #d4af37 !important;
+        }
+        
+        .stat-card p {
+            color: #ccc !important;
+        }
+        
+        .service-card {
+            background: #212121 !important;
+            border-radius: 30px !important;
+            border: none !important;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        
+     
+        
+        .service-card h3 {
+            color: #d4af37 !important;
+        }
+        
+        .service-card p {
+            color: #ccc !important;
+        }
+        
+        .contact-card {
+            background: #212121 !important;
+            border-radius: 30px !important;
+
+            border: none !important;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-card h3 {
+            color: #d4af37 !important;
+        }
+        
+        .contact-card p {
+            color: #ccc !important;
+        }
+        
+        .stat-card i,
+        .service-card i,
+        .contact-card i {
+            color: #d4af37 !important;
+        }
+    
