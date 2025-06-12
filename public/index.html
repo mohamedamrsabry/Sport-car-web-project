@@ -439,9 +439,10 @@
                 </form>
             </div>
         </div>
-    </section>
-     <!-- Customer Reviews Section -->
-     <section class="reviews-section">
+    </section> 
+
+    <!-- Customer Reviews Section -->
+    <section class="reviews-section">
         <div class="reviews-container">
             <div class="reviews-header">
                 <h2 class="luxury-heading">Client Experiences</h2>
@@ -554,6 +555,8 @@
         </div>
     </section>
 
+   
+
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     
     <section>
@@ -645,5 +648,96 @@
     <script src="/js/loader.js" type="module"></script>
     <script src="/js/newsletter.js"></script>
     <script src="/js/cookies.js"></script>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team of luxury car specialists</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3><i class="fas fa-map-marker-alt"></i>Our Location</h3>
+                        <p>OBOUR ROAD 50, Egypt</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3><i class="fas fa-phone"></i>Phone</h3>
+                        <p>+20 01226699307</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3><i class="fas fa-envelope"></i>Email</h3>
+                        <p>info@stradauto.com</p>
+                    </div>
+                    <form class="rate-form contact-card">
+                        <h3><i class="fas fa-star"></i> Rate Us</h3>
+                        <div>
+                            <label for="rateName">Name <span style="color:red;">*</span></label>
+                            <input type="text" id="rateName" name="name" required>
+                        </div>
+                        <div>
+                            <label>Rating <span style="color:red;">*</span></label>
+                            <div class="star-rating" id="starRating">
+                                <span data-value="1" class="star">&#9733;</span>
+                                <span data-value="2" class="star">&#9733;</span>
+                                <span data-value="3" class="star">&#9733;</span>
+                                <span data-value="4" class="star">&#9733;</span>
+                                <span data-value="5" class="star">&#9733;</span>
+                            </div>
+                            <input type="hidden" id="rateRating" name="rating" required>
+                        </div>
+                        <div>
+                            <label for="rateMessage">Message (optional)</label>
+                            <textarea id="rateMessage" name="message"></textarea>
+                        </div>
+                        <button type="submit">Submit Rating</button>
+                    </form>
+                </div>
+                <form class="contact-form">
+                    <div class="section-header" style="margin-bottom: 32px;">
+                        <h2>Contact Us</h2>
+                        <p>Get in touch with our team of luxury car specialists</p>
+                    </div>
+                    <div>
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div>
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div>
+                        <label for="carOfInterest">Car of Interest (Optional)</label>
+                        <input type="text" id="carOfInterest" name="carOfInterest">
+                    </div>
+                    <div>
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Feedback Modal -->
+    <div id="contact-modal" class="modal-overlay" style="display:none;">
+      <div class="modal-content">
+        <div class="modal-message" id="contact-modal-message"></div>
+        <button class="modal-close" id="contact-modal-close">Close</button>
+      </div>
+    </div>
+
+    <script src="/js/contact.js"></script>
+
 </body>
 </html>
