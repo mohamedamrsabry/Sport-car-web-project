@@ -1,0 +1,125 @@
+/* public/css/pages.css */
+
+/* General Page Layout */
+.page-content {
+    padding: 80px 0;
+    background-color: black;
+    color: white;
+    min-height: 80vh; /* Ensure content pushes footer down */
+}
+
+.page-content .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Page Header Styling */
+.page-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 40px 20px;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+}
+
+.page-header h1 {
+    font-size: 3.5rem;
+    color: #ffca66;
+    margin-bottom: 15px;
+    font-family: 'FrontageRegular', sans-serif;
+    text-shadow: 0 0 10px rgba(255, 202, 102, 0.5);
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Page Section Styling */
+.page-section {
+    background-color: #232323;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    padding: 40px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+}
+
+.page-section h2 {
+    font-size: 2rem;
+    color: #ffca66;
+    margin-bottom: 20px;
+    font-family: 'FrontageRegular', sans-serif;
+}
+
+.page-section p {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.page-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.page-section ul li {
+    margin-bottom: 10px;
+    color: #e0e0e0;
+}
+
+.page-section ul li i {
+    color: #ffca66;
+    margin-right: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .page-header h1 {
+        font-size: 2.8rem;
+    }
+    .page-header p {
+        font-size: 1.1rem;
+    }
+    .page-section {
+        padding: 30px;
+    }
+    .page-section h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-content {
+        padding: 40px 0;
+    }
+    .page-header {
+        padding: 30px 15px;
+        margin-bottom: 40px;
+    }
+    .page-header h1 {
+        font-size: 2.2rem;
+    }
+    .page-header p {
+        font-size: 1rem;
+    }
+    .page-section {
+        padding: 20px;
+        margin: 0 15px 30px 15px; /* Add horizontal margin on smaller screens */
+    }
+    .page-section h2 {
+        font-size: 1.6rem;
+    }
+    .page-section p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Include-html.js fallback for local development */
+[data-include]{
+    display: contents;
+} 

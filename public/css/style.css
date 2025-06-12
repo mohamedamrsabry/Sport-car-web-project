@@ -879,19 +879,39 @@ scale: 2;
                 0 16px 10px -3px #d4af37;
 }
 
-/* Enhanced Service Card Effects */
-.service-card {
-    background: #212121 !important;
-    border-radius: 30px !important;
-    box-shadow: none !important;
-    border: none !important;
+/* Cool Stat Card Effects */
+.stat-card {
+    background: #232323; /* Restored background from original image */
+    border-radius: 20px; /* Restored border-radius from original image */
+    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.35); /* Restored box-shadow from original image */
+    padding: 25px; /* Ensure original padding */
+    text-align: center; /* Ensure original text alignment */
     color: white;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Kept for hover animation */
     position: relative;
     overflow: hidden;
 }
 
-.service-card::before {
+.stat-card i {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 2rem; /* Original size */
+    margin-bottom: 15px; /* Original margin */
+    display: block; /* Original display */
+    color: #ffca66; /* Original color */
+}
+
+.stat-card:hover i {
+    transform: scale(1.2) rotate(10deg);
+    color: #ffca66 !important;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Added subtle shadow on hover */
+}
+
+/* Ensure the glowing effect for stat-cards */
+.stat-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -908,27 +928,25 @@ scale: 2;
     transition: 0.5s;
 }
 
-.service-card:hover::before {
+.stat-card:hover::before {
     transform: translateX(100%);
 }
 
-.service-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: none !important;
+/* Ensure specific styles for intro-stats .stat-card if needed, to maintain consistency */
+.intro-stats .stat-card {
+    /* These properties are inherited from .stat-card, explicitly define if you need overrides */
+    background: #232323; 
+    border-radius: 20px; 
+    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.35); 
 }
 
-/* Cool Stat Card Effects */
-.stat-card {
-    background: #212121 !important;
-    border-radius: 30px !important;
-    box-shadow: none !important;
-    border: none !important;
-    color: white;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
+.intro-stats .stat-card h3 {
+    color: #ffca66; /* Original color */
+    font-size: 1.2rem; /* Original size */
+    margin-bottom: 8px; /* Original margin */
 }
 
+<<<<<<< HEAD
 .stat-card i {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -957,6 +975,11 @@ scale: 2;
 .swiper-pagination-bullet-active {
     background-color: #d4af37 !important;
     transform: scale(1.2);
+=======
+.intro-stats .stat-card p {
+    color: #ccc; /* Original color */
+    margin: 0; /* Original margin */
+>>>>>>> c8d4d40b8f9bc2df257623b25efaafdb85a37c4f
 }
 
 
@@ -1011,6 +1034,7 @@ scale: 2;
     }
 }
 
+<<<<<<< HEAD
 /* Enhanced Stat Card Effects for Company Intro */
 .intro-stats .stat-card {
     background: #212121 !important;
@@ -1200,6 +1224,9 @@ scale: 2;
 }
 
 
+=======
+/* Full-width Rate Us Section Styles */
+>>>>>>> c8d4d40b8f9bc2df257623b25efaafdb85a37c4f
 .rate-section {
     padding: 80px 0;
     background: #181818;
