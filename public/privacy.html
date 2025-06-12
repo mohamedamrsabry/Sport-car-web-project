@@ -3,173 +3,903 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms and Conditions</title>
-        <script src="/js/terms.js" defer></script>
-    <link rel="icon" type="image/png" href="/partials/img/logo.ico"> <!--page icon logo-->
+    <title>Privacy and Cookie Policy - Strada-Auto Egypt</title>
+    <link rel="icon" type="image/png" href="/partials/img/logo.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-gold: #b6a15a;
+            --dark-gold: #9d8b4d;
+            --light-gold: rgba(182, 161, 90, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --text-muted: #cccccc;
+            --bg-primary: #000000;
+            --bg-secondary: #111111;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(182, 161, 90, 0.2);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-       *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-}
-h2 {
-color: #b6a15a;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    background-color: black; 
-    position: relative;
-    overflow-x: hidden; 
-    width:100%;
-    color: white;
-}
-        nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-    width: 100%;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    position: fixed;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.25) 10%, rgba(255, 255, 255, 0.05) 80%);
-    backdrop-filter: blur(15px);
-    border-radius: 30px;
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.08);
-    z-index: 99;
-    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-/* When hidden, move up and fade out */
-.nav-hidden {
-    transform: translateX(-50%) translateY(-100%);
-    opacity: 0;
-    pointer-events: none;
-}
-.nav-logo {
-    height: 90px; /* Bigger size */
-    width: auto;
-}
+        body {
+            background: linear-gradient(135deg, #000000 0%, #0d0d0d 100%);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-ul{
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    margin: 0 auto;
-}
-a{
-    text-decoration: none;
-    color:rgb(255, 255, 255);
-    font-family: 'Proxima Nova';
-    font-weight: 500;
-    position: relative;
-    padding: 5px;
-    transition: color 0.3s ease;
-}
-a::after{
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background:#b6a15a;
-    bottom:0;
-    left: 50%;
-    transition: all 0.3s ease;
-}
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            transition: var(--transition);
+        }
 
-a:hover::after{
-    width:100%;
-    left:0;
-}
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-a:hover{
-    color:#b6a15a;
-}
+        .nav-logo {
+            height: 60px;
+            width: auto;
+        }
 
-/* Sidebar overlay (hidden by default) */
-.sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Transparent black background */
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-    transform: translateX(-100%); /* Hidden off-screen */
-    transition: transform 0.3s ease;
-}
-.sidebar-overlay ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-}
+        .nav-menu {
+            display: none;
+            list-style: none;
+            gap: 2rem;
+        }
 
-.sidebar-overlay ul li {
-    margin: 1rem 0;
-}
+        .nav-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+        }
 
-.sidebar-overlay ul li a {
-    text-decoration: none;
-    color: #b6a15a;
-    font-size: 2rem; /* Larger font size */
-    transition: color 0.3s ease;
-}
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: var(--transition);
+        }
 
-.sidebar-overlay ul li a:hover {
-    color: #fff;
-}
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
 
-/* Sidebar toggle button */
-.sidebar-toggle {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 101;
-}
+        .nav-menu a:hover {
+            color: var(--primary-gold);
+        }
 
-/* Sidebar open state */
-.sidebar-overlay.open {
-    transform: translateX(0); /* Slide into view */
-}
+        .mobile-menu-toggle {
+            display: block;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
 
-
-        h1{
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, rgba(182, 161, 90, 0.15) 0%, rgba(0, 0, 0, 0.9) 100%);
+            padding: 120px 0 80px;
             text-align: center;
-            padding: 50px;
-            margin-top: 150px;
-            font-family:'frontage';
-            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
         }
-        p{
-            word-spacing: 5px;
-            line-height: 50px;
-            margin-top: 50px;
-            margin: 50px;
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(182, 161, 90, 0.1) 0%, transparent 70%);
+            pointer-events: none;
         }
-        footer {
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        .header-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Main Content */
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .content-wrapper {
+            padding: 60px 0;
+        }
+
+        /* Company Info Card */
+        .company-info {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(182, 161, 90, 0.05) 100%);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-gold);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .company-info h3 {
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .company-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .detail-item:hover {
+            background: rgba(182, 161, 90, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .detail-icon {
+            color: var(--primary-gold);
+            width: 20px;
+            text-align: center;
+            margin-top: 0.2rem;
+        }
+
+        .detail-content {
+            flex: 1;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--primary-gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-value {
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        /* Sections */
+        .section {
+            margin: 4rem 0;
+            scroll-margin-top: 100px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--dark-gold) 100%);
+            color: var(--bg-primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(182, 161, 90, 0.3);
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .section-content {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .subsection {
+            margin: 2rem 0;
+            padding-left: 1.5rem;
+            border-left: 3px solid rgba(182, 161, 90, 0.3);
+            position: relative;
+        }
+
+        .subsection::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+        }
+
+        .subsection-title {
+            font-size: 1.3rem;
+            color: var(--primary-gold);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Lists */
+        .feature-list {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .feature-item:hover {
+            border-color: var(--primary-gold);
+            background: rgba(182, 161, 90, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-icon {
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+            margin-top: 0.2rem;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(182, 161, 90, 0.1) 0%, rgba(182, 161, 90, 0.05) 100%);
+            border: 1px solid var(--primary-gold);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+        }
+
+        .highlight-box .icon {
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Rights Grid */
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .right-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .right-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+        }
+
+        .right-card:hover {
+            border-color: var(--primary-gold);
+            background: rgba(182, 161, 90, 0.05);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .right-title {
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .right-icon {
+            font-size: 1.3rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, rgba(182, 161, 90, 0.1) 0%, rgba(182, 161, 90, 0.05) 100%);
+            border: 1px solid var(--primary-gold);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(182, 161, 90, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-title {
+            color: var(--primary-gold);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-email {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--dark-gold) 100%);
+            color: var(--bg-primary);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            margin: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(182, 161, 90, 0.3);
+        }
+
+        .contact-email:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(182, 161, 90, 0.4);
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: sticky;
+            top: 100px;
+        }
+
+        .toc-title {
+            color: var(--primary-gold);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 8px;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .toc-link:hover {
+            background: rgba(182, 161, 90, 0.1);
+            color: var(--primary-gold);
+            padding-left: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-muted);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-gold);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .nav-menu {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main {
+                padding: 0 1rem;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .company-info,
+            .contact-section {
+                padding: 1.5rem;
+            }
+
+            .rights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .company-details {
+                grid-template-columns: 1fr;
+            }
+
+            .toc {
+                position: static;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gold);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--dark-gold);
+        }
+
+        /* Smooth animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .nav,
+            .toc {
+                display: none;
+            }
+            
+            body {
+                color: #000;
+                background: #fff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="/partials/img/logo.png" alt="Strada-Auto Egypt" class="nav-logo">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#data-collection">Data Collection</a></li>
+                <li><a href="#your-rights">Your Rights</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="header-title">Privacy & Cookie Policy</h1>
+            <p class="header-subtitle">Your privacy is our priority. This comprehensive policy explains how we collect, use, and protect your personal information when you interact with our services.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="content-wrapper">
+            <!-- Company Information -->
+            <div class="company-info fade-in">
+                <h3>
+                    <i class="fas fa-building detail-icon"></i>
+                    Data Controller Information
+                </h3>
+                <p>The controller as per the Egyptian Data Protection Law No. 151 of 2020 ("PDPL") is:</p>
+                <div class="company-details">
+                    <div class="detail-item">
+                        <i class="fas fa-building detail-icon"></i>
+                        <div class="detail-content">
+                            <div class="detail-label">Company</div>
+                            <div class="detail-value">Strada-Auto Egypt S.A.E</div>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt detail-icon"></i>
+                        <div class="detail-content">
+                            <div class="detail-label">Address</div>
+                            <div class="detail-value">Hegaz 175, 2nd Floor, 50 South Road, Obour, Egypt</div>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-mailbox detail-icon"></i>
+                        <div class="detail-content">
+                            <div class="detail-label">P.O. Box</div>
+                            <div class="detail-value">15/11835</div>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-envelope detail-icon"></i>
+                        <div class="detail-content">
+                            <div class="detail-label">Email</div>
+                            <div class="detail-value">Customer.Support.StradaAuto@daimler.com</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: Data Protection Overview -->
+            <section class="section fade-in" id="overview">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">Data Protection Overview</h2>
+                </div>
+                <div class="section-content">
+                    <p>We appreciate your visit to our website and your interest in our products. Protecting your personal data is of utmost importance to us. This Privacy Policy explains how we collect, process, and safeguard your personal information.</p>
+                    
+                    <div class="highlight-box">
+                        <i class="fas fa-exclamation-triangle icon"></i>
+                        <p><strong>Important:</strong> Our Privacy Statement applies exclusively to our websites and services. It does not cover activities on social networks or third-party websites accessible through links on our platforms. Please review the privacy policies of those respective providers.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Data Collection -->
+            <section class="section fade-in" id="data-collection">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Collection and Processing of Personal Data</h2>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Automatic Data Collection</h3>
+                    <div class="section-content">
+                        <p>When you visit our websites, we automatically collect and store certain technical information:</p>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <i class="fas fa-browser feature-icon"></i>
+                                <div class="feature-content">
+                                    <div class="feature-title">Browser & System Information</div>
+                                    <p>Browser type and operating system details</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-clock feature-icon"></i>
+                                <div class="feature-content">
+                                    <div class="feature-title">Visit Analytics</div>
+                                    <p>Date, time, and duration of your visit</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-mouse-pointer feature-icon"></i>
+                                <div class="feature-content">
+                                    <div class="feature-title">Interaction Data</div>
+                                    <p>Pages accessed, features used, and search queries</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-network-wired feature-icon"></i>
+                                <div class="feature-content">
+                                    <div class="feature-title">Network Information</div>
+                                    <p>IP address and Internet service provider (stored for 7 days for security)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Voluntary Data Provision</h3>
+                    <div class="section-content">
+                        <p>We collect additional personal data only when you voluntarily provide it through:</p>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <i class="fas fa-user-plus feature-icon"></i>
+                                <div class="feature-content">Registration forms and user accounts</div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-envelope feature-icon"></i>
+                                <div class="feature-content">Contact forms and customer inquiries</div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-comments feature-icon"></i>
+                                <div class="feature-content">Live chat interactions</div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-poll feature-icon"></i>
+                                <div class="feature-content">Surveys and feedback submissions</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <i class="fas fa-info-circle icon"></i>
+                    <p><strong>Please Note:</strong> Providing personal information is neither legally nor contractually required. However, certain website features may require personal data to function properly. Without this information, some features may be unavailable or have limited functionality.</p>
+                </div>
+            </section>
+
+            <!-- Section 3: Purposes -->
+            <section class="section fade-in">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Purposes of Data Processing</h2>
+                </div>
+                
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <i class="fas fa-cogs feature-icon"></i>
+                        <div class="feature-content">
+                            <div class="feature-title">Website Optimization</div>
+                            <p>Enhance user experience and ensure optimal website functionality</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                        <div class="feature-content">
+                            <div class="feature-title">Security Protection</div>
+                            <p>Safeguard our IT systems against attacks and unlawful activities</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-handshake feature-icon"></i>
+                        <div class="feature-content">
+                            <div class="feature-title">Service Delivery</div>
+                            <p>Process requests, manage customer relationships, and fulfill contractual obligations</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-balance-scale feature-icon"></i>
+                        <div class="feature-content">
+                            <div class="feature-title">Legal Compliance</div>
+                            <p>Fulfill legal requirements and cooperate with authorities when required</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+
+            <!-- Section 4: Your Rights -->
+            <section class="section fade-in" id="your-rights">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Your Data Protection Rights</h2>
+                </div>
+                <div class="section-content">
+                    <p>As a data subject, you have comprehensive rights under the Egyptian PDPL:</p>
+                    
+                    <div class="rights-grid">
+                        <div class="right-card">
+                            <div class="right-title">
+                                <i class="fas fa-info-circle right-icon"></i>
+                                Right to Information
+                            </div>
+                            <p>Request details about how your personal data is processed and stored</p>
+                        </div>
+                        <div class="right-card">
+                            <div class="right-title">
+                                <i class="fas fa-edit right-icon"></i>
+                                Right to Correction
+                            </div>
+                            <p>Request correction of inaccurate or incomplete personal data</p>
+                        </div>
+                        <div class="right-card">
+                            <div class="right-title">
+                                <i class="fas fa-trash-alt right-icon"></i>
+                                Right to Deletion
+                            </div>
+                            <p>Request deletion of your personal data under certain circumstances</p>
+                        </div>
+                        <div class="right-card">
+                            <div class="right-title">
+                                <i class="fas fa-pause-circle right-icon"></i>
+                                Right to Restricted Processing
+                            </div>
+                            <p>Request limitation of data processing in specific situations</p>
+                        </div>
+                        </section>
+                        <style>
+.footer-container {
+    position: relative;
+    z-index: 99;
+}
+
+footer {
   background-color: #111;
   color: #fff;
-  padding: 40px 20px 20px;
+  padding: 20px 20px 20px; /* Reduced from 50px to 20px top padding */
   text-align: center;
-  padding: 50px;
+  position: relative;
 }
 
 .footer-container {
@@ -205,27 +935,36 @@ a:hover{
   align-self: center;
   text-align: center;
 }
-.footer-section.contact p{
-    padding: 17px;
+
+.footer-section.contact p {
+  padding: 0;
 }
+
 .footer-section a:hover {
   color: #fff;
 }
 
 .footer-section.links ul {
   display: flex;
-  flex-direction: column; /* Ensure links are aligned vertically */
-  gap: 12px; /* Space out the list items */
+  flex-direction: column;
+  gap: 12px;
+  margin-right: 0px;
 }
 
 .footer-section.links li {
-  margin-bottom: 8px; /* Optional: Adjusts the space between the items */
+  margin-bottom: 8px;
 }
 
 .footer-section .logo {
   max-width: 70px;
   margin-bottom: 15px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+.footer-section.about {
+  text-align: center;
 }
 
 .subscribe input[type="email"] {
@@ -238,15 +977,28 @@ a:hover{
 
 .subscribe button {
   padding: 10px 20px;
-  background-color: #444;
+  background-color: #d4af37;
   color: #fff;
   border: none;
   cursor: pointer;
   border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
-.subscribe button:hover {
-  background-color: #666;
+.subscribe button:hover:not(:disabled) {
+  background-color: #b38f2b;
+  transform: translateY(-1px);
+}
+
+.subscribe button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .social-icons {
@@ -268,122 +1020,186 @@ a:hover{
   font-size: 13px;
 }
 
-    </style>
-</head>
 
-<body>
-    <div data-include="/partials/nav.html"></div>
 
-    <h1>PRIVACY AND COOKIE POLICY</h1>
-    <p>Privacy Statement
-The controller as per the Egyptian Data Protection Law No. 151 of 2020 ("PDPL")) is:
+/* Newsletter-specific styles */
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-Strada-Auto Egypt S.A.E ("We")
-<br>
-hegaz 175, 2nd floor, 50 South Road,
-<br>
-obour, Egypt.
-<br>
-P.O. Box 15/11835
-<br>
-Email: Customer.Support.StradaAuto@daimler.com
+/* Loading spinner */
+.loading {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+}
 
-<h2>1. Data Protection</h2>
-We appreciate you visiting our website and your interest in the products we offer. Protecting your personal data is very important to us. In this Privacy Policy, we explain how we collect your personal information, what we do with it, for what purposes and on what legal foundation we do so, and what rights you have on that basis. We will also refer you to Strada-Benz's Data Protection Policy:
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
-Strada-Auto Data Protection Policy
+/* Newsletter messages */
+.newsletter-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.95);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: none;
+    max-width: 400px;
+    width: 90%;
+}
 
-Our Privacy Statement on the use of our websites and the Strada-Benz Group AG Data Protection Policy do not apply to your activities on the websites of social networks or other providers that can be accessed using the links on our websites. Please read the data protection provisions on the websites of those providers.
-<br><br><br><br>
-<h2>2. Collecting and Processing Your Personal Data</h2>
-a. Whenever you visit our websites, we store certain information about the browser and operating system you are using; the date and time of your visit; the status of the interaction (e.g. whether you were able to access the website or received an error message); the usage of features on the website; any search phrases you entered; how often you visit individual websites; the names of the files you access; the amount of data transferred; the Web page from which you accessed our website; and the Web page you visited after visiting our website, whether by clicking links on our websites or entering a domain directly into the input field of the same tab (or window) of the browser in which you have our websites open. In addition, we store your IP address and the name of your Internet service provider for seven days. This is for security reasons; in particular, to prevent and detect attacks on our websites or attempts at fraud.
+.newsletter-message.success {
+    border-left: 4px solid #4CAF50;
+    border-bottom: 4px solid #4CAF50;
+}
 
-b. We only store other personal data if you provide this data, e.g. as part of a registration, contact form, chat, survey, price competition competition or for the execution of a contract, and even in these cases only insofar as this is permitted to us on the basis of a consent given by you or in accordance with the applicable legal provisions (see section 7).
+.newsletter-message.error {
+    border-left: 4px solid #ff6b6b;
+}
 
-c. You are neither legally nor contractually obligated to share your personal information. However, certain features of our websites may depend on the sharing or personal information. If you do not provide your personal information in such cases, you may not be able to use those features, or they may be available with limited functionality.
-<br><br><br><br>
-<h2>3. Purposes of Use</h2>
-a. We use the personal information collected during your visit to any of our websites to make using them as convenient as possible for you and to protect our IT systems against attacks and other unlawful activities.
+.newsletter-message h3 {
+    color: #d4af37;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
 
-b. If you share additional information with us – for example, by filling out a registration form, contact form, chat, survey, contest entry or to execute a contract with you – we will use that information for the designated purposes, purposes of customer management and – if required – for purposes of processing and billing and business transactions within the required scope in each instance.
+.newsletter-message p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: #cccccc;
+}
 
-c. For more information about the data sharing between Strada-Auto Egypt S.A.E, Strada-Benz AG, Strada-Benz Mobility AG for the purpose of analysis and marketing please click here. This refers to activities on this specific Strada-Benz website only in case you have granted consent for this purpose and data sharing with Strada-Benz AG and Strada-Benz Mobility AG.
+.newsletter-message .message-icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
 
-d. In addition, we use personal data to the extent that we are legally obliged to do so (e.g., storage for the fulfillment of commercial or tax-related retention obligations, release in accordance with official or judicial orders, e.g. to a law enforcement authority).
-<br><br><br><br>
-<h2>4. Transfer of Personal Information to Third Parties; Social Plugins; Use of Service Providers</h2>
-a. Our websites may also contain an offer of third parties. If you click on such an offer, we transfer data to the respective provider to the required extent (e.g. information that you have found this offer with us and, if applicable, further information that you have already provided on our websites for this purpose).
+.newsletter-message .success-icon {
+    color: #4CAF50;
+}
 
-b. When we use social plug-ins on our websites from social networks such as Facebook and Twitter, we integrate them as follows:
-When you visit our websites, the social plug-ins are deactivated, i.e. no data is transmitted to the operators of these networks. If you want to use one of the networks, click on the respective social plug-in to establish a direct connection to the server of the respective network.
-If you have a user account on the network and are logged in when you activate the social plug-in, the network can associate your visit to our websites with your user account. If you want to avoid this, please log out of the network before activating the social plug-in.
-A social network cannot associate a visit to other Strada-Benz websites until you have activated an existing social plug-in.
-When you activate a social plug-in, the network transfers the content that becomes available directly to your browser, which integrates it into our websites. In this situation, data transmissions can also take place that are initiated and controlled by the respective social network. Your connection to a social network, the data transfers taking place between the network and your system, and your interactions on that platform are governed solely by the privacy policies of that network.
-The social plug-in remains active until you deactivate it or delete your cookies (see section 5.d).
+.newsletter-message .error-icon {
+    color: #ff6b6b;
+}
 
-c. If you click on the link to an offer or activate a social plug-in, Personal data may reach providers in countries outside Egypt that, from the point of view of the Personal Data Protection Law No. 151 of 2020 may not guarantee an "adequate level of protection" for the processing of personal data in accordance with the Personal Data Protection Law No. 151 of 2020 standards. Please remember this fact before clicking on a link or activating a social plug-in and thereby triggering a transfer of your data.
+.newsletter-message .close-btn {
+    background-color: #d4af37;
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
 
-d. We also use qualified service providers (e.g., IT service providers, marketing agencies) to operate, optimize and secure our web-sites. We only pass on personal data to the latter insofar as this is necessary for the provision and use of the website and its functionalities, for the pursuit of legitimate interests, to comply with legal obligations, or insofar as you have consented there to (see section 7). You will find more information regarding recipients of personal data in our consent management system here.
+.newsletter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    display: none;
+}
 
-For more information about the data sharing between Strada-Auto Egypt S.A.E, Strada-Auto AG, Strada-Benz Mobility AG for the purpose of analysis and marketing please click here.
-This refers to activities on this specific Strada-Benz website only in case you have granted consent for this purpose and data sharing with Strada-Benz AG and Strada-Benz Mobility AG.
-<br><br><br><br>
-<h2>5. Cookies</h2>
-a. Cookies may be used when you are visiting our websites. Technically, these are so-called HTML cookies and similar software tools such as Web/DOM Storage or Local Shared Objects (so-called "Flash cookies"), which we collectively refer to as cookies.
+</style>
+<footer>
+<div class="video-background">
+    <video autoplay muted loop playsinline class="footer-video">
+        <source src="public/partials/vids/project_car_video.mp4" type="video/mp4">
+    </video>
+</div>
 
-b. Cookies are small files that are stored on your desktop, notebook or mobile device while you visit a website. Cookies make it possible, for example, to determine whether there has already been a connection between the device and the websites; take into account your preferred language or other settings, offer you certain functions (e.g. online shop, vehicle configurator) or recognize your usage-based interests. Cookies may also contain personal data.
+<div class="footer-container">
+  <!-- About Us -->
+  <div class="footer-section about">
+    <h3>ABOUT US</h3>
+    <img src="/partials/img/logo.png" alt="Strada Auto Logo" class="logo">
+    <p>
+      Strada Auto, a premium dealership specializing in luxury automotive brands,
+      offers a seamless and exceptional car-buying experience. With headquarters
+      in OBOUR ROAD 50, our presence ensures accessibility and convenience for our clients.
+    </p>
+    <p>
+      <a href="/terms.html">Terms & Conditions</a> | <a href="/privacy.html">Privacy Policy</a>
+    </p>
+  </div>
 
-c. Whether and which cookies are used when you visit our websites depends on which areas and functions of our websites you use and whether you agree to the use of cookies that are not technically required in our Consent Management System. You will find further information and decision-making options here.
+  <!-- Contact Us -->
+  <div class="footer-section contact">
+    <h3>CONTACT US</h3>
+    <p><strong>Strada Auto Showroom</strong></p>
+    <p>📍 OBOUR ROAD 50</p>
+    <p>📞 01226699307</p>
+    <p>📱 WhatsApp: 01226699307</p>
+    <p>📧 info@stradaauto.com</p>
+  </div>
 
-d. The use of cookies also depends on the settings of the web browser you are using (e.g., Microsoft Edge, Google Chrome, Apple Safari, Mozilla Firefox). Most web browsers are preset to automatically accept certain types of cookies; however, you can usually change this setting. You can delete stored cookies at any time. Web/DOM storage and local shared objects can be deleted separately. You can find out how this works in the browser or de-vice you are using in the manual of the learner.
+  <!-- Quick Links -->
+  <div class="footer-section links">
+    <h3>QUICK LINKS</h3>
+    <ul>
+      <li><a href="/about.html">What We Do</a></li>
+      <li><a href="/products.html">Brands Housed by Strada</a></li>
+      <li><a href="#">Top</a></li>
+    </ul>
+  </div>
 
-e. The consent to, and rejection or deletion of, cookies are tied to the device and also to the respective web browser you use. If you use multiple devices or web browsers, you can make decisions or settings differently.
+  <!-- Subscribe -->
+  <div class="footer-section subscribe">
+    <h3>SUBSCRIBE</h3>
+    <p>Subscribe to our Newsletter to stay updated with the latest news and deals.</p>
+    <form class="newsletter-form" id="newsletterForm">
+      <input type="email" id="newsletterEmail" placeholder="Your Email Address" required>
+      <button type="submit" id="subscribeBtn">
+        <span id="subscribeText">SUBSCRIBE</span>
+        <div class="loading" id="subscribeLoading"></div>
+      </button>
+    </form>
+    <div class="social-icons">
+      <a href="#"><img src="/partials/img/icons/facebook-logo-24.png" alt="Facebook"></a>
+      <a href="#"><img src="/partials/img/icons/instagram-logo-24.png" alt="Instagram"></a>
+      <a href="#"><img src="/partials/img/icons/linkedin-logo-24.png" alt="LinkedIn"></a>
+    </div>
+  </div>
+</div>
 
-f. If you decide against the use of cookies or delete them, you may not have access to all functions of our websites or individual functions may be limited.
-<br><br><br><br>
-<h2>6. Security</h2>
-We take technical and organizational security measures in order to protect your information managed by us from being tampered with, lost, destroyed or accessed by authorized individuals. We are continuously improving our security measures in line with technological advancements.
-<br><br><br><br>
-<h2>7. Legal Foundations for Processing</h2>
-a. If you have given us your consent to process your personal information, then that is the legal foundation for processing it (the Personal Data Protection Law No. 151 of 2020 (“PDPL”)).
+<div class="footer-bottom">
+  <p>&copy; 2025 STRADA AUTO. All Rights Reserved.</p>
+</div>
 
-b. Article 6, clause No. 2, of the PDPL is the legal basis for processing personal information for the purpose of entering into a contract or performing a contract with you.
+<!-- Newsletter Messages -->
+<div class="newsletter-overlay" id="newsletterOverlay"></div>
+<div class="newsletter-message success" id="newsletterSuccess">
+    <div class="message-icon success-icon">✓</div>
+    <h3>Successfully Subscribed!</h3>
+    <p id="successText">Thank you for subscribing to our newsletter! Check your email for confirmation.</p>
+    <button class="close-btn" onclick="closeNewsletterMessage()">Close</button>
+</div>
 
-c. If processing your personal information is required to fulfill our legal obligations (e.g. data retention), we are authorized to do so by Article 6, clause No. 3, of the PDPL.
+<div class="newsletter-message error" id="newsletterError">
+    <div class="message-icon error-icon">✗</div>
+    <h3>Subscription Failed</h3>
+    <p id="errorText">There was an error processing your subscription. Please try again.</p>
+    <button class="close-btn" onclick="closeNewsletterMessage()">Close</button>
+</div>
 
-d. Furthermore, we process personal information for purposes of protecting our legitimate interests as well as the interests of third parties in accordance with Article 6, clause No. 4 of the PDPL. Examples of such legitimate interests include maintaining the functionality of our IT systems as well as the (direct) marketing of our products and services (to the extent not covered by your consent) and those of third parties and the legally required documentation of business contacts. As part of the consideration of interests required in each case, we take into account various aspects, in particular the type of personal information, the purpose of processing, the circumstances of processing and your interest in the confidentiality of your personal information.
-<br><br><br><br>
-<h2>8. Deleting Your Personal Data</h2>
-Your IP address and the name of your Internet service provider, which we store for security reasons, are deleted after seven days. Moreover, we delete your personal information as soon as the purpose for which it was collected and processed has been fulfilled. Beyond this time period, data storage only takes place to the extent made necessary by the legislation, regulations or other legal provisions to which we are subject in the PDPL or by legal provisions in third-party countries if these have an appropriate level of data protection. Should it not be possible to delete data in individual cases, the relevant personal data are flagged to restrict their further processing.
-<br><br><br><br>
-<h2>9. Rights of the Data Subject</h2>
-a. As a data subject affected by data processing, you have the right to information (Article 2 clause No. 1 of the PDPL), Correction (Article 2 clause No. 3 of the PDPL), Deletion (Article 2 clause No. 3 of the PDPL), Restricted processing (Article 2 clause No. 6) and Data Transferability (Article 2 clause No. 4).
-
-b. If you have consented to the processing of your personal information by us, you have the right to revoke your consent at any time. Your revocation does not affect the legality of the processing of your personal information that took place before your consent was revoked. It also has no effect on the continued processing of the information on another legal basis, such as to fulfill legal obligations (see section titled "Legal Foundation of Processing").
-
-c. Right to object
-For reasons relating to your particular situation, you have the right to file an objection at any time to the processing of personal data pertaining to you that is collected under Article 6 Clause clause No. 2 of the PDPL or a) Article 6 clause No. 4 of the PDPL. If you file an objection, we will continue to process your personal data only if we can document mandatory, legitimate reasons that outweigh your interests, rights and freedoms, or if processing is for the assertion, exercise or defense of legal claims. To the extent we use your personal data for direct marketing based on legitimate interests, you have the right to object at any time without giving reasons.
-
-d. We ask you to address your claims or declarations to the following contact address if possible:
-Customer.Support.MBEg@strada-benz.com
-
-e. If you believe that the processing of your personal data violates legal requirements, you have the right to lodge a complaint with a competent data protection supervisory authority.
-<br><br><br><br>
-<h2>10. Newsletter</h2>
-If you subscribe to a newsletter offered on our website, the information provided during registration for the newsletter will be used solely for the purpose of mailing the newsletter unless you consent to its use for additional purposes. You may cancel the subscription at any time by using the option to unsubscribe contained in the newsletter.
-<br><br><br><br>
-<h2>11. Strada-Benz Group AG's Central Registration Service</h2>
-With the Central Registration Service offered by Strada-Benz Group AG, you can sign up for every website and application belonging to the Strada-Benz Group and its brands that are connected to the service. The applicable terms of use contain specific data protection provisions. Those terms of use can be found on the registration pages of affiliated websites and applications.
-<br><br><br><br>
-<h2>12. Data Transmission to Recipients Outside Egypt</h2>
-a. When using service providers (see section 4. d.) and passing on data to third parties based on you consent (see section 3.c.), personal data may be provided to recipients in countries outside Egypt.
-<br><br><br><br>
-</p>
-<div data-include="/partials/footer.html"></div>
-
-    <script src="/js/nav.js"></script>
-    <script src="/js/loader.js" type="module"></script>
-    <script src="/js/newsletter.js"></script>
-</body>
-
-</html>
+</footer>
+                            
