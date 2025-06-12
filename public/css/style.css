@@ -10,6 +10,7 @@
   font-weight: normal;
   font-style: normal;
 }
+
 *{
     margin: 0;
     padding: 0;
@@ -24,11 +25,13 @@ body {
     width:100%;
     font-family: 'mont';
 }
+
 section{
     opacity: 0;
     transform: translateY(60px);
     transition: opacity 1.5s ease-out, transform 1.5s ease-out;
 }
+
 section.visible{
     opacity: 1;
     transform: translateY(0);
@@ -46,9 +49,11 @@ section.visible{
     margin-right: 0; /* Remove right margin */
     margin-top: -20px;
 }
+
 .brand-logos a:hover::after{
     display: none;
 }
+
 .logo {
     display: flex;
     justify-content: center;
@@ -283,7 +288,9 @@ section.visible{
     transform: scale(0);
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
+a.stat-card-link:hover {
+      text-decoration: none;
+}
 .vehicles .vehicles-slider .swiper-slide-active .content{
     transform: scale(1);
 }
@@ -946,7 +953,6 @@ scale: 2;
     margin-bottom: 8px; /* Original margin */
 }
 
-<<<<<<< HEAD
 .stat-card i {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -975,11 +981,10 @@ scale: 2;
 .swiper-pagination-bullet-active {
     background-color: #d4af37 !important;
     transform: scale(1.2);
-=======
+}
 .intro-stats .stat-card p {
     color: #ccc; /* Original color */
     margin: 0; /* Original margin */
->>>>>>> c8d4d40b8f9bc2df257623b25efaafdb85a37c4f
 }
 
 
@@ -1034,7 +1039,6 @@ scale: 2;
     }
 }
 
-<<<<<<< HEAD
 /* Enhanced Stat Card Effects for Company Intro */
 .intro-stats .stat-card {
     background: #212121 !important;
@@ -1224,9 +1228,7 @@ scale: 2;
 }
 
 
-=======
 /* Full-width Rate Us Section Styles */
->>>>>>> c8d4d40b8f9bc2df257623b25efaafdb85a37c4f
 .rate-section {
     padding: 80px 0;
     background: #181818;
