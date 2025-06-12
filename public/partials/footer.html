@@ -25,7 +25,34 @@ footer {
   flex: 1 1 220px;
   min-width: 220px;
 }
+.footer-container a{
+    text-decoration: none;
+    color:rgb(255, 255, 255);
+    font-family: 'Proxima Nova';
+    font-weight: 500;
+    position: relative;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+.footer-container a::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background:#b6a15a;
+    bottom:0;
+    left: 50%;
+    transition: all 0.3s ease;
+}
 
+.footer-container a:hover::after{
+    width:100%;
+    left:0;
+}
+
+.footer-container a:hover{
+    color:#b6a15a;
+}
 .footer-section h3 {
   font-size: 16px;
   margin-bottom: 15px;
@@ -231,11 +258,7 @@ footer {
 
 </style>
 <footer>
-<div class="video-background">
-    <video autoplay muted loop playsinline class="footer-video">
-        <source src="public/partials/vids/project_car_video.mp4" type="video/mp4">
-    </video>
-</div>
+
 
 <div class="footer-container">
   <!-- About Us -->

@@ -15,14 +15,14 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 // Email configuration
-define('FROM_EMAIL', 'moamrsabry2005@gmail.com');        
+define('FROM_EMAIL', 'stradaautogroup@gmail.com');        
 define('FROM_NAME', 'STRADA Auto');
-define('ADMIN_EMAIL', 'moamrsabry2005@gmail.com');    
-define('GMAIL_APP_PASSWORD', 'cegx zzmo embw ages'); // Replace with your App Password
+define('ADMIN_EMAIL', 'stradaautogroup@gmail.com');    
+define('GMAIL_APP_PASSWORD', 'npzy phfr lgzm hwhj');
 
 // Business info
-define('BUSINESS_ADDRESS', '123 Main Street');
-define('BUSINESS_CITY', 'Your City, State 12345');
+define('BUSINESS_ADDRESS', 'OBOUR ROAD 50');
+define('BUSINESS_CITY', 'Cairo, Egypt');
 define('BUSINESS_PHONE', '01226699307');
 define('BUSINESS_WEBSITE', 'www.stradaauto.com');
 

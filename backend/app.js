@@ -287,7 +287,7 @@ async function addAllCars() {
     }
 }
 
-// Connect to DB, add cars, then start server
+
 connectDB()
     .then(async () => {
         console.log('MongoDB connected successfully');

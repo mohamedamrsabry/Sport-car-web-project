@@ -40,7 +40,7 @@ ul{
     gap: 3rem;
     margin: 0 auto;
 }
-a{
+.sidebar-overlay a{
     text-decoration: none;
     color:rgb(255, 255, 255);
     font-family: 'Proxima Nova';
@@ -49,7 +49,7 @@ a{
     padding: 5px;
     transition: color 0.3s ease;
 }
-a::after{
+.sidebar-overlay a::after{
     content: '';
     position: absolute;
     width: 0;
@@ -60,12 +60,12 @@ a::after{
     transition: all 0.3s ease;
 }
 
-a:hover::after{
+.sidebar-overlay a:hover::after{
     width:100%;
     left:0;
 }
 
-a:hover{
+.sidebar-overlay a:hover{
     color:#b6a15a;
 }
 

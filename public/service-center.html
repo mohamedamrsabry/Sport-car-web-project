@@ -43,14 +43,6 @@
             border-bottom: 2px solid var(--gold);
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
 
         .logo {
             font-size: 2rem;
@@ -59,42 +51,9 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-menu a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-menu a:hover {
-            color: var(--gold);
-            transform: translateY(-2px);
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
-
         /* Hero Section */
         .hero {
+            top:100px;
             background: linear-gradient(135deg, var(--primary-black) 0%, var(--dark-black) 50%, var(--light-black) 100%);
             color: var(--white);
             padding: 120px 0 80px;
@@ -460,70 +419,6 @@
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
 
-        /* Footer */
-        .footer {
-            background: var(--primary-black);
-            color: var(--white);
-            text-align: center;
-            padding: 2rem 0;
-            border-top: 2px solid var(--gold);
-        }
-
-        .footer p {
-            margin-bottom: 1rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: var(--gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-black);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-
-        .social-link:hover {
-            background: var(--white);
-            color: var(--primary-black);
-            transform: translateY(-3px) scale(1.1);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
         /* Floating Animation */
         .floating {
             animation: floating 3s ease-in-out infinite;
@@ -681,18 +576,10 @@
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Strada Auto. All rights reserved.</p>
-            <div class="social-links">
-                <a href="#" class="social-link">f</a>
-                <a href="#" class="social-link">t</a>
-                <a href="#" class="social-link">in</a>
-                <a href="#" class="social-link">ig</a>
-            </div>
-        </div>
-    </footer>
-
+    <div data-include="/partials/footer.html"></div>
+    <script src="/js/nav.js"></script>
+    <script src="/js/loader.js" type="module"></script>
+    <script src="/js/newsletter.js"></script>
     <script>
         // Contact form functionality
         document.getElementById('contactForm').addEventListener('submit', function(e) {
@@ -751,6 +638,7 @@
             observer.observe(card);
         });
     </script>
-    <div data-include="/partials/footer.html"></div>
+
+    
 </body>
 </html>

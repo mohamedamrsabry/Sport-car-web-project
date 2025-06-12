@@ -13,14 +13,14 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 // Email configuration
-define('FROM_EMAIL', 'moamrsabry2005@gmail.com');        
+define('FROM_EMAIL', 'stradaautogroup@gmail.com');        
 define('FROM_NAME', 'STRADA Auto');
-define('ADMIN_EMAIL', 'moamrsabry2005@gmail.com');    
-define('GMAIL_APP_PASSWORD', 'cegx zzmo embw ages'); // Replace with your App Password
+define('ADMIN_EMAIL', 'stradaautogroup@gmail.com');    
+define('GMAIL_APP_PASSWORD', 'npzy phfr lgzm hwhj');
 
 // Business info
-define('BUSINESS_ADDRESS', '123 Main Street');
-define('BUSINESS_CITY', 'Your City, State 12345');
+define('BUSINESS_ADDRESS', 'OBOUR ROAD 50');
+define('BUSINESS_CITY', 'Cairo, Egypt');
 define('BUSINESS_PHONE', '01226699307');
 define('BUSINESS_WEBSITE', 'www.stradaauto.com');
 
@@ -117,7 +117,7 @@ function sendCustomerEmail($data, $quoteId) {
         $mail->Body = "
         <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8f9fa;'>
             <div style='background-color: #d4af37; color: white; padding: 30px; text-align: center;'>
-                <h1 style='margin: 0; font-size: 2.2rem;'>STRADA Auto</h1>
+                <h1 style='margin: 0; font-size: 2.2rem;'>STRADA AUTO</h1>
                 <h2 style='margin: 10px 0 0 0; font-size: 1.5rem; font-weight: normal;'>Quota Request Received</h2>
             </div>
             
@@ -174,12 +174,12 @@ function sendCustomerEmail($data, $quoteId) {
                 </div>
                 
                 <p style='font-size: 16px; color: #555; line-height: 1.6; margin-top: 25px;'>
-                    Thank you for considering STRADA Auto for your luxury vehicle needs. We look forward to helping you find your perfect car!
+                    Thank you for considering STRADA AUTO for your luxury vehicle needs. We look forward to helping you find your perfect car!
                 </p>
                 
                 <p style='font-size: 16px; color: #333; margin-top: 20px;'>
                     Best regards,<br>
-                    <strong>The STRADA Auto Team</strong>
+                    <strong>The STRADA AUTO Team</strong>
                 </p>
             </div>
             
@@ -225,7 +225,7 @@ function sendAdminEmail($data, $quoteId) {
         $mail->Body = "
         <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;'>
             <div style='background-color: #d4af37; color: white; padding: 20px; text-align: center;'>
-                <h1 style='margin: 0;'>STRADA Auto</h1>
+                <h1 style='margin: 0;'>STRADA AUTO</h1>
                 <h2 style='margin: 10px 0 0 0; font-weight: normal;'>New Quota Request</h2>
             </div>
             
