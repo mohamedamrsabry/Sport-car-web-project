@@ -324,27 +324,32 @@
                 gap: 5px;
             }
         }
-        /* Back button */
-        .back-btn {
+       /* Back button */
+.back-btn {
   position: fixed;
   top: 20px;
   left: 20px;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.4); /* Transparent black */
+  color: #d4af37; /* Gold text */
+  padding: 14px 21px;
+  border-radius: 999px; /* Fully rounded */
+  border: 1px solid #d4af37; /* Gold border */
   font-size: 14px;
   text-decoration: none;
   backdrop-filter: blur(5px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: background 0.3s, transform 0.2s, color 0.3s, border-color 0.3s;
   z-index: 1001;
 }
 
 .back-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.6); /* Darker on hover */
   transform: translateX(-3px);
+  color: #fff; /* Optional: white text on hover */
+  border-color: #fff; /* Optional: white border on hover */
 }
+
+
 
 
         /* Custom scrollbar removed as no scrolling needed */
