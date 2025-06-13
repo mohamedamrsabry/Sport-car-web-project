@@ -181,7 +181,6 @@ let cars = []; // This will store our fetched cars
 document.addEventListener('DOMContentLoaded', async () => {
     const loadingElement = document.getElementById('carLoading');
     
-    // Show loading if element exists
     if (loadingElement) {
         loadingElement.style.display = 'block';
     }
@@ -193,10 +192,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         cars = await response.json();
 
-        // Populate brands dropdown
         populateBrands();
 
-        // Check for URL parameters to pre-select brand/model
         const params = new URLSearchParams(location.search);
         const brand = params.get('brand');
         const model = params.get('model');
@@ -206,7 +203,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             updateModels();
 
             if (model) {
-                // Need to wait for models to populate
                 setTimeout(() => {
                     document.getElementById('modelSelect').value = model;
                 }, 100);
@@ -214,7 +210,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } catch (error) {
         console.error('Error fetching car data:', error);
-        // You can add a showDebugInfo function or just log the error
         console.log('Error loading car data: ' + error.message);
     } finally {
         if (loadingElement) {
@@ -222,7 +217,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // Create modal elements
     createModal();
 });
 

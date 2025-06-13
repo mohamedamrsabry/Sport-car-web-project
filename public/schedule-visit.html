@@ -435,22 +435,12 @@
                 const submitText = document.getElementById('submitText');
                 const loading = document.getElementById('loading');
                 
-                // Show loading state
                 submitBtn.disabled = true;
                 submitText.style.display = 'none';
                 loading.style.display = 'inline-block';
                 
-                // Collect form data
                 const formData = new FormData(this);
                 
-                // Debug: Show what we're sending
-                let debugMsg = 'Sending data to: submit-visit.php<br>';
-                for (let [key, value] of formData.entries()) {
-                    debugMsg += `${key}: ${value}<br>`;
-                }
-                showDebugInfo(debugMsg);
-                
-                // Send AJAX request
                 fetch('http://localhost:8080/submit-visit.php', {
                     method: 'POST',
                     body: formData
@@ -463,13 +453,11 @@
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     
-                    return response.text(); // Get as text first to debug
+                    return response.text();
                 })
                 .then(text => {
                     console.log('Raw response:', text);
-                    showDebugInfo(debugMsg + '<br><strong>Raw Response:</strong><br>' + text);
                     
-                    // Try to parse as JSON
                     let data;
                     try {
                         data = JSON.parse(text);
@@ -477,25 +465,20 @@
                         throw new Error('Invalid JSON response: ' + text);
                     }
                     
-                    // Reset button state
                     submitBtn.disabled = false;
                     submitText.style.display = 'inline';
                     loading.style.display = 'none';
                     
                     if (data.success) {
-                        // Show success message
                         document.getElementById('overlay').style.display = 'block';
                         document.getElementById('successMessage').style.display = 'block';
                         
-                        // Reset form
                         this.reset();
                         
-                        // Redirect to about us page after 5 seconds
                         setTimeout(function() {
                             window.location.href = 'about.html';
                         }, 5000);
                     } else {
-                        // Show error message
                         document.getElementById('errorText').textContent = data.message || 'There was an error processing your request. Please try again.';
                         document.getElementById('overlay').style.display = 'block';
                         document.getElementById('errorMessage').style.display = 'block';
@@ -504,14 +487,11 @@
                 .catch(error => {
                     console.error('Error:', error);
                     
-                    // Reset button state
                     submitBtn.disabled = false;
                     submitText.style.display = 'inline';
                     loading.style.display = 'none';
                     
-                    // Show detailed error message
                     let errorMessage = 'Error: ' + error.message;
-                    showDebugInfo(debugMsg + '<br><strong>Error:</strong><br>' + errorMessage);
                     
                     document.getElementById('errorText').textContent = errorMessage;
                     document.getElementById('overlay').style.display = 'block';

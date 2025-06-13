@@ -487,18 +487,8 @@
                 return responses.greetings[Math.floor(Math.random() * responses.greetings.length)];
             }
             
-            // Removed direct response for browse here as it will be redirected by quickAction
-            // if (lowerMessage.includes('browse') || lowerMessage.includes('collection') || lowerMessage.includes('cars')) {
-            //     return responses.browse;
-            // }
-            
-            // Removed direct response for financing here as it will be redirected by quickAction
-            // if (lowerMessage.includes('finance') || lowerMessage.includes('payment') || lowerMessage.includes('loan')) {
-            //     return responses.financing;
-            // }
-            
             if (lowerMessage.includes('test drive') || lowerMessage.includes('appointment') || lowerMessage.includes('schedule')) {
-                return responses.appointment; // This will trigger the popup logic in sendMessage
+                return responses.appointment;
             }
             
             if (lowerMessage.includes('trade') || lowerMessage.includes('sell') || lowerMessage.includes('exchange')) {

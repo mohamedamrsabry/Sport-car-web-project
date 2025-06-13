@@ -3,7 +3,7 @@ function initNav () {
   const nav           = document.querySelector('nav');
   const toggle        = document.getElementById('sidebarToggle');
   const overlay       = document.getElementById('sidebarOverlay');
-  if (!nav || !toggle || !overlay) return;      // fragment missing
+  if (!nav || !toggle || !overlay) return;
 
   /* hide-on-scroll */
   let last = window.scrollY;
