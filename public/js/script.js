@@ -1,5 +1,3 @@
-
-
 const sections=document.querySelectorAll('section');
 const observer=new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -16,38 +14,53 @@ sections.forEach(section => {
 }
 );
 
-
 let scaleValue = 1;
-    let opacityValue = 1;
-    let scrollingEnabled = false;
+let opacityValue = 1;
+let scrollingEnabled = false;
 
-    window.addEventListener('wheel', (event) => {
-        if (!scrollingEnabled) {
-            event.preventDefault(); // Prevent native scrolling
-            
+// Add scroll-down indicator
+const scrollIndicator = document.createElement('div');
+scrollIndicator.className = 'scroll-indicator';
+scrollIndicator.innerHTML = '<i class="fas fa-chevron-down"></i>';
+document.querySelector('.trans-image').appendChild(scrollIndicator);
 
-            if (event.deltaY > 0) {
-                scaleValue = Math.min(scaleValue + event.deltaY * 0.005, 6);
-                opacityValue = Math.max(opacityValue - event.deltaY * 0.002, 0);
-            }
-            else {
-                scaleValue = Math.max(scaleValue + event.deltaY * 0.005, 1);
-                opacityValue = Math.min(opacityValue - event.deltaY * 0.002, 1);
-            }
-
-
-            const cover = document.querySelector('.black-cover');
-            cover.style.transform = `scale(${scaleValue})`;
-            cover.style.opacity = opacityValue;
-
-            if (opacityValue <= 0) {
-                scrollingEnabled = true;
-                document.body.style.overflowY = 'auto'; 
-                cover.style.display = 'none'; 
-            }
+window.addEventListener('wheel', (event) => {
+    if (!scrollingEnabled) {
+        event.preventDefault(); // Prevent native scrolling
+        
+        if (event.deltaY > 0) {
+            scaleValue = Math.min(scaleValue + event.deltaY * 0.005, 6);
+            opacityValue = Math.max(opacityValue - event.deltaY * 0.002, 0);
         }
-    }, { passive: false });
+        else {
+            scaleValue = Math.max(scaleValue + event.deltaY * 0.005, 1);
+            opacityValue = Math.min(opacityValue - event.deltaY * 0.002, 1);
+        }
 
+        const cover = document.querySelector('.black-cover');
+        cover.style.transform = `scale(${scaleValue})`;
+        cover.style.opacity = opacityValue;
+
+        // Parallax effect for hero text
+        const textOverlay = document.querySelector('.text-overlay');
+        const parallaxY = Math.min(scaleValue * 40, 120); // Move up as you scroll
+        const textScale = Math.max(1 - (scaleValue - 1) * 0.15, 0.7); // Scale down
+        textOverlay.style.transform = `translateY(-${parallaxY}px) scale(${textScale})`;
+        textOverlay.style.opacity = opacityValue + 0.2;
+
+        // Fade out scroll indicator
+        scrollIndicator.style.opacity = Math.max(opacityValue * 2 - 0.2, 0);
+
+        if (opacityValue <= 0) {
+            scrollingEnabled = true;
+            document.body.style.overflowY = 'auto'; 
+            cover.style.display = 'none'; 
+            scrollIndicator.style.display = 'none';
+            textOverlay.style.transform = '';
+            textOverlay.style.opacity = '';
+        }
+    }
+}, { passive: false });
 
 document.addEventListener("DOMContentLoaded", () => {
     let counter = document.getElementById("speedCounter");
@@ -129,7 +142,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-
 var swiper = new Swiper(".vehicles-slider", {
     allowTouchMove: true,
     simulateTouch: true,
@@ -163,7 +175,6 @@ var swiper = new Swiper(".vehicles-slider", {
     },
     
   });
-
 
 let cars = []; // This will store our fetched cars
 
