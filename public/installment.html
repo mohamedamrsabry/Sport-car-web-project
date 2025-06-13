@@ -477,13 +477,12 @@ function updateModels() {
 
 // Get car price from fetched data
 function getCarPrice(model) {
-    if (!cars.length) return 750000; // Default fallback
+    if (!cars.length) return 750000;
 
     const selectedCar = cars.find(car => car.model === model);
     
     if (!selectedCar) return 750000;
 
-    // Try different common property names for price
     let carPrice = 0;
     
     if (selectedCar.price) {
@@ -495,14 +494,13 @@ function getCarPrice(model) {
     } else if (selectedCar.value) {
         carPrice = parseFloat(selectedCar.value.toString().replace(/[,$]/g, ''));
     } else {
-        carPrice = 750000; // Default fallback
+        carPrice = 750000;
         console.log('No price found for selected car, using default price');
         console.log('Available car properties:', Object.keys(selectedCar));
     }
 
-    // Ensure we have valid numbers
     if (isNaN(carPrice) || carPrice <= 0) {
-        carPrice = 750000; // Default fallback
+        carPrice = 750000;
     }
 
     return carPrice;
@@ -511,10 +509,8 @@ function getCarPrice(model) {
 // Fallback to hardcoded data if fetch fails
 function useHardcodedData() {
     const carModels = {
-
     };
 
-    // Convert hardcoded data to match expected format
     cars = [];
     Object.keys(carModels).forEach(make => {
         carModels[make].forEach(model => {

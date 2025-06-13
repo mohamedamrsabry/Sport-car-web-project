@@ -527,22 +527,12 @@
                 const submitText = document.getElementById('submitText');
                 const loading = document.getElementById('loading');
                 
-                // Show loading state
                 submitBtn.disabled = true;
                 submitText.style.display = 'none';
                 loading.style.display = 'inline-block';
                 
-                // Collect form data
                 const formData = new FormData(this);
                 
-                // Debug: Show what we're sending
-                let debugMsg = 'Sending data to: submit-quote.php<br>';
-                for (let [key, value] of formData.entries()) {
-                    debugMsg += `${key}: ${value}<br>`;
-                }
-                showDebugInfo(debugMsg);
-                
-                // Send AJAX request
                 fetch('http://localhost:8080/submit-quote.php', {
                     method: 'POST',
                     body: formData
@@ -555,11 +545,11 @@
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     
-                    return response.text(); // Get as text first to debug
+                    return response.text();
                 })
                 .then(text => {
                     console.log('Raw response:', text);
-                    showDebugInfo(debugMsg + '<br><strong>Raw Response:</strong><br>' + text);
+                    showDebugInfo(text);
                     
                     // Try to parse as JSON
                     let data;
@@ -605,7 +595,7 @@
                     
                     // Show detailed error message
                     let errorMessage = 'Error: ' + error.message;
-                    showDebugInfo(debugMsg + '<br><strong>Error:</strong><br>' + errorMessage);
+                    showDebugInfo(errorMessage);
                     
                     document.getElementById('errorText').textContent = errorMessage;
                     document.getElementById('overlay').style.display = 'block';
