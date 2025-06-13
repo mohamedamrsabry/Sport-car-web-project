@@ -1,0 +1,12 @@
+{
+  "build": {
+    "commands": [
+      "cd backend",
+      "npm install"
+    ]
+  },
+  "start": {
+    "cmd": "npm start",
+    "cwd": "backend"
+  }
+}
