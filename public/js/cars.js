@@ -1,4 +1,5 @@
 let cars = []; // Will store fetched cars
+let currentCar = null; // Current car being viewed
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
@@ -13,7 +14,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
     
     const carId = getQueryParam("id");
-    const car = cars.find(c => c.id == carId); // Use loose equality for string/number
+    const car = cars.find(c => c.id == carId);
+    currentCar = car; // Set global current car
 
     if (car) {
       // Set page title and heading
@@ -89,6 +91,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // Render similar cars
       renderSimilarCars(cars, car);
+      
+      // Initialize comparison dropdown after cars are loaded
+      populateCompareDropdown();
+      
     } else {
       document.title = "Car Not Found";
       document.getElementById("car-title").textContent = "Car not found";
@@ -137,8 +143,8 @@ function renderSimilarCars(allCars, currentCar) {
     }
   });
 }
-/* Simple intersection/fade-in.
-   Add once, it will work for as many "luxury--card"s as you have. */
+
+// Scroll reveal animation
 (function () {
   const cards = document.querySelectorAll('.luxury--card');
 
@@ -151,149 +157,204 @@ function renderSimilarCars(allCars, currentCar) {
     });
   };
 
-  reveal();                    // run on load
+  reveal();
   window.addEventListener('scroll', reveal);
 })();
-// Add these functions to your existing cars.js file
 
-// Global variable to store all cars data for comparison
-let allCarsData = [];
-let currentCarData = null;
-
-// Function to load all cars for comparison dropdown
-async function loadAllCarsForComparison() {
-    try {
-        // This would typically be an API call to get all cars
-        // For now, using sample data - replace with your actual data source
-        const response = await fetch('/api/cars'); // Replace with your API endpoint
-        allCarsData = await response.json();
-        
-        // Populate the compare dropdown
-        populateCompareDropdown();
-    } catch (error) {
-        console.error('Error loading cars data:', error);
-        // Fallback sample data
-        allCarsData = getSampleCarsData();
-        populateCompareDropdown();
-    }
-}
-
-// Sample data function - replace this with your actual data
-function getSampleCarsData() {
-    return [
-        {
-            id: 'bmw-x5',
-            name: 'BMW X5 2024',
-            brand: 'BMW',
-            price: '$75,000',
-            engine: '3.0L Turbo I6',
-            horsepower: '335 HP',
-            transmission: '8-Speed Automatic',
-            fuelType: 'Gasoline',
-            drivetrain: 'AWD',
-            seating: '7 seats',
-            fuelEconomy: '21/26 MPG',
-            topSpeed: '155 mph',
-            acceleration: '5.3 seconds (0-60)',
-            image: '/partials/img/bmw-x5.jpg' // Replace with actual image path
-        },
-        {
-            id: 'mercedes-gle',
-            name: 'Mercedes GLE 2024',
-            brand: 'Mercedes',
-            price: '$73,500',
-            engine: '2.0L Turbo I4',
-            horsepower: '255 HP',
-            transmission: '9-Speed Automatic',
-            fuelType: 'Gasoline',
-            drivetrain: 'AWD',
-            seating: '5 seats',
-            fuelEconomy: '23/29 MPG',
-            topSpeed: '130 mph',
-            acceleration: '6.2 seconds (0-60)',
-            image: '/partials/img/mercedes-gle.jpg'
-        },
-        {
-            id: 'audi-q7',
-            name: 'Audi Q7 2024',
-            brand: 'Audi',
-            price: '$71,200',
-            engine: '3.0L Turbo V6',
-            horsepower: '335 HP',
-            transmission: '8-Speed Automatic',
-            fuelType: 'Gasoline',
-            drivetrain: 'AWD',
-            seating: '7 seats',
-            fuelEconomy: '20/25 MPG',
-            topSpeed: '155 mph',
-            acceleration: '5.7 seconds (0-60)',
-            image: '/partials/img/audi-q7.jpg'
-        }
-        // Add more cars as needed
-    ];
-}
+// COMPARISON FUNCTIONS
+// ====================
 
 // Populate the compare dropdown with available cars
 function populateCompareDropdown() {
-    const compareSelect = document.getElementById('compareCar');
-    const currentCarId = getCurrentCarId(); // You'll need to implement this
-    
-    // Clear existing options except the first one
-    compareSelect.innerHTML = '<option value="">Select a car to compare</option>';
-    
-    // Add cars to dropdown (excluding current car)
-    allCarsData.forEach(car => {
-        if (car.id !== currentCarId) {
-            const option = document.createElement('option');
-            option.value = car.id;
-            option.textContent = car.name;
-            compareSelect.appendChild(option);
-        }
-    });
-}
-
-// Get current car ID from URL or page data
-function getCurrentCarId() {
-    // Extract car ID from URL or page data
-    // This is a simple example - adjust based on your URL structure
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('id') || 'bmw-x5'; // Default fallback
-}
-
-// Set current car data
-function setCurrentCarData() {
-    const currentCarId = getCurrentCarId();
-    currentCarData = allCarsData.find(car => car.id === currentCarId);
-    
-    if (currentCarData) {
-        document.getElementById('currentCarOption').textContent = currentCarData.name;
+  const compareSelect = document.getElementById('compareCar');
+  
+  if (!compareSelect || !cars.length) return;
+  
+  // Clear existing options
+  compareSelect.innerHTML = '<option value="">Choose a car to compare...</option>';
+  
+  // Add cars to dropdown (excluding current car)
+  cars.forEach(car => {
+    if (currentCar && car.id != currentCar.id) {
+      const option = document.createElement('option');
+      option.value = car.id;
+      option.textContent = `${car.year} ${car.make} ${car.model}`;
+      compareSelect.appendChild(option);
     }
+  });
 }
 
 // Open compare modal
 function openCompareModal() {
-    // Load cars data if not already loaded
-    if (allCarsData.length === 0) {
-        loadAllCarsForComparison();
-    }
-    
-    setCurrentCarData();
-    document.getElementById('compareModal').style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+  const modal = document.getElementById('compareModal');
+  if (!modal) {
+    console.error('Compare modal not found in HTML');
+    return;
+  }
+  
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  
+  // Ensure dropdown is populated
+  populateCompareDropdown();
+  
+  // Reset the comparison
+  const compareSelect = document.getElementById('compareCar');
+  const comparisonResult = document.getElementById('comparisonResult');
+  
+  if (compareSelect) compareSelect.value = '';
+  if (comparisonResult) {
+    comparisonResult.innerHTML = `
+      <div class="no-comparison">
+        Select a car from the dropdown above to start comparing
+      </div>
+    `;
+  }
 }
 
 // Close compare modal
 function closeCompareModal() {
-    document.getElementById('compareModal').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Restore scrolling
-    
-    // Reset the comparison
-    document.getElementById('compareCar').value = '';
-    document.getElementById('comparisonResult').innerHTML = `
-        <div class="no-comparison">
-            Select a car from the dropdown above to start comparing
-        </div>
-    `;
+  const modal = document.getElementById('compareModal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
 }
 
-// Update comparison
+// Update comparison with slide-up animation
+function updateComparison() {
+  const selectedCarId = document.getElementById('compareCar').value;
+  const comparisonResult = document.getElementById('comparisonResult');
+  const loading = document.getElementById('loading');
+  
+  if (!selectedCarId) {
+    comparisonResult.innerHTML = `
+      <div class="no-comparison">
+        Select a car from the dropdown above to start comparing
+      </div>
+    `;
+    return;
+  }
+
+  // Show loading animation
+  if (loading) loading.classList.add('show');
+  if (comparisonResult) comparisonResult.style.opacity = '0';
+  
+  // Simulate loading delay for better UX
+  setTimeout(() => {
+    const selectedCar = cars.find(car => car.id == selectedCarId);
+    
+    if (selectedCar && currentCar) {
+      renderComparison(currentCar, selectedCar);
+    }
+    
+    // Hide loading and show result with animation
+    if (loading) loading.classList.remove('show');
+    if (comparisonResult) comparisonResult.style.opacity = '1';
+    
+    // Trigger the slide-up animation
+    const container = comparisonResult.querySelector('.comparison-container');
+    if (container) {
+      setTimeout(() => {
+        container.classList.add('show');
+      }, 100);
+    }
+  }, 800);
+}
+
+// Render the comparison
+function renderComparison(currentCarData, compareCarData) {
+  const comparisonResult = document.getElementById('comparisonResult');
+  
+  // Map your car data structure to display labels
+  const getCarDisplayData = (car) => {
+    return {
+      name: `${car.year} ${car.make} ${car.model}`,
+      price: car.price,
+      image: car.image || `/partials/img/products/${car.make} ${car.model}/${car.make} ${car.model}.jpg`,
+      year: car.year,
+      engine: car.engine || 'N/A',
+      horsepower: car.horsepower ? `${car.horsepower} hp` : 'N/A',
+      mileage: car.mileage ? `${car.mileage} km` : 'N/A',
+      condition: car.condition || 'N/A',
+      doors: car.doors || 'N/A',
+      exteriorColor: car.exteriorColor || 'N/A',
+      interiorColor: car.interiorColor || 'N/A'
+    };
+  };
+
+  const currentDisplay = getCarDisplayData(currentCarData);
+  const compareDisplay = getCarDisplayData(compareCarData);
+
+  function createCarCard(carData, isCurrent = false) {
+    return `
+      <div class="car-card ${isCurrent ? 'current-car' : ''}">
+        <div class="car-header">
+          <div class="car-name">${carData.name}</div>
+          <div class="car-price">${carData.price}</div>
+        </div>
+        <div class="specs-grid">
+          <div class="spec-row">
+            <div class="spec-label">Year</div>
+            <div class="spec-value">${carData.year}</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Engine</div>
+            <div class="spec-value">${carData.engine}</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Horsepower</div>
+            <div class="spec-value">${carData.horsepower}</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Mileage</div>
+            <div class="spec-value">${carData.mileage}</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Condition</div>
+            <div class="spec-value">${carData.condition}</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Doors</div>
+            <div class="spec-value">${carData.doors}</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Exterior Color</div>
+            <div class="spec-value">${carData.exteriorColor}</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Interior Color</div>
+            <div class="spec-value">${carData.interiorColor}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  comparisonResult.innerHTML = `
+    <div class="comparison-container">
+      <div class="comparison-grid">
+        ${createCarCard(currentDisplay, true)}
+        ${createCarCard(compareDisplay)}
+      </div>
+    </div>
+  `;
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Close modal when clicking outside
+  window.addEventListener('click', function(event) {
+    const modal = document.getElementById('compareModal');
+    if (event.target === modal) {
+      closeCompareModal();
+    }
+  });
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeCompareModal();
+    }
+  });
+});

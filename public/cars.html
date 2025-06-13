@@ -44,8 +44,29 @@
 <section>
     <div class="enquire-btn">
         <button id="enquire-button" class="enquire-button" onclick="location.href='/quota.html'">Enquire Now</button>
-        <button class="compare-button" id="compare-btn">Compare Cars</button>
+        <button class="compare-button" id="compare-btn" onclick="openCompareModal()">Compare Cars</button>
     </div>
+    <div id="compareModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Compare Cars</h2>
+      <span class="close" onclick="closeCompareModal()">&times;</span>
+    </div>
+    <div class="modal-body">
+      <div class="car-selector">
+        <h3>Select a car to compare with:</h3>
+        <select id="compareCar" onchange="updateComparison()">
+          <option value="">Choose a car to compare...</option>
+        </select>
+      </div>
+
+      <div id="comparisonResult">
+        <div class="no-comparison">
+          Select a car from the dropdown above to start comparing
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 
@@ -116,33 +137,6 @@
 <script src="/js/nav.js"></script>
 <script src="/js/loader.js" type="module"></script>
 <script src="/js/newsletter.js"></script>
-<!-- Compare Modal -->
-<div id="compareModal" class="compare-modal">
-    <div class="compare-modal-content">
-        <span class="close-modal" id="close-modal">&times;</span>
-        <h2 class="modal-title">COMPARE CARS</h2>
-        
-        <div class="car-selector">
-            <div class="car-select-box">
-                <h3>Current Car</h3>
-                <select class="car-dropdown" id="currentCar" disabled>
-                    <option id="currentCarOption">Loading...</option>
-                </select>
-            </div>
-            <div class="car-select-box">
-                <h3>Compare With</h3>
-                <select class="car-dropdown" id="compareCar">
-                    <option value="">Select a car to compare</option>
-                </select>
-            </div>
-        </div>
 
-        <div id="comparisonResult">
-            <div class="no-comparison">
-                Select a car from the dropdown above to start comparing
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 </html>
