@@ -435,9 +435,9 @@
     font-size: 2rem;
     font-family: 'FrontageRegular';
     padding: 20px 120px;
-    background-color: #1a1a1a;
+    background-color: #000000;
     color: #ccc;
-    border: 1px solid #666;
+    border: 1px solid #b6a15a;
     transition: all .4s;
     margin: 10px;
     cursor: pointer;
@@ -468,7 +468,7 @@
 }
 
 .compare-modal-content {
-    background-color: #1a1a1a;
+    background-color: #000000;
     margin: 2% auto;
     padding: 30px;
     border: 2px solid #b6a15a;
@@ -525,8 +525,8 @@
 .car-dropdown {
     width: 100%;
     padding: 15px;
-    background-color: #2a2a2a;
-    border: 1px solid #666;
+    background-color: #000000;
+    border: 1px solid #b6a15a;
     border-radius: 5px;
     color: white;
     font-size: 1.1rem;
