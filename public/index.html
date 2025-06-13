@@ -350,76 +350,60 @@
         </div>
     </section> 
 
-    <!-- Customer Reviews Section -->
-    <section class="reviews-section">
-        <div class="reviews-container">
-            <div class="reviews-header">
-                <h2 class="luxury-heading">Client Experiences</h2>
-                <p class="luxury-subheading">Discover What Our Distinguished Clients Say About Their Journey</p>
-            </div>
-
-            <div class="reviews-grid">
-                <article class="review-card">
-                    <div class="review-header">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="James Wilson" class="reviewer-image">
-                        <div class="reviewer-info">
-                            <h3 class="reviewer-name">James Wilson</h3>
-                            <p class="review-date">March 15, 2025</p>
-                        </div>
-                    </div>
-                    <div class="review-rating">★★★★★</div>
-                    <p class="review-content">
-                        "The Ferrari 812 Superfast is a masterpiece of engineering and design. 
-                        The perfect balance of power and refinement makes every journey 
-                        a pleasure. The carbon fiber accents and premium materials 
-                        create an atmosphere of pure luxury. STRADA AUTO's showroom experience 
-                        was equally impressive - their knowledgeable staff guided me through 
-                        every detail of the car. The entire purchase process was seamless and professional."
-                    </p>
-                    <p class="review-model">Ferrari 812 Superfast</p>
-                </article>
-
-                <article class="review-card">
-                    <div class="review-header">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Sarah Chen" class="reviewer-image">
-                        <div class="reviewer-info">
-                            <h3 class="reviewer-name">Sarah Chen</h3>
-                            <p class="review-date">February 28, 2025</p>
-                        </div>
-                    </div>
-                    <div class="review-rating">★★★★★</div>
-                    <p class="review-content">
-                        "The Rolls-Royce Phantom is a masterpiece of luxury and craftsmanship. 
-                        The attention to detail in the handcrafted interior is simply 
-                        breathtaking. Every drive feels like a special occasion, and the 
-                        performance is nothing short of extraordinary. What truly sets STRADA AUTO apart 
-                        is their exceptional service - from the elegant showroom experience to the 
-                        personalized attention throughout the entire process. Their team's expertise 
-                        and dedication to excellence made this purchase truly memorable."
-                    </p>
-                    <p class="review-model">Rolls-Royce Phantom</p>
-                </article>
-
-                <article class="review-card">
-                    <div class="review-header">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Michael Rodriguez" class="reviewer-image">
-                        <div class="reviewer-info">
-                            <h3 class="reviewer-name">Michael Rodriguez</h3>
-                            <p class="review-date">December 10, 2024</p>
-                        </div>
-                    </div>
-                    <div class="review-rating">★★★★★</div>
-                    <p class="review-content">
-                        "The bespoke experience was beyond anything I could have imagined. 
-                        The team's dedication to perfection is evident in every detail. 
-                        From the initial consultation to the final delivery, the service 
-                        was impeccable."
-                    </p>
-                    <p class="review-model">Lamborghini Revuelto</p>
-                </article>
-            </div>
+    <!-- Car Video Showcase Section (replaces Client Experiences) -->
+    <section class="car-videos-section" style="padding: 6rem 0; background: black; border-top: 1px solid rgba(255,202,102,0.1);">
+      <div class="container" style="max-width: 900px; margin: 0 auto;">
+        <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+          <h2 class="luxury-heading" style="color: #d4af37; text-shadow: 0 0 10px #d4af37, 0 0 15px #d4af37; font-family: 'FrontageRegular';">Car Video Highlights</h2>
+          <p class="luxury-subheading" style="color: #d4af37; opacity: 0.8; font-family: 'FrontageRegular';">Experience the thrill of our finest cars in motion</p>
         </div>
-    </section> 
+        <div class="car-videos-cards" style="display: flex; flex-direction: column; gap: 2.5rem;">
+          <!-- Card 1: Place your first car video here -->
+          <div class="car-video-card" style="background: rgba(0,0,0,0.7); border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); padding: 2rem; display: flex; flex-direction: column; align-items: center;">
+            <video class="hover-play" poster="/partials/img/video-thumb1.jpg" style="width: 100%; max-width: 700px; border-radius: 15px;">
+              <!-- Replace the src below with your first car video file -->
+              <source src="/partials/vids/car-video-1.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <h3 style="color: #d4af37; margin-top: 1.2rem;">Supercar Acceleration</h3>
+            <p style="color: #ccc;">Feel the power and speed of our latest supercar model.</p>
+          </div>
+          <!-- Card 2: Place your second car video here -->
+          <div class="car-video-card" style="background: rgba(0,0,0,0.7); border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); padding: 2rem; display: flex; flex-direction: column; align-items: center;">
+            <video class="hover-play" poster="/partials/img/video-thumb2.jpg" style="width: 100%; max-width: 700px; border-radius: 15px;">
+              <!-- Replace the src below with your second car video file -->
+              <source src="/partials/vids/car-video-2.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <h3 style="color: #d4af37; margin-top: 1.2rem;">Luxury Interior Tour</h3>
+            <p style="color: #ccc;">Explore the exquisite interior craftsmanship and features.</p>
+          </div>
+          <!-- Card 3: Place your third car video here -->
+          <div class="car-video-card" style="background: rgba(0,0,0,0.7); border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); padding: 2rem; display: flex; flex-direction: column; align-items: center;">
+            <video class="hover-play" poster="/partials/img/video-thumb3.jpg" style="width: 100%; max-width: 700px; border-radius: 15px;">
+              <!-- Replace the src below with your third car video file -->
+              <source src="/partials/vids/car-video-3.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <h3 style="color: #d4af37; margin-top: 1.2rem;">Track Performance</h3>
+            <p style="color: #ccc;">Watch the car dominate the track with precision handling.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Car Video Showcase Section -->
+
+    <!-- Add this script at the end of the body to enable hover play -->
+    <script>
+      document.querySelectorAll('.hover-play').forEach(video => {
+        video.addEventListener('mouseenter', () => {
+          video.play();
+        });
+        video.addEventListener('mouseleave', () => {
+          video.pause();
+        });
+      });
+    </script>
 
     <!-- Contact Information -->
      <section class="contact-info" style=" padding: 80px 0; background: #000000; color: white;">
