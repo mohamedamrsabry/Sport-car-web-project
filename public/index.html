@@ -350,7 +350,7 @@
         </div>
     </section> 
 
-    <!-- Car Video Showcase Section (replaces Client Experiences) -->
+    <!-- Car Video Showcase Section (custom layout) -->
     <section class="car-videos-section" style="padding: 6rem 0; background: black; border-top: 1px solid rgba(255,202,102,0.1);">
       <div class="container" style="max-width: 900px; margin: 0 auto;">
         <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
@@ -358,31 +358,40 @@
           <p class="luxury-subheading" style="color: #d4af37; opacity: 0.8; font-family: 'FrontageRegular';">Experience the thrill of our finest cars in motion</p>
         </div>
         <div class="car-videos-cards" style="display: flex; flex-direction: column; gap: 2.5rem;">
-          <!-- Card 1: Place your first car video here -->
+          <!-- Top Horizontal Video Card -->
           <div class="car-video-card" style="background: rgba(0,0,0,0.7); border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); padding: 2rem; display: flex; flex-direction: column; align-items: center;">
-            <video class="hover-play" poster="/partials/img/video-thumb1.jpg" style="width: 100%; max-width: 700px; border-radius: 15px;">
-              <!-- Replace the src below with your first car video file -->
-              <source src="/partials/vids/car-video-1.mp4" type="video/mp4">
+            <video class="hover-play" poster="/partials/img/lamborghini-preview.jpg" style="width: 100%; max-width: 700px; aspect-ratio: 16/9; border-radius: 15px;">
+              <source src="/partials/vids/lamborghini.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
             <h3 style="color: #d4af37; margin-top: 1.2rem;">Supercar Acceleration</h3>
             <p style="color: #ccc;">Feel the power and speed of our latest supercar model.</p>
           </div>
-          <!-- Card 2: Place your second car video here -->
-          <div class="car-video-card" style="background: rgba(0,0,0,0.7); border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); padding: 2rem; display: flex; flex-direction: column; align-items: center;">
-            <video class="hover-play" poster="/partials/img/video-thumb2.jpg" style="width: 100%; max-width: 700px; border-radius: 15px;">
-              <!-- Replace the src below with your second car video file -->
-              <source src="/partials/vids/car-video-2.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <h3 style="color: #d4af37; margin-top: 1.2rem;">Luxury Interior Tour</h3>
-            <p style="color: #ccc;">Explore the exquisite interior craftsmanship and features.</p>
+          <!-- Row of 2 Vertical Video Cards -->
+          <div class="car-videos-row" style="display: flex; flex-direction: row; gap: 2rem; justify-content: center;">
+            <!-- Vertical Card 1 -->
+            <div class="car-video-card" style="flex: 1 1 0; background: rgba(0,0,0,0.7); border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); padding: 2rem; display: flex; flex-direction: column; align-items: center; max-width: 320px;">
+              <video class="hover-play" poster="/partials/img/vertical-preview1.jpg" style="width: 100%; aspect-ratio: 9/16; max-width: 270px; border-radius: 15px;">
+                <source src="/partials/vids/3A5CC45E-2897-473F-96C9-C5D7D871A9AB.mov" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <h3 style="color: #d4af37; margin-top: 1.2rem;">Vertical Car Feature 1</h3>
+              <p style="color: #ccc;">Showcase a unique vertical video of your car.</p>
+            </div>
+            <!-- Vertical Card 2 -->
+            <div class="car-video-card" style="flex: 1 1 0; background: rgba(0,0,0,0.7); border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); padding: 2rem; display: flex; flex-direction: column; align-items: center; max-width: 320px;">
+              <video class="hover-play" poster="/partials/img/vertical-preview2.jpg" style="width: 100%; aspect-ratio: 9/16; max-width: 270px; border-radius: 15px;">
+                <source src="/partials/vids/lamborghini.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <h3 style="color: #d4af37; margin-top: 1.2rem;">Vertical Car Feature 2</h3>
+              <p style="color: #ccc;">Showcase another vertical video of your car.</p>
+            </div>
           </div>
-          <!-- Card 3: Place your third car video here -->
+          <!-- Bottom Horizontal Video Card -->
           <div class="car-video-card" style="background: rgba(0,0,0,0.7); border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); padding: 2rem; display: flex; flex-direction: column; align-items: center;">
-            <video class="hover-play" poster="/partials/img/video-thumb3.jpg" style="width: 100%; max-width: 700px; border-radius: 15px;">
-              <!-- Replace the src below with your third car video file -->
-              <source src="/partials/vids/car-video-3.mp4" type="video/mp4">
+            <video class="hover-play" poster="/partials/img/lamborghini-preview2.jpg" style="width: 100%; max-width: 700px; aspect-ratio: 16/9; border-radius: 15px;">
+              <source src="/partials/vids/lamborghini.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
             <h3 style="color: #d4af37; margin-top: 1.2rem;">Track Performance</h3>
