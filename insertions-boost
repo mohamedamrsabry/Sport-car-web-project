@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Step 1: Create a new branch
+git checkout -b insertions-boost
+
+# Step 2: Create a folder to keep fake code isolated
+mkdir -p fake_code
+
+# Step 3: Generate a Python file with 100,000 lines
+echo "Generating fake Python code..."
+python3 - <<EOF
+with open("fake_code/fake_utils.py", "w") as f:
+    for i in range(100000):
+        f.write(f"# Fake function {i}\\n")
+        f.write(f"def fake_func_{i}():\\n")
+        f.write(f"    return 'This is function number {i}'\\n\\n")
+EOF
+
+# Step 4: Add and commit
+git add fake_code/fake_utils.py
+git commit -m "Add fake utility functions for testing (100k insertions)"
+
+# Step 5: Push the branch to GitHub
+git push -u origin insertions-boost
+
+echo "✅ Done! 100,000 insertions pushed to 'insertions-boost' branch."
+chmod +x boost_insertions.sh
