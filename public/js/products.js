@@ -32,20 +32,20 @@ divs.forEach(div => {
 );
 
 
-// create one IntersectionObserver at top of file
+
 const revealObserver = new IntersectionObserver(
   entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        revealObserver.unobserve(e.target);      // animate only once
+        revealObserver.unobserve(e.target);      
       }
     });
   },
   { threshold: 0.1 }
 );
 
-// observe anything that is already present and should animate
+
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 let cars = [];
@@ -54,7 +54,7 @@ async function fetchCars() {
   try {
     const res = await fetch("http://localhost:3000/cars");
     cars = await res.json();
-    populateFilters(); // now populate dropdowns
+    populateFilters(); 
     const makeParam = getQueryParam("make");
     if (makeParam) {
       document.getElementById("makeFilter").value = makeParam;
@@ -68,16 +68,16 @@ async function fetchCars() {
   }
 }
 
-fetchCars(); // call the function on load
+fetchCars(); 
 
 
-/* ----------  renderCars  ---------- */
+
 function renderCars(carList) {
   const container = document.getElementById("carList");
   container.innerHTML = "";
   carList.forEach(car => {
     const card = document.createElement("div");
-    card.className = "car-card reveal";   // starts hidden
+    card.className = "car-card reveal";  
     card.innerHTML = `
         <img src="${car.image}" alt="${car.make} ${car.model}" />
         <h3>${car.year} ${car.make.toUpperCase()} ${car.model.toUpperCase()}</h3>
@@ -90,7 +90,7 @@ function renderCars(carList) {
         <button class="btn" onclick="location.href='cars.html?id=${car.id}'">Check Out</button>`;
     container.appendChild(card);
 
-    revealObserver.observe(card);         // now it will animate
+    revealObserver.observe(card);         
   });
 }
   function parsePrice(priceStr){
@@ -98,18 +98,18 @@ function renderCars(carList) {
 }
   
   function applyFilters() {
-    // Existing dropdown values
+    
     const make  = document.getElementById("makeFilter").value;
     const model = document.getElementById("modelFilter").value;
     const year  = document.getElementById("yearFilter").value;
 
-    // NEW: price-range values (default 0 → Infinity)
+    
     const priceFrom = +document.getElementById("priceFrom").value || 0;
     const priceTo   = +document.getElementById("priceTo").value   || Infinity;
 
-    // Apply every active filter
+  
     const filtered = cars.filter(car => {
-        const priceNum = parsePrice(car.price);   // helper from Step-3
+        const priceNum = parsePrice(car.price);   
         return (!make  || car.make  === make)  &&
                (!model || car.model === model) &&
                (!year  || car.year.toString() === year) &&
@@ -125,33 +125,33 @@ function populateFilters() {
     const modelSelect = document.getElementById("modelFilter");
     const yearSelect = document.getElementById("yearFilter");
 
-    // Populate the make dropdown
+    
     const makeSet = new Set(cars.map(car => car.make));
     fillOptions(makeSelect, makeSet);
 
-    // Update model and year dropdowns based on selected make
+  
     makeSelect.addEventListener("change", () => {
         const selectedMake = makeSelect.value;
 
-        // Filter models based on selected make
+        
         const filteredModels = cars
             .filter(car => car.make === selectedMake || !selectedMake)
             .map(car => car.model);
         const modelSet = new Set(filteredModels);
 
-        // Populate the model dropdown
+        
         fillOptions(modelSelect, modelSet);
 
-        // Clear and repopulate the year dropdown
+       
         yearSelect.innerHTML = '<option value="">Select Year</option>';
     });
 
-    // Update year dropdown based on selected model
+    
     modelSelect.addEventListener("change", () => {
         const selectedMake = makeSelect.value;
         const selectedModel = modelSelect.value;
 
-        // Filter years based on selected make and model
+        
         const filteredYears = cars
             .filter(car =>
                 (car.make === selectedMake || !selectedMake) &&
@@ -160,7 +160,7 @@ function populateFilters() {
             .map(car => car.year);
         const yearSet = new Set(filteredYears);
 
-        // Populate the year dropdown
+     
         fillOptions(yearSelect, yearSet);
     });
 }
@@ -187,21 +187,21 @@ function getQueryParam(param) {
 }
 
 
-// Initialize page
-window.onload = () => {
-    populateFilters(); // Populate the dropdowns first
 
-    const makeParam = getQueryParam("make"); // Get the 'make' query parameter
+window.onload = () => {
+    populateFilters();
+
+    const makeParam = getQueryParam("make"); 
     const makeSelect = document.getElementById("makeFilter");
 
     if (makeParam) {
-        makeSelect.value = makeParam; // Set the make filter to the query parameter value
-        makeSelect.dispatchEvent(new Event("change")); // Trigger the change event to update models and years
+        makeSelect.value = makeParam; 
+        makeSelect.dispatchEvent(new Event("change")); 
 
-        // Directly call the applyFilters function instead of relying on a button click
+        
         applyFilters();
     } else {
-        // Render all cars if no filter is applied
+        
         renderCars(cars);
     }
 };
