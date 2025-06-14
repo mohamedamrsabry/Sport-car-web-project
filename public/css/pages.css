@@ -119,7 +119,7 @@
     }
 }
 
-/* Include-html.js fallback for local development */
+
 [data-include]{
     display: contents;
 }
