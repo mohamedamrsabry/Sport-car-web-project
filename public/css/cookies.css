@@ -1,4 +1,4 @@
-
+/* Cookie Consent Popup Styles */
 .cookie-consent-overlay {
     position: fixed;
     top: 0;
@@ -182,7 +182,7 @@
     transform: translateX(25px);
 }
 
-
+/* Responsive */
 @media (max-width: 768px) {
     .cookie-consent-popup {
         padding: 20px;

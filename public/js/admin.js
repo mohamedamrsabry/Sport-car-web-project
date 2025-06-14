@@ -1,25 +1,30 @@
+const ADMIN_CREDENTIALS = {
+    username: "admin",
+    password: "admin123"
+};
 
-// DOM Elements for login
+
 const loginModal = document.getElementById('loginModal');
 const loginForm = document.getElementById('loginForm');
 const loginBtn = document.getElementById('loginBtn');
 const mainContainer = document.querySelector('.container');
 const modal = document.getElementById('carModal');
 
-// Image upload elements
+
+
 const dragDropArea = document.getElementById('dragDropArea');
 const imageInput = document.getElementById('imageInput');
 const uploadedImages = document.getElementById('uploadedImages');
 let selectedImages = [];
 
-// Store original dashboard content
+
 let originalDashboardContent = '';
 
-// Initially hide the main content
+
 mainContainer.style.display = 'none';
 
-// Login functionality
-loginBtn.addEventListener('click', async () => {
+
+loginBtn.addEventListener('click', () => {
     if (!loginForm.checkValidity()) {
         loginForm.reportValidity();
         return;
@@ -28,43 +33,32 @@ loginBtn.addEventListener('click', async () => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     
-    try {
-        const response = await fetch('/admin/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password })
-        });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            loginModal.classList.remove('active');
-            mainContainer.style.display = 'flex';
-            document.body.style.overflow = 'auto';
-            fetchCars();
-        } else {
-            showToast('Invalid credentials', 'error');
-        }
-    } catch (error) {
-        showToast('Login failed', 'error');
+    if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+       
+
+        loginModal.classList.remove('active');
+        mainContainer.style.display = 'flex';
+        document.body.style.overflow = 'auto';
+        fetchCars();
+    } else {
+        showToast('Invalid credentials', 'error');
     }
 });
 
-// Image upload functionality
+
 function setupImageUpload() {
-    // Click to browse files
+    
+
     dragDropArea.addEventListener('click', () => {
         imageInput.click();
     });
     
-    // File input change
+    
     imageInput.addEventListener('change', (e) => {
         handleFiles(e.target.files);
     });
     
-    // Drag and drop events
+    
     dragDropArea.addEventListener('dragover', (e) => {
         e.preventDefault();
         dragDropArea.classList.add('drag-over');
@@ -122,17 +116,20 @@ function removeImage(index) {
     displayImagePreviews();
 }
 
-// Close modal when clicking outside (but prevent closing for login modal)
+
+
 modal.addEventListener('click', (e) => {
     if (e.target === modal && !loginModal.classList.contains('active')) {
         closeModal();
     }
 });
 
-// Current car being edited
+
+
 let currentCarId = null;
 
-// DOM Elements
+
+
 const carsTableBody = document.getElementById('carsTableBody');
 const carForm = document.getElementById('carForm');
 const addCarBtn = document.getElementById('addCarBtn');
@@ -146,8 +143,8 @@ const totalCarsEl = document.getElementById('totalCars');
 const newCarsEl = document.getElementById('newCars');
 const brandsCountEl = document.getElementById('brandsCount');
 
-// API Configuration
-const API_URL = 'http://localhost:3000'; // Your backend URL
+
+const API_URL = 'http://localhost:3000'; 
 const API_ENDPOINTS = {
     GET_CARS: `${API_URL}/api/cars`,
     CREATE_CAR: `${API_URL}/api/cars`,
@@ -159,27 +156,28 @@ const API_ENDPOINTS = {
     DELETE_RATING: (id) => `${API_URL}/api/ratings/${id}`
 };
 
-// Initialize the page
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Store original dashboard content
+    
+
     const mainContent = document.querySelector('.main-content');
     if (mainContent) {
         originalDashboardContent = mainContent.innerHTML;
     }
     
-    // Setup sidebar navigation
+   
     setupSidebarNavigation();
     
-    // Event listeners
+    
     addCarBtn.addEventListener('click', openAddCarModal);
     closeBtn.addEventListener('click', closeModal);
     cancelBtn.addEventListener('click', closeModal);
     saveCarBtn.addEventListener('click', saveCar);
     
-    // Setup image upload
+   
     setupImageUpload();
     
-    // Close modal when clicking outside (but prevent closing for login modal)
+    
     modal.addEventListener('click', (e) => {
         if (e.target === modal && !loginModal.classList.contains('active')) {
             closeModal();
@@ -187,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Setup sidebar navigation
+
 function setupSidebarNavigation() {
     const navLinks = document.querySelectorAll('.nav-links a');
     
@@ -195,13 +193,13 @@ function setupSidebarNavigation() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Remove active class from all links
+            
             navLinks.forEach(l => l.classList.remove('active'));
             
-            // Add active class to clicked link
+            
             link.classList.add('active');
             
-            // Handle navigation based on link content
+            
             const linkText = link.textContent.trim();
             
             if (linkText.includes('Dashboard')) {
@@ -215,19 +213,20 @@ function setupSidebarNavigation() {
     });
 }
 
-// Show dashboard
+
+
 function showDashboard() {
     const mainContent = document.querySelector('.main-content');
     mainContent.innerHTML = originalDashboardContent;
     
-    // Re-bind event listeners for dashboard elements
+   
     rebindDashboardEvents();
     
-    // Fetch cars to update the dashboard
+   
     fetchCars();
 }
 
-// Rebind dashboard events after content replacement
+
 function rebindDashboardEvents() {
     const newAddCarBtn = document.getElementById('addCarBtn');
     if (newAddCarBtn) {
@@ -235,7 +234,7 @@ function rebindDashboardEvents() {
     }
 }
 
-// Handle logout
+
 function handleLogout() {
     mainContainer.style.display = 'none';
     loginModal.classList.add('active');
@@ -243,7 +242,7 @@ function handleLogout() {
     document.body.style.overflow = 'hidden';
 }
 
-// Fetch and display ratings
+
 function fetchRatings() {
     showLoading(true);
     
@@ -260,7 +259,7 @@ function fetchRatings() {
         });
 }
 
-// Render ratings view
+
 function renderRatings(ratings) {
     const mainContent = document.querySelector('.main-content');
     mainContent.innerHTML = `
@@ -334,14 +333,14 @@ function renderRatings(ratings) {
     `;
 }
 
-// Calculate average rating
+
 function calculateAverage(ratings) {
     if (ratings.length === 0) return '0.0';
     const total = ratings.reduce((sum, rating) => sum + rating.rating, 0);
     return (total / ratings.length).toFixed(1);
 }
 
-// Delete rating
+
 function deleteRating(id) {
     if (confirm('Delete this rating permanently?')) {
         fetch(API_ENDPOINTS.DELETE_RATING(id), {
@@ -361,7 +360,7 @@ function deleteRating(id) {
     }
 }
 
-// Fetch cars from backend
+
 function fetchCars() {
     showLoading(true);
     
@@ -384,7 +383,7 @@ function fetchCars() {
         });
 }
 
-// Render cars table
+
 function renderCarsTable(cars) {
     const tableBody = document.getElementById('carsTableBody');
     if (!tableBody) return;
@@ -407,7 +406,7 @@ function renderCarsTable(cars) {
     cars.forEach((car, index) => {
         const row = document.createElement('tr');
         
-        // Use index + 1 for display ID if car.id doesn't exist
+        
         const displayId = car.id || (index + 1);
         
         row.innerHTML = `
@@ -428,7 +427,8 @@ function renderCarsTable(cars) {
     });
 }
 
-// Update stats
+
+
 function updateStats(cars) {
     const totalCarsElement = document.getElementById('totalCars');
     const newCarsElement = document.getElementById('newCars');
@@ -447,7 +447,7 @@ function updateStats(cars) {
     }
 }
 
-// Open modal for adding a car
+
 function openAddCarModal() {
     currentCarId = null;
     const modalTitleEl = document.getElementById('modalTitle');
@@ -457,60 +457,9 @@ function openAddCarModal() {
     if (uploadedImages) uploadedImages.innerHTML = '';
     openModal();
 }
-function displayExistingImages(car) {
-    if (!car.image || !uploadedImages) return;
-    
-    // Clear any existing previews
-    uploadedImages.innerHTML = '';
-    
-    // Extract folder path from main image path
-    const imagePath = car.image;
-    const folderPath = imagePath.substring(0, imagePath.lastIndexOf('/'));
-    const folderName = `${car.make} ${car.model}`;
-    
-    // Display existing images as previews
-    const imageNames = [
-        `${folderName}`,
-        'A',
-        'B', 
-        'C'
-    ];
-    
-    imageNames.forEach((name, index) => {
-        const imagePreview = document.createElement('div');
-        imagePreview.className = 'image-preview existing-image';
-        
-        const imageSrc = `${folderPath}/${name}${getImageExtension(imagePath)}`;
-        const labels = ['Main', 'A', 'B', 'C'];
-        
-        imagePreview.innerHTML = `
-            <img src="${imageSrc}" alt="Existing ${labels[index]}" onerror="this.style.display='none'">
-            <div class="image-label">${labels[index]} (Current)</div>
-            <div class="existing-indicator">Existing</div>
-        `;
-        
-        uploadedImages.appendChild(imagePreview);
-    });
-    
-    // Add message about image replacement
-    const messageDiv = document.createElement('div');
-    messageDiv.className = 'image-update-message';
-    messageDiv.innerHTML = `
-        <p><i class="fas fa-info-circle"></i> Current images shown above. Upload new images to replace them (optional).</p>
-    `;
-    uploadedImages.appendChild(messageDiv);
-}
 
-function getImageExtension(imagePath) {
-    const extensions = ['.jpg', '.jpeg', '.png', '.gif'];
-    for (let ext of extensions) {
-        // You might need to check which extension exists, for now assume .jpg
-        return '.jpg';
-    }
-    return '.jpg';
-}
 
-// Update the editCar function
+
 function editCar(id) {
     showLoading(true);
     
@@ -526,7 +475,7 @@ function editCar(id) {
             const modalTitleEl = document.getElementById('modalTitle');
             if (modalTitleEl) modalTitleEl.textContent = 'Edit Car';
             
-            // Populate form (including ID field)
+            
             document.getElementById('carId').value = car.id || '';
             document.getElementById('make').value = car.make || '';
             document.getElementById('model').value = car.model || '';
@@ -540,9 +489,10 @@ function editCar(id) {
             document.getElementById('horsepower').value = car.horsepower || '';
             document.getElementById('doors').value = car.doors || '';
             
-            // Clear new image selection but show existing images
+            
+
             selectedImages = [];
-            displayExistingImages(car);
+            if (uploadedImages) uploadedImages.innerHTML = '';
             
             openModal();
             showLoading(false);
@@ -555,7 +505,7 @@ function editCar(id) {
 }
 
 
-// View car details
+
 function viewCar(id) {
     showLoading(true);
     
@@ -577,7 +527,8 @@ function viewCar(id) {
         });
 }
 
-// Delete car
+
+
 function deleteCar(id) {
     if (confirm('Are you sure you want to delete this car?')) {
         showLoading(true);
@@ -603,7 +554,8 @@ function deleteCar(id) {
     }
 }
 
-// Upload images to server
+
+
 async function uploadImages(make, model) {
     if (selectedImages.length === 0) {
         throw new Error('No images selected');
@@ -634,13 +586,14 @@ async function uploadImages(make, model) {
     return await response.json();
 }
 
+
 async function saveCar() {
     if (!carForm.checkValidity()) {
         carForm.reportValidity();
         return;
     }
+  
     
-    // Validate required fields
     const carId = document.getElementById('carId').value.trim();
     const make = document.getElementById('make').value.trim();
     const model = document.getElementById('model').value.trim();
@@ -651,16 +604,10 @@ async function saveCar() {
         showToast('Please fill in all required fields', 'error');
         return;
     }
-    
-    // For new cars, validate images are required
+   
+
     if (!currentCarId && selectedImages.length !== 4) {
         showToast('Please upload exactly 4 images for the car', 'error');
-        return;
-    }
-    
-    // For editing, images are optional
-    if (currentCarId && selectedImages.length > 0 && selectedImages.length !== 4) {
-        showToast('If updating images, please upload exactly 4 images', 'error');
         return;
     }
     
@@ -669,8 +616,9 @@ async function saveCar() {
     try {
         let imagePath = '';
         
-        // Upload images only if new images are selected
-        if (selectedImages.length > 0) {
+      
+
+        if (!currentCarId && selectedImages.length > 0) {
             const uploadResult = await uploadImages(make, model);
             imagePath = uploadResult.mainImagePath;
         }
@@ -687,18 +635,15 @@ async function saveCar() {
             interiorColor: document.getElementById('interiorColor').value.trim(),
             engine: document.getElementById('engine').value.trim(),
             horsepower: parseInt(document.getElementById('horsepower').value) || 0,
-            doors: parseInt(document.getElementById('doors').value) || 4
+            doors: parseInt(document.getElementById('doors').value) || 4,
+            image: imagePath || '' 
         };
-        
-        // Only update image path if new images were uploaded
-        if (imagePath) {
-            carData.image = imagePath;
-        }
         
         let response;
         
         if (currentCarId) {
-            // Update existing car
+            
+
             response = await fetch(API_ENDPOINTS.UPDATE_CAR(currentCarId), {
                 method: 'PUT',
                 headers: {
@@ -707,8 +652,8 @@ async function saveCar() {
                 body: JSON.stringify(carData)
             });
         } else {
-            // Add new car - image is required
-            carData.image = imagePath;
+         
+
             response = await fetch(API_ENDPOINTS.CREATE_CAR, {
                 method: 'POST',
                 headers: {
@@ -737,7 +682,7 @@ async function saveCar() {
     }
 }
 
-// Show/hide loading spinner
+
 function showLoading(isLoading) {
     const spinner = document.getElementById('loadingSpinner');
     if (spinner) {
@@ -745,13 +690,13 @@ function showLoading(isLoading) {
     }
 }
 
-// Open modal
+
 function openModal() {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
-// Close modal
+
 function closeModal() {
     modal.classList.remove('active');
     document.body.style.overflow = 'auto';
@@ -761,7 +706,7 @@ function closeModal() {
     }
 }
 
-// Show toast notification
+
 function showToast(message, type) {
     if (toast) {
         toast.textContent = message;
@@ -771,7 +716,7 @@ function showToast(message, type) {
             toast.classList.remove('show');
         }, 3000);
     } else {
-        // Fallback to alert if toast element doesn't exist
+      
         alert(message);
     }
 }

@@ -12,16 +12,16 @@
         }
 
         :root {
-            --primary: #000000;        
-            --secondary: #ffca66;      
-            --accent: #ffca66;         
-            --success: #27ae60;        
-            --warning: #f39c12;        
-            --light: #ffca66;          
-            --dark: #000000;           
+            --primary: #000000;        /* Black */
+            --secondary: #ffca66;      /* Dark gray for contrast */
+            --accent: #ffca66;         /* Gold */
+            --success: #27ae60;        /* Keep green for success */
+            --warning: #f39c12;        /* Keep orange warning or change if you want */
+            --light: #ffca66;          /* Light goldish/cream for backgrounds */
+            --dark: #000000;           /* Black */
             --gray: #ffca66;
-            --border: #b8860b;         
-            --card-shadow: 0 4px 12px rgba(255, 202, 102, 0.3); 
+            --border: #b8860b;         /* Dark gold/brown border */
+            --card-shadow: 0 4px 12px rgba(255, 202, 102, 0.3); /* subtle gold shadow */
             --login-bg: url('/partials/img/image_fx_ (9).png');
         }
 
@@ -56,7 +56,7 @@
             min-height: 100vh;
         }
 
-        
+        /* Sidebar Styles */
         .sidebar {
             width: 250px;
             background: var(--primary);
@@ -117,7 +117,7 @@
             text-align: center;
         }
 
-        
+        /* Main Content */
         .main-content {
             flex: 1;
             padding: 30px;
@@ -159,7 +159,7 @@
             font-size: 20px;
         }
 
-        
+        /* Stats Cards */
         .stats-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -224,7 +224,7 @@
             font-size: 15px;
         }
 
-        
+        /* Cars Table */
         .content-box {
             background: white;
             border-radius: 12px;
@@ -365,7 +365,7 @@
             box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
 
-        
+        /* Modal Styles */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -507,7 +507,7 @@
             gap: 15px;
         }
 
-        
+        /* Toast Notification */
         .toast {
             position: fixed;
             top: 30px;
@@ -534,7 +534,7 @@
             background: var(--accent);
         }
 
-        
+        /* Loading spinner */
         .spinner {
             border: 4px solid rgba(0, 0, 0, 0.1);
             width: 36px;
@@ -551,7 +551,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        
+        /* Responsive */
         @media (max-width: 1100px) {
             .sidebar {
                 width: 220px;
@@ -673,50 +673,13 @@
     text-align: center;
 }
 
-
+/* Add to .icon classes */
 .icon-purple {
     background: rgba(155, 89, 182, 0.15);
     color: #9b59b6;
 }
 
-
+/* Add to stats container */
 .ratings-table {
     margin-top: 25px;
-}
-/* Existing image indicators */
-.image-preview.existing-image {
-    position: relative;
-    border: 2px solid #28a745;
-}
-
-.existing-indicator {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: #28a745;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 10px;
-    font-weight: bold;
-}
-
-.image-update-message {
-    width: 100%;
-    padding: 10px;
-    background: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
-    margin-top: 10px;
-}
-
-.image-update-message p {
-    margin: 0;
-    color: #6c757d;
-    font-size: 14px;
-}
-
-.image-update-message i {
-    color: #17a2b8;
-    margin-right: 5px;
 }

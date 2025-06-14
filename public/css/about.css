@@ -186,7 +186,7 @@ body {
     font-family: 'FrontageRegular';
 }
 
-
+/* Responsive Design */
 @media screen and (max-width: 768px) {
     .timeline::after {
         left: 31px;
@@ -212,7 +212,7 @@ body {
         left: 21px;
     }
 }
-
+/* CSS Code (add to about.css) */
 .cta-section {
     padding: 60px 20px;
     background-color: black;
@@ -273,7 +273,7 @@ body {
     background-color: #b38f2b;
 }
 
-
+/* Responsive Design */
 @media (max-width: 768px) {
     .cta-container {
         grid-template-columns: 1fr;
