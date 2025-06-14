@@ -3,26 +3,27 @@ const ADMIN_CREDENTIALS = {
     password: "admin123"
 };
 
-// DOM Elements for login
+
 const loginModal = document.getElementById('loginModal');
 const loginForm = document.getElementById('loginForm');
 const loginBtn = document.getElementById('loginBtn');
 const mainContainer = document.querySelector('.container');
 const modal = document.getElementById('carModal');
 
-// Image upload elements
+
+
 const dragDropArea = document.getElementById('dragDropArea');
 const imageInput = document.getElementById('imageInput');
 const uploadedImages = document.getElementById('uploadedImages');
 let selectedImages = [];
 
-// Store original dashboard content
+
 let originalDashboardContent = '';
 
-// Initially hide the main content
+
 mainContainer.style.display = 'none';
 
-// Login functionality
+
 loginBtn.addEventListener('click', () => {
     if (!loginForm.checkValidity()) {
         loginForm.reportValidity();
@@ -33,7 +34,8 @@ loginBtn.addEventListener('click', () => {
     const password = document.getElementById('password').value;
     
     if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
-        // Successful login
+       
+
         loginModal.classList.remove('active');
         mainContainer.style.display = 'flex';
         document.body.style.overflow = 'auto';
@@ -43,19 +45,20 @@ loginBtn.addEventListener('click', () => {
     }
 });
 
-// Image upload functionality
+
 function setupImageUpload() {
-    // Click to browse files
+    
+
     dragDropArea.addEventListener('click', () => {
         imageInput.click();
     });
     
-    // File input change
+    
     imageInput.addEventListener('change', (e) => {
         handleFiles(e.target.files);
     });
     
-    // Drag and drop events
+    
     dragDropArea.addEventListener('dragover', (e) => {
         e.preventDefault();
         dragDropArea.classList.add('drag-over');
@@ -113,17 +116,20 @@ function removeImage(index) {
     displayImagePreviews();
 }
 
-// Close modal when clicking outside (but prevent closing for login modal)
+
+
 modal.addEventListener('click', (e) => {
     if (e.target === modal && !loginModal.classList.contains('active')) {
         closeModal();
     }
 });
 
-// Current car being edited
+
+
 let currentCarId = null;
 
-// DOM Elements
+
+
 const carsTableBody = document.getElementById('carsTableBody');
 const carForm = document.getElementById('carForm');
 const addCarBtn = document.getElementById('addCarBtn');
@@ -137,8 +143,8 @@ const totalCarsEl = document.getElementById('totalCars');
 const newCarsEl = document.getElementById('newCars');
 const brandsCountEl = document.getElementById('brandsCount');
 
-// API Configuration
-const API_URL = 'http://localhost:3000'; // Your backend URL
+
+const API_URL = 'http://localhost:3000'; 
 const API_ENDPOINTS = {
     GET_CARS: `${API_URL}/cars`,
     CREATE_CAR: `${API_URL}/cars`,
@@ -150,27 +156,28 @@ const API_ENDPOINTS = {
     DELETE_RATING: (id) => `${API_URL}/ratings/${id}`
 };
 
-// Initialize the page
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Store original dashboard content
+    
+
     const mainContent = document.querySelector('.main-content');
     if (mainContent) {
         originalDashboardContent = mainContent.innerHTML;
     }
     
-    // Setup sidebar navigation
+   
     setupSidebarNavigation();
     
-    // Event listeners
+    
     addCarBtn.addEventListener('click', openAddCarModal);
     closeBtn.addEventListener('click', closeModal);
     cancelBtn.addEventListener('click', closeModal);
     saveCarBtn.addEventListener('click', saveCar);
     
-    // Setup image upload
+   
     setupImageUpload();
     
-    // Close modal when clicking outside (but prevent closing for login modal)
+    
     modal.addEventListener('click', (e) => {
         if (e.target === modal && !loginModal.classList.contains('active')) {
             closeModal();
@@ -178,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Setup sidebar navigation
+
 function setupSidebarNavigation() {
     const navLinks = document.querySelectorAll('.nav-links a');
     
@@ -186,13 +193,13 @@ function setupSidebarNavigation() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Remove active class from all links
+            
             navLinks.forEach(l => l.classList.remove('active'));
             
-            // Add active class to clicked link
+            
             link.classList.add('active');
             
-            // Handle navigation based on link content
+            
             const linkText = link.textContent.trim();
             
             if (linkText.includes('Dashboard')) {
@@ -206,19 +213,20 @@ function setupSidebarNavigation() {
     });
 }
 
-// Show dashboard
+
+
 function showDashboard() {
     const mainContent = document.querySelector('.main-content');
     mainContent.innerHTML = originalDashboardContent;
     
-    // Re-bind event listeners for dashboard elements
+   
     rebindDashboardEvents();
     
-    // Fetch cars to update the dashboard
+   
     fetchCars();
 }
 
-// Rebind dashboard events after content replacement
+
 function rebindDashboardEvents() {
     const newAddCarBtn = document.getElementById('addCarBtn');
     if (newAddCarBtn) {
@@ -226,7 +234,7 @@ function rebindDashboardEvents() {
     }
 }
 
-// Handle logout
+
 function handleLogout() {
     mainContainer.style.display = 'none';
     loginModal.classList.add('active');
@@ -234,7 +242,7 @@ function handleLogout() {
     document.body.style.overflow = 'hidden';
 }
 
-// Fetch and display ratings
+
 function fetchRatings() {
     showLoading(true);
     
@@ -251,7 +259,7 @@ function fetchRatings() {
         });
 }
 
-// Render ratings view
+
 function renderRatings(ratings) {
     const mainContent = document.querySelector('.main-content');
     mainContent.innerHTML = `
@@ -325,14 +333,14 @@ function renderRatings(ratings) {
     `;
 }
 
-// Calculate average rating
+
 function calculateAverage(ratings) {
     if (ratings.length === 0) return '0.0';
     const total = ratings.reduce((sum, rating) => sum + rating.rating, 0);
     return (total / ratings.length).toFixed(1);
 }
 
-// Delete rating
+
 function deleteRating(id) {
     if (confirm('Delete this rating permanently?')) {
         fetch(API_ENDPOINTS.DELETE_RATING(id), {
@@ -352,7 +360,7 @@ function deleteRating(id) {
     }
 }
 
-// Fetch cars from backend
+
 function fetchCars() {
     showLoading(true);
     
@@ -375,7 +383,7 @@ function fetchCars() {
         });
 }
 
-// Render cars table
+
 function renderCarsTable(cars) {
     const tableBody = document.getElementById('carsTableBody');
     if (!tableBody) return;
@@ -398,7 +406,7 @@ function renderCarsTable(cars) {
     cars.forEach((car, index) => {
         const row = document.createElement('tr');
         
-        // Use index + 1 for display ID if car.id doesn't exist
+        
         const displayId = car.id || (index + 1);
         
         row.innerHTML = `
@@ -419,7 +427,8 @@ function renderCarsTable(cars) {
     });
 }
 
-// Update stats
+
+
 function updateStats(cars) {
     const totalCarsElement = document.getElementById('totalCars');
     const newCarsElement = document.getElementById('newCars');
@@ -438,7 +447,7 @@ function updateStats(cars) {
     }
 }
 
-// Open modal for adding a car
+
 function openAddCarModal() {
     currentCarId = null;
     const modalTitleEl = document.getElementById('modalTitle');
@@ -449,7 +458,8 @@ function openAddCarModal() {
     openModal();
 }
 
-// Open modal for editing a car
+
+
 function editCar(id) {
     showLoading(true);
     
@@ -465,7 +475,7 @@ function editCar(id) {
             const modalTitleEl = document.getElementById('modalTitle');
             if (modalTitleEl) modalTitleEl.textContent = 'Edit Car';
             
-            // Populate form (including ID field)
+            
             document.getElementById('carId').value = car.id || '';
             document.getElementById('make').value = car.make || '';
             document.getElementById('model').value = car.model || '';
@@ -479,7 +489,8 @@ function editCar(id) {
             document.getElementById('horsepower').value = car.horsepower || '';
             document.getElementById('doors').value = car.doors || '';
             
-            // Clear image selection for editing
+            
+
             selectedImages = [];
             if (uploadedImages) uploadedImages.innerHTML = '';
             
@@ -493,7 +504,8 @@ function editCar(id) {
         });
 }
 
-// View car details
+
+
 function viewCar(id) {
     showLoading(true);
     
@@ -515,7 +527,8 @@ function viewCar(id) {
         });
 }
 
-// Delete car
+
+
 function deleteCar(id) {
     if (confirm('Are you sure you want to delete this car?')) {
         showLoading(true);
@@ -541,7 +554,8 @@ function deleteCar(id) {
     }
 }
 
-// Upload images to server
+
+
 async function uploadImages(make, model) {
     if (selectedImages.length === 0) {
         throw new Error('No images selected');
@@ -572,14 +586,14 @@ async function uploadImages(make, model) {
     return await response.json();
 }
 
-// Save car (add or update)
+
 async function saveCar() {
     if (!carForm.checkValidity()) {
         carForm.reportValidity();
         return;
     }
+  
     
-    // Validate required fields
     const carId = document.getElementById('carId').value.trim();
     const make = document.getElementById('make').value.trim();
     const model = document.getElementById('model').value.trim();
@@ -590,8 +604,8 @@ async function saveCar() {
         showToast('Please fill in all required fields', 'error');
         return;
     }
-    
-    // For new cars, validate images
+   
+
     if (!currentCarId && selectedImages.length !== 4) {
         showToast('Please upload exactly 4 images for the car', 'error');
         return;
@@ -602,7 +616,8 @@ async function saveCar() {
     try {
         let imagePath = '';
         
-        // Upload images for new cars
+      
+
         if (!currentCarId && selectedImages.length > 0) {
             const uploadResult = await uploadImages(make, model);
             imagePath = uploadResult.mainImagePath;
@@ -621,13 +636,14 @@ async function saveCar() {
             engine: document.getElementById('engine').value.trim(),
             horsepower: parseInt(document.getElementById('horsepower').value) || 0,
             doors: parseInt(document.getElementById('doors').value) || 4,
-            image: imagePath || '' // Use uploaded image path or keep existing
+            image: imagePath || '' 
         };
         
         let response;
         
         if (currentCarId) {
-            // Update existing car
+            
+
             response = await fetch(API_ENDPOINTS.UPDATE_CAR(currentCarId), {
                 method: 'PUT',
                 headers: {
@@ -636,7 +652,8 @@ async function saveCar() {
                 body: JSON.stringify(carData)
             });
         } else {
-            // Add new car
+         
+
             response = await fetch(API_ENDPOINTS.CREATE_CAR, {
                 method: 'POST',
                 headers: {
@@ -665,7 +682,7 @@ async function saveCar() {
     }
 }
 
-// Show/hide loading spinner
+
 function showLoading(isLoading) {
     const spinner = document.getElementById('loadingSpinner');
     if (spinner) {
@@ -673,13 +690,13 @@ function showLoading(isLoading) {
     }
 }
 
-// Open modal
+
 function openModal() {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
-// Close modal
+
 function closeModal() {
     modal.classList.remove('active');
     document.body.style.overflow = 'auto';
@@ -689,7 +706,7 @@ function closeModal() {
     }
 }
 
-// Show toast notification
+
 function showToast(message, type) {
     if (toast) {
         toast.textContent = message;
@@ -699,7 +716,7 @@ function showToast(message, type) {
             toast.classList.remove('show');
         }, 3000);
     } else {
-        // Fallback to alert if toast element doesn't exist
+      
         alert(message);
     }
 }

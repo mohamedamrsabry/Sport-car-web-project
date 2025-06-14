@@ -1,13 +1,14 @@
-let cars = []; // Will store fetched cars
-let currentCar = null; // Current car being viewed
+let cars = []; 
+let currentCar = null; 
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    // Fetch cars from backend
+    
+
     const response = await fetch("http://localhost:3000/cars");
     cars = await response.json();
     
-    // Get car ID from URL
+   
     const getQueryParam = (param) => {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
@@ -15,22 +16,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     const carId = getQueryParam("id");
     const car = cars.find(c => c.id == carId);
-    currentCar = car; // Set global current car
+    currentCar = car; 
 
     if (car) {
-      // Set page title and heading
+     
       document.title = `${car.make} ${car.model} – Showroom`;
       document.getElementById("car-title").textContent = `${car.make} ${car.model}`;
       document.getElementById("price").textContent = car.price;
 
-      // Set up enquiry button
+      
       const enquireBtn = document.getElementById("enquire-button");
       enquireBtn.addEventListener("click", () => {
         const url = `quota.html?brand=${encodeURIComponent(car.make)}&model=${encodeURIComponent(car.model)}`;
         location.href = url;
       });
 
-      // Build image paths
+      
       const buildURL = (folder, file) => 
         `/partials/img/products/${encodeURIComponent(folder)}/${encodeURIComponent(file)}`;
 
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const imgSet = files.map(f => buildURL(folder, f));
       imgSet.push("/partials/img/products/info.jpg");
 
-      // Create image slides
+      
       const slides = document.getElementById("slide-wrapper");
       const thumbs = document.getElementById("thumb-wrapper");
       imgSet.forEach((src, i) => {
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         thumbs.insertAdjacentHTML("beforeend", `<img src="${src}" data-index="${i}" ${i === 0 ? 'class="active"' : ""}>`);
       });
 
-      // Create specifications grid
+      
       const specPairs = {
         Year: car.year,
         Mileage: `${car.mileage} km`,
@@ -65,7 +66,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         grid.insertAdjacentHTML("beforeend", `<div class="label">${k}</div><div class="value">${v}</div>`);
       });
 
-      // Initialize Swiper
+      
       const swiper = new Swiper(".mainSwiper", {
         loop: true,
         speed: 400,
@@ -75,13 +76,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       });
 
-      // Handle thumbnail clicks
+      
       const thumbImgs = [...document.querySelectorAll(".thumbs img")];
       thumbImgs.forEach(t => t.addEventListener("click", () => 
         swiper.slideToLoop(+t.dataset.index)
       ));
 
-      // Update active thumbnail on slide change
+     
       swiper.on("slideChange", () => {
         const r = swiper.realIndex;
         thumbImgs.forEach(t => 
@@ -89,10 +90,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
       });
 
-      // Render similar cars
+      
       renderSimilarCars(cars, car);
       
-      // Initialize comparison dropdown after cars are loaded
+      
       populateCompareDropdown();
       
     } else {
@@ -128,7 +129,7 @@ function renderSimilarCars(allCars, currentCar) {
     wrap.appendChild(slide);
   });
 
-  // Initialize Swiper for similar cars
+
   if (window.simSwiper) window.simSwiper.destroy(true, true);
   window.simSwiper = new Swiper(".similarSwiper", {
     slidesPerView: 1.2,
@@ -144,7 +145,7 @@ function renderSimilarCars(allCars, currentCar) {
   });
 }
 
-// Scroll reveal animation
+
 (function () {
   const cards = document.querySelectorAll('.luxury--card');
 
@@ -161,19 +162,18 @@ function renderSimilarCars(allCars, currentCar) {
   window.addEventListener('scroll', reveal);
 })();
 
-// COMPARISON FUNCTIONS
-// ====================
 
-// Populate the compare dropdown with available cars
+
+//populate the compare dropdown function
 function populateCompareDropdown() {
   const compareSelect = document.getElementById('compareCar');
   
   if (!compareSelect || !cars.length) return;
   
-  // Clear existing options
+ 
   compareSelect.innerHTML = '<option value="">Choose a car to compare...</option>';
   
-  // Add cars to dropdown (excluding current car)
+  
   cars.forEach(car => {
     if (currentCar && car.id != currentCar.id) {
       const option = document.createElement('option');
@@ -184,7 +184,7 @@ function populateCompareDropdown() {
   });
 }
 
-// Open compare modal
+
 function openCompareModal() {
   const modal = document.getElementById('compareModal');
   if (!modal) {
@@ -195,10 +195,10 @@ function openCompareModal() {
   modal.style.display = 'block';
   document.body.style.overflow = 'hidden';
   
-  // Ensure dropdown is populated
+  
   populateCompareDropdown();
   
-  // Reset the comparison
+ 
   const compareSelect = document.getElementById('compareCar');
   const comparisonResult = document.getElementById('comparisonResult');
   
@@ -212,7 +212,7 @@ function openCompareModal() {
   }
 }
 
-// Close compare modal
+
 function closeCompareModal() {
   const modal = document.getElementById('compareModal');
   if (modal) {
@@ -221,7 +221,7 @@ function closeCompareModal() {
   }
 }
 
-// Update comparison with slide-up animation
+
 function updateComparison() {
   const selectedCarId = document.getElementById('compareCar').value;
   const comparisonResult = document.getElementById('comparisonResult');
@@ -236,11 +236,11 @@ function updateComparison() {
     return;
   }
 
-  // Show loading animation
+ 
   if (loading) loading.classList.add('show');
   if (comparisonResult) comparisonResult.style.opacity = '0';
   
-  // Simulate loading delay for better UX
+ 
   setTimeout(() => {
     const selectedCar = cars.find(car => car.id == selectedCarId);
     
@@ -248,11 +248,11 @@ function updateComparison() {
       renderComparison(currentCar, selectedCar);
     }
     
-    // Hide loading and show result with animation
+   
     if (loading) loading.classList.remove('show');
     if (comparisonResult) comparisonResult.style.opacity = '1';
     
-    // Trigger the slide-up animation
+    
     const container = comparisonResult.querySelector('.comparison-container');
     if (container) {
       setTimeout(() => {
@@ -262,11 +262,11 @@ function updateComparison() {
   }, 800);
 }
 
-// Render the comparison
+
 function renderComparison(currentCarData, compareCarData) {
   const comparisonResult = document.getElementById('comparisonResult');
   
-  // Map your car data structure to display labels
+ 
   const getCarDisplayData = (car) => {
     return {
       name: `${car.year} ${car.make} ${car.model}`,
@@ -343,7 +343,8 @@ function renderComparison(currentCarData, compareCarData) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Close modal when clicking outside
+ 
+
   window.addEventListener('click', function(event) {
     const modal = document.getElementById('compareModal');
     if (event.target === modal) {
@@ -351,7 +352,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Close modal with Escape key
+
+  
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
       closeCompareModal();
