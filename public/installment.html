@@ -602,15 +602,15 @@ function calculateInstallment() {
     });
 }
 
-// Custom validation message function (styled to match the design)
+
 function showValidationMessage(message) {
-    // Remove existing validation message if any
+    
     const existingMessage = document.querySelector('.validation-message');
     if (existingMessage) {
         existingMessage.remove();
     }
 
-    // Create validation message element
+   
     const messageDiv = document.createElement('div');
     messageDiv.className = 'validation-message';
     messageDiv.innerHTML = `
@@ -628,7 +628,7 @@ function showValidationMessage(message) {
         </div>
     `;
 
-    // Add animation styles
+    
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideIn {
@@ -638,11 +638,11 @@ function showValidationMessage(message) {
     `;
     document.head.appendChild(style);
 
-    // Insert before the calculate button
+    
     const calculateBtn = document.querySelector('.calculate-btn');
     calculateBtn.parentNode.insertBefore(messageDiv, calculateBtn);
 
-    // Auto-remove after 5 seconds
+    
     setTimeout(() => {
         if (messageDiv.parentNode) {
             messageDiv.style.animation = 'slideIn 0.3s ease-out reverse';

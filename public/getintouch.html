@@ -405,8 +405,7 @@
                 "Good day! I'm delighted to assist you with our premium automotive collection.",
                 "Welcome! I'm here to guide you through our exceptional range of luxury vehicles."
             ],
-            // browse: "I'd be happy to show you our collection! We have premium sedans, sports cars, SUVs, and exotic vehicles. Which category interests you most?", // This will now be handled by direct redirect
-            // financing: "We offer exclusive financing packages for our luxury vehicles, including lease options and customized payment plans. Would you like me to connect you with our finance specialist?", // This will now be handled by direct redirect
+            
             appointment: "Great! To schedule your private test drive experience, please select your preferred date and time in the pop-up window that just appeared. We'll confirm availability shortly.",
             trade: "We provide premium trade-in evaluations for your current vehicle. Could you tell me the make, model, and year of your car?",
             features: "Our luxury vehicles come with cutting-edge technology, premium materials, and exceptional performance. Are you interested in specific features like autonomous driving, custom interiors, or performance specs?",
@@ -424,7 +423,7 @@
 
         function goBack() {
             // Redirect to the "about us" page
-            window.location.href = "about.html"; // Make sure 'about.html' is the correct path
+            window.location.href = "about.html"; 
         }
 
         function handleKeyPress(event) {
@@ -450,7 +449,7 @@
                 addMessage(response, 'bot');
                 conversationCount++;
                 
-                // If the user's message or the bot's response is about appointment, show popup
+                
                 if (message.toLowerCase().includes('test drive') || message.toLowerCase().includes('schedule') || response === responses.appointment) {
                     showTestDrivePopup();
                 }
@@ -516,17 +515,16 @@
 
         function quickAction(action) {
             if (action === 'browse') {
-                window.location.href = "products.html"; // Redirect directly to products.html
-                return; // Stop further execution in this function
+                window.location.href = "products.html"; 
+                return; 
             }
             if (action === 'financing') {
-                window.location.href = "installment.html"; // Redirect directly to installment.html
-                return; // Stop further execution in this function
+                window.location.href = "installment.html"; 
+                return; 
             }
 
             const actions = {
-                // browse: "I'd like to browse your collection", // Removed as it's now a direct redirect
-                // financing: "What are my financing options?", // Removed as it's now a direct redirect
+                
                 appointment: "I want to schedule a test drive",
                 trade: "What's my trade-in value?",
                 contact: "I need to speak to someone in sales"
@@ -580,15 +578,15 @@
             document.getElementById('testDrivePopup').style.display = 'block';
             document.getElementById('popupOverlay').style.display = 'block';
 
-            // Set default date to tomorrow or next available weekday
+            
             const today = new Date();
             let tomorrow = new Date(today);
             tomorrow.setDate(today.getDate() + 1);
 
-            // Skip weekend if tomorrow is Saturday or Sunday
-            if (tomorrow.getDay() === 6) { // Saturday
+            
+            if (tomorrow.getDay() === 6) { 
                 tomorrow.setDate(tomorrow.getDate() + 2);
-            } else if (tomorrow.getDay() === 0) { // Sunday
+            } else if (tomorrow.getDay() === 0) { 
                 tomorrow.setDate(tomorrow.getDate() + 1);
             }
 
@@ -608,14 +606,14 @@
             if (date && time) {
                 addMessage(`Excellent! Your test drive request for <strong>${date}</strong> at <strong>${time}</strong> has been received. Our team will contact you shortly to confirm.`, 'bot');
                 closeTestDrivePopup();
-                // In a real application, you would send this data to your backend
+                
                 console.log(`Test Drive Requested: Date - ${date}, Time - ${time}`);
             } else {
                 alert('Please select both a date and a time for your test drive.');
             }
         }
 
-        // Ensure chat page is visible on load
+        
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('chatPage').style.display = 'flex';
         });

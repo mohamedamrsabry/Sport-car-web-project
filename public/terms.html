@@ -123,7 +123,7 @@
         }
 
 
-        /* Responsive Design */
+        
         @media (max-width: 768px) {
             .main-title {
                 font-size: 2.5rem;
@@ -148,7 +148,7 @@
             }
         }
 
-        /* Scroll animations */
+        
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -164,7 +164,7 @@
 
 
 <style>
-    /* keep your existing NAV rules exactly as they were */
+    
   nav {
     display: flex;
     align-items: center;
@@ -183,14 +183,14 @@
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
-/* When hidden, move up and fade out */
+
 .nav-hidden {
     transform: translateX(-50%) translateY(-100%);
     opacity: 0;
     pointer-events: none;
 }
 .nav-logo {
-    height: 90px; /* Bigger size */
+    height: 90px; 
     width: auto;
 }
 
@@ -233,27 +233,27 @@ a:hover{
     color:#b6a15a;
 }
 
-/* Sidebar overlay (hidden by default) */
+
 .sidebar-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Transparent black background */
+    background: rgba(0, 0, 0, 0.8); 
     border-radius: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 100;
-    transform: translateX(-100%); /* Hidden off-screen */
+    transform: translateX(-100%); 
     transition: transform 0.3s ease;
 }
 .car-image{
-    width: 100vw;  /* Ensures full width */
-    height: 100vh; /* Ensures full height */
-    object-fit: cover; /* Covers the section without distortion */
+    width: 100vw;  
+    height: 100vh; 
+    object-fit: cover; 
     position: absolute;
     top: 0;
     left: 0;
@@ -272,7 +272,7 @@ a:hover{
 .sidebar-overlay ul li a {
     text-decoration: none;
     color: #b6a15a;
-    font-size: 2rem; /* Larger font size */
+    font-size: 2rem; 
     transition: color 0.3s ease;
 }
 
@@ -280,7 +280,7 @@ a:hover{
     color: #fff;
 }
 
-/* Sidebar toggle button */
+
 .sidebar-toggle {
     position: fixed;
     top: 1rem;
@@ -293,9 +293,9 @@ a:hover{
     z-index: 101;
 }
 
-/* Sidebar open state */
+
 .sidebar-overlay.open {
-    transform: translateX(0); /* Slide into view */
+    transform: translateX(0);
 }
 </style>
 
@@ -585,14 +585,14 @@ footer {
 
 
 
-/* Newsletter-specific styles */
+
 .newsletter-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Loading spinner */
+
 .loading {
     display: none;
     width: 16px;
@@ -749,7 +749,7 @@ footer {
   <p>&copy; 2025 STRADA AUTO. All Rights Reserved.</p>
 </div>
 
-<!-- Newsletter Messages -->
+
 <div class="newsletter-overlay" id="newsletterOverlay"></div>
 <div class="newsletter-message success" id="newsletterSuccess">
     <div class="message-icon success-icon">✓</div>
@@ -768,7 +768,7 @@ footer {
 </footer>
 
     <script>
-        // Fade-in animation on scroll
+       
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -786,7 +786,7 @@ footer {
             observer.observe(el);
         });
 
-        // Smooth scroll for navigation
+       
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
