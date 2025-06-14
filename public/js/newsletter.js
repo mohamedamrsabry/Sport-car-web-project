@@ -30,11 +30,11 @@ function initNewsletter() {
             subscribeText.style.display = 'none';
             subscribeLoading.style.display = 'inline-block';
             
-            // Create form data
+            
             const formData = new FormData();
             formData.append('email', email);
             
-            // Send AJAX request
+            
             fetch('http://localhost:8080/newsletter-subscribe.php', {
                 method: 'POST',
                 body: formData
@@ -46,7 +46,7 @@ function initNewsletter() {
                 return response.text();
             })
             .then(text => {
-                // Try to parse as JSON
+              
                 let data;
                 try {
                     data = JSON.parse(text);
@@ -54,16 +54,16 @@ function initNewsletter() {
                     throw new Error('Invalid response from server');
                 }
                 
-                // Reset button state
+                
                 resetSubscribeButton();
                 
                 if (data.success) {
-                    // Show success message
+                   
                     showNewsletterMessage('success', data.message);
-                    // Clear the form
+                   
                     newsletterForm.reset();
                 } else {
-                    // Show error message
+                    
                     showNewsletterMessage('error', data.message);
                 }
             })
@@ -74,7 +74,7 @@ function initNewsletter() {
             });
         });
         
-        // Mark as initialized
+        
         newsletterInitialized = true;
     }
 
@@ -118,12 +118,12 @@ function closeNewsletterMessage() {
     errorMsg.style.display = 'none';
 }
 
-// Initialize newsletter when DOM is ready
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Small delay to ensure footer is loaded
+    
     setTimeout(initNewsletter, 100);
 });
 
-// Make functions globally available
+
 window.showNewsletterMessage = showNewsletterMessage;
 window.closeNewsletterMessage = closeNewsletterMessage;
