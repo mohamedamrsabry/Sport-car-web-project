@@ -8,14 +8,9 @@ use PHPMailer\PHPMailer\Exception;
 
 // Set content type to JSON
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Origin: http://localhost:3000');
+header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
-
-// Handle preflight requests
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    exit(0);
-}
 
 // Email configuration
 define('FROM_EMAIL', 'stradaautogroup@gmail.com');        
@@ -32,7 +27,10 @@ define('BUSINESS_WEBSITE', 'www.stradaauto.com');
 // Enable error logging for debugging
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/error.log');
-
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    http_response_code(200);
+    exit(0);
+}
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -40,20 +38,38 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+// Debug: Log the request method and content type
+error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
+error_log("Content Type: " . ($_SERVER['CONTENT_TYPE'] ?? 'Not set'));
+
 // Get JSON input
 $json = file_get_contents('php://input');
+error_log("Raw JSON input: " . $json); // Debug log
+
+// Also check if data was sent via regular POST
+$postData = $_POST;
+error_log("POST data: " . print_r($postData, true)); // Debug log
+
 $data = json_decode($json, true);
+error_log("Decoded JSON: " . print_r($data, true)); // Debug log
 
 // If JSON is empty, try to get data from regular POST
-if (empty($data) && !empty($_POST)) {
-    $data = $_POST;
+if (empty($data) && !empty($postData)) {
+    $data = $postData;
+    error_log("Using POST data instead of JSON");
 }
 
-// If still no data, return error
+// If still no data, return error with debug info
 if (empty($data)) {
     echo json_encode([
         'success' => false, 
-        'message' => 'No data received'
+        'message' => 'No data received',
+        'debug' => [
+            'json_input' => $json,
+            'post_data' => $postData,
+            'content_type' => $_SERVER['CONTENT_TYPE'] ?? 'Not set',
+            'request_method' => $_SERVER['REQUEST_METHOD']
+        ]
     ]);
     exit;
 }
@@ -81,30 +97,39 @@ $phone = sanitizeInput($data['phone'] ?? '');
 $carOfInterest = sanitizeInput($data['carOfInterest'] ?? '');
 $message = sanitizeInput($data['message'] ?? '');
 
+// Debug: Log sanitized data
+error_log("Sanitized data - First Name: '$firstName', Last Name: '$lastName', Email: '$email', Phone: '$phone', Message: '$message'");
+
 // Validation
 $errors = [];
 
 if (empty($firstName)) {
     $errors[] = 'First name is required';
+    error_log("Validation failed: First name is empty");
 }
 
 if (empty($lastName)) {
     $errors[] = 'Last name is required';
+    error_log("Validation failed: Last name is empty");
 }
 
 if (empty($email) || !validateEmail($email)) {
     $errors[] = 'Please enter a valid email address';
+    error_log("Validation failed: Email is invalid - '$email'");
 }
 
 if (empty($phone) || !validatePhone($phone)) {
     $errors[] = 'Please enter a valid phone number';
+    error_log("Validation failed: Phone is invalid - '$phone'");
 }
 
 if (empty($message)) {
     $errors[] = 'Message is required';
+    error_log("Validation failed: Message is empty");
 }
 
 if (!empty($errors)) {
+    error_log("Validation errors: " . implode(', ', $errors));
     echo json_encode(['success' => false, 'message' => implode(', ', $errors)]);
     exit;
 }
