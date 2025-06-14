@@ -27,7 +27,7 @@ define('GMAIL_APP_PASSWORD', 'npzy phfr lgzm hwhj');
 define('BUSINESS_ADDRESS', 'OBOUR ROAD 50');
 define('BUSINESS_CITY', 'Cairo, Egypt');
 define('BUSINESS_PHONE', '01226699307');
-define('BUSINESS_WEBSITE', 'www.stradaauto.com');
+define('BUSINESS_WEBSITE', 'https://stradauto.onrender.com/');
 
 // Enable error logging for debugging
 ini_set('log_errors', 1);
