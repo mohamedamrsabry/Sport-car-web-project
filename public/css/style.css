@@ -1743,3 +1743,37 @@ transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 10px;
     margin-bottom: 20px;
 }
+.transition-divider {
+  background: #000;
+  color: #fff;
+  padding: 100px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.transition-divider .fade-overlay {
+  opacity: 0;
+  animation: fadeIn 2s ease-in forwards;
+  animation-delay: 0.3s;
+}
+
+.transition-divider .tagline {
+  font-size: 2.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
