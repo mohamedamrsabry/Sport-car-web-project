@@ -1,11 +1,11 @@
-// Cookie Consent JavaScript
+
 let cookiePreferences = {
     essential: true,
     analytics: false,
     marketing: false
 };
 
-// Show cookie popup on page load
+
 window.addEventListener('load', function() {
     if (!getCookie('cookieConsent')) {
         setTimeout(() => {
@@ -23,7 +23,7 @@ function acceptAllCookies() {
     setCookie('cookieConsent', JSON.stringify(cookiePreferences), 365);
     hidePopup();
     
-    // Initialize all tracking scripts here
+
     initializeAnalytics();
     initializeMarketing();
     
@@ -58,7 +58,7 @@ function saveCustomSettings() {
     setCookie('cookieConsent', JSON.stringify(cookiePreferences), 365);
     hidePopup();
     
-    // Initialize only accepted tracking scripts
+    
     if (cookiePreferences.analytics) {
         initializeAnalytics();
     }
@@ -73,7 +73,7 @@ function hidePopup() {
     document.getElementById('cookieConsentOverlay').classList.remove('show');
 }
 
-// Cookie utility functions
+
 function setCookie(name, value, days) {
     const expires = new Date();
     expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -91,31 +91,29 @@ function getCookie(name) {
     return null;
 }
 
-// Initialize tracking scripts (replace with your actual tracking codes)
+
 function initializeAnalytics() {
-    // Google Analytics initialization
+    
     console.log('Analytics initialized');
     
-    // Example: Google Analytics 4
-    // gtag('config', 'GA_MEASUREMENT_ID');
+   
 }
 
 function initializeMarketing() {
-    // Marketing pixels initialization
+    
     console.log('Marketing cookies initialized');
     
-    // Example: Facebook Pixel
-    // fbq('init', 'YOUR_PIXEL_ID');
+   
 }
 
-// Check existing consent on page load
+
 window.addEventListener('load', function() {
     const existingConsent = getCookie('cookieConsent');
     if (existingConsent) {
         try {
             cookiePreferences = JSON.parse(existingConsent);
             
-            // Initialize based on existing preferences
+           
             if (cookiePreferences.analytics) {
                 initializeAnalytics();
             }
