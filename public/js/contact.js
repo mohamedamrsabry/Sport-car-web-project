@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target === contactModal) hideContactModal();
     };
 
+    // UPDATED CONTACT FORM HANDLER FOR PHP
     if (contactForm) {
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -126,8 +127,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     carOfInterest: contactForm.querySelector('[name="carOfInterest"]')?.value || ''
                 };
                 
-                // Send data to backend
-                const response = await fetch('http://localhost:3000/api/contact', {
+                // Send data to PHP backend (adjust port if needed)
+                console.log('Sending data:', formData); // Debug log
+                
+                const response = await fetch('http://localhost:8080/contact.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -135,11 +138,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: JSON.stringify(formData)
                 });
                 
-                const result = await response.json();
+                console.log('Response status:', response.status); // Debug log
+                console.log('Response headers:', response.headers); // Debug log
                 
-                if (response.ok) {
+                const responseText = await response.text();
+                console.log('Raw response:', responseText); // Debug log
+                
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                } catch (parseError) {
+                    console.error('JSON parse error:', parseError);
+                    console.log('Response was not valid JSON:', responseText);
+                    throw new Error('Invalid response from server');
+                }
+                
+                if (response.ok && result.success) {
                     // Show success modal
-                    showContactModal('Thank you for your message! We will get back to you soon.');
+                    showContactModal(result.message || 'Thank you for your message! We will get back to you soon.');
                     contactForm.reset();
                 } else {
                     // Show error modal
@@ -156,6 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Rate form handler (keeping original functionality)
     if (rateForm) {
         rateForm.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -222,4 +239,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-}); 
+});
