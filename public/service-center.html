@@ -161,11 +161,11 @@
     <script src="/js/loader.js" type="module"></script>
     <script src="/js/newsletter.js"></script>
     <script>
-        // Contact form functionality
+        
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form data
+           
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
@@ -174,14 +174,14 @@
                 message: document.getElementById('message').value
             };
             
-            // Simulate form submission
+            
             alert('Thank you for your message! We will contact you soon to schedule your service.');
             
-            // Reset form
+           
             this.reset();
         });
 
-        // Smooth scrolling for navigation links
+     
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -195,7 +195,7 @@
             });
         });
 
-        // Add animation on scroll
+        
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -210,7 +210,7 @@
             });
         }, observerOptions);
 
-        // Observe service cards
+        
         document.querySelectorAll('.service-card').forEach(card => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(30px)';

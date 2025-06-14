@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STRADA Auto - Schedule a Visit</title>
     <style>
-        /* Reset and base styles */
+        
        * {
             margin: 0;
             padding: 0;
@@ -20,7 +20,7 @@
             position: relative;
         }
 
-        /* Background image with blur effect */
+       
         body::before {
             content: '';
             position: fixed;
@@ -36,8 +36,6 @@
             filter: blur(8px);
             z-index: -2;
         }
-
-        /* Dark overlay for better readability */
         body::after {
             content: '';
             position: fixed;
@@ -49,7 +47,7 @@
             z-index: -1;
         }
 
-        /* Main container styles */
+        
         .schedule-container {
             max-width: 800px;
             margin: 50px auto;
@@ -101,7 +99,7 @@
             background-color: rgba(255, 255, 255, 1);
         }
 
-        /* Loading spinner */
+        
         .loading {
             display: none;
             width: 20px;
@@ -154,7 +152,7 @@
             margin-bottom: 20px;
         }
 
-        /* Error message styles */
+        
         .error-message {
             position: fixed;
             top: 50%;
@@ -195,7 +193,7 @@
             margin-top: 10px;
         }
 
-        /* Overlay for messages */
+        
         .overlay {
             position: fixed;
             top: 0;
@@ -254,7 +252,7 @@
             font-weight: 400;
         }
 
-        /* Debug info styles */
+        
         .debug-info {
             background-color: rgba(255, 255, 255, 0.1);
             padding: 20px;
@@ -265,7 +263,7 @@
             display: none;
         }
 
-        /* Responsive design */
+        
         @media (max-width: 768px) {
             .schedule-container {
                 margin: 20px;
@@ -299,16 +297,16 @@
                 font-size: 1.8rem;
             }
         }
-          /* Back button */
+          
 .back-btn {
   position: fixed;
   top: 20px;
   left: 20px;
-  background: rgba(0, 0, 0, 0.4); /* Transparent black */
-  color: #d4af37; /* Gold text */
+  background: rgba(0, 0, 0, 0.4); 
+  color: #d4af37; 
   padding: 14px 21px;
-  border-radius: 999px; /* Fully rounded */
-  border: 1px solid #d4af37; /* Gold border */
+  border-radius: 999px; 
+  border: 1px solid #d4af37; 
   font-size: 14px;
   text-decoration: none;
   backdrop-filter: blur(5px);
@@ -318,10 +316,10 @@
 }
 
 .back-btn:hover {
-  background: rgba(0, 0, 0, 0.6); /* Darker on hover */
+  background: rgba(0, 0, 0, 0.6); 
   transform: translateX(-3px);
-  color: #fff; /* Optional: white text on hover */
-  border-color: #fff; /* Optional: white border on hover */
+  color: #fff; 
+  border-color: #fff; 
 }
     </style>
 </head>
@@ -417,10 +415,10 @@
         </div>
 
         <script>
-            // Set minimum date to today
+           
             document.getElementById('date').min = new Date().toISOString().split('T')[0];
 
-            // Function to show debug info
+            
             function showDebugInfo(message) {
                 const debugInfo = document.getElementById('debugInfo');
                 const debugContent = document.getElementById('debugContent');
@@ -504,7 +502,7 @@
                 document.getElementById('errorMessage').style.display = 'none';
             }
 
-            // Close messages when clicking overlay
+            
             document.getElementById('overlay').addEventListener('click', function() {
                 this.style.display = 'none';
                 document.getElementById('successMessage').style.display = 'none';
