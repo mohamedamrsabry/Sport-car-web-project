@@ -10,6 +10,7 @@ const multer = require('multer');
 const fs = require('fs');
 const Rating = require('./models/rating');
 
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -153,6 +154,25 @@ app.post('/cars', async (req, res) => {
     }
 });
 
+// Get all ratings (for admin)
+app.get('/ratings', async (req, res) => {
+    try {
+        const ratings = await Rating.find().sort({ createdAt: -1 });
+        res.json(ratings);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// Delete a rating
+app.delete('/ratings/:id', async (req, res) => {
+    try {
+        await Rating.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Rating deleted' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 // Get one car by id
 app.get('/cars/:id', async (req, res) => {
     try {
@@ -272,6 +292,46 @@ app.post('/api/rate', async (req, res) => {
         res.status(500).json({ message: 'Error submitting rating.' });
     }
 });
+// Rate Us endpoint
+app.post('/api/rate', async (req, res) => {
+    try {
+        const { name, rating, message } = req.body;
+        if (!name || !rating) {
+            return res.status(400).json({ message: 'Name and rating are required.' });
+        }
+        if (isNaN(rating) || rating < 1 || rating > 5) {
+            return res.status(400).json({ message: 'Rating must be a number between 1 and 5.' });
+        }
+        const newRating = new Rating({ name, rating, message });
+        await newRating.save();
+        res.status(201).json({ message: 'Thank you for your rating!' });
+    } catch (err) {
+        console.error('Rating submission error:', err);
+        res.status(500).json({ message: 'Error submitting rating.' });
+    }
+});
+
+// Get all ratings (for admin)
+app.get('/ratings', async (req, res) => {
+    try {
+        const ratings = await Rating.find().sort({ createdAt: -1 });
+        res.json(ratings);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// Delete a rating
+app.delete('/ratings/:id', async (req, res) => {
+    try {
+        await Rating.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Rating deleted' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+
 
 async function addAllCars() {
     try {

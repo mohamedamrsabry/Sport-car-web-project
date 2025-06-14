@@ -672,3 +672,14 @@
     font-size: 12px;
     text-align: center;
 }
+
+/* Add to .icon classes */
+.icon-purple {
+    background: rgba(155, 89, 182, 0.15);
+    color: #9b59b6;
+}
+
+/* Add to stats container */
+.ratings-table {
+    margin-top: 25px;
+}

@@ -16,6 +16,9 @@ const imageInput = document.getElementById('imageInput');
 const uploadedImages = document.getElementById('uploadedImages');
 let selectedImages = [];
 
+// Store original dashboard content
+let originalDashboardContent = '';
+
 // Initially hide the main content
 mainContainer.style.display = 'none';
 
@@ -142,11 +145,22 @@ const API_ENDPOINTS = {
     GET_CAR: (id) => `${API_URL}/cars/${id}`,
     UPDATE_CAR: (id) => `${API_URL}/cars/${id}`,
     DELETE_CAR: (id) => `${API_URL}/cars/${id}`,
-    UPLOAD_IMAGES: `${API_URL}/upload-images`
+    UPLOAD_IMAGES: `${API_URL}/upload-images`,
+    GET_RATINGS: `${API_URL}/ratings`,
+    DELETE_RATING: (id) => `${API_URL}/ratings/${id}`
 };
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', () => {
+    // Store original dashboard content
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+        originalDashboardContent = mainContent.innerHTML;
+    }
+    
+    // Setup sidebar navigation
+    setupSidebarNavigation();
+    
     // Event listeners
     addCarBtn.addEventListener('click', openAddCarModal);
     closeBtn.addEventListener('click', closeModal);
@@ -163,6 +177,180 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Setup sidebar navigation
+function setupSidebarNavigation() {
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Remove active class from all links
+            navLinks.forEach(l => l.classList.remove('active'));
+            
+            // Add active class to clicked link
+            link.classList.add('active');
+            
+            // Handle navigation based on link content
+            const linkText = link.textContent.trim();
+            
+            if (linkText.includes('Dashboard')) {
+                showDashboard();
+            } else if (linkText.includes('Ratings')) {
+                fetchRatings();
+            } else if (linkText.includes('Logout')) {
+                handleLogout();
+            }
+        });
+    });
+}
+
+// Show dashboard
+function showDashboard() {
+    const mainContent = document.querySelector('.main-content');
+    mainContent.innerHTML = originalDashboardContent;
+    
+    // Re-bind event listeners for dashboard elements
+    rebindDashboardEvents();
+    
+    // Fetch cars to update the dashboard
+    fetchCars();
+}
+
+// Rebind dashboard events after content replacement
+function rebindDashboardEvents() {
+    const newAddCarBtn = document.getElementById('addCarBtn');
+    if (newAddCarBtn) {
+        newAddCarBtn.addEventListener('click', openAddCarModal);
+    }
+}
+
+// Handle logout
+function handleLogout() {
+    mainContainer.style.display = 'none';
+    loginModal.classList.add('active');
+    loginForm.reset();
+    document.body.style.overflow = 'hidden';
+}
+
+// Fetch and display ratings
+function fetchRatings() {
+    showLoading(true);
+    
+    fetch(API_ENDPOINTS.GET_RATINGS)
+        .then(response => response.json())
+        .then(ratings => {
+            renderRatings(ratings);
+            showLoading(false);
+        })
+        .catch(error => {
+            console.error('Error fetching ratings:', error);
+            showToast('Failed to load ratings', 'error');
+            showLoading(false);
+        });
+}
+
+// Render ratings view
+function renderRatings(ratings) {
+    const mainContent = document.querySelector('.main-content');
+    mainContent.innerHTML = `
+        <div class="header">
+            <h2>Customer Ratings</h2>
+            <div class="user-info">
+                <div class="avatar">AD</div>
+                <div>
+                    <h4>Administrator</h4>
+                    <p>Customer Feedback</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon icon-purple">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="totalRatings">${ratings.length}</h3>
+                    <p>Total Ratings</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-blue">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="avgRating">${calculateAverage(ratings)}</h3>
+                    <p>Average Rating</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-box">
+            <div class="table-header">
+                <h3>Customer Feedback</h3>
+            </div>
+            <div class="spinner" id="loadingSpinner" style="display: none;"></div>
+            <table id="ratingsTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Rating</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="ratingsTableBody">
+                    ${ratings.map(rating => `
+                        <tr>
+                            <td>${rating.name}</td>
+                            <td>
+                                ${'★'.repeat(rating.rating)}${'☆'.repeat(5 - rating.rating)}
+                                (${rating.rating}/5)
+                            </td>
+                            <td>${rating.message || 'No message'}</td>
+                            <td>${new Date(rating.createdAt).toLocaleDateString()}</td>
+                            <td class="actions">
+                                <button class="action-btn delete-btn" onclick="deleteRating('${rating._id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+// Calculate average rating
+function calculateAverage(ratings) {
+    if (ratings.length === 0) return '0.0';
+    const total = ratings.reduce((sum, rating) => sum + rating.rating, 0);
+    return (total / ratings.length).toFixed(1);
+}
+
+// Delete rating
+function deleteRating(id) {
+    if (confirm('Delete this rating permanently?')) {
+        fetch(API_ENDPOINTS.DELETE_RATING(id), {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                showToast('Rating deleted', 'success');
+                fetchRatings();
+            } else {
+                throw new Error('Failed to delete rating');
+            }
+        })
+        .catch(error => {
+            showToast(error.message, 'error');
+        });
+    }
+}
 
 // Fetch cars from backend
 function fetchCars() {
@@ -189,10 +377,13 @@ function fetchCars() {
 
 // Render cars table
 function renderCarsTable(cars) {
-    carsTableBody.innerHTML = '';
+    const tableBody = document.getElementById('carsTableBody');
+    if (!tableBody) return;
+    
+    tableBody.innerHTML = '';
     
     if (cars.length === 0) {
-        carsTableBody.innerHTML = `
+        tableBody.innerHTML = `
             <tr>
                 <td colspan="7" style="text-align: center; padding: 30px;">
                     <i class="fas fa-car" style="font-size: 48px; color: #ccc; margin-bottom: 15px;"></i>
@@ -224,28 +415,37 @@ function renderCarsTable(cars) {
             </td>
         `;
         
-        carsTableBody.appendChild(row);
+        tableBody.appendChild(row);
     });
 }
 
 // Update stats
 function updateStats(cars) {
-    totalCarsEl.textContent = cars.length;
+    const totalCarsElement = document.getElementById('totalCars');
+    const newCarsElement = document.getElementById('newCars');
+    const brandsCountElement = document.getElementById('brandsCount');
     
-    const newCars = cars.filter(car => car.condition === 'New').length;
-    newCarsEl.textContent = newCars;
+    if (totalCarsElement) totalCarsElement.textContent = cars.length;
     
-    const uniqueBrands = new Set(cars.map(car => car.make));
-    brandsCountEl.textContent = uniqueBrands.size;
+    if (newCarsElement) {
+        const newCars = cars.filter(car => car.condition === 'New').length;
+        newCarsElement.textContent = newCars;
+    }
+    
+    if (brandsCountElement) {
+        const uniqueBrands = new Set(cars.map(car => car.make));
+        brandsCountElement.textContent = uniqueBrands.size;
+    }
 }
 
 // Open modal for adding a car
 function openAddCarModal() {
     currentCarId = null;
-    modalTitle.textContent = 'Add New Car';
+    const modalTitleEl = document.getElementById('modalTitle');
+    if (modalTitleEl) modalTitleEl.textContent = 'Add New Car';
     carForm.reset();
     selectedImages = [];
-    uploadedImages.innerHTML = '';
+    if (uploadedImages) uploadedImages.innerHTML = '';
     openModal();
 }
 
@@ -262,7 +462,8 @@ function editCar(id) {
         })
         .then(car => {
             currentCarId = id;
-            modalTitle.textContent = 'Edit Car';
+            const modalTitleEl = document.getElementById('modalTitle');
+            if (modalTitleEl) modalTitleEl.textContent = 'Edit Car';
             
             // Populate form (including ID field)
             document.getElementById('carId').value = car.id || '';
@@ -280,7 +481,7 @@ function editCar(id) {
             
             // Clear image selection for editing
             selectedImages = [];
-            uploadedImages.innerHTML = '';
+            if (uploadedImages) uploadedImages.innerHTML = '';
             
             openModal();
             showLoading(false);
@@ -466,8 +667,9 @@ async function saveCar() {
 
 // Show/hide loading spinner
 function showLoading(isLoading) {
-    if (loadingSpinner) {
-        loadingSpinner.style.display = isLoading ? 'block' : 'none';
+    const spinner = document.getElementById('loadingSpinner');
+    if (spinner) {
+        spinner.style.display = isLoading ? 'block' : 'none';
     }
 }
 
@@ -501,16 +703,3 @@ function showToast(message, type) {
         alert(message);
     }
 }
-
-// Logout functionality
-document.addEventListener('DOMContentLoaded', () => {
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            mainContainer.style.display = 'none';
-            loginModal.classList.add('active');
-            loginForm.reset();
-        });
-    }
-});
