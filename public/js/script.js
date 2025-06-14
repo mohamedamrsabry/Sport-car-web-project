@@ -18,7 +18,7 @@ let scaleValue = 1;
 let opacityValue = 1;
 let scrollingEnabled = false;
 
-// Add scroll-down indicator
+
 const scrollIndicator = document.createElement('div');
 scrollIndicator.className = 'scroll-indicator';
 scrollIndicator.innerHTML = '<i class="fas fa-chevron-down"></i>';
@@ -26,7 +26,7 @@ document.querySelector('.trans-image').appendChild(scrollIndicator);
 
 window.addEventListener('wheel', (event) => {
     if (!scrollingEnabled) {
-        event.preventDefault(); // Prevent native scrolling
+        event.preventDefault(); 
         
         if (event.deltaY > 0) {
             scaleValue = Math.min(scaleValue + event.deltaY * 0.005, 6);
@@ -41,14 +41,14 @@ window.addEventListener('wheel', (event) => {
         cover.style.transform = `scale(${scaleValue})`;
         cover.style.opacity = opacityValue;
 
-        // Parallax effect for hero text
+        
         const textOverlay = document.querySelector('.text-overlay');
-        const parallaxY = Math.min(scaleValue * 40, 120); // Move up as you scroll
-        const textScale = Math.max(1 - (scaleValue - 1) * 0.15, 0.7); // Scale down
+        const parallaxY = Math.min(scaleValue * 40, 120);
+        const textScale = Math.max(1 - (scaleValue - 1) * 0.15, 0.7); 
         textOverlay.style.transform = `translateY(-${parallaxY}px) scale(${textScale})`;
         textOverlay.style.opacity = opacityValue + 0.2;
 
-        // Fade out scroll indicator
+        
         scrollIndicator.style.opacity = Math.max(opacityValue * 2 - 0.2, 0);
 
         if (opacityValue <= 0) {
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let interval = null;
     let text=document.querySelector(".start");
 
-    // Start revving when "W" is pressed
+   
     document.addEventListener("keydown", (event) => {
         if (event.key.toLowerCase() === "w" && !revving) {
             revving = true;
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Stop revving when "W" is released
+    
     document.addEventListener("keyup", (event) => {
         if (event.key.toLowerCase() === "w") {
             revving = false;
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
             text.style.backgroundColor="#0000003a";
             text.textContent="-PRESS W TO START-";
             audio.currentTime = 0;
-            speed = 0; // Reset speed
+            speed = 0; 
             counter.textContent = "0 km/h";
             clearInterval(interval);
         }
@@ -148,21 +148,21 @@ var swiper = new Swiper(".vehicles-slider", {
     touchStartPreventDefault: true,
     centeredSlides: true,
     loop: true,
-    slidesPerView: 1.5, // Shows half of the next and previous slides
-    spaceBetween: 20, // Adjust spacing between slides
+    slidesPerView: 1.5, 
+    spaceBetween: 20, 
     autoplay: {
       delay: 9500,
       disableOnInteraction: false,
     },
     effect: "coverflow",
     coverflowEffect: {
-      rotate: 0, // No rotation
-      stretch: 0, // No stretch
-      depth: 200, // Adjust depth for a 3D effect
+      rotate: 0,
+      stretch: 0,
+      depth: 200,
       modifier: 1,
       slideShadows: false,
-      scale: 0.9, // Slightly smaller side slides
-      opacity: 0.5, // Make side slides less prominent
+      scale: 0.9, 
+      opacity: 0.5, 
     },
     pagination: {
       el: ".swiper-pagination",
@@ -176,7 +176,7 @@ var swiper = new Swiper(".vehicles-slider", {
     
   });
 
-let cars = []; // This will store our fetched cars
+let cars = []; 
 
 document.addEventListener('DOMContentLoaded', async () => {
     const loadingElement = document.getElementById('carLoading');
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     createModal();
 });
 
-// Create modal HTML structure
+
 function createModal() {
     const modalHTML = `
         <div id="installmentModal" class="modal-overlay" style="display: none;">
@@ -241,7 +241,7 @@ function createModal() {
     
     document.body.insertAdjacentHTML('beforeend', modalHTML);
     
-    // Add modal styles
+    
     const modalStyles = `
         <style>
             .modal-overlay {
@@ -371,7 +371,7 @@ function createModal() {
     document.head.insertAdjacentHTML('beforeend', modalStyles);
 }
 
-// Show modal with results
+
 function showModal(resultData) {
     const modal = document.getElementById('installmentModal');
     const modalBody = document.getElementById('modalBody');
@@ -409,17 +409,17 @@ function showModal(resultData) {
     
     modalBody.innerHTML = resultHTML;
     modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    document.body.style.overflow = 'hidden'; 
 }
 
-// Close modal
+
 function closeModal() {
     const modal = document.getElementById('installmentModal');
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Restore scrolling
+    document.body.style.overflow = 'auto'; 
 }
 
-// Close modal when clicking outside
+
 document.addEventListener('click', (e) => {
     const modal = document.getElementById('installmentModal');
     if (e.target === modal) {
@@ -427,20 +427,20 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Close modal with Escape key
+
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeModal();
     }
 });
 
-// Populate the brands dropdown with unique car makes
+
 function populateBrands() {
     const brandSelect = document.getElementById('brandSelect');
     
     if (!brandSelect) return;
 
-    // Get unique brands
+    
     const brands = [...new Set(cars.map(car => car.make))].sort();
 
     brands.forEach(brand => {
@@ -451,7 +451,7 @@ function populateBrands() {
     });
 }
 
-// Update models dropdown based on selected brand
+
 function updateModels() {
     const brandSelect = document.getElementById('brandSelect');
     const modelSelect = document.getElementById('modelSelect');
@@ -460,19 +460,19 @@ function updateModels() {
     
     const brand = brandSelect.value;
 
-    modelSelect.innerHTML = '<option value="">Choose…</option>'; // reset
+    modelSelect.innerHTML = '<option value="">Choose…</option>';
 
     if (!brand) return;
 
-    // Filter models for the selected brand
+    
     const brandModels = cars
         .filter(car => car.make === brand)
         .map(car => car.model);
 
-    // Remove duplicates and sort
+    
     const uniqueModels = [...new Set(brandModels)].sort();
 
-    // Add models to dropdown
+    
     uniqueModels.forEach(model => {
         const option = document.createElement('option');
         option.value = model;
@@ -481,7 +481,7 @@ function updateModels() {
     });
 }
 
-// Add event listener for brand selection change
+
 document.addEventListener('DOMContentLoaded', () => {
     const brandSelect = document.getElementById('brandSelect');
     if (brandSelect) {
@@ -489,7 +489,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Installment calculation function
+
 function calculateInstallment() {
     const brandSelect = document.getElementById('brandSelect');
     const modelSelect = document.getElementById('modelSelect');
@@ -497,14 +497,14 @@ function calculateInstallment() {
     const termSelect = document.getElementById('termSelect');
     const jobTitleInput = document.getElementById('jobTitle');
 
-    // Get values
+  
     const selectedBrand = brandSelect.value;
     const selectedModel = modelSelect.value;
     const downPaymentPercent = parseFloat(downPaymentInput.value) || 0;
     const termMonths = parseInt(termSelect.value);
     const jobTitle = jobTitleInput.value;
 
-    // Validation
+ 
     if (!selectedBrand || !selectedModel) {
         alert('Please select both car brand and model');
         return;
@@ -515,7 +515,7 @@ function calculateInstallment() {
         return;
     }
 
-    // Find the selected car to get its price
+   
     const selectedCar = cars.find(car => 
         car.make === selectedBrand && car.model === selectedModel
     );
@@ -525,10 +525,10 @@ function calculateInstallment() {
         return;
     }
 
-    // Calculate installment - handle different possible price property names
+   
     let carPrice = 0;
     
-    // Try different common property names for price
+    
     if (selectedCar.price) {
         carPrice = parseFloat(selectedCar.price.toString().replace(/[,EGP]/g, ''));
     } else if (selectedCar.Price) {
@@ -538,24 +538,24 @@ function calculateInstallment() {
     } else if (selectedCar.value) {
         carPrice = parseFloat(selectedCar.value.toString().replace(/[,EGP]/g, ''));
     } else {
-        // If no price found, use a default or prompt user
+        
         carPrice = 50000;
         console.log('No price found for selected car, using default price');
         console.log('Available car properties:', Object.keys(selectedCar));
     }
 
-    // Ensure we have valid numbers
+    
     if (isNaN(carPrice) || carPrice <= 0) {
-        carPrice = 50000; // Default fallback
+        carPrice = 50000; 
     }
 
     const downPaymentAmount = (carPrice * downPaymentPercent) / 100;
     const loanAmount = carPrice - downPaymentAmount;
     
-    // Simple calculation (0% APR as mentioned in HTML)
+    
     const monthlyInstallment = loanAmount / termMonths;
 
-    // Prepare result data
+   
     const resultData = {
         brand: selectedBrand,
         model: selectedModel,
@@ -568,16 +568,17 @@ function calculateInstallment() {
         jobTitle: jobTitle
     };
 
-    // Show modal instead of alert
+    
     showModal(resultData);
     
-    // Debug information
+    
+
     console.log('Selected Car Object:', selectedCar);
     console.log('Available properties:', Object.keys(selectedCar));
     console.log('Installment Calculation:', resultData);
 }
 
-// Add event listener for the calculate button
+
 document.addEventListener('DOMContentLoaded', () => {
     const calculateBtn = document.querySelector('.calculate-btn');
     if (calculateBtn) {
