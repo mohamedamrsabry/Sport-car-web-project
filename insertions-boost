@@ -25,3 +25,4 @@ git push -u origin insertions-boost
 
 echo "✅ Done! 100,000 insertions pushed to 'insertions-boost' branch."
 chmod +x boost_insertions.sh
+./boost_insertions.sh
