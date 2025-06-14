@@ -683,3 +683,40 @@
 .ratings-table {
     margin-top: 25px;
 }
+/* Existing image indicators */
+.image-preview.existing-image {
+    position: relative;
+    border: 2px solid #28a745;
+}
+
+.existing-indicator {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #28a745;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.image-update-message {
+    width: 100%;
+    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.image-update-message p {
+    margin: 0;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.image-update-message i {
+    color: #17a2b8;
+    margin-right: 5px;
+}

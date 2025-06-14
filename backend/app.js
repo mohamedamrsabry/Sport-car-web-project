@@ -9,6 +9,8 @@ const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
 const Rating = require('./models/rating');
+const session = require('express-session');
+const bcrypt = require('bcrypt');
 
 
 const app = express();
@@ -18,13 +20,20 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// Ensure the products directory exists
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }
+}));
+
+
 const productsDir = path.join(__dirname, '..', 'public', 'partials', 'img', 'products');
 if (!fs.existsSync(productsDir)) {
     fs.mkdirSync(productsDir, { recursive: true });
 }
 
-// Configure multer for image uploads
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const make = req.body.make;
@@ -32,7 +41,7 @@ const storage = multer.diskStorage({
         const folderName = `${make} ${model}`;
         const folderPath = path.join(productsDir, folderName);
         
-        // Create folder if it doesn't exist
+ 
         if (!fs.existsSync(folderPath)) {
             fs.mkdirSync(folderPath, { recursive: true });
         }
@@ -75,7 +84,23 @@ const upload = multer({
         fileSize: 5 * 1024 * 1024 // 5MB limit
     }
 });
-
+function requireAdmin(req, res, next) {
+    if (req.session.isAdmin) {
+        next();
+    } else {
+        res.status(401).json({ error: 'Unauthorized' });
+    }
+}
+app.post('/admin/login', (req, res) => {
+    const { username, password } = req.body;
+    
+    if (username === process.env.ADMIN_USER && password === process.env.ADMIN_PASS) {
+        req.session.isAdmin = true;
+        res.json({ success: true });
+    } else {
+        res.status(401).json({ success: false, message: 'Invalid credentials' });
+    }
+});
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
@@ -101,7 +126,6 @@ app.get('/car-list', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'cars.html'));
 });
 
-// Image upload endpoint
 app.post('/upload-images', upload.array('images', 4), (req, res) => {
     try {
         if (!req.files || req.files.length !== 4) {
@@ -111,6 +135,16 @@ app.post('/upload-images', upload.array('images', 4), (req, res) => {
         const make = req.body.make;
         const model = req.body.model;
         const folderName = `${make} ${model}`;
+        const folderPath = path.join(productsDir, folderName);
+        
+        // If folder exists (updating), remove old images first
+        if (fs.existsSync(folderPath)) {
+            const existingFiles = fs.readdirSync(folderPath);
+            existingFiles.forEach(file => {
+                fs.unlinkSync(path.join(folderPath, file));
+            });
+            console.log(`Cleared existing images for ${folderName}`);
+        }
         
         // Return the path to the main image
         const mainImagePath = `/partials/img/products/${folderName}/${folderName}${path.extname(req.files[0].originalname)}`;
@@ -184,18 +218,54 @@ app.get('/cars/:id', async (req, res) => {
     }
 });
 
-// Update a car by id
 app.put('/cars/:id', async (req, res) => {
     try {
-        const updatedCar = await Car.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!updatedCar) return res.status(404).json({ message: 'Car not found' });
+        // Find the current car to preserve existing data
+        const existingCar = await Car.findById(req.params.id);
+        if (!existingCar) return res.status(404).json({ message: 'Car not found' });
+        
+        // If make/model changed and there's an existing image, we need to handle folder rename
+        const makeModelChanged = (req.body.make !== existingCar.make || req.body.model !== existingCar.model);
+        
+        if (makeModelChanged && existingCar.image && !req.body.image) {
+            // Make/model changed but no new image provided
+            // We should move the existing folder to new name
+            const oldFolderName = `${existingCar.make} ${existingCar.model}`;
+            const newFolderName = `${req.body.make} ${req.body.model}`;
+            const oldFolderPath = path.join(productsDir, oldFolderName);
+            const newFolderPath = path.join(productsDir, newFolderName);
+            
+            if (fs.existsSync(oldFolderPath)) {
+                try {
+                    fs.renameSync(oldFolderPath, newFolderPath);
+                    
+                    // Update image path in the request
+                    const newImagePath = existingCar.image.replace(oldFolderName, newFolderName);
+                    req.body.image = newImagePath;
+                    
+                    console.log(`Moved folder from ${oldFolderName} to ${newFolderName}`);
+                } catch (error) {
+                    console.error('Error moving folder:', error);
+                }
+            }
+        }
+        
+        // Create update object, preserving existing image if no new one provided
+        const updateData = {
+            ...req.body,
+            // If no new image provided, keep the existing one (possibly updated path)
+            image: req.body.image || existingCar.image
+        };
+        
+        const updatedCar = await Car.findByIdAndUpdate(req.params.id, updateData, { new: true });
         res.json(updatedCar);
     } catch (err) {
+        console.error('Update error:', err);
         res.status(400).json({ message: err.message });
     }
 });
 
-// Delete a car by id
+// Updated delete car route (no changes needed, but included for completeness)
 app.delete('/cars/:id', async (req, res) => {
     try {
         const car = await Car.findById(req.params.id);
