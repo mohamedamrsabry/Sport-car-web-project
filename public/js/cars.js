@@ -4,7 +4,7 @@ let currentCar = null; // Current car being viewed
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     // Fetch cars from backend
-    const response = await fetch("http://localhost:3000/cars");
+    const response = await fetch("http://localhost:3000/api/cars");
     cars = await response.json();
     
     // Get car ID from URL

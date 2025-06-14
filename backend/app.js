@@ -2,20 +2,23 @@ require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
-const Car = require('./models/car');
-const Contact = require('./models/contact');
-const carData = require('./carData');
 const path = require('path');
-const multer = require('multer');
-const fs = require('fs');
-const Rating = require('./models/rating');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
+const Car = require('./models/car');
+const carData = require('./carData');
 
+// Import routes
+const authRoutes = require('./routes/authRoutes');
+const carRoutes = require('./routes/carRoutes');
+const contactRoutes = require('./routes/contactRoutes');
+const ratingRoutes = require('./routes/ratingRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
+const viewRoutes = require('./routes/viewRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Middleware
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '..', 'public')));
@@ -27,382 +30,15 @@ app.use(session({
     cookie: { secure: false }
 }));
 
+// Routes
+app.use('/', viewRoutes);
+app.use('/admin', authRoutes);
+app.use('/api', carRoutes);
+app.use('/api', contactRoutes);
+app.use('/api', ratingRoutes);
+app.use('/', uploadRoutes);
 
-const productsDir = path.join(__dirname, '..', 'public', 'partials', 'img', 'products');
-if (!fs.existsSync(productsDir)) {
-    fs.mkdirSync(productsDir, { recursive: true });
-}
-
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const make = req.body.make;
-        const model = req.body.model;
-        const folderName = `${make} ${model}`;
-        const folderPath = path.join(productsDir, folderName);
-        
- 
-        if (!fs.existsSync(folderPath)) {
-            fs.mkdirSync(folderPath, { recursive: true });
-        }
-        
-        cb(null, folderPath);
-    },
-    filename: function (req, file, cb) {
-        const make = req.body.make;
-        const model = req.body.model;
-        const folderName = `${make} ${model}`;
-        
-        // Get the current file count to determine the filename
-        const folderPath = path.join(productsDir, folderName);
-        const files = fs.readdirSync(folderPath).filter(f => f.match(/\.(jpg|jpeg|png|gif)$/i));
-        
-        let filename;
-        if (files.length === 0) {
-            // First image gets the folder name
-            filename = `${folderName}${path.extname(file.originalname)}`;
-        } else {
-            // Other images get A, B, C
-            const letters = ['A', 'B', 'C'];
-            filename = `${letters[files.length - 1]}${path.extname(file.originalname)}`;
-        }
-        
-        cb(null, filename);
-    }
-});
-
-const upload = multer({ 
-    storage: storage,
-    fileFilter: (req, file, cb) => {
-        if (file.mimetype.startsWith('image/')) {
-            cb(null, true);
-        } else {
-            cb(new Error('Only image files are allowed!'), false);
-        }
-    },
-    limits: {
-        fileSize: 5 * 1024 * 1024 // 5MB limit
-    }
-});
-function requireAdmin(req, res, next) {
-    if (req.session.isAdmin) {
-        next();
-    } else {
-        res.status(401).json({ error: 'Unauthorized' });
-    }
-}
-app.post('/admin/login', (req, res) => {
-    const { username, password } = req.body;
-    
-    if (username === process.env.ADMIN_USER && password === process.env.ADMIN_PASS) {
-        req.session.isAdmin = true;
-        res.json({ success: true });
-    } else {
-        res.status(401).json({ success: false, message: 'Invalid credentials' });
-    }
-});
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
-});
-
-const htmlPages = [
-    'about',
-    'admin',
-    'privacy',
-    'products',
-    'quota',
-    'terms',
-    'car-list'
-];
-
-htmlPages.forEach(page => {
-    const ext = page === 'admin' ? '.html' : '.html';
-    app.get(`/${page}`, (req, res) => {
-        res.sendFile(path.join(__dirname, '..', 'public', `${page}${ext}`));
-    });
-});
-
-app.get('/car-list', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'cars.html'));
-});
-
-app.post('/upload-images', upload.array('images', 4), (req, res) => {
-    try {
-        if (!req.files || req.files.length !== 4) {
-            return res.status(400).json({ message: 'Please upload exactly 4 images' });
-        }
-
-        const make = req.body.make;
-        const model = req.body.model;
-        const folderName = `${make} ${model}`;
-        const folderPath = path.join(productsDir, folderName);
-        
-        // If folder exists (updating), remove old images first
-        if (fs.existsSync(folderPath)) {
-            const existingFiles = fs.readdirSync(folderPath);
-            existingFiles.forEach(file => {
-                fs.unlinkSync(path.join(folderPath, file));
-            });
-            console.log(`Cleared existing images for ${folderName}`);
-        }
-        
-        // Return the path to the main image
-        const mainImagePath = `/partials/img/products/${folderName}/${folderName}${path.extname(req.files[0].originalname)}`;
-        
-        res.json({
-            message: 'Images uploaded successfully',
-            mainImagePath: mainImagePath,
-            folderPath: `/partials/img/products/${folderName}/`,
-            uploadedFiles: req.files.map(file => file.filename)
-        });
-    } catch (error) {
-        console.error('Upload error:', error);
-        res.status(500).json({ message: 'Error uploading images: ' + error.message });
-    }
-});
-
-// Get all cars
-app.get('/cars', async (req, res) => {
-    try {
-        const cars = await Car.find();
-        res.json(cars);
-    } catch (err) {
-        res.status(500).send('Server error');
-    }
-});
-
-// Create a new car
-app.post('/cars', async (req, res) => {
-    try {
-        // Check if ID already exists
-        const existingCar = await Car.findOne({ id: req.body.id });
-        if (existingCar) {
-            return res.status(400).json({ message: 'Car with this ID already exists' });
-        }
-
-        const newCar = new Car(req.body);
-        const savedCar = await newCar.save();
-        res.status(201).json(savedCar);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-});
-
-// Get all ratings (for admin)
-app.get('/ratings', async (req, res) => {
-    try {
-        const ratings = await Rating.find().sort({ createdAt: -1 });
-        res.json(ratings);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
-// Delete a rating
-app.delete('/ratings/:id', async (req, res) => {
-    try {
-        await Rating.findByIdAndDelete(req.params.id);
-        res.json({ message: 'Rating deleted' });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-// Get one car by id
-app.get('/cars/:id', async (req, res) => {
-    try {
-        const car = await Car.findById(req.params.id);
-        if (!car) return res.status(404).json({ message: 'Car not found' });
-        res.json(car);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-});
-
-app.put('/cars/:id', async (req, res) => {
-    try {
-        // Find the current car to preserve existing data
-        const existingCar = await Car.findById(req.params.id);
-        if (!existingCar) return res.status(404).json({ message: 'Car not found' });
-        
-        // If make/model changed and there's an existing image, we need to handle folder rename
-        const makeModelChanged = (req.body.make !== existingCar.make || req.body.model !== existingCar.model);
-        
-        if (makeModelChanged && existingCar.image && !req.body.image) {
-            // Make/model changed but no new image provided
-            // We should move the existing folder to new name
-            const oldFolderName = `${existingCar.make} ${existingCar.model}`;
-            const newFolderName = `${req.body.make} ${req.body.model}`;
-            const oldFolderPath = path.join(productsDir, oldFolderName);
-            const newFolderPath = path.join(productsDir, newFolderName);
-            
-            if (fs.existsSync(oldFolderPath)) {
-                try {
-                    fs.renameSync(oldFolderPath, newFolderPath);
-                    
-                    // Update image path in the request
-                    const newImagePath = existingCar.image.replace(oldFolderName, newFolderName);
-                    req.body.image = newImagePath;
-                    
-                    console.log(`Moved folder from ${oldFolderName} to ${newFolderName}`);
-                } catch (error) {
-                    console.error('Error moving folder:', error);
-                }
-            }
-        }
-        
-        // Create update object, preserving existing image if no new one provided
-        const updateData = {
-            ...req.body,
-            // If no new image provided, keep the existing one (possibly updated path)
-            image: req.body.image || existingCar.image
-        };
-        
-        const updatedCar = await Car.findByIdAndUpdate(req.params.id, updateData, { new: true });
-        res.json(updatedCar);
-    } catch (err) {
-        console.error('Update error:', err);
-        res.status(400).json({ message: err.message });
-    }
-});
-
-// Updated delete car route (no changes needed, but included for completeness)
-app.delete('/cars/:id', async (req, res) => {
-    try {
-        const car = await Car.findById(req.params.id);
-        if (!car) return res.status(404).json({ message: 'Car not found' });
-        
-        // Delete the car's image folder
-        const folderName = `${car.make} ${car.model}`;
-        const folderPath = path.join(productsDir, folderName);
-        
-        if (fs.existsSync(folderPath)) {
-            fs.rmSync(folderPath, { recursive: true, force: true });
-            console.log(`Deleted folder: ${folderPath}`);
-        }
-        
-        const deletedCar = await Car.findByIdAndDelete(req.params.id);
-        res.json({ message: 'Car and associated images deleted' });
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-});
-
-// Contact form submission
-app.post('/api/contact', async (req, res) => {
-    try {
-        const { firstName, lastName, email, phone, message, carOfInterest } = req.body;
-        
-        // Basic validation
-        if (!firstName || !lastName || !email || !phone || !message) {
-            return res.status(400).json({ message: 'Please fill in all required fields' });
-        }
-
-        const contact = new Contact({
-            firstName,
-            lastName,
-            email,
-            phone,
-            message,
-            carOfInterest
-        });
-
-        await contact.save();
-        res.status(201).json({ message: 'Contact form submitted successfully' });
-    } catch (err) {
-        console.error('Contact submission error:', err);
-        res.status(500).json({ message: 'Error submitting contact form' });
-    }
-});
-
-// Get all contact submissions (admin only)
-app.get('/api/contacts', async (req, res) => {
-    try {
-        const contacts = await Contact.find().sort({ createdAt: -1 });
-        res.json(contacts);
-    } catch (err) {
-        res.status(500).json({ message: 'Error fetching contacts' });
-    }
-});
-
-// Update contact status (admin only)
-app.put('/api/contacts/:id', async (req, res) => {
-    try {
-        const { status } = req.body;
-        const contact = await Contact.findByIdAndUpdate(
-            req.params.id,
-            { status },
-            { new: true }
-        );
-        
-        if (!contact) {
-            return res.status(404).json({ message: 'Contact not found' });
-        }
-        
-        res.json(contact);
-    } catch (err) {
-        res.status(500).json({ message: 'Error updating contact status' });
-    }
-});
-
-// Rate Us endpoint
-app.post('/api/rate', async (req, res) => {
-    try {
-        const { name, rating, message } = req.body;
-        if (!name || !rating) {
-            return res.status(400).json({ message: 'Name and rating are required.' });
-        }
-        if (isNaN(rating) || rating < 1 || rating > 5) {
-            return res.status(400).json({ message: 'Rating must be a number between 1 and 5.' });
-        }
-        const newRating = new Rating({ name, rating, message });
-        await newRating.save();
-        res.status(201).json({ message: 'Thank you for your rating!' });
-    } catch (err) {
-        console.error('Rating submission error:', err);
-        res.status(500).json({ message: 'Error submitting rating.' });
-    }
-});
-// Rate Us endpoint
-app.post('/api/rate', async (req, res) => {
-    try {
-        const { name, rating, message } = req.body;
-        if (!name || !rating) {
-            return res.status(400).json({ message: 'Name and rating are required.' });
-        }
-        if (isNaN(rating) || rating < 1 || rating > 5) {
-            return res.status(400).json({ message: 'Rating must be a number between 1 and 5.' });
-        }
-        const newRating = new Rating({ name, rating, message });
-        await newRating.save();
-        res.status(201).json({ message: 'Thank you for your rating!' });
-    } catch (err) {
-        console.error('Rating submission error:', err);
-        res.status(500).json({ message: 'Error submitting rating.' });
-    }
-});
-
-// Get all ratings (for admin)
-app.get('/ratings', async (req, res) => {
-    try {
-        const ratings = await Rating.find().sort({ createdAt: -1 });
-        res.json(ratings);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
-// Delete a rating
-app.delete('/ratings/:id', async (req, res) => {
-    try {
-        await Rating.findByIdAndDelete(req.params.id);
-        res.json({ message: 'Rating deleted' });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
-
-
+// Function to add initial car data
 async function addAllCars() {
     try {
         const count = await Car.countDocuments();
@@ -417,12 +53,12 @@ async function addAllCars() {
     }
 }
 
-
+// Start server
 connectDB()
     .then(async () => {
         console.log('MongoDB connected successfully');
         await addAllCars();
-        app.listen(PORT,'0.0.0.0', () => {
+        app.listen(PORT, '0.0.0.0', () => {
             console.log(`Server running at http://localhost:${PORT}`);
         });
     })

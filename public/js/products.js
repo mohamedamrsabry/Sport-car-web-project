@@ -52,7 +52,7 @@ let cars = [];
 
 async function fetchCars() {
   try {
-    const res = await fetch("http://localhost:3000/cars");
+    const res = await fetch("http://localhost:3000/api/cars");
     cars = await res.json();
     populateFilters(); // now populate dropdowns
     const makeParam = getQueryParam("make");

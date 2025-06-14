@@ -149,14 +149,14 @@ const brandsCountEl = document.getElementById('brandsCount');
 // API Configuration
 const API_URL = 'http://localhost:3000'; // Your backend URL
 const API_ENDPOINTS = {
-    GET_CARS: `${API_URL}/cars`,
-    CREATE_CAR: `${API_URL}/cars`,
-    GET_CAR: (id) => `${API_URL}/cars/${id}`,
-    UPDATE_CAR: (id) => `${API_URL}/cars/${id}`,
-    DELETE_CAR: (id) => `${API_URL}/cars/${id}`,
-    UPLOAD_IMAGES: `${API_URL}/upload-images`,
-    GET_RATINGS: `${API_URL}/ratings`,
-    DELETE_RATING: (id) => `${API_URL}/ratings/${id}`
+    GET_CARS: `${API_URL}/api/cars`,
+    CREATE_CAR: `${API_URL}/api/cars`,
+    GET_CAR: (id) => `${API_URL}/api/cars/${id}`,
+    UPDATE_CAR: (id) => `${API_URL}/api/cars/${id}`,
+    DELETE_CAR: (id) => `${API_URL}/api/cars/${id}`,
+    UPLOAD_IMAGES: `${API_URL}/api/upload-images`,
+    GET_RATINGS: `${API_URL}/api/ratings`,
+    DELETE_RATING: (id) => `${API_URL}/api/ratings/${id}`
 };
 
 // Initialize the page

@@ -1,0 +1,36 @@
+[14-Jun-2025 04:51:20 UTC] Request Method: POST
+[14-Jun-2025 04:51:20 UTC] Content Type: application/json
+[14-Jun-2025 04:51:20 UTC] Raw JSON input: {"firstName":"Mohamed","lastName":"Sabry","email":"sanchoj033@gmail.com","phone":"01226699308","message":"yert","carOfInterest":"bmw"}
+[14-Jun-2025 04:51:20 UTC] POST data: Array
+(
+)
+
+[14-Jun-2025 04:51:20 UTC] Decoded JSON: Array
+(
+    [firstName] => Mohamed
+    [lastName] => Sabry
+    [email] => sanchoj033@gmail.com
+    [phone] => 01226699308
+    [message] => yert
+    [carOfInterest] => bmw
+)
+
+[14-Jun-2025 04:51:20 UTC] Sanitized data - First Name: 'Mohamed', Last Name: 'Sabry', Email: 'sanchoj033@gmail.com', Phone: '01226699308', Message: 'yert'
+[14-Jun-2025 05:07:35 UTC] Request Method: POST
+[14-Jun-2025 05:07:35 UTC] Content Type: application/json
+[14-Jun-2025 05:07:35 UTC] Raw JSON input: {"firstName":"Mohamed","lastName":"Sabry","email":"sanchoj033@gmail.com","phone":"01226699308","message":"ew","carOfInterest":"bmw"}
+[14-Jun-2025 05:07:35 UTC] POST data: Array
+(
+)
+
+[14-Jun-2025 05:07:35 UTC] Decoded JSON: Array
+(
+    [firstName] => Mohamed
+    [lastName] => Sabry
+    [email] => sanchoj033@gmail.com
+    [phone] => 01226699308
+    [message] => ew
+    [carOfInterest] => bmw
+)
+
+[14-Jun-2025 05:07:35 UTC] Sanitized data - First Name: 'Mohamed', Last Name: 'Sabry', Email: 'sanchoj033@gmail.com', Phone: '01226699308', Message: 'ew'
