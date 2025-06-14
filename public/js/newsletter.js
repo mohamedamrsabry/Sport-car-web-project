@@ -1,8 +1,8 @@
-// Newsletter subscription handler
-let newsletterInitialized = false; // Flag to prevent multiple initializations
+
+let newsletterInitialized = false; 
 
 function initNewsletter() {
-    // Prevent multiple initializations
+   
     if (newsletterInitialized) {
         return;
     }
@@ -19,13 +19,13 @@ function initNewsletter() {
             
             const email = newsletterEmail.value.trim();
             
-            // Basic email validation
+            
             if (!email || !isValidEmail(email)) {
                 showNewsletterMessage('error', 'Please enter a valid email address.');
                 return;
             }
             
-            // Show loading state
+           
             subscribeBtn.disabled = true;
             subscribeText.style.display = 'none';
             subscribeLoading.style.display = 'inline-block';
