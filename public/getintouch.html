@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strada - Premium Assistance Chat</title>
+    <style>
+        /* (CSS from previous response, with minor adjustments) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2d2d2d 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-page {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            width: 100%;
+        }
+
+        .chat-header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 20px;
+        }
+
+        .back-btn:hover {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .chat-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .chat-logo {
+            height: 30px; /* Adjust as needed for your logo */
+            width: auto;
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 10px 0;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            display: flex;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .message.bot {
+            justify-content: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .message.bot .message-content {
+            background: linear-gradient(135deg, #ffd700, #ffed4a);
+            color: #000;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.user .message-content {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-bottom-right-radius: 5px;
+        }
+
+        .specialist-prompt {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .specialist-prompt .message-content {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            margin-bottom: 15px;
+        }
+
+        .chat-input-container {
+            padding: 20px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            flex-shrink: 0;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .send-btn {
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            color: #000;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .quick-action-btn {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+            margin-left: 20px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ffd700;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        .customer-service-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .customer-service-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .chat-messages {
+                padding: 20px 10px;
+            }
+
+            .message-content {
+                max-width: 90%;
+            }
+
+            .chat-input-container {
+                padding: 15px 10px;
+            }
+
+            .quick-actions {
+                justify-content: flex-start;
+            }
+        }
+
+        /* Styles for the test drive popup */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a1a; /* Darker background for popup */
+            color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none; /* Initially hidden */
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .popup h2 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .popup label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ddd;
+            font-size: 1.1rem;
+        }
+
+        .popup input[type="date"],
+        .popup input[type="time"] {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 5px;
+            width: calc(100% - 24px); /* Account for padding */
+            background-color: #0f0f0f;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .popup button {
+            background: linear-gradient(45deg, #ffd700, #ffed4a);
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: block; /* Make button full width */
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .popup button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Darker overlay */
+            z-index: 999;
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-page" id="chatPage">
+        <div class="chat-header">
+            <button class="back-btn" onclick="goBack()">← Back</button>
+            <div class="chat-title">
+                <img src="/partials/img/logo.png" alt="Logo" class="chat-logo">
+                Strada - Premium Assistance
+            </div>
+            <div></div> </div>
+        
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-content">
+                        Welcome to Strada's luxury car collection! I'm here to help you find your perfect vehicle. How may I assist you today?
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="message-content" style="background: rgba(255,215,0,0.2); color: #ffd700;">
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+                    <button class="send-btn" onclick="sendMessage()">Send</button>
+                </div>
+                <div class="quick-actions">
+                    <button class="quick-action-btn" onclick="quickAction('browse')">Browse Collection</button>
+                    <button class="quick-action-btn" onclick="quickAction('financing')">Financing Options</button>
+                    <button class="quick-action-btn" onclick="quickAction('appointment')">Schedule Test Drive</button>
+                    <button class="quick-action-btn" onclick="quickAction('trade')">Trade-In Value</button>
+                    <button class="quick-action-btn" onclick="quickAction('contact')">Speak to Sales</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="testDrivePopup">
+        <h2>Schedule a Test Drive</h2>
+        <label for="testDriveDate">Preferred Date:</label>
+        <input type="date" id="testDriveDate">
+        <label for="testDriveTime">Preferred Time:</label>
+        <input type="time" id="testDriveTime">
+        <button onclick="submitTestDriveRequest()">Submit Request</button>
+        <button class="customer-service-btn" style="background: #555; margin-top: 15px;" onclick="closeTestDrivePopup()">Cancel</button>
+    </div>
+
+    <div class="overlay" id="popupOverlay"></div>
+
+    <script>
+        // Chatbot responses database
+        const responses = {
+            greetings: [
+                "Hello! Welcome to Strada's exclusive luxury car showroom. How can I help you find your dream vehicle today?",
+                "Good day! I'm delighted to assist you with our premium automotive collection.",
+                "Welcome! I'm here to guide you through our exceptional range of luxury vehicles."
+            ],
+            
+            appointment: "Great! To schedule your private test drive experience, please select your preferred date and time in the pop-up window that just appeared. We'll confirm availability shortly.",
+            trade: "We provide premium trade-in evaluations for your current vehicle. Could you tell me the make, model, and year of your car?",
+            features: "Our luxury vehicles come with cutting-edge technology, premium materials, and exceptional performance. Are you interested in specific features like autonomous driving, custom interiors, or performance specs?",
+            price: "Our vehicles represent exceptional value in the luxury market. Prices vary based on model and customization. Would you like detailed pricing for a specific vehicle?",
+            brands: "We carry the world's most prestigious brands including Mercedes-Benz, BMW, Audi, Porsche, Jaguar, and more. Do you have a preferred brand in mind?",
+            contact: "Certainly! To help you best, could you tell me what specific questions you have for our sales team?",
+            default: [
+                "That's a great question! Let me help you with that.",
+                "I understand your interest. Could you provide more details so I can assist you better?",
+                "Thank you for that information. How else can I help you today?"
+            ]
+        };
+
+        let conversationCount = 0;
+
+        function goBack() {
+            // Redirect to the "about us" page
+            window.location.href = "about.html"; 
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+
+            addMessage(message, 'user');
+            input.value = '';
+            
+            showTypingIndicator();
+            
+            setTimeout(() => {
+                hideTypingIndicator();
+                const response = generateResponse(message);
+                addMessage(response, 'bot');
+                conversationCount++;
+                
+                
+                if (message.toLowerCase().includes('test drive') || message.toLowerCase().includes('schedule') || response === responses.appointment) {
+                    showTestDrivePopup();
+                }
+
+                if (conversationCount >= 3 && Math.random() > 0.5) {
+                    setTimeout(() => {
+                        addCustomerServiceOption();
+                    }, 1000);
+                }
+            }, 1500 + Math.random() * 1000);
+        }
+
+        function addMessage(content, sender, isSpecialPrompt = false) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            if (isSpecialPrompt) {
+                messageDiv.classList.add('specialist-prompt');
+            }
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = content;
+            
+            messageDiv.appendChild(contentDiv);
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function generateResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                return responses.greetings[Math.floor(Math.random() * responses.greetings.length)];
+            }
+            
+            if (lowerMessage.includes('test drive') || lowerMessage.includes('appointment') || lowerMessage.includes('schedule')) {
+                return responses.appointment;
+            }
+            
+            if (lowerMessage.includes('trade') || lowerMessage.includes('sell') || lowerMessage.includes('exchange')) {
+                return responses.trade;
+            }
+            
+            if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('expensive')) {
+                return responses.price;
+            }
+            
+            if (lowerMessage.includes('brand') || lowerMessage.includes('mercedes') || lowerMessage.includes('bmw') || lowerMessage.includes('audi')) {
+                return responses.brands;
+            }
+            
+            if (lowerMessage.includes('feature') || lowerMessage.includes('technology') || lowerMessage.includes('specs')) {
+                return responses.features;
+            }
+
+            if (lowerMessage.includes('sales') || lowerMessage.includes('speak to someone') || lowerMessage.includes('human') || lowerMessage.includes('contact')) {
+                return responses.contact;
+            }
+            
+            return responses.default[Math.floor(Math.random() * responses.default.length)];
+        }
+
+        function quickAction(action) {
+            if (action === 'browse') {
+                window.location.href = "products.html"; 
+                return; 
+            }
+            if (action === 'financing') {
+                window.location.href = "installment.html"; 
+                return; 
+            }
+
+            const actions = {
+                
+                appointment: "I want to schedule a test drive",
+                trade: "What's my trade-in value?",
+                contact: "I need to speak to someone in sales"
+            };
+            
+            document.getElementById('chatInput').value = actions[action];
+            sendMessage();
+        }
+
+        function showTypingIndicator() {
+            document.getElementById('typingIndicator').style.display = 'flex';
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            document.getElementById('typingIndicator').style.display = 'none';
+        }
+
+        function addCustomerServiceOption() {
+            addMessage("It seems like you have more specific questions. Would you like to speak with one of our premium vehicle specialists for personalized assistance?", 'bot', true);
+            
+            const messagesContainer = document.getElementById('chatMessages');
+            const buttonContainer = document.createElement('div');
+            buttonContainer.className = 'message bot specialist-prompt';
+            buttonContainer.innerHTML = `<button class="customer-service-btn" onclick="connectToCustomerService()">Connect to Specialist</button>`;
+            messagesContainer.appendChild(buttonContainer);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function connectToCustomerService() {
+            const connectBtn = document.querySelector('.customer-service-btn');
+            if (connectBtn) {
+                connectBtn.disabled = true;
+                connectBtn.textContent = 'Connecting...';
+            }
+
+            addMessage("Perfect! I'm connecting you to one of our luxury vehicle specialists. Please hold for just a moment...", 'bot');
+            
+            setTimeout(() => {
+                addMessage("Thank you for your patience. You're now connected to Sarah, our Premium Vehicle Specialist. She'll be able to provide detailed information about our collection and arrange exclusive viewings.", 'bot');
+                
+                setTimeout(() => {
+                    addMessage("Hello! I'm Sarah, your dedicated luxury vehicle specialist. I see you've been inquiring about our collection. I'm here to provide you with personalized service and answer any detailed questions you may have. How can I assist you today?", 'bot');
+                }, 2000);
+            }, 3000);
+        }
+
+        // Test Drive Popup Functions
+        function showTestDrivePopup() {
+            document.getElementById('testDrivePopup').style.display = 'block';
+            document.getElementById('popupOverlay').style.display = 'block';
+
+            
+            const today = new Date();
+            let tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+
+            
+            if (tomorrow.getDay() === 6) { 
+                tomorrow.setDate(tomorrow.getDate() + 2);
+            } else if (tomorrow.getDay() === 0) { 
+                tomorrow.setDate(tomorrow.getDate() + 1);
+            }
+
+            const formattedDate = tomorrow.toISOString().split('T')[0];
+            document.getElementById('testDriveDate').value = formattedDate;
+        }
+
+        function closeTestDrivePopup() {
+            document.getElementById('testDrivePopup').style.display = 'none';
+            document.getElementById('popupOverlay').style.display = 'none';
+        }
+
+        function submitTestDriveRequest() {
+            const date = document.getElementById('testDriveDate').value;
+            const time = document.getElementById('testDriveTime').value;
+
+            if (date && time) {
+                addMessage(`Excellent! Your test drive request for <strong>${date}</strong> at <strong>${time}</strong> has been received. Our team will contact you shortly to confirm.`, 'bot');
+                closeTestDrivePopup();
+                
+                console.log(`Test Drive Requested: Date - ${date}, Time - ${time}`);
+            } else {
+                alert('Please select both a date and a time for your test drive.');
+            }
+        }
+
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('chatPage').style.display = 'flex';
+        });
+    </script>
+</body>
+</html>

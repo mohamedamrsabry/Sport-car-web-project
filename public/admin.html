@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Inventory Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="icon" type="image/png" href="/partials/img/logo.ico">
+</head>
+<body>
+    
+    <div class="modal-overlay active login-bg" id="loginModal">
+        <div class="modal" style="max-width: 450px;">
+            <div class="modal-header">
+                <h3>Admin Login</h3>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Username *</label>
+                        <input type="text" id="username" placeholder="Enter admin username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <input type="password" id="password" placeholder="Enter password" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="loginBtn">Login</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">`
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="partials/img/logo.png" alt="STRADA Logo" class="logo-image">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active"><i class="fas fa-home"></i> <span>Dashboard</span></a></li>
+                <li><a href="#" id="ratingsLink"><i class="fas fa-star"></i> <span>Ratings</span></a></li>
+                <li><a href="/index.html"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h2>Hello Admin!</h2>
+                <div class="user-info">
+                    <div class="avatar">AD</div>
+                    <div>
+                        <h4>Administrator</h4>
+                        <p>Car Inventory Manager</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon icon-blue">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalCars">0</h3>
+                        <p>Total Cars</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="newCars">0</h3>
+                        <p>New Cars</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-orange">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="brandsCount">0</h3>
+                        <p>Brands</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-red">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>0</h3>
+                        <p>Pending Actions</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cars Table -->
+            <div class="content-box">
+                <div class="table-header">
+                    <h3>Car Inventory</h3>
+                    <button class="btn btn-primary" id="addCarBtn">
+                        <i class="fas fa-plus"></i> Add New Car
+                    </button>
+                </div>
+                <div class="spinner" id="loadingSpinner"></div>
+                <table id="carsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Make & Model</th>
+                            <th>Year</th>
+                            <th>Price</th>
+                            <th>Condition</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="carsTableBody">
+                        <!-- Cars will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Car Modal -->
+    <div class="modal-overlay" id="carModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add New Car</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="carForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="carId">Car ID *</label>
+                            <input type="number" id="carId" placeholder="Enter unique car ID" required>
+                            <small style="color: #666; font-size: 12px;">Enter a unique number for this car</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="make">Make *</label>
+                            <input type="text" id="make" placeholder="Enter car make" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="model">Model *</label>
+                            <input type="text" id="model" placeholder="Enter car model" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="year">Year *</label>
+                            <input type="number" id="year" placeholder="Enter year" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price *</label>
+                            <input type="text" id="price" placeholder="Enter price (e.g., 5,000,000 EGP)" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mileage">Mileage (km) *</label>
+                            <input type="number" id="mileage" placeholder="Enter mileage" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="condition">Condition *</label>
+                            <select id="condition" required>
+                                <option value="New">New</option>
+                                <option value="Used">Used</option>
+                                <option value="Certified">Certified Pre-Owned</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="exteriorColor">Exterior Color *</label>
+                            <input type="text" id="exteriorColor" placeholder="Enter exterior color" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="interiorColor">Interior Color *</label>
+                            <input type="text" id="interiorColor" placeholder="Enter interior color" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="engine">Engine *</label>
+                            <input type="text" id="engine" placeholder="Enter engine details" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="horsepower">Horsepower *</label>
+                            <input type="number" id="horsepower" placeholder="Enter horsepower" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group">
+                        <label for="doors">Doors *</label>
+                        <input type="number" id="doors" placeholder="Enter number of doors" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Car Images * (Upload 4 images)</label>
+                        <div class="image-upload-container">
+                            <div class="drag-drop-area" id="dragDropArea">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drag & drop images here or <span class="browse-link">browse files</span></p>
+                                <input type="file" id="imageInput" multiple accept="image/*" style="display: none;">
+                            </div>
+                            <div class="uploaded-images" id="uploadedImages"></div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="cancelBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveCarBtn">Save Car</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="toast" id="toast"></div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Award Winning - STRADA AUTO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+    <div data-include="/partials/nav.html"></div>
+    <!-- Animated Background Particles -->
+    <div class="bg-particles">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 0.5s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 1.5s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 2.5s;"></div>
+    </div>
+
+    <!-- Navigation Placeholder -->
+    <div data-include="/partials/nav.html"></div>
+
+    <a href="javascript:history.back()" class="back-btn" title="Go back" style="border-radius: 16px; border: 2px solid #ffd700; top: 150px; position: fixed; left: 32px; background: #000; color: #ffd700; font-weight: bold; font-size: 1.2rem; padding: 12px 32px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 2px 16px rgba(255,215,0,0.08); z-index: 2000; transition: background 0.3s, color 0.3s, box-shadow 0.3s;">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
+
+    <main class="page-content">
+        <div class="container">
+            <!-- Header Section -->
+            <section class="page-header" style="margin-top: 120px;">
+                <h1>Award Winning</h1>
+                <p>Celebrating our achievements and unwavering commitment to excellence in luxury automotive service.</p>
+            </section>
+
+            <!-- Awards Grid -->
+            <section class="awards-grid">
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h2>Best Luxury Dealer 2023</h2>
+                    <p>We are proud to announce that STRADA AUTO has been awarded 'Best Luxury Dealer 2023' for our outstanding customer service, extensive selection of premium vehicles, and commitment to quality.</p>
+                    <p>This award is a testament to our team's dedication and our loyal customers' trust. We strive to continually set new benchmarks in the luxury automotive industry.</p>
+                    <span class="award-year">2023</span>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h2>Customer Excellence Award</h2>
+                    <p>Recognized for delivering exceptional customer experiences and maintaining the highest standards of service quality. Our personalized approach and attention to detail have earned us this prestigious recognition.</p>
+                    <p>This award reflects our commitment to going above and beyond for every client who walks through our doors.</p>
+                    <span class="award-year">2023</span>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h2>Industry Innovation Leader</h2>
+                    <p>Awarded for pioneering innovative solutions in luxury automotive retail and embracing cutting-edge technologies to enhance the customer journey.</p>
+                    <p>Our forward-thinking approach continues to set industry standards and inspire excellence across the automotive sector.</p>
+                    <span class="award-year">2023</span>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="stats-section">
+                <div class="container">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Years of Excellence</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5000+</span>
+                            <span class="stat-label">Satisfied Customers</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">25+</span>
+                            <span class="stat-label">Industry Awards</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-label">Customer Satisfaction</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonial Section -->
+            <section class="testimonial-section">
+                <div class="testimonial">
+                    <div class="testimonial-quote">
+                        "STRADA AUTO doesn't just sell luxury vehicles; they deliver an unparalleled experience. Their attention to detail and commitment to excellence is truly remarkable. Every interaction feels personalized and professional."
+                    </div>
+                    <div class="testimonial-author">
+                        - Industry Recognition Committee
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div data-include="/partials/footer.html"></div>
+    <script src="/js/nav.js"></script>
+    <script src="/js/loader.js" type="module"></script>
+    <script src="/js/newsletter.js"></script>
+
+    <script>
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate numbers in stats section
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            const animateNumbers = () => {
+                statNumbers.forEach(stat => {
+                    const target = parseInt(stat.textContent);
+                    const increment = target / 100;
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            stat.textContent = stat.textContent.includes('+') ? target + '+' : 
+                                             stat.textContent.includes('%') ? target + '%' : target;
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.floor(current);
+                        }
+                    }, 20);
+                });
+            };
+
+            // Trigger animation when stats section is in view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateNumbers();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            observer.observe(document.querySelector('.stats-section'));
+
+            // Add hover effects to award cards
+            const awardCards = document.querySelectorAll('.award-card');
+            awardCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-15px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(-10px) scale(1)';
+                });
+            });
+        });
+    </script>
+    <div data-include="/partials/footer.html"></div>
+    <script src="/js/nav.js"></script>
+    <script src="/js/loader.js" type="module"></script>
+    <script src="/js/newsletter.js"></script>
+</body>
+</html>

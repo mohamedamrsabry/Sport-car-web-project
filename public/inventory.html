@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory & Sales - STRADA AUTO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation Placeholder */
+        .nav-placeholder {
+            height: 80px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #ffd700;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffffff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: #cccccc;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: #ffd700;
+            border-bottom-color: #ffd700;
+        }
+
+        .tab-btn:hover {
+            color: #ffffff;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Inventory Section */
+        .inventory-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .filter-group select, .filter-group input {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #333;
+            color: #ffffff;
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-group select:focus, .filter-group input:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .vehicle-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(255, 255, 0, 0.15);
+        }
+
+        .vehicle-image {
+            height: 200px;
+            background: linear-gradient(45deg, #333, #555);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #ffd700;
+        }
+
+        .vehicle-info {
+            padding: 1.5rem;
+        }
+
+        .vehicle-title {
+            font-size: 1.3rem;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        .vehicle-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .vehicle-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .spec-item {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+
+        .vehicle-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+        }
+
+        .btn-secondary:hover {
+            background: #ffd700;
+            color: #000;
+        }
+
+        /* Comparison Tool */
+        .comparison-section {
+            padding: 2rem 0;
+        }
+
+        .comparison-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-card {
+            background: rgba(255, 215, 0, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .comparison-dropdown {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #333;
+            color: #ffffff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .comparison-table th {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        /* Calculator Sections */
+        .calculator-section {
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .calculator-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #333;
+            color: #ffffff;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+
+        .calculator-result {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #000;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .result-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .result-item {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-available {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .status-sold {
+            background: #f44336;
+            color: white;
+        }
+
+        .status-reserved {
+            background: #ff9800;
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tab-navigation {
+                flex-wrap: wrap;
+            }
+            
+            .tab-btn {
+                padding: 0.75rem 1rem;
+                font-size: 1rem;
+            }
+            
+            .inventory-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .inventory-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Placeholder -->
+    <div class="nav-placeholder"></div>
+
+    <main>
+        <div class="container">
+            <!-- Page Header -->
+            <section class="page-header">
+                <h1>Inventory & Sales</h1>
+                <p>Discover our premium collection of luxury vehicles with advanced tools to help you make the perfect choice.</p>
+            </section>
+
+            <!-- Tab Navigation -->
+            <nav class="tab-navigation">
+                <button class="tab-btn active" onclick="showTab('inventory')">
+                    <i class="fas fa-cars"></i> Live Inventory
+                </button>
+                <button class="tab-btn" onclick="showTab('comparison')">
+                    <i class="fas fa-balance-scale"></i> Compare Vehicles
+                </button>
+                <button class="tab-btn" onclick="showTab('financing')">
+                    <i class="fas fa-calculator"></i> Financing Calculator
+                </button>
+                <button class="tab-btn" onclick="showTab('tradein')">
+                    <i class="fas fa-exchange-alt"></i> Trade-In Value
+                </button>
+            </nav>
+
+            <!-- Live Inventory Tab -->
+            <section id="inventory" class="tab-content active">
+                <div class="inventory-controls">
+                    <div class="filter-group">
+                        <label for="brand-filter">Brand</label>
+                        <select id="brand-filter" onchange="filterInventory()">
+                            <option value="">All Brands</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Mercedes">Mercedes-Benz</option>
+                            <option value="Audi">Audi</option>
+                            <option value="ferarri">ferrari</option>
+                            <option value="Porsche">Porsche</option>
+                            <option value="Bentley">Bentley</option>
+                            <option value="Mclaren">Mclaren</option>
+                            <option value="Lamborghini">Lamborghini</option>
+                        </select>
+                    </div>
+                   
+                    <div class="filter-group">
+                        <label for="price-min">Min Price</label>
+                        <input type="number" id="price-min" placeholder="$0" onchange="filterInventory()">
+                    </div>
+                    <div class="filter-group">
+                        <label for="price-max">Max Price</label>
+                        <input type="number" id="price-max" placeholder="No limit" onchange="filterInventory()">
+                    </div>
+                    <div class="filter-group">
+                        <label for="year-filter">Year</label>
+                        <select id="year-filter" onchange="filterInventory()">
+                            <option value="">All Years</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="inventory-grid" id="inventory-grid">
+                    <!-- Inventory items will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Vehicle Comparison Tab -->
+            <section id="comparison" class="tab-content">
+                <div class="comparison-section">
+                    <h2 style="color: #ffd700; text-align: center; margin-bottom: 2rem;">Compare Up to 3 Vehicles</h2>
+                    
+                    <div class="comparison-selector">
+                        <div class="comparison-card">
+                            <h3 style="color: #ffd700; margin-bottom: 1rem;">Vehicle 1</h3>
+                            <select class="comparison-dropdown" id="compare-vehicle-1" onchange="updateComparison()">
+                                <option value="">Select Vehicle</option>
+                            </select>
+                        </div>
+                        <div class="comparison-card">
+                            <h3 style="color: #ffd700; margin-bottom: 1rem;">Vehicle 2</h3>
+                            <select class="comparison-dropdown" id="compare-vehicle-2" onchange="updateComparison()">
+                                <option value="">Select Vehicle</option>
+                            </select>
+                        </div>
+                        <div class="comparison-card">
+                            <h3 style="color: #ffd700; margin-bottom: 1rem;">Vehicle 3</h3>
+                            <select class="comparison-dropdown" id="compare-vehicle-3" onchange="updateComparison()">
+                                <option value="">Select Vehicle</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <table class="comparison-table" id="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Vehicle 1</th>
+                                <th>Vehicle 2</th>
+                                <th>Vehicle 3</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparison-tbody">
+                            <tr><td colspan="4" style="text-align: center; color: #cccccc;">Select vehicles to compare</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Financing Calculator Tab -->
+            <section id="financing" class="tab-content">
+                <div class="calculator-section">
+                    <h2 style="color: #ffd700; text-align: center; margin-bottom: 2rem;">Financing Calculator</h2>
+                    
+                    <div class="calculator-form">
+                        <div class="form-group">
+                            <label for="vehicle-price">Vehicle Price ($)</label>
+                            <input type="number" id="vehicle-price" placeholder="75000" onchange="calculateFinancing()">
+                        </div>
+                        <div class="form-group">
+                            <label for="down-payment">Down Payment ($)</label>
+                            <input type="number" id="down-payment" placeholder="15000" onchange="calculateFinancing()">
+                        </div>
+                        <div class="form-group">
+                            <label for="trade-value">Trade-In Value ($)</label>
+                            <input type="number" id="trade-value" placeholder="0" onchange="calculateFinancing()">
+                        </div>
+                        <div class="form-group">
+                            <label for="loan-term">Loan Term (months)</label>
+                            <select id="loan-term" onchange="calculateFinancing()">
+                                <option value="12">12 months</option>
+                                <option value="24">24 months</option>
+                                <option value="36">36 months</option>
+                                <option value="48">48 months</option>
+                                <option value="60" selected>60 months</option>
+                                <option value="72">72 months</option>
+                                <option value="84">84 months</option>
+                                <option value="96">96 months</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="interest-rate">Interest Rate (%)</label>
+                            <input type="number" id="interest-rate" step="0.1" placeholder="4.5" onchange="calculateFinancing()">
+                        </div>
+                        <div class="form-group">
+                            <label for="credit-score">Credit Score Range</label>
+                            <select id="credit-score" onchange="updateInterestRate()">
+                                <option value="excellent">Excellent (750+)</option>
+                                <option value="good">Good (700-749)</option>
+                                <option value="fair">Fair (650-699)</option>
+                                <option value="poor">Poor (600-649)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="calculator-result" id="financing-result" style="display: none;">
+                        <div class="result-amount" id="monthly-payment">$0</div>
+                        <div>Estimated Monthly Payment</div>
+                        <div class="result-details">
+                            <div class="result-item">
+                                <strong>Total Loan Amount</strong><br>
+                                <span id="loan-amount">$0</span>
+                            </div>
+                            <div class="result-item">
+                                <strong>Total Interest</strong><br>
+                                <span id="total-interest">$0</span>
+                            </div>
+                            <div class="result-item">
+                                <strong>Total Cost</strong><br>
+                                <span id="total-cost">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trade-In Value Tab -->
+            <section id="tradein" class="tab-content">
+                <div class="calculator-section">
+                    <h2 style="color: #ffd700; text-align: center; margin-bottom: 2rem;">Trade-In Value Estimator</h2>
+                    
+                    <div class="calculator-form">
+                        <div class="form-group">
+                            <label for="trade-year">Year</label>
+                            <select id="trade-year" onchange="calculateTradeValue()">
+                                <option value="">Select Year</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="trade-make">Make</label>
+                            <select id="trade-make" onchange="calculateTradeValue()">
+                                 <option value="BMW">BMW</option>
+                            <option value="Mercedes">Mercedes-Benz</option>
+                            <option value="Audi">Audi</option>
+                            <option value="ferarri">ferrari</option>
+                            <option value="Porsche">Porsche</option>
+                            <option value="Bentley">Bentley</option>
+                            <option value="Mclaren">Mclaren</option>
+                            <option value="Lamborghini">Lamborghini</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="trade-model">Model</label>
+                            <input type="text" id="trade-model" placeholder="e.g., 3 Series, C-Class" onchange="calculateTradeValue()">
+                        </div>
+                        <div class="form-group">
+                            <label for="trade-mileage">Mileage</label>
+                            <input type="number" id="trade-mileage" placeholder="50000" onchange="calculateTradeValue()">
+                        </div>
+                        <div class="form-group">
+                            <label for="trade-condition">Condition</label>
+                            <select id="trade-condition" onchange="calculateTradeValue()">
+                                <option value="excellent">Excellent</option>
+                                <option value="good" selected>Good</option>
+                                <option value="fair">Fair</option>
+                                <option value="poor">Poor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="trade-trim">Trim Level</label>
+                            <select id="trade-trim" onchange="calculateTradeValue()">
+                                <option value="base">Base</option>
+                                <option value="mid" selected>Mid-Level</option>
+                                <option value="premium">Premium</option>
+                                <option value="luxury">Luxury</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="calculator-result" id="tradein-result" style="display: none;">
+                        <div class="result-amount" id="trade-value-amount">$0</div>
+                        <div>Estimated Trade-In Value</div>
+                        <div class="result-details">
+                            <div class="result-item">
+                                <strong>Market Value Range</strong><br>
+                                <span id="market-range">$0 - $0</span>
+                            </div>
+                            <div class="result-item">
+                                <strong>Depreciation Factor</strong><br>
+                                <span id="depreciation">0%</span>
+                            </div>
+                            <div class="result-item">
+                                <strong>Condition Adjustment</strong><br>
+                                <span id="condition-adj">0%</span>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                            *This is an estimate. Final trade-in value may vary based on vehicle inspection and market conditions.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Sample inventory data
+        const inventory = [
+            {
+                id: 1,
+                brand: 'BMW',
+                model: 'X5 M Competition',
+                year: 2024,
+                price: 125000,
+                type: 'SUV',
+                status: 'available',
+                mileage: 0,
+                engine: '4.4L V8 Twin Turbo',
+                horsepower: 617,
+                transmission: '8-Speed Automatic',
+                color: 'Jet Black'
+            },
+            {
+                id: 2,
+                brand: 'Mercedes',
+                model: 'S-Class AMG S63',
+                year: 2023,
+                price: 165000,
+                type: 'Sedan',
+                status: 'available',
+                mileage: 2500,
+                engine: '4.0L V8 Biturbo',
+                horsepower: 630,
+                transmission: '9-Speed Automatic',
+                color: 'Obsidian Black'
+            },
+            {
+                id: 3,
+                brand: 'Audi',
+                model: 'RS Q8',
+                year: 2024,
+                price: 135000,
+                type: 'SUV',
+                status: 'reserved',
+                mileage: 0,
+                engine: '4.0L V8 TFSI',
+                horsepower: 591,
+                transmission: '8-Speed Tiptronic',
+                color: 'Glacier White'
+            },
+            {
+                id: 4,
+                brand: 'Porsche',
+                model: '911 Turbo S',
+                year: 2023,
+                price: 230000,
+                type: 'Coupe',
+                status: 'available',
+                mileage: 1200,
+                engine: '3.8L H6 Twin Turbo',
+                horsepower: 640,
+                transmission: '8-Speed PDK',
+                color: 'Guards Red'
+            },
+            {
+                id: 5,
+                brand: 'Lexus',
+                model: 'LS 500h F Sport',
+                year: 2024,
+                price: 95000,
+                type: 'Sedan',
+                status: 'sold',
+                mileage: 0,
+                engine: '3.5L V6 Hybrid',
+                horsepower: 354,
+                transmission: '10-Speed Automatic',
+                color: 'Ultra White'
+            }
+        ];
+
+        let filteredInventory = [...inventory];
+
+       
+        document.addEventListener('DOMContentLoaded', function() {
+            displayInventory();
+            populateComparisonDropdowns();
+            calculateFinancing();
+            updateInterestRate();
+        });
+
+        
+        function showTab(tabName) {
+            
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+        
+            document.getElementById(tabName).classList.add('active');
+            
+            event.target.classList.add('active');
+        }
+
+        function filterInventory() {
+            const brand = document.getElementById('brand-filter').value;
+            const type = document.getElementById('type-filter').value;
+            const minPrice = parseInt(document.getElementById('price-min').value) || 0;
+            const maxPrice = parseInt(document.getElementById('price-max').value) || Infinity;
+            const year = document.getElementById('year-filter').value;
+
+            filteredInventory = inventory.filter(vehicle => {
+                return (!brand || vehicle.brand === brand) &&
+                       (!type || vehicle.type === type) &&
+                       (vehicle.price >= minPrice) &&
+                       (vehicle.price <= maxPrice) &&
+                       (!year || vehicle.year.toString() === year);
+            });
+
+            displayInventory();
+        }
+        function displayInventory() {
+            const grid = document.getElementById('inventory-grid');
+            grid.innerHTML = '';
+
+            filteredInventory.forEach(vehicle => {
+                const statusClass = `status-${vehicle.status}`;
+                const statusText = vehicle.status.charAt(0).toUpperCase() + vehicle.status.slice(1);
+                
+                const card = document.createElement('div');
+                card.className = 'vehicle-card';
+                card.innerHTML = `
+                    <div class="vehicle-image">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="vehicle-info">
+                        <div class="vehicle-title">${vehicle.year} ${vehicle.brand} ${vehicle.model}</div>
+                        <div class="vehicle-price">$${vehicle.price.toLocaleString()}</div>
+                        <span class="status-indicator ${statusClass}">${statusText}</span>
+                        <div class="vehicle-specs">
+                            <div class="spec-item"><strong>Mileage:</strong> ${vehicle.mileage.toLocaleString()} mi</div>
+                            <div class="spec-item"><strong>Color:</strong> ${vehicle.color}</div>
+                        </div>
+                        <div class="vehicle-actions">
+                            <button class="btn btn-primary" onclick="viewDetails(${vehicle.id})">View Details</button>
+                            <button class="btn btn-secondary" onclick="scheduleTest(${vehicle.id})">Test Drive</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            if (filteredInventory.length === 0) {
+                grid.innerHTML = '<div style="text-align: center; color: #cccccc; grid-column: 1 / -1; padding: 2rem;">No vehicles match your criteria.</div>';
+            }
+        }
+        function populateComparisonDropdowns() {
+            const dropdowns = ['compare-vehicle-1', 'compare-vehicle-2', 'compare-vehicle-3'];
+            
+            dropdowns.forEach(dropdownId => {
+                const dropdown = document.getElementById(dropdownId);
+                dropdown.innerHTML = '<option value="">Select Vehicle</option>';
+                
+                inventory.forEach(vehicle => {
+                    if (vehicle.status === 'available') {
+                        const option = document.createElement('option');
+                        option.value = vehicle.id;
+                        option.textContent = `${vehicle.year} ${vehicle.brand} ${vehicle.model}`;
+                        dropdown.appendChild(option);
+                    }
+                });
+            });
+        }
+
+       
+        function updateComparison() {
+            const vehicle1Id = document.getElementById('compare-vehicle-1').value;
+            const vehicle2Id = document.getElementById('compare-vehicle-2').value;
+            const vehicle3Id = document.getElementById('compare-vehicle-3').value;
+            
+            const vehicles = [
+                inventory.find(v => v.id == vehicle1Id),
+                inventory.find(v => v.id == vehicle2Id),
+                inventory.find(v => v.id == vehicle3Id)
+            ];
+
+            const tbody = document.getElementById('comparison-tbody');
+            
+            if (!vehicle1Id && !vehicle2Id && !vehicle3Id) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #cccccc;">Select vehicles to compare</td></tr>';
+                return;
+            }
+
+            const features = [
+                { label: 'Price', key: 'price', format: (val) => val ? `${val.toLocaleString()}` : '-' },
+                { label: 'Year', key: 'year', format: (val) => val || '-' },
+                { label: 'Engine', key: 'engine', format: (val) => val || '-' },
+                { label: 'Horsepower', key: 'horsepower', format: (val) => val ? `${val} HP` : '-' },
+                { label: 'Transmission', key: 'transmission', format: (val) => val || '-' },
+                { label: 'Type', key: 'type', format: (val) => val || '-' },
+                { label: 'Mileage', key: 'mileage', format: (val) => val !== undefined ? `${val.toLocaleString()} mi` : '-' },
+                { label: 'Color', key: 'color', format: (val) => val || '-' }
+            ];
+
+            tbody.innerHTML = features.map(feature => `
+                <tr>
+                    <td><strong>${feature.label}</strong></td>
+                    <td>${vehicles[0] ? feature.format(vehicles[0][feature.key]) : '-'}</td>
+                    <td>${vehicles[1] ? feature.format(vehicles[1][feature.key]) : '-'}</td>
+                    <td>${vehicles[2] ? feature.format(vehicles[2][feature.key]) : '-'}</td>
+                </tr>
+            `).join('');
+        }
+
+        
+        function updateInterestRate() {
+            const creditScore = document.getElementById('credit-score').value;
+            const interestRateInput = document.getElementById('interest-rate');
+            
+            const rates = {
+                'excellent': 3.5,
+                'good': 4.5,
+                'fair': 6.5,
+                'poor': 9.5
+            };
+            
+            interestRateInput.value = rates[creditScore] || 4.5;
+            calculateFinancing();
+        }
+
+        // Calculate financing
+        function calculateFinancing() {
+            const vehiclePrice = parseFloat(document.getElementById('vehicle-price').value) || 75000;
+            const downPayment = parseFloat(document.getElementById('down-payment').value) || 0;
+            const tradeValue = parseFloat(document.getElementById('trade-value').value) || 0;
+            const loanTerm = parseInt(document.getElementById('loan-term').value) || 60;
+            const interestRate = parseFloat(document.getElementById('interest-rate').value) || 4.5;
+
+            const loanAmount = vehiclePrice - downPayment - tradeValue;
+            const monthlyRate = interestRate / 100 / 12;
+            const monthlyPayment = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, loanTerm)) / 
+                                 (Math.pow(1 + monthlyRate, loanTerm) - 1);
+            const totalInterest = (monthlyPayment * loanTerm) - loanAmount;
+            const totalCost = vehiclePrice + totalInterest;
+
+            document.getElementById('monthly-payment').textContent = `${monthlyPayment.toFixed(0)}`;
+            document.getElementById('loan-amount').textContent = `${loanAmount.toLocaleString()}`;
+            document.getElementById('total-interest').textContent = `${totalInterest.toLocaleString()}`;
+            document.getElementById('total-cost').textContent = `${totalCost.toLocaleString()}`;
+            document.getElementById('financing-result').style.display = 'block';
+        }
+
+        // Calculate trade-in value
+        function calculateTradeValue() {
+            const year = parseInt(document.getElementById('trade-year').value);
+            const make = document.getElementById('trade-make').value;
+            const model = document.getElementById('trade-model').value;
+            const mileage = parseInt(document.getElementById('trade-mileage').value);
+            const condition = document.getElementById('trade-condition').value;
+            const trim = document.getElementById('trade-trim').value;
+
+            if (!year || !make || !model || !mileage) {
+                document.getElementById('tradein-result').style.display = 'none';
+                return;
+            }
+
+            
+            const baseValues = {
+                'BMW': 45000,
+                'Mercedes': 50000,
+                'Audi': 42000,
+                'Lexus': 40000,
+                'Toyota': 25000,
+                'Honda': 22000
+            };
+
+            const currentYear = new Date().getFullYear();
+            const age = currentYear - year;
+            let baseValue = baseValues[make] || 30000;
+
+            
+            const ageDepreciation = age * 0.15;
+            baseValue *= (1 - ageDepreciation);
+
+            
+            const expectedMileage = age * 12000;
+            const excessMileage = Math.max(0, mileage - expectedMileage);
+            const mileageDeduction = excessMileage * 0.10;
+            baseValue -= mileageDeduction;
+
+            
+            const conditionMultipliers = {
+                'excellent': 1.1,
+                'good': 1.0,
+                'fair': 0.85,
+                'poor': 0.65
+            };
+            baseValue *= conditionMultipliers[condition] || 1.0;
+
+            // Trim adjustment
+            const trimMultipliers = {
+                'luxury': 1.2,
+                'premium': 1.1,
+                'mid': 1.0,
+                'base': 0.9
+            };
+            baseValue *= trimMultipliers[trim] || 1.0;
+
+            const finalValue = Math.max(1000, baseValue); // Minimum $1000
+            const marketLow = finalValue * 0.85;
+            const marketHigh = finalValue * 1.15;
+
+            document.getElementById('trade-value-amount').textContent = `${finalValue.toFixed(0)}`;
+            document.getElementById('market-range').textContent = `${marketLow.toFixed(0)} - ${marketHigh.toFixed(0)}`;
+            document.getElementById('depreciation').textContent = `${(ageDepreciation * 100).toFixed(1)}%`;
+            document.getElementById('condition-adj').textContent = `${((conditionMultipliers[condition] - 1) * 100).toFixed(1)}%`;
+            document.getElementById('tradein-result').style.display = 'block';
+        }
+
+        // Vehicle actions
+        function viewDetails(vehicleId) {
+            const vehicle = inventory.find(v => v.id === vehicleId);
+            alert(`Viewing details for: ${vehicle.year} ${vehicle.brand} ${vehicle.model}\n\nThis would open a detailed view page.`);
+        }
+
+        function scheduleTest(vehicleId) {
+            const vehicle = inventory.find(v => v.id === vehicleId);
+            alert(`Scheduling test drive for: ${vehicle.year} ${vehicle.brand} ${vehicle.model}\n\nThis would open a scheduling form.`);
+        }
+    </script>
+</body>
+</html>Engine:</strong> ${vehicle.engine}</div>
+                            <div class="spec-item"><strong>Power:</strong> ${vehicle.horsepower} HP</div>
+                            <div class="spec-item"><strong>Transmission:</strong> ${vehicle.transmission}</div>
+                            <div class="spec-item"><strong>     

@@ -1,0 +1,346 @@
+<style>
+.footer-container {
+    position: relative;
+    z-index: 99;
+}
+
+footer {
+  background-color: #111;
+  color: #fff;
+  padding: 20px 20px 20px; /* Reduced from 50px to 20px top padding */
+  text-align: center;
+  position: relative;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1 1 220px;
+  min-width: 220px;
+}
+.footer-container a{
+    text-decoration: none;
+    color:rgb(255, 255, 255);
+    font-family: 'Proxima Nova';
+    font-weight: 500;
+    position: relative;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+.footer-container a::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background:#b6a15a;
+    bottom:0;
+    left: 50%;
+    transition: all 0.3s ease;
+}
+
+.footer-container a:hover::after{
+    width:100%;
+    left:0;
+}
+
+.footer-container a:hover{
+    color:#b6a15a;
+}
+.footer-section h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #fff;
+  font-family: 'frontage';
+}
+
+.footer-section p, 
+.footer-section li, 
+.footer-section a {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #ccc;
+  margin-bottom: 10px;
+  text-decoration: none;
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+}
+
+.footer-section.contact p {
+  padding: 0;
+}
+
+.footer-section a:hover {
+  color: #fff;
+}
+
+.footer-section.links ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-right: 0px;
+}
+
+.footer-section.links li {
+  margin-bottom: 8px;
+}
+
+.footer-section .logo {
+  max-width: 70px;
+  margin-bottom: 15px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-section.about {
+  text-align: center;
+}
+
+.subscribe input[type="email"] {
+  padding: 10px;
+  width: 100%;
+  margin: 10px 0;
+  border: none;
+  border-radius: 4px;
+}
+
+.subscribe button {
+  padding: 10px 20px;
+  background-color: #d4af37;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.subscribe button:hover:not(:disabled) {
+  background-color: #b38f2b;
+  transform: translateY(-1px);
+}
+
+.subscribe button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.social-icons {
+  margin-top: 15px;
+}
+
+.social-icons img {
+  width: 24px;
+  margin-right: 10px;
+  filter: brightness(0) invert(1);
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+  text-align: center;
+  padding: 20px 0 0;
+  margin-top: 20px;
+  color: #aaa;
+  font-size: 13px;
+}
+
+
+
+/* Newsletter-specific styles */
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Loading spinner */
+.loading {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Newsletter messages */
+.newsletter-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.95);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: none;
+    max-width: 400px;
+    width: 90%;
+}
+
+.newsletter-message.success {
+    border-left: 4px solid #4CAF50;
+    border-bottom: 4px solid #4CAF50;
+}
+
+.newsletter-message.error {
+    border-left: 4px solid #ff6b6b;
+}
+
+.newsletter-message h3 {
+    color: #d4af37;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.newsletter-message p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: #cccccc;
+}
+
+.newsletter-message .message-icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.newsletter-message .success-icon {
+    color: #4CAF50;
+}
+
+.newsletter-message .error-icon {
+    color: #ff6b6b;
+}
+
+.newsletter-message .close-btn {
+    background-color: #d4af37;
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.newsletter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    display: none;
+}
+
+</style>
+<footer>
+
+
+<div class="footer-container">
+  <!-- About Us -->
+  <div class="footer-section about">
+    <h3>ABOUT US</h3>
+    <img src="/partials/img/logo.png" alt="Strada Auto Logo" class="logo">
+    <p>
+      Strada Auto, a premium dealership specializing in luxury automotive brands,
+      offers a seamless and exceptional car-buying experience. With headquarters
+      in OBOUR ROAD 50, our presence ensures accessibility and convenience for our clients.
+    </p>
+    <p>
+      <a href="/terms.html">Terms & Conditions</a> | <a href="/privacy.html">Privacy Policy</a>
+    </p>
+  </div>
+
+  <!-- Contact Us -->
+  <div class="footer-section contact">
+    <h3>CONTACT US</h3>
+    <p><strong>Strada Auto Showroom</strong></p>
+    <p>📍 OBOUR ROAD 50</p>
+    <p>📞 01226699307</p>
+    <p>📱 WhatsApp: 01226699307</p>
+    <p>📧 info@stradaauto.com</p>
+  </div>
+
+  <!-- Quick Links -->
+  <div class="footer-section links">
+    <h3>QUICK LINKS</h3>
+    <ul>
+      <li><a href="/about.html">What We Do</a></li>
+      <li><a href="/products.html">Brands Housed by Strada</a></li>
+      <li><a href="#">Top</a></li>
+    </ul>
+  </div>
+
+  <!-- Subscribe -->
+  <div class="footer-section subscribe">
+    <h3>SUBSCRIBE</h3>
+    <p>Subscribe to our Newsletter to stay updated with the latest news and deals.</p>
+    <form class="newsletter-form" id="newsletterForm">
+      <input type="email" id="newsletterEmail" placeholder="Your Email Address" required>
+      <button type="submit" id="subscribeBtn">
+        <span id="subscribeText">SUBSCRIBE</span>
+        <div class="loading" id="subscribeLoading"></div>
+      </button>
+    </form>
+    <div class="social-icons">
+      <div class="social-icons">
+  <a href="https://www.facebook.com/yourpage" target="_blank">
+    <img src="/partials/img/icons/facebook-logo-24.png" alt="Facebook">
+  </a>
+  <a href="https://www.instagram.com/yourprofile" target="_blank">
+    <img src="/partials/img/icons/instagram-logo-24.png" alt="Instagram">
+  </a>
+  <a href="https://www.linkedin.com/company/yourcompany" target="_blank">
+    <img src="/partials/img/icons/linkedin-logo-24.png" alt="LinkedIn">
+  </a>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<div class="footer-bottom">
+  <p>&copy; 2025 STRADA AUTO. All Rights Reserved.</p>
+</div>
+
+<!-- Newsletter Messages -->
+<div class="newsletter-overlay" id="newsletterOverlay"></div>
+<div class="newsletter-message success" id="newsletterSuccess">
+    <div class="message-icon success-icon">✓</div>
+    <h3>Successfully Subscribed!</h3>
+    <p id="successText">Thank you for subscribing to our newsletter! Check your email for confirmation.</p>
+    <button class="close-btn" onclick="closeNewsletterMessage()">Close</button>
+</div>
+
+<div class="newsletter-message error" id="newsletterError">
+    <div class="message-icon error-icon">✗</div>
+    <h3>Subscription Failed</h3>
+    <p id="errorText">There was an error processing your subscription. Please try again.</p>
+    <button class="close-btn" onclick="closeNewsletterMessage()">Close</button>
+</div>
+
+</footer>

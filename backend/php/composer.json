@@ -1,0 +1,13 @@
+{
+    "name": "strada-auto/email-service",
+    "description": "Email service for STRADA Auto",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^6.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "StradaAuto\\": "src/"
+        }
+    }
+}
