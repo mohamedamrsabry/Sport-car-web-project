@@ -436,9 +436,9 @@
         </div>
 
         <script>
-            let cars = []; // This will store our fetched cars
+            let cars = []; 
 
-            // Function to show debug info
+            
             function showDebugInfo(message) {
                 const debugInfo = document.getElementById('debugInfo');
                 const debugContent = document.getElementById('debugContent');
@@ -446,7 +446,7 @@
                 debugInfo.style.display = 'block';
             }
 
-            // Fetch cars from backend when page loads
+            
             document.addEventListener('DOMContentLoaded', async () => {
                 const loadingElement = document.getElementById('carLoading');
                 loadingElement.style.display = 'block';
@@ -458,10 +458,10 @@
                     }
                     cars = await response.json();
                     
-                    // Populate brands dropdown
+                   
                     populateBrands();
                     
-                    // Check for URL parameters to pre-select brand/model
+                    
                     const params = new URLSearchParams(location.search);
                     const brand = params.get('brand'); 
                     const model = params.get('model');  
@@ -471,7 +471,7 @@
                         updateModels();
                         
                         if (model) {
-                            // Need to wait for models to populate
+                            
                             setTimeout(() => {
                                 document.getElementById('model').value = model;
                             }, 100);
@@ -485,11 +485,11 @@
                 }
             });
 
-            // Populate the brands dropdown with unique car makes
+            
             function populateBrands() {
                 const brandSelect = document.getElementById('car');
                 
-                // Get unique brands
+               
                 const brands = [...new Set(cars.map(car => car.make))].sort();
                 
                 brands.forEach(brand => {
@@ -500,7 +500,6 @@
                 });
             }
 
-            // Update models dropdown based on selected brand
             function updateModels() {
                 const brandSelect = document.getElementById('car');
                 const modelSelect = document.getElementById('model');
@@ -510,12 +509,12 @@
 
                 if (!brand) return;
 
-                // Filter models for the selected brand
+                
                 const brandModels = cars
                     .filter(car => car.make === brand)
                     .map(car => car.model);
 
-                // Add models to dropdown
+                
                 brandModels.forEach(model => {
                     const option = document.createElement('option');
                     option.value = model;
@@ -524,7 +523,7 @@
                 });
             }
 
-            // Handle form submission
+            
             document.getElementById('quoteForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
@@ -564,22 +563,22 @@
                         throw new Error('Invalid JSON response: ' + text);
                     }
                     
-                    // Reset button state
+                    
                     submitBtn.disabled = false;
                     submitText.style.display = 'inline';
                     loading.style.display = 'none';
                     
                     if (data.success) {
-                        // Show success message
+                        
                         document.getElementById('overlay').style.display = 'block';
                         document.getElementById('successMessage').style.display = 'block';
                         
                         // Reset form
                         this.reset();
-                        // Reset dropdowns
+                        
                         document.getElementById('model').innerHTML = '<option value="">Select a Model</option>';
                         
-                        // Redirect to homepage after 5 seconds
+                        
                         setTimeout(function() {
                             window.location.href = '/index.html';
                         }, 5000);
@@ -613,7 +612,7 @@
                 document.getElementById('errorMessage').style.display = 'none';
             }
 
-            // Close messages when clicking overlay
+           
             document.getElementById('overlay').addEventListener('click', function() {
                 this.style.display = 'none';
                 document.getElementById('successMessage').style.display = 'none';
