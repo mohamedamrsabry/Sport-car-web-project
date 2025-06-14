@@ -1,8 +1,3 @@
-const ADMIN_CREDENTIALS = {
-    username: "admin",
-    password: "admin123"
-};
-
 
 const loginModal = document.getElementById('loginModal');
 const loginForm = document.getElementById('loginForm');
@@ -24,7 +19,7 @@ let originalDashboardContent = '';
 mainContainer.style.display = 'none';
 
 
-loginBtn.addEventListener('click', () => {
+loginBtn.addEventListener('click', async () => {
     if (!loginForm.checkValidity()) {
         loginForm.reportValidity();
         return;
@@ -33,15 +28,27 @@ loginBtn.addEventListener('click', () => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     
-    if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
-       
-
-        loginModal.classList.remove('active');
-        mainContainer.style.display = 'flex';
-        document.body.style.overflow = 'auto';
-        fetchCars();
-    } else {
-        showToast('Invalid credentials', 'error');
+    try {
+        const response = await fetch('/admin/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            loginModal.classList.remove('active');
+            mainContainer.style.display = 'flex';
+            document.body.style.overflow = 'auto';
+            fetchCars();
+        } else {
+            showToast('Invalid credentials', 'error');
+        }
+    } catch (error) {
+        showToast('Login failed', 'error');
     }
 });
 
@@ -146,14 +153,14 @@ const brandsCountEl = document.getElementById('brandsCount');
 
 const API_URL = 'http://localhost:3000'; 
 const API_ENDPOINTS = {
-    GET_CARS: `${API_URL}/cars`,
-    CREATE_CAR: `${API_URL}/cars`,
-    GET_CAR: (id) => `${API_URL}/cars/${id}`,
-    UPDATE_CAR: (id) => `${API_URL}/cars/${id}`,
-    DELETE_CAR: (id) => `${API_URL}/cars/${id}`,
-    UPLOAD_IMAGES: `${API_URL}/upload-images`,
-    GET_RATINGS: `${API_URL}/ratings`,
-    DELETE_RATING: (id) => `${API_URL}/ratings/${id}`
+    GET_CARS: `${API_URL}/api/cars`,
+    CREATE_CAR: `${API_URL}/api/cars`,
+    GET_CAR: (id) => `${API_URL}/api/cars/${id}`,
+    UPDATE_CAR: (id) => `${API_URL}/api/cars/${id}`,
+    DELETE_CAR: (id) => `${API_URL}/api/cars/${id}`,
+    UPLOAD_IMAGES: `${API_URL}/api/upload-images`,
+    GET_RATINGS: `${API_URL}/api/ratings`,
+    DELETE_RATING: (id) => `${API_URL}/api/ratings/${id}`
 };
 
 
@@ -460,6 +467,60 @@ function openAddCarModal() {
 
 
 
+function displayExistingImages(car) {
+    if (!car.image || !uploadedImages) return;
+    
+    // Clear any existing previews
+    uploadedImages.innerHTML = '';
+    
+    // Extract folder path from main image path
+    const imagePath = car.image;
+    const folderPath = imagePath.substring(0, imagePath.lastIndexOf('/'));
+    const folderName = `${car.make} ${car.model}`;
+    
+    // Display existing images as previews
+    const imageNames = [
+        `${folderName}`,
+        'A',
+        'B', 
+        'C'
+    ];
+    
+    imageNames.forEach((name, index) => {
+        const imagePreview = document.createElement('div');
+        imagePreview.className = 'image-preview existing-image';
+        
+        const imageSrc = `${folderPath}/${name}${getImageExtension(imagePath)}`;
+        const labels = ['Main', 'A', 'B', 'C'];
+        
+        imagePreview.innerHTML = `
+            <img src="${imageSrc}" alt="Existing ${labels[index]}" onerror="this.style.display='none'">
+            <div class="image-label">${labels[index]} (Current)</div>
+            <div class="existing-indicator">Existing</div>
+        `;
+        
+        uploadedImages.appendChild(imagePreview);
+    });
+    
+    // Add message about image replacement
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'image-update-message';
+    messageDiv.innerHTML = `
+        <p><i class="fas fa-info-circle"></i> Current images shown above. Upload new images to replace them (optional).</p>
+    `;
+    uploadedImages.appendChild(messageDiv);
+}
+
+function getImageExtension(imagePath) {
+    const extensions = ['.jpg', '.jpeg', '.png', '.gif'];
+    for (let ext of extensions) {
+        // You might need to check which extension exists, for now assume .jpg
+        return '.jpg';
+    }
+    return '.jpg';
+}
+
+// Update the editCar function
 function editCar(id) {
     showLoading(true);
     
@@ -475,7 +536,7 @@ function editCar(id) {
             const modalTitleEl = document.getElementById('modalTitle');
             if (modalTitleEl) modalTitleEl.textContent = 'Edit Car';
             
-            
+            // Populate form (including ID field)
             document.getElementById('carId').value = car.id || '';
             document.getElementById('make').value = car.make || '';
             document.getElementById('model').value = car.model || '';
@@ -489,10 +550,9 @@ function editCar(id) {
             document.getElementById('horsepower').value = car.horsepower || '';
             document.getElementById('doors').value = car.doors || '';
             
-            
-
+            // Clear new image selection but show existing images
             selectedImages = [];
-            if (uploadedImages) uploadedImages.innerHTML = '';
+            displayExistingImages(car);
             
             openModal();
             showLoading(false);
@@ -592,8 +652,8 @@ async function saveCar() {
         carForm.reportValidity();
         return;
     }
-  
     
+    // Validate required fields
     const carId = document.getElementById('carId').value.trim();
     const make = document.getElementById('make').value.trim();
     const model = document.getElementById('model').value.trim();
@@ -604,10 +664,16 @@ async function saveCar() {
         showToast('Please fill in all required fields', 'error');
         return;
     }
-   
-
+    
+    // For new cars, validate images are required
     if (!currentCarId && selectedImages.length !== 4) {
         showToast('Please upload exactly 4 images for the car', 'error');
+        return;
+    }
+    
+    // For editing, images are optional
+    if (currentCarId && selectedImages.length > 0 && selectedImages.length !== 4) {
+        showToast('If updating images, please upload exactly 4 images', 'error');
         return;
     }
     
@@ -616,9 +682,8 @@ async function saveCar() {
     try {
         let imagePath = '';
         
-      
-
-        if (!currentCarId && selectedImages.length > 0) {
+        // Upload images only if new images are selected
+        if (selectedImages.length > 0) {
             const uploadResult = await uploadImages(make, model);
             imagePath = uploadResult.mainImagePath;
         }
@@ -635,15 +700,18 @@ async function saveCar() {
             interiorColor: document.getElementById('interiorColor').value.trim(),
             engine: document.getElementById('engine').value.trim(),
             horsepower: parseInt(document.getElementById('horsepower').value) || 0,
-            doors: parseInt(document.getElementById('doors').value) || 4,
-            image: imagePath || '' 
+            doors: parseInt(document.getElementById('doors').value) || 4
         };
+        
+        // Only update image path if new images were uploaded
+        if (imagePath) {
+            carData.image = imagePath;
+        }
         
         let response;
         
         if (currentCarId) {
-            
-
+            // Update existing car
             response = await fetch(API_ENDPOINTS.UPDATE_CAR(currentCarId), {
                 method: 'PUT',
                 headers: {
@@ -652,8 +720,8 @@ async function saveCar() {
                 body: JSON.stringify(carData)
             });
         } else {
-         
-
+            // Add new car - image is required
+            carData.image = imagePath;
             response = await fetch(API_ENDPOINTS.CREATE_CAR, {
                 method: 'POST',
                 headers: {

@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     
 
-    const response = await fetch("http://localhost:3000/cars");
+    const response = await fetch("http://localhost:3000/api/cars");
     cars = await response.json();
     
    
