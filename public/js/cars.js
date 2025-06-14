@@ -1,13 +1,14 @@
-let cars = []; // Will store fetched cars
-let currentCar = null; // Current car being viewed
+let cars = []; 
+let currentCar = null; 
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    // Fetch cars from backend
+    
+
     const response = await fetch("http://localhost:3000/cars");
     cars = await response.json();
     
-    // Get car ID from URL
+   
     const getQueryParam = (param) => {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     const carId = getQueryParam("id");
     const car = cars.find(c => c.id == carId);
-    currentCar = car; // Set global current car
+    currentCar = car; 
 
     if (car) {
       // Set page title and heading
