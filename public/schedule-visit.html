@@ -334,7 +334,7 @@
             <p>Experience our luxury vehicles in person at our state-of-the-art showroom</p>
         </div>
         
-        <form class="schedule-form" id="scheduleForm">
+        <form class="schedule-form" id="scheduleForm" action="http://localhost:8080/submit-visit.php" method="POST">
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
@@ -436,11 +436,7 @@
                 
                 const formData = new FormData(this);
                 
-                             const baseUrl = window.location.hostname === 'localhost' 
-                ? 'http://localhost:8080' 
-                : 'https://stradauto.onrender.com';
-
-            fetch(`${baseUrl}/submit-visit.php`, {
+                fetch('http://localhost:8080/submit-visit.php', {
                     method: 'POST',
                     body: formData
                 })

@@ -99,6 +99,43 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.schedule-form');
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            
+            try {
+                submitBtn.textContent = 'Scheduling...';
+                submitBtn.disabled = true;
+                
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Visit scheduled successfully! We will contact you shortly to confirm.');
+                    form.reset();
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                alert('An error occurred. Please try again later.');
+                console.error('Error:', error);
+            } finally {
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+});
 
 var swiper = new Swiper(".vehicles-slider", {
     allowTouchMove: true,
