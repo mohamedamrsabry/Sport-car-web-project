@@ -19,7 +19,7 @@ body {
     width:100%;
     color: #ffffff;
 }
-/* instead of div{…} use .reveal{…} */
+
 .reveal{
    opacity:0;
    transform:translateY(60px);
@@ -123,8 +123,8 @@ font-size:20px;
     border-radius: 10px;
     padding:25px;
     text-align: center;
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack items vertically */
+    display: flex; 
+    flex-direction: column; 
     gap: 1rem;
     justify-content: center;
     align-items: center;
@@ -179,7 +179,7 @@ z
     box-shadow: 0px 6px 16px  #ffc96682;
 }
 
-/* ----------  Price range inputs ---------- */
+
 .price-filter{
     display:flex;
     align-items:center;
@@ -201,19 +201,19 @@ z
 }
 
 .price-filter input::-webkit-inner-spin-button{
-    opacity:.4;            /* subtle arrow */
+    opacity:.4;            
 }
 
 
-/* wrapper that holds only the button */
+
 .filters-btn{
     width:100%;
     display:flex;
-    justify-content:center;   /* centers horizontally */
-    margin-top:1rem;          /* a little spacing below filters */
+    justify-content:center;   
+    margin-top:1rem;          
 }
 
-/* optional: make the button a bit wider */
+
 .filters-btn .filter-button{
     padding:14px 32px;
     font-size:20px;

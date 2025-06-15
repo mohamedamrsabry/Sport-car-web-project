@@ -1,39 +1,33 @@
 <?php
-// Updated submit-visit.php - Use Composer autoload instead of manual includes
 
-// Include Composer autoload (replaces manual PHPMailer includes)
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// Set content type to JSON
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Email configuration
 define('FROM_EMAIL', 'stradaautogroup@gmail.com');        
 define('FROM_NAME', 'STRADA Auto');
 define('ADMIN_EMAIL', 'stradaautogroup@gmail.com');    
 define('GMAIL_APP_PASSWORD', 'npzy phfr lgzm hwhj');
 
-// Business info
 define('BUSINESS_ADDRESS', 'OBOUR ROAD 50');
 define('BUSINESS_CITY', 'Cairo, Egypt');
 define('BUSINESS_PHONE', '01226699307');
 define('BUSINESS_WEBSITE', 'https://stradauto.onrender.com/');
 
-// Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['success' => false, 'message' => 'Method not allowed']);
     exit;
 }
 
-// Validation functions
 function sanitizeInput($data) {
     return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
 }
@@ -51,7 +45,6 @@ function validateDate($date) {
     return $d && $d->format('Y-m-d') === $date && $d >= new DateTime();
 }
 
-// Collect form data
 $data = [
     'name' => sanitizeInput($_POST['name'] ?? ''),
     'email' => sanitizeInput($_POST['email'] ?? ''),
@@ -61,7 +54,6 @@ $data = [
     'message' => sanitizeInput($_POST['message'] ?? '')
 ];
 
-// Validate
 $errors = [];
 if (empty($data['name']) || strlen($data['name']) < 2) $errors[] = 'Valid name required';
 if (empty($data['email']) || !validateEmail($data['email'])) $errors[] = 'Valid email required';
@@ -102,7 +94,7 @@ function sendCustomerEmail($data, $appointmentId) {
     $mail = new PHPMailer(true);
     
     try {
-        // Server settings
+
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
@@ -110,12 +102,10 @@ function sendCustomerEmail($data, $appointmentId) {
         $mail->Password = GMAIL_APP_PASSWORD;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
-        
-        // Recipients
+
         $mail->setFrom(FROM_EMAIL, FROM_NAME);
         $mail->addAddress($data['email'], $data['name']);
-        
-        // Content
+
         $mail->isHTML(true);
         $mail->Subject = 'Showroom Visit Confirmation - STRADA Auto';
         

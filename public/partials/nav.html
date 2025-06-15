@@ -25,7 +25,7 @@
     pointer-events: none;
 }
 .nav-logo {
-    height: 90px; /* Bigger size */
+    height: 90px; 
     width: auto;
 }
 nav ul{
@@ -67,27 +67,27 @@ nav ul{
     color:#b6a15a;
 }
 
-/* Sidebar overlay (hidden by default) */
+
 .sidebar-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Transparent black background */
+    background: rgba(0, 0, 0, 0.8); 
     border-radius: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 100;
-    transform: translateX(-100%); /* Hidden off-screen */
+    transform: translateX(-100%); 
     transition: transform 0.3s ease;
 }
 .car-image{
-    width: 100vw;  /* Ensures full width */
-    height: 100vh; /* Ensures full height */
-    object-fit: cover; /* Covers the section without distortion */
+    width: 100vw;  
+    height: 100vh; 
+    object-fit: cover; 
     position: absolute;
     top: 0;
     left: 0;
@@ -106,7 +106,7 @@ nav ul{
 .sidebar-overlay ul li a {
     text-decoration: none;
     color: #b6a15a;
-    font-size: 2rem; /* Larger font size */
+    font-size: 2rem; 
     transition: color 0.3s ease;
 }
 
@@ -114,7 +114,7 @@ nav ul{
     color: #fff;
 }
 
-/* Sidebar toggle button */
+
 .sidebar-toggle {
     position: fixed;
     top: 1rem;
@@ -127,9 +127,9 @@ nav ul{
     z-index: 101;
 }
 
-/* Sidebar open state */
+
 .sidebar-overlay.open {
-    transform: translateX(0); /* Slide into view */
+    transform: translateX(0); 
 }
 
 

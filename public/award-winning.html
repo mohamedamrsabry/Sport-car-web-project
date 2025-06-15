@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="/css/pages.css">
 </head>
 <body>
-    <!-- Animated Background Particles -->
-    <div class="bg-particles">
+        <div class="bg-particles">
         <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
         <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
         <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
@@ -21,21 +20,18 @@
         <div class="particle" style="left: 90%; animation-delay: 2.5s;"></div>
     </div>
 
-    <!-- Navigation Placeholder -->
-    <div data-include="/partials/nav.html"></div>
+        <div data-include="/partials/nav.html"></div>
 
 
 
     <main class="page-content">
         <div class="container">
-            <!-- Header Section -->
-            <section class="page-header" style="margin-top: 120px;">
+                        <section class="page-header" style="margin-top: 120px;">
                 <h1>Award Winning</h1>
                 <p>Celebrating our achievements and unwavering commitment to excellence in luxury automotive service.</p>
             </section>
 
-            <!-- Awards Grid -->
-            <section class="awards-grid">
+                        <section class="awards-grid">
                 <div class="award-card">
                     <div class="award-icon">
                         <i class="fas fa-trophy"></i>
@@ -67,8 +63,7 @@
                 </div>
             </section>
 
-            <!-- Statistics Section -->
-            <section class="stats-section">
+                        <section class="stats-section">
                 <div class="container">
                     <div class="stats-grid">
                         <div class="stat-item">
@@ -91,8 +86,7 @@
                 </div>
             </section>
 
-            <!-- Testimonial Section -->
-            <section class="testimonial-section">
+                        <section class="testimonial-section">
                 <div class="testimonial">
                     <div class="testimonial-quote">
                         "STRADA AUTO doesn't just sell luxury vehicles; they deliver an unparalleled experience. Their attention to detail and commitment to excellence is truly remarkable. Every interaction feels personalized and professional."
@@ -111,9 +105,9 @@
     <script src="/js/newsletter.js"></script>
 
     <script>
-        // Add some interactive animations
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Animate numbers in stats section
+
             const statNumbers = document.querySelectorAll('.stat-number');
             
             const animateNumbers = () => {
@@ -135,7 +129,6 @@
                 });
             };
 
-            // Trigger animation when stats section is in view
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -147,7 +140,6 @@
 
             observer.observe(document.querySelector('.stats-section'));
 
-            // Add hover effects to award cards
             const awardCards = document.querySelectorAll('.award-card');
             awardCards.forEach(card => {
                 card.addEventListener('mouseenter', function() {

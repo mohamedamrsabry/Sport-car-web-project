@@ -151,16 +151,16 @@ const newCarsEl = document.getElementById('newCars');
 const brandsCountEl = document.getElementById('brandsCount');
 
 
-const API_URL = 'http://localhost:3000'; 
+const API_URL = '';
 const API_ENDPOINTS = {
-    GET_CARS: `${API_URL}/api/cars`,
-    CREATE_CAR: `${API_URL}/api/cars`,
-    GET_CAR: (id) => `${API_URL}/api/cars/${id}`,
-    UPDATE_CAR: (id) => `${API_URL}/api/cars/${id}`,
-    DELETE_CAR: (id) => `${API_URL}/api/cars/${id}`,
-    UPLOAD_IMAGES: `${API_URL}/api/upload-images`,
-    GET_RATINGS: `${API_URL}/api/ratings`,
-    DELETE_RATING: (id) => `${API_URL}/api/ratings/${id}`
+    GET_CARS: `/api/cars`,
+    CREATE_CAR: `/api/cars`,
+    GET_CAR: (id) => `/api/cars/${id}`,
+    UPDATE_CAR: (id) => `/api/cars/${id}`,
+    DELETE_CAR: (id) => `/api/cars/${id}`,
+    UPLOAD_IMAGES: `/api/upload-images`,
+    GET_RATINGS: `/api/ratings`,
+    DELETE_RATING: (id) => `/api/ratings/${id}`
 };
 
 
@@ -469,16 +469,13 @@ function openAddCarModal() {
 
 function displayExistingImages(car) {
     if (!car.image || !uploadedImages) return;
-    
-    // Clear any existing previews
+
     uploadedImages.innerHTML = '';
-    
-    // Extract folder path from main image path
+
     const imagePath = car.image;
     const folderPath = imagePath.substring(0, imagePath.lastIndexOf('/'));
     const folderName = `${car.make} ${car.model}`;
-    
-    // Display existing images as previews
+
     const imageNames = [
         `${folderName}`,
         'A',
@@ -501,8 +498,7 @@ function displayExistingImages(car) {
         
         uploadedImages.appendChild(imagePreview);
     });
-    
-    // Add message about image replacement
+
     const messageDiv = document.createElement('div');
     messageDiv.className = 'image-update-message';
     messageDiv.innerHTML = `
@@ -514,13 +510,12 @@ function displayExistingImages(car) {
 function getImageExtension(imagePath) {
     const extensions = ['.jpg', '.jpeg', '.png', '.gif'];
     for (let ext of extensions) {
-        // You might need to check which extension exists, for now assume .jpg
+
         return '.jpg';
     }
     return '.jpg';
 }
 
-// Update the editCar function
 function editCar(id) {
     showLoading(true);
     
@@ -535,8 +530,7 @@ function editCar(id) {
             currentCarId = id;
             const modalTitleEl = document.getElementById('modalTitle');
             if (modalTitleEl) modalTitleEl.textContent = 'Edit Car';
-            
-            // Populate form (including ID field)
+
             document.getElementById('carId').value = car.id || '';
             document.getElementById('make').value = car.make || '';
             document.getElementById('model').value = car.model || '';
@@ -549,8 +543,7 @@ function editCar(id) {
             document.getElementById('engine').value = car.engine || '';
             document.getElementById('horsepower').value = car.horsepower || '';
             document.getElementById('doors').value = car.doors || '';
-            
-            // Clear new image selection but show existing images
+
             selectedImages = [];
             displayExistingImages(car);
             
@@ -652,8 +645,7 @@ async function saveCar() {
         carForm.reportValidity();
         return;
     }
-    
-    // Validate required fields
+
     const carId = document.getElementById('carId').value.trim();
     const make = document.getElementById('make').value.trim();
     const model = document.getElementById('model').value.trim();
@@ -664,14 +656,12 @@ async function saveCar() {
         showToast('Please fill in all required fields', 'error');
         return;
     }
-    
-    // For new cars, validate images are required
+
     if (!currentCarId && selectedImages.length !== 4) {
         showToast('Please upload exactly 4 images for the car', 'error');
         return;
     }
-    
-    // For editing, images are optional
+
     if (currentCarId && selectedImages.length > 0 && selectedImages.length !== 4) {
         showToast('If updating images, please upload exactly 4 images', 'error');
         return;
@@ -681,8 +671,7 @@ async function saveCar() {
     
     try {
         let imagePath = '';
-        
-        // Upload images only if new images are selected
+
         if (selectedImages.length > 0) {
             const uploadResult = await uploadImages(make, model);
             imagePath = uploadResult.mainImagePath;
@@ -702,8 +691,7 @@ async function saveCar() {
             horsepower: parseInt(document.getElementById('horsepower').value) || 0,
             doors: parseInt(document.getElementById('doors').value) || 4
         };
-        
-        // Only update image path if new images were uploaded
+
         if (imagePath) {
             carData.image = imagePath;
         }
@@ -711,7 +699,7 @@ async function saveCar() {
         let response;
         
         if (currentCarId) {
-            // Update existing car
+
             response = await fetch(API_ENDPOINTS.UPDATE_CAR(currentCarId), {
                 method: 'PUT',
                 headers: {
@@ -720,7 +708,7 @@ async function saveCar() {
                 body: JSON.stringify(carData)
             });
         } else {
-            // Add new car - image is required
+
             carData.image = imagePath;
             response = await fetch(API_ENDPOINTS.CREATE_CAR, {
                 method: 'POST',

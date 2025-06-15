@@ -6,32 +6,27 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// Set content type to JSON
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Email configuration
 define('FROM_EMAIL', 'stradaautogroup@gmail.com');        
 define('FROM_NAME', 'STRADA Auto');
 define('ADMIN_EMAIL', 'stradaautogroup@gmail.com');    
 define('GMAIL_APP_PASSWORD', 'npzy phfr lgzm hwhj');
 
-// Business info
 define('BUSINESS_ADDRESS', 'OBOUR ROAD 50');
 define('BUSINESS_CITY', 'Cairo, Egypt');
 define('BUSINESS_PHONE', '01226699307');
 define('BUSINESS_WEBSITE', 'www.stradaauto.com');
 
-// Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['success' => false, 'message' => 'Method not allowed']);
     exit;
 }
 
-// Validation functions
 function sanitizeInput($data) {
     return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
 }
@@ -44,7 +39,6 @@ function validatePhone($phone) {
     return preg_match('/^[\+]?[1-9][\d]{0,15}$/', preg_replace('/\D/', '', $phone));
 }
 
-// Collect form data
 $data = [
     'name' => sanitizeInput($_POST['name'] ?? ''),
     'email' => sanitizeInput($_POST['email'] ?? ''),
@@ -54,7 +48,6 @@ $data = [
     'message' => sanitizeInput($_POST['message'] ?? '')
 ];
 
-// Validate required fields
 $errors = [];
 if (empty($data['name']) || strlen($data['name']) < 2) $errors[] = 'Valid name required';
 if (empty($data['email']) || !validateEmail($data['email'])) $errors[] = 'Valid email required';
@@ -68,10 +61,9 @@ if (!empty($errors)) {
 }
 
 try {
-    // Generate quote request ID
+
     $quoteId = 'QT' . date('Ymd') . rand(1000, 9999);
-    
-    // Send emails
+
     $customerEmailSent = sendCustomerEmail($data, $quoteId);
     $adminEmailSent = sendAdminEmail($data, $quoteId);
     
@@ -97,7 +89,7 @@ function sendCustomerEmail($data, $quoteId) {
     $mail = new PHPMailer(true);
     
     try {
-        // Server settings
+
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
@@ -105,12 +97,10 @@ function sendCustomerEmail($data, $quoteId) {
         $mail->Password = GMAIL_APP_PASSWORD;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
-        
-        // Recipients
+
         $mail->setFrom(FROM_EMAIL, FROM_NAME);
         $mail->addAddress($data['email'], $data['name']);
-        
-        // Content
+
         $mail->isHTML(true);
         $mail->Subject = 'Quota Request Confirmation - STRADA AUTO';
         
@@ -205,7 +195,7 @@ function sendAdminEmail($data, $quoteId) {
     $mail = new PHPMailer(true);
     
     try {
-        // Server settings
+
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
@@ -213,12 +203,10 @@ function sendAdminEmail($data, $quoteId) {
         $mail->Password = GMAIL_APP_PASSWORD;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
-        
-        // Recipients
+
         $mail->setFrom(FROM_EMAIL, FROM_NAME);
         $mail->addAddress(ADMIN_EMAIL);
-        
-        // Content
+
         $mail->isHTML(true);
         $mail->Subject = 'New Quota Request - STRADA AUTO';
         

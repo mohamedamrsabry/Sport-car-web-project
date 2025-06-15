@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     
 
-    const response = await fetch("http://localhost:3000/api/cars");
+    const response = await fetch("/api/cars");
     cars = await response.json();
     
    
@@ -162,9 +162,6 @@ function renderSimilarCars(allCars, currentCar) {
   window.addEventListener('scroll', reveal);
 })();
 
-
-
-//populate the compare dropdown function
 function populateCompareDropdown() {
   const compareSelect = document.getElementById('compareCar');
   

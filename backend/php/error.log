@@ -34,3 +34,21 @@
 )
 
 [14-Jun-2025 05:07:35 UTC] Sanitized data - First Name: 'Mohamed', Last Name: 'Sabry', Email: 'sanchoj033@gmail.com', Phone: '01226699308', Message: 'ew'
+[15-Jun-2025 00:29:12 UTC] Request Method: POST
+[15-Jun-2025 00:29:12 UTC] Content Type: application/json
+[15-Jun-2025 00:29:12 UTC] Raw JSON input: {"firstName":"Mohamed","lastName":"Sabry","email":"sanchoj033@gmail.com","phone":"01226699308","message":"kj","carOfInterest":"bmw"}
+[15-Jun-2025 00:29:12 UTC] POST data: Array
+(
+)
+
+[15-Jun-2025 00:29:12 UTC] Decoded JSON: Array
+(
+    [firstName] => Mohamed
+    [lastName] => Sabry
+    [email] => sanchoj033@gmail.com
+    [phone] => 01226699308
+    [message] => kj
+    [carOfInterest] => bmw
+)
+
+[15-Jun-2025 00:29:12 UTC] Sanitized data - First Name: 'Mohamed', Last Name: 'Sabry', Email: 'sanchoj033@gmail.com', Phone: '01226699308', Message: 'kj'

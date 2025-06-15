@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strada - Premium Assistance Chat</title>
     <style>
-        /* (CSS from previous response, with minor adjustments) */
+        
         * {
             margin: 0;
             padding: 0;
@@ -68,7 +68,7 @@
         }
 
         .chat-logo {
-            height: 30px; /* Adjust as needed for your logo */
+            height: 30px; 
             width: auto;
         }
 
@@ -264,19 +264,19 @@
             }
         }
 
-        /* Styles for the test drive popup */
+        
         .popup {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #1a1a1a; /* Darker background for popup */
+            background: #1a1a1a; 
             color: #ffffff;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
             z-index: 1000;
-            display: none; /* Initially hidden */
+            display: none; 
             max-width: 400px;
             width: 90%;
             border: 1px solid rgba(255, 215, 0, 0.3);
@@ -302,7 +302,7 @@
             margin-bottom: 20px;
             border: 1px solid rgba(255, 215, 0, 0.3);
             border-radius: 5px;
-            width: calc(100% - 24px); /* Account for padding */
+            width: calc(100% - 24px); 
             background-color: #0f0f0f;
             color: #ffffff;
             font-size: 1rem;
@@ -317,7 +317,7 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
-            display: block; /* Make button full width */
+            display: block; 
             width: 100%;
             margin-top: 10px;
         }
@@ -333,9 +333,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7); /* Darker overlay */
+            background: rgba(0, 0, 0, 0.7); 
             z-index: 999;
-            display: none; /* Initially hidden */
+            display: none; 
         }
     </style>
 </head>
@@ -398,7 +398,7 @@
     <div class="overlay" id="popupOverlay"></div>
 
     <script>
-        // Chatbot responses database
+
         const responses = {
             greetings: [
                 "Hello! Welcome to Strada's exclusive luxury car showroom. How can I help you find your dream vehicle today?",
@@ -422,7 +422,7 @@
         let conversationCount = 0;
 
         function goBack() {
-            // Redirect to the "about us" page
+
             window.location.href = "about.html"; 
         }
 
@@ -573,7 +573,6 @@
             }, 3000);
         }
 
-        // Test Drive Popup Functions
         function showTestDrivePopup() {
             document.getElementById('testDrivePopup').style.display = 'block';
             document.getElementById('popupOverlay').style.display = 'block';

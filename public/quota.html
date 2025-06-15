@@ -23,7 +23,7 @@
  
         }
 
-        /* Background image with blur effect */
+        
         body::before {
             content: '';
             position: fixed;
@@ -39,7 +39,7 @@
             z-index: -2;
         }
 
-        /* Dark overlay for better readability */
+        
         body::after {
             content: '';
             position: fixed;
@@ -51,7 +51,7 @@
             z-index: -1;
         }
 
-        /* Main container styles - centered box */
+        
         .quote-container {
             max-width: 500px;
             margin: 30px auto;
@@ -64,7 +64,7 @@
             z-index: 1;
         }
         
-        /* Form now uses single column layout with compact spacing */
+        
         .quote-form {
             display: flex;
             flex-direction: column;
@@ -110,7 +110,7 @@
             color: rgba(255, 255, 255, 0.788);
         }
 
-        /* Loading spinner */
+        
         .loading {
             display: none;
             width: 20px;
@@ -127,7 +127,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Success message styles */
+        
         .success-message {
             position: fixed;
             top: 50%;
@@ -163,7 +163,7 @@
             margin-bottom: 20px;
         }
 
-        /* Error message styles */
+        
         .error-message {
             position: fixed;
             top: 50%;
@@ -204,7 +204,7 @@
             margin-top: 10px;
         }
 
-        /* Overlay for messages */
+        
         .overlay {
             position: fixed;
             top: 0;
@@ -265,7 +265,7 @@
             font-weight: 400;
         }
 
-        /* Debug info styles */
+        
         .debug-info {
             background-color: rgba(255, 255, 255, 0.1);
             padding: 20px;
@@ -276,7 +276,7 @@
             display: none;
         }
 
-        /* Car data loading indicator */
+        
         .car-loading {
             color: #d4af37;
             font-style: italic;
@@ -285,7 +285,7 @@
             display: none;
         }
 
-        /* Mobile optimization */
+        
         @media (max-width: 768px) {
             .quote-container {
                 margin: 20px;
@@ -324,16 +324,16 @@
                 gap: 5px;
             }
         }
-       /* Back button */
+       
 .back-btn {
   position: fixed;
   top: 20px;
   left: 20px;
-  background: rgba(0, 0, 0, 0.4); /* Transparent black */
-  color: #d4af37; /* Gold text */
+  background: rgba(0, 0, 0, 0.4); 
+  color: #d4af37; 
   padding: 14px 21px;
-  border-radius: 999px; /* Fully rounded */
-  border: 1px solid #d4af37; /* Gold border */
+  border-radius: 999px; 
+  border: 1px solid #d4af37; 
   font-size: 14px;
   text-decoration: none;
   backdrop-filter: blur(5px);
@@ -343,16 +343,16 @@
 }
 
 .back-btn:hover {
-  background: rgba(0, 0, 0, 0.6); /* Darker on hover */
+  background: rgba(0, 0, 0, 0.6); 
   transform: translateX(-3px);
-  color: #fff; /* Optional: white text on hover */
-  border-color: #fff; /* Optional: white border on hover */
+  color: #fff; 
+  border-color: #fff; 
 }
 
 
 
 
-        /* Custom scrollbar removed as no scrolling needed */
+        
     </style>
 </head>
 <body>
@@ -411,14 +411,12 @@
             </div>
         </form>
 
-        <!-- Debug Information -->
-        <div class="debug-info" id="debugInfo">
+                <div class="debug-info" id="debugInfo">
             <strong>Debug Information:</strong>
             <div id="debugContent"></div>
         </div>
 
-        <!-- Success Message -->
-        <div class="overlay" id="overlay"></div>
+                <div class="overlay" id="overlay"></div>
         <div class="success-message" id="successMessage">
             <div class="success-icon">✓</div>
             <h2>Quota Request Submitted Successfully!</h2>
@@ -427,8 +425,7 @@
             <p>Redirecting you to our homepage...</p>
         </div>
 
-        <!-- Error Message -->
-        <div class="error-message" id="errorMessage">
+                <div class="error-message" id="errorMessage">
             <div class="error-icon">✗</div>
             <h2>Something went wrong!</h2>
             <p id="errorText">There was an error processing your request. Please try again.</p>
@@ -450,7 +447,7 @@
                 loadingElement.style.display = 'block';
                 
                 try {
-                    const response = await fetch("http://localhost:3000/api/cars");
+                    const response = await fetch("/api/cars");
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
@@ -544,8 +541,7 @@
                 .then(text => {
                     console.log('Raw response:', text);
                     showDebugInfo(text);
-                    
-                    // Try to parse as JSON
+
                     let data;
                     try {
                         data = JSON.parse(text);
@@ -562,8 +558,7 @@
                         
                         document.getElementById('overlay').style.display = 'block';
                         document.getElementById('successMessage').style.display = 'block';
-                        
-                        // Reset form
+
                         this.reset();
                         
                         document.getElementById('model').innerHTML = '<option value="">Select a Model</option>';
@@ -573,7 +568,7 @@
                             window.location.href = '/index.html';
                         }, 5000);
                     } else {
-                        // Show error message
+
                         document.getElementById('errorText').textContent = data.message || 'There was an error processing your request. Please try again.';
                         document.getElementById('overlay').style.display = 'block';
                         document.getElementById('errorMessage').style.display = 'block';
@@ -581,13 +576,11 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    
-                    // Reset button state
+
                     submitBtn.disabled = false;
                     submitText.style.display = 'inline';
                     loading.style.display = 'none';
-                    
-                    // Show detailed error message
+
                     let errorMessage = 'Error: ' + error.message;
                     showDebugInfo(errorMessage);
                     

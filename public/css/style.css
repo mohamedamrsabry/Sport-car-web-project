@@ -44,9 +44,9 @@ section.visible{
     justify-content: center;
     align-items: center;
     margin-top: 8rem;
-    width: 100vw; /* Full width of the viewport */
-    margin-left: 0; /* Remove left margin */
-    margin-right: 0; /* Remove right margin */
+    width: 100vw; 
+    margin-left: 0; 
+    margin-right: 0; 
     margin-top: -20px;
 }
 
@@ -89,8 +89,8 @@ section.visible{
 .trans-image {
     position: relative;
     width: 100%;
-    height: 120vh; /* Increase height to 100vh */
-    min-height: 120vh; /* Ensure it takes full viewport height */
+    height: 120vh; 
+    min-height: 120vh; 
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -104,7 +104,7 @@ section.visible{
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1; /* Image at the back */
+    z-index: 1; 
     -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
 }
@@ -125,7 +125,7 @@ section.visible{
     display: flex;
     align-items: center;
     justify-content: center;
-    mix-blend-mode: multiply; /* Creates blending effect */
+    mix-blend-mode: multiply; 
     transform: scale(1);
     opacity: 1;
 }
@@ -144,7 +144,7 @@ section.visible{
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 
-/* Scroll-down indicator styles */
+
 .scroll-indicator {
     position: absolute;
     left: 50%;
@@ -416,8 +416,8 @@ section.visible{
 }
 
 .swiper-pagination-bullet {
-    background-color: white; /* Default white */
-    opacity: 1; /* Ensure visibility */
+    background-color: white; 
+    opacity: 1; 
 }
 
 .swiper-pagination-bullet-active {
@@ -426,7 +426,7 @@ section.visible{
 }
 
 
-/* Navigation button styles - more specific selectors */
+
 .swiper-button-next::after,
 .swiper-button-prev::after {
   color: white !important;
@@ -439,7 +439,7 @@ section.visible{
 }
 
 
-/* Pagination dash styles */
+
 .swiper-pagination-bullet {
   width: 20px !important;
   height: 4px !important;
@@ -462,7 +462,7 @@ padding-left: 180px;
 padding-top: 200px;
 scale: 2;
 }
-/* Add these styles to maintain consistency */
+
 .schedule-container {
     background-color: #f5f5f5;
     border-left: 4px solid #d4af37;
@@ -519,7 +519,7 @@ scale: 2;
   position: relative;         
   overflow: hidden;
 
-  /* ← only this box gets the background image */
+  
   background-image: url('../partials/img/install.png');
   background-position: center;
   background-size: cover;
@@ -541,14 +541,14 @@ scale: 2;
 .installment-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;  /* center the two columns as a group */
+  justify-content: center;  
   align-items: flex-start;
   gap: 2rem;
 }
 
 .installment-info,
 .installment-form {
-  flex: 1 1 350px;  /* base width 350px, then grow/shrink */
+  flex: 1 1 350px;  
   min-width: 300px;
 }
 
@@ -621,7 +621,7 @@ scale: 2;
 .video-container {
     position: relative;
     width: 100%;
-    height: 500px; /* Adjust height as needed */
+    height: 500px; 
     overflow: hidden;
 }
 
@@ -635,8 +635,8 @@ scale: 2;
 .overlay-button  left-align {
     position: absolute;
     top: 50%;
-    left: 10%; /* Changed from 50% to 10% for left alignment */
-    transform: translateY(-50%); /* Removed X translation */
+    left: 10%; 
+    transform: translateY(-50%); 
     padding: 15px 30px;
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
@@ -651,7 +651,7 @@ scale: 2;
     border-radius: 1px;
     border:1px solid white;
 }
-/* Customer Reviews Section Styles */
+
 .reviews-section {
   padding: 6rem 0;
   background-color: black;
@@ -805,7 +805,7 @@ scale: 2;
   transform: translateX(10px);
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
   .reviews-grid {
       grid-template-columns: 1fr;
@@ -827,7 +827,7 @@ scale: 2;
   }
 }
 
-/* Animation for review cards */
+
 @keyframes fadeInUp {
   from {
       opacity: 0;
@@ -851,7 +851,7 @@ scale: 2;
   animation-delay: 0.4s;
 }
 
-/* Enhanced Hero Stats Transitions */
+
 .hero-stats .stat {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -861,7 +861,7 @@ scale: 2;
 }
 
 
-/* Cool Pagination Effects */
+
 .swiper-pagination-bullet {
     width: 20px !important;
     height: 4px !important;
@@ -880,7 +880,7 @@ scale: 2;
 
 
 
-/* Cool Button Effects */
+
 .btn {
     width: 130px;
     height: 40px;
@@ -923,25 +923,25 @@ scale: 2;
                 0 16px 10px -3px #d4af37;
 }
 
-/* Cool Stat Card Effects */
+
 .stat-card {
-    background: #232323; /* Restored background from original image */
-    border-radius: 20px; /* Restored border-radius from original image */
-    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.35); /* Restored box-shadow from original image */
-    padding: 25px; /* Ensure original padding */
-    text-align: center; /* Ensure original text alignment */
+    background: #232323; 
+    border-radius: 20px; 
+    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.35); 
+    padding: 25px; 
+    text-align: center; 
     color: white;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Kept for hover animation */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
     position: relative;
     overflow: hidden;
 }
 
 .stat-card i {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 2rem; /* Original size */
-    margin-bottom: 15px; /* Original margin */
-    display: block; /* Original display */
-    color: #ffca66; /* Original color */
+    font-size: 2rem; 
+    margin-bottom: 15px; 
+    display: block; 
+    color: #ffca66; 
 }
 
 .stat-card:hover i {
@@ -951,10 +951,10 @@ scale: 2;
 
 .stat-card:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Added subtle shadow on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
 }
 
-/* Ensure the glowing effect for stat-cards */
+
 .stat-card::before {
     content: '';
     position: absolute;
@@ -976,18 +976,18 @@ scale: 2;
     transform: translateX(100%);
 }
 
-/* Ensure specific styles for intro-stats .stat-card if needed, to maintain consistency */
+
 .intro-stats .stat-card {
-    /* These properties are inherited from .stat-card, explicitly define if you need overrides */
+    
     background: #232323; 
     border-radius: 20px; 
     box-shadow: 0 4px 32px 0 rgba(0,0,0,0.35); 
 }
 
 .intro-stats .stat-card h3 {
-    color: #ffca66; /* Original color */
-    font-size: 1.2rem; /* Original size */
-    margin-bottom: 8px; /* Original margin */
+    color: #ffca66; 
+    font-size: 1.2rem; 
+    margin-bottom: 8px; 
 }
 
 .stat-card i {
@@ -1012,7 +1012,7 @@ scale: 2;
     box-shadow: none !important;
 }
 
-/* Cool Pagination Effects */
+
 .swiper-pagination-bullet {
     width: 20px !important;
     height: 4px !important;
@@ -1028,8 +1028,8 @@ scale: 2;
     transform: scale(1.2);
 }
 .intro-stats .stat-card p {
-    color: #ccc; /* Original color */
-    margin: 0; /* Original margin */
+    color: #ccc; 
+    margin: 0; 
 }
 
 
@@ -1084,7 +1084,7 @@ scale: 2;
     }
 }
 
-/* Enhanced Stat Card Effects for Company Intro */
+
 .intro-stats .stat-card {
     background: #212121 !important;
     border-radius: 30px !important;
@@ -1139,7 +1139,7 @@ scale: 2;
     color: #ffffff !important;
 }
 
-/* Remove white shadows from all cards */
+
 .service-card,
 .contact-card,
 .stat-card,
@@ -1184,7 +1184,7 @@ transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     background: rgba(0, 0, 0, 0.8);
 }
 
-/* Contact Section Styles */
+
 .contact-section {
     padding: 80px 0;
     background: black;
@@ -1275,7 +1275,7 @@ transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 
-/* Full-width Rate Us Section Styles */
+
 .rate-section {
     padding: 80px 0;
     background: #181818;
@@ -1437,7 +1437,6 @@ transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 .star-rating .star.selected-3 { color: #ffb300 !important; }   
 .star-rating .star.selected-4 { color: #ffd700 !important; }   
 .star-rating .star.selected-5 { color: #ffca66 !important; }   
-
 #contact-modal.modal-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -1677,7 +1676,7 @@ transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 }
 
-/* Restore Contact Us section left alignment */
+
 .contact-section .contact-card {
     align-items: flex-start !important;
     text-align: left !important;
@@ -1694,7 +1693,7 @@ transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     width: auto;
 }
     .tagline-section {
-  background: rgba(0, 0, 0, 0.75); /* dark overlay */
+  background: rgba(0, 0, 0, 0.75); 
   padding: 100px 20px;
   text-align: center;
   color: #ffffff;
@@ -1725,7 +1724,7 @@ transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   letter-spacing: 1px;
 }
 
-/* Animation */
+
 @keyframes fadeInUp {
   from {
     transform: translateY(20px);
@@ -1766,7 +1765,7 @@ transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
-/* Animation */
+
 @keyframes fadeIn {
   from {
     opacity: 0;

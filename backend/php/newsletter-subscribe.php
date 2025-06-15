@@ -6,32 +6,27 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// Set content type to JSON
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Email configuration
 define('FROM_EMAIL', 'stradaautogroup@gmail.com');        
 define('FROM_NAME', 'STRADA Auto');
 define('ADMIN_EMAIL', 'stradaautogroup@gmail.com');    
 define('GMAIL_APP_PASSWORD', 'npzy phfr lgzm hwhj');
 
-// Business info
 define('BUSINESS_ADDRESS', 'OBOUR ROAD 50');
 define('BUSINESS_CITY', 'Cairo, Egypt');
 define('BUSINESS_PHONE', '01226699307');
 define('BUSINESS_WEBSITE', 'https://stradauto.onrender.com/');
 
-// Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['success' => false, 'message' => 'Method not allowed']);
     exit;
 }
 
-// Validation functions
 function sanitizeInput($data) {
     return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
 }
@@ -40,20 +35,17 @@ function validateEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-// Collect form data
 $email = sanitizeInput($_POST['email'] ?? '');
 
-// Validate email
 if (empty($email) || !validateEmail($email)) {
     echo json_encode(['success' => false, 'message' => 'Please enter a valid email address']);
     exit;
 }
 
 try {
-    // Generate subscription ID
+
     $subscriptionId = 'NL' . date('Ymd') . rand(1000, 9999);
-    
-    // Send emails
+
     $customerEmailSent = sendWelcomeEmail($email, $subscriptionId);
     $adminEmailSent = sendAdminNotification($email, $subscriptionId);
     
@@ -79,7 +71,7 @@ function sendWelcomeEmail($email, $subscriptionId) {
     $mail = new PHPMailer(true);
     
     try {
-        // Server settings
+
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
@@ -87,12 +79,10 @@ function sendWelcomeEmail($email, $subscriptionId) {
         $mail->Password = GMAIL_APP_PASSWORD;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
-        
-        // Recipients
+
         $mail->setFrom(FROM_EMAIL, FROM_NAME);
         $mail->addAddress($email);
-        
-        // Content
+
         $mail->isHTML(true);
         $mail->Subject = 'Welcome to STRADA Auto Newsletter!';
         
@@ -195,7 +185,7 @@ function sendAdminNotification($email, $subscriptionId) {
     $mail = new PHPMailer(true);
     
     try {
-        // Server settings
+
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
@@ -203,12 +193,10 @@ function sendAdminNotification($email, $subscriptionId) {
         $mail->Password = GMAIL_APP_PASSWORD;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
-        
-        // Recipients
+
         $mail->setFrom(FROM_EMAIL, FROM_NAME);
         $mail->addAddress(ADMIN_EMAIL);
-        
-        // Content
+
         $mail->isHTML(true);
         $mail->Subject = 'New Newsletter Subscription - STRADA AUTO';
         

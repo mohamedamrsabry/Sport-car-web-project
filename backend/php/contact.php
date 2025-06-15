@@ -6,60 +6,51 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// Set content type to JSON
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Email configuration
 define('FROM_EMAIL', 'stradaautogroup@gmail.com');        
 define('FROM_NAME', 'STRADA Auto');
 define('ADMIN_EMAIL', 'stradaautogroup@gmail.com');    
 define('GMAIL_APP_PASSWORD', 'npzy phfr lgzm hwhj');
 
-// Business info
 define('BUSINESS_ADDRESS', 'OBOUR ROAD 50');
 define('BUSINESS_CITY', 'Cairo, Egypt');
 define('BUSINESS_PHONE', '01226699307');
 define('BUSINESS_WEBSITE', 'https://stradauto.onrender.com/');
 
-// Enable error logging for debugging
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/error.log');
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     http_response_code(200);
     exit(0);
 }
-// Only allow POST requests
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['success' => false, 'message' => 'Method not allowed']);
     exit;
 }
 
-// Debug: Log the request method and content type
 error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
 error_log("Content Type: " . ($_SERVER['CONTENT_TYPE'] ?? 'Not set'));
 
-// Get JSON input
 $json = file_get_contents('php://input');
 error_log("Raw JSON input: " . $json); // Debug log
 
-// Also check if data was sent via regular POST
 $postData = $_POST;
 error_log("POST data: " . print_r($postData, true)); // Debug log
 
 $data = json_decode($json, true);
 error_log("Decoded JSON: " . print_r($data, true)); // Debug log
 
-// If JSON is empty, try to get data from regular POST
 if (empty($data) && !empty($postData)) {
     $data = $postData;
     error_log("Using POST data instead of JSON");
 }
 
-// If still no data, return error with debug info
 if (empty($data)) {
     echo json_encode([
         'success' => false, 
@@ -74,7 +65,6 @@ if (empty($data)) {
     exit;
 }
 
-// Validation functions
 function sanitizeInput($data) {
     if (is_null($data)) return '';
     return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
@@ -85,11 +75,10 @@ function validateEmail($email) {
 }
 
 function validatePhone($phone) {
-    // Basic phone validation - adjust pattern as needed
+
     return preg_match('/^[\d\s\-\+\(\)]{10,}$/', $phone);
 }
 
-// Collect and validate form data
 $firstName = sanitizeInput($data['firstName'] ?? '');
 $lastName = sanitizeInput($data['lastName'] ?? '');
 $email = sanitizeInput($data['email'] ?? '');
@@ -97,10 +86,8 @@ $phone = sanitizeInput($data['phone'] ?? '');
 $carOfInterest = sanitizeInput($data['carOfInterest'] ?? '');
 $message = sanitizeInput($data['message'] ?? '');
 
-// Debug: Log sanitized data
 error_log("Sanitized data - First Name: '$firstName', Last Name: '$lastName', Email: '$email', Phone: '$phone', Message: '$message'");
 
-// Validation
 $errors = [];
 
 if (empty($firstName)) {
@@ -135,10 +122,9 @@ if (!empty($errors)) {
 }
 
 try {
-    // Generate inquiry ID
+
     $inquiryId = 'INQ' . date('Ymd') . rand(1000, 9999);
-    
-    // Send emails
+
     $customerEmailSent = sendCustomerConfirmation($firstName, $lastName, $email, $phone, $carOfInterest, $message, $inquiryId);
     $adminEmailSent = sendAdminNotification($firstName, $lastName, $email, $phone, $carOfInterest, $message, $inquiryId);
     
@@ -171,7 +157,7 @@ function sendCustomerConfirmation($firstName, $lastName, $email, $phone, $carOfI
     $mail = new PHPMailer(true);
     
     try {
-        // Server settings
+
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
@@ -179,12 +165,10 @@ function sendCustomerConfirmation($firstName, $lastName, $email, $phone, $carOfI
         $mail->Password = GMAIL_APP_PASSWORD;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
-        
-        // Recipients
+
         $mail->setFrom(FROM_EMAIL, FROM_NAME);
         $mail->addAddress($email, $firstName . ' ' . $lastName);
-        
-        // Content
+
         $mail->isHTML(true);
         $mail->Subject = 'Thank you for contacting STRADA Auto - Inquiry Confirmation';
         
@@ -309,7 +293,7 @@ function sendAdminNotification($firstName, $lastName, $email, $phone, $carOfInte
     $mail = new PHPMailer(true);
     
     try {
-        // Server settings
+
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
@@ -317,12 +301,10 @@ function sendAdminNotification($firstName, $lastName, $email, $phone, $carOfInte
         $mail->Password = GMAIL_APP_PASSWORD;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
-        
-        // Recipients
+
         $mail->setFrom(FROM_EMAIL, FROM_NAME);
         $mail->addAddress(ADMIN_EMAIL);
-        
-        // Content
+
         $mail->isHTML(true);
         $mail->Subject = 'New Contact Form Inquiry - STRADA AUTO';
         

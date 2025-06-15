@@ -5,15 +5,15 @@
     font-style: normal;
   }
 
-  /* ─── variables ────────────────────────────── */
+  
   :root{
       --gold : #b6a15a;
       --white: #f8f8f8;
       --black: #000;
-      --nav-h: 160px;               /* NEW  tweak if you resize the logo */
+      --nav-h: 160px;               
     }
 
-    /* ─── global reset ─────────────────────────── */
+    
     *{box-sizing:border-box}
     body{
       background:var(--black);
@@ -21,15 +21,15 @@
       font-family:Arial,Helvetica,sans-serif;
       min-height:100vh;
     
-      padding-top:var(--nav-h);     /* NEW  pushes everything below the nav */
+      padding-top:var(--nav-h);     
     }
     
     
     
-    /* ─── title strip ──────────────────────────── */
-    #car-title{
+    
+      #car-title{
       text-align:center;
-      font-size:3rem;             /* slightly smaller */
+      font-size:3rem;             
       font-weight:700;
       color:var(--gold);
       margin-top: 50px;
@@ -45,32 +45,32 @@
       font-weight: 700;
       color: #b6a15a;
       
-      /* NEW: Force it to be on its own line and take full width */
+      
       display: block;
       width: 100%;
       clear: both;
-      margin: 20px 0;  /* Add some vertical spacing */
+      margin: 20px 0;  
   }
     
-    /* ─── two-square grid ──────────────────────── */
+    
     .grid{
       display:flex;
       flex-wrap:wrap;
       justify-content:center;
-      gap:25px;                     /* NEW  tighter gap */
+      gap:25px;                     
       padding:15px;    
-      position:relative;                       /* create containing block */
-      overflow:hidden;              /* NEW  less padding */
+      position:relative;                       
+      overflow:hidden;              
     }
 
-  /* paint the image with a dark tint */
+  
   .grid::before{
       content:"";
       position:absolute;
-      inset:0;                                 /* stretch to all edges   */
+      inset:0;                                 
       background:url("/partials/img/image_fx_\ \(9\).png") center/cover no-repeat ;
-      filter:brightness(.25);                  /* dim so squares pop     */
-      z-index:-1;                              /* sit behind real content*/
+      filter:brightness(.25);                  
+      z-index:-1;                              
       border-radius:12px; 
       transform:scale(1.05);    
   }
@@ -79,23 +79,23 @@
       aspect-ratio:1/1;
       position:relative;
     }
-  /* ─── image panel: keep old width + square ratio ─── */
+  
   .grid > .square:first-child{
       width:clamp(260px,40vw,420px);
       aspect-ratio:1/1;
-      flex:0 0 auto;          /* don’t grow */
+      flex:0 0 auto;          
   }
 
-  /* ─── specs panel: no fixed width, may grow ─── */
+  
   .grid > .square:last-child{
-      width:auto;             /* ← removes the clamp */
-      aspect-ratio:auto;      /* height = content    */
-      flex:1 1 600px;         /* start at 600px, grow into free space */
-      max-width:900px;        /* (optional upper bound) */
-      display:flex;           /* so wrapper can stretch full height   */
+      width:auto;             
+      aspect-ratio:auto;      
+      flex:1 1 600px;         
+      max-width:900px;        
+      display:flex;           
   }
-  .grid > .square:last-child .spec-wrapper{flex:1;}  /* fill the box */
-    /* ─── swiper (image) ───────────────────────── */
+  .grid > .square:last-child .spec-wrapper{flex:1;}  
+    
     .swiper,
     .swiper img{
       width:100%;height:100%;
@@ -103,7 +103,7 @@
       border-radius:10px;
     }
     .thumbs{
-      margin-top:10px;              /* reduced */
+      margin-top:10px;              
       display:flex;gap:6px;justify-content:center;
     }
     .thumbs img{
@@ -115,15 +115,15 @@
     }
     .thumbs img.active,.thumbs img:hover{border-color:var(--gold)}
     
-    /* ─── specs square ─────────────────────────── */
+    
     .spec-wrapper{
-      background:#343435;                  /* light-grey panel */
+      background:#343435;                  
       font-family: 'FrontageRegular';
       border:1px solid #ffca66;
       padding:26px 30px 24px;
       border-radius:4px;
       box-shadow:none;  
-      text-align: center;                   /* flat, like sample */
+      text-align: center;                   
   }
 
   .spec-wrapper h2{
@@ -138,39 +138,37 @@
       padding-bottom:6px;
   }
 
-  /* ───── Specs grid – 4 equal columns (Label/Value · Label/Value) ─ */
+  
   .spec-grid{
       display:grid;
-      grid-template-columns:repeat(4, 1fr);   /* L V | L V */
+      grid-template-columns:repeat(4, 1fr);   
       column-gap:24px;
       row-gap:12px;
       font-size:.85rem;
       text-transform:uppercase;
   }
 
-  /* label (odd cells)  */
+  
   .spec-grid .label{
       font-weight:700;
   }
 
-  /* value (even cells) */
+  
   .spec-grid .value{
       font-weight:500;
-      text-transform:none;   /* keep normal case for values */
+      text-transform:none;   
   }
-    /* ──────────────────────────────────────────────
-    GLOBAL override for every Swiper on the page
-    ──────────────────────────────────────────── */
+    
   .swiper{
-      /* colour & size the library uses for its arrow glyphs */
-      --swiper-navigation-color: rgba(255,255,255,.85);  /* ← white, 85 % */
-      --swiper-navigation-size : 16px;                   /* glyph size     */
+      
+      --swiper-navigation-color: rgba(255,255,255,.85);  
+      --swiper-navigation-size : 16px;                   
   }
 
 
   .swiper-pagination{display:none!important}
 
-  /* arrow buttons – no disc, small hit-area */
+  
   .swiper-button-prev,
   .swiper-button-next{
       width:26px;
@@ -181,32 +179,32 @@
       transition:.2s;
   }
 
-  /* optional hover / keyboard focus tweaks */
+  
   .swiper-button-prev:hover,
   .swiper-button-next:hover{
-      --swiper-navigation-color:#fff;     /* solid white on hover */
+      --swiper-navigation-color:#fff;     
   }
   .swiper-button-prev:focus-visible,
   .swiper-button-next:focus-visible{
       outline:2px solid #fff;
   }
-    /* ─── mobile stack ─────────────────────────── */
+    
     @media(max-width:900px){
       .grid{flex-direction:column;align-items:center}
       .square{width:min(90vw,400px);}
     }
 
-    /* ─── A. bigger horizontal gap on desktop ─── */
+    
   @media (min-width:901px){
     .grid{
-        column-gap:300px;   /* big space left–right (when they sit side-by-side) */
-        row-gap:40px;       /* small space top–bottom */
+        column-gap:300px;   
+        row-gap:40px;       
     }
   }
     
-    /* ─── B. more vertical space between spec rows ─── */
+    
     .spec-grid{
-      row-gap:30px;                  /* was 12px */
+      row-gap:30px;                  
     }
     .similar{
     margin:40px auto;
@@ -253,7 +251,7 @@
     0 8px 0 -4px #000000,
     0 12px 10px -3px #000000;
   }
-  /* card look inside the swiper-slide */
+  
   .sim-card{
     background:#181818;
     border:1px solid #444;
@@ -286,24 +284,24 @@
   }
   .sim-card .btn:hover{background:#b6a15a;color:#000}
 
-  /* size / spacing for the carousel */
-  .similarSwiper{padding-bottom:4px}          /* space under slides */
-  .sim-prev,.sim-next{color:#fff}             /* arrow colour */
+  
+  .similarSwiper{padding-bottom:4px}          
+  .sim-prev,.sim-next{color:#fff}             
 
 
 
-  /* ─────────  COLOR TOKENS  ───────── */
+  
   :root{
-    /* desaturated gold gradient so it blends, not screams */
+    
     --gold-1:#b6a15a;
     --gold-2:#d5c06b;
 
     --black:#000;
-    --black-2:#111;          /* slightly lighter for cards */
-    --text-body:#f0f0f0;     /* light grey for readability on black */
+    --black-2:#111;          
+    --text-body:#f0f0f0;     
   }
 
-  /* ─────────  SECTION WRAPPER  ───────── */
+  
   .luxury--bg{
     background:var(--black);
     color:var(--text-body);
@@ -312,23 +310,23 @@
     font-family:"Poppins",sans-serif;
   }
 
-  /* container keeps content narrow on big screens */
+  
   .luxury--container{
     max-width:1280px;
     margin:0 auto;
   }
 
-  /* ─────────  GOLD GRADIENT TEXT  ───────── */
+  
   @supports (-webkit-background-clip:text){
     .grad-gold{
       background:linear-gradient(110deg,var(--gold-1),var(--gold-2));
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
-      color:transparent;               /* fallback for older browsers */
+      color:transparent;               
     }
   }
 
-  /* ─────────  TYPOGRAPHY  ───────── */
+  
   .luxury--title{
     font-size:clamp(2.3rem,4vw + 1rem,3.9rem);
     font-weight:600;
@@ -347,15 +345,15 @@
     margin-bottom:1.25rem;
   }
 
-  /* Apply gradient-gold to both headings */
+  
   .luxury--title, .card--title{
     background:linear-gradient(110deg,var(--gold-1),var(--gold-2));
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    color:transparent;     /* non-webkit fallback */
+    color:transparent;     
   }
 
-  /* ─────────  CARD GRID  ───────── */
+  
   .luxury--cards{
     display:flex;
     flex-wrap:wrap;
@@ -363,23 +361,23 @@
     gap:2.2rem;
   }
 
-  /* ─────────  CARD  ───────── */
+  
   .luxury--card{
     position:relative;
     background:var(--black-2);
-    border:1px solid rgba(213,192,107,.35);   /* faint gold rim */
+    border:1px solid rgba(213,192,107,.35);   
     border-radius:8px;
     padding:3rem 2.1rem;
     flex:1 1 300px;
     max-width:380px;
 
-    /* white multi-layer glow */
+    
     box-shadow:
         0  4px   6px  rgba(255,255,255,.06),
         0 12px  20px  rgba(255,255,255,.05),
         0 28px  55px  rgba(255,255,255,.04);
 
-    /* entrance position (down & slightly smaller) */
+    
     opacity:0;
     transform:translateY(50px) scale(.96);
     transition:
@@ -389,7 +387,7 @@
     will-change:transform,box-shadow,opacity;
   }
 
-  /* glassy highlight overlay */
+  
   .luxury--card::before{
     content:'';
     position:absolute;
@@ -403,20 +401,20 @@
     transition:opacity .35s ease;
   }
 
-  /* card body text */
+  
   .card--text{
     font-size:1.1rem;
     line-height:1.65;
     color:var(--text-body);
   }
 
-  /* ─────────  ENTER VIEWPORT (from IntersectionObserver JS) ───────── */
+  
   .luxury--card.in-view{
     opacity:1;
     transform:translateY(0) scale(1);
   }
 
-  /* ─────────  HOVER / FOCUS  ───────── */
+  
   .luxury--card:hover,
   .luxury--card:focus-visible{
     transform:translateY(-20px) scale(1.05);
@@ -424,13 +422,13 @@
         0  8px  12px rgba(255,255,255,.08),
         0 24px  38px rgba(255,255,255,.07),
         0 46px  75px rgba(255,255,255,.06),
-        0  0   28px rgba(213,192,107,.25); /* subtle gold halo */
+        0  0   28px rgba(213,192,107,.25); 
   }
 
   .luxury--card:hover::before{
     opacity:.45;
   }
-  /* Compare button styles */
+  
   .compare-button {
       font-size: 2rem;
       font-family: 'FrontageRegular';
@@ -454,7 +452,7 @@
       color: #b6a15a;
   }
 
-  /* Modal Styles */
+  
   .modal {
     display: none;
     position: fixed;
@@ -536,7 +534,7 @@
     background: #1a1a1a;
   }
 
-  /* Car Selection */
+  
   .car-selector {
     margin-bottom: 30px;
     padding: 25px;
@@ -570,7 +568,7 @@
     background: #333333;
   }
 
-  /* Comparison Grid */
+  
   .comparison-container {
     opacity: 0;
     transform: translateY(30px);
@@ -622,15 +620,15 @@
   }
 
   .car-image {
-  width: 120px;           /* Fixed width instead of percentage */
-  height: 80px;           /* Fixed height instead of percentage */
-  object-fit: cover;      /* Keep this to maintain aspect ratio */
+  width: 120px;           
+  height: 80px;           
+  object-fit: cover;      
   border-radius: 15px;
   margin-bottom: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid #d4af37;
-  display: block;         /* Ensure it's a block element */
-  margin-left: auto;      /* Center the image */
+  display: block;         
+  margin-left: auto;      
   margin-right: auto;
 }
 

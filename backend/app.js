@@ -7,10 +7,8 @@ const session = require('express-session');
 const Car = require('./models/car');
 const carData = require('./carData');
 
-// Import routes
 const authRoutes = require('./routes/authRoutes');
 const carRoutes = require('./routes/carRoutes');
-const contactRoutes = require('./routes/contactRoutes');
 const ratingRoutes = require('./routes/ratingRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const viewRoutes = require('./routes/viewRoutes');
@@ -18,7 +16,6 @@ const viewRoutes = require('./routes/viewRoutes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '..', 'public')));
@@ -30,15 +27,12 @@ app.use(session({
     cookie: { secure: false }
 }));
 
-// Routes
 app.use('/', viewRoutes);
 app.use('/admin', authRoutes);
 app.use('/api', carRoutes);
-app.use('/api', contactRoutes);
 app.use('/api', ratingRoutes);
 app.use('/', uploadRoutes);
 
-// Function to add initial car data
 async function addAllCars() {
     try {
         const count = await Car.countDocuments();
@@ -53,7 +47,6 @@ async function addAllCars() {
     }
 }
 
-// Start server
 connectDB()
     .then(async () => {
         console.log('MongoDB connected successfully');

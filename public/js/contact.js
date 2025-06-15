@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitBtn.disabled = false;
                     return;
                 }
-                const response = await fetch('http://localhost:3000/api/rate', {
+                const response = await fetch('/api/rate', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

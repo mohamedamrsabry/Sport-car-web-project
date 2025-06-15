@@ -31,8 +31,6 @@ divs.forEach(div => {
 }
 );
 
-
-// create one IntersectionObserver at top of file
 const revealObserver = new IntersectionObserver(
   entries => {
     entries.forEach(e => {
@@ -45,14 +43,13 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.1 }
 );
 
-// observe anything that is already present and should animate
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 let cars = [];
 
 async function fetchCars() {
   try {
-    const res = await fetch("http://localhost:3000/api/cars");
+    const res = await fetch("/api/cars");
     cars = await res.json();
     populateFilters(); // now populate dropdowns
     const makeParam = getQueryParam("make");
@@ -71,7 +68,7 @@ async function fetchCars() {
 fetchCars(); // call the function on load
 
 
-/* ----------  renderCars  ---------- */
+
 function renderCars(carList) {
   const container = document.getElementById("carList");
   container.innerHTML = "";
@@ -98,16 +95,14 @@ function renderCars(carList) {
 }
   
   function applyFilters() {
-    // Existing dropdown values
+
     const make  = document.getElementById("makeFilter").value;
     const model = document.getElementById("modelFilter").value;
     const year  = document.getElementById("yearFilter").value;
 
-    // NEW: price-range values (default 0 → Infinity)
     const priceFrom = +document.getElementById("priceFrom").value || 0;
     const priceTo   = +document.getElementById("priceTo").value   || Infinity;
 
-    // Apply every active filter
     const filtered = cars.filter(car => {
         const priceNum = parsePrice(car.price);   // helper from Step-3
         return (!make  || car.make  === make)  &&
@@ -125,33 +120,26 @@ function populateFilters() {
     const modelSelect = document.getElementById("modelFilter");
     const yearSelect = document.getElementById("yearFilter");
 
-    // Populate the make dropdown
     const makeSet = new Set(cars.map(car => car.make));
     fillOptions(makeSelect, makeSet);
 
-    // Update model and year dropdowns based on selected make
     makeSelect.addEventListener("change", () => {
         const selectedMake = makeSelect.value;
 
-        // Filter models based on selected make
         const filteredModels = cars
             .filter(car => car.make === selectedMake || !selectedMake)
             .map(car => car.model);
         const modelSet = new Set(filteredModels);
 
-        // Populate the model dropdown
         fillOptions(modelSelect, modelSet);
 
-        // Clear and repopulate the year dropdown
         yearSelect.innerHTML = '<option value="">Select Year</option>';
     });
 
-    // Update year dropdown based on selected model
     modelSelect.addEventListener("change", () => {
         const selectedMake = makeSelect.value;
         const selectedModel = modelSelect.value;
 
-        // Filter years based on selected make and model
         const filteredYears = cars
             .filter(car =>
                 (car.make === selectedMake || !selectedMake) &&
@@ -160,7 +148,6 @@ function populateFilters() {
             .map(car => car.year);
         const yearSet = new Set(filteredYears);
 
-        // Populate the year dropdown
         fillOptions(yearSelect, yearSet);
     });
 }
@@ -186,8 +173,6 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
-
-// Initialize page
 window.onload = () => {
     populateFilters(); // Populate the dropdowns first
 
@@ -198,10 +183,9 @@ window.onload = () => {
         makeSelect.value = makeParam; // Set the make filter to the query parameter value
         makeSelect.dispatchEvent(new Event("change")); // Trigger the change event to update models and years
 
-        // Directly call the applyFilters function instead of relying on a button click
         applyFilters();
     } else {
-        // Render all cars if no filter is applied
+
         renderCars(cars);
     }
 };

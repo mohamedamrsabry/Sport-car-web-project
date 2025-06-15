@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Installment Calculator</title>
-    <link rel="icon" type="image/png" href="/partials/img/logo.ico"> <!--page icon logo-->
-    <style>
+    <link rel="icon" type="image/png" href="/partials/img/logo.ico">     <style>
         * {
             margin: 0;
             padding: 0;
@@ -230,16 +229,16 @@
                 grid-template-columns: 1fr;
             }
         }
-          /* Back button */
+          
 .back-btn {
   position: fixed;
   top: 20px;
   left: 20px;
-  background: rgba(0, 0, 0, 0.4); /* Transparent black */
-  color: #d4af37; /* Gold text */
+  background: rgba(0, 0, 0, 0.4); 
+  color: #d4af37; 
   padding: 14px 21px;
-  border-radius: 999px; /* Fully rounded */
-  border: 1px solid #d4af37; /* Gold border */
+  border-radius: 999px; 
+  border: 1px solid #d4af37; 
   font-size: 14px;
   text-decoration: none;
   backdrop-filter: blur(5px);
@@ -249,10 +248,10 @@
 }
 
 .back-btn:hover {
-  background: rgba(0, 0, 0, 0.6); /* Darker on hover */
+  background: rgba(0, 0, 0, 0.6); 
   transform: translateX(-3px);
-  color: #fff; /* Optional: white text on hover */
-  border-color: #fff; /* Optional: white border on hover */
+  color: #fff; 
+  border-color: #fff; 
 }
 
     </style>
@@ -399,16 +398,14 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const response = await fetch("http://localhost:3000/api/cars");
+        const response = await fetch("/api/cars");
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         cars = await response.json();
 
-        // Populate brands dropdown with fetched data
         populateBrands();
 
-        // Check for URL parameters to pre-select brand/model
         const params = new URLSearchParams(location.search);
         const brand = params.get('brand');
         const model = params.get('model');
@@ -418,7 +415,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             updateModels();
 
             if (model) {
-                // Need to wait for models to populate
+
                 setTimeout(() => {
                     document.getElementById('carModel').value = model;
                 }, 100);
@@ -426,22 +423,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } catch (error) {
         console.error('Error fetching car data:', error);
-        // Fall back to hardcoded data if fetch fails
+
         console.log('Falling back to hardcoded car data');
         useHardcodedData();
     }
 });
 
-// Populate the brands dropdown with unique car makes from fetched data
 function populateBrands() {
     const brandSelect = document.getElementById('carBrand');
     
     if (!brandSelect || !cars.length) return;
 
-    // Clear existing options except the first one
     brandSelect.innerHTML = '<option value="">Choose...</option>';
 
-    // Get unique brands from fetched data
     const brands = [...new Set(cars.map(car => car.make))].sort();
 
     brands.forEach(brand => {
@@ -452,7 +446,6 @@ function populateBrands() {
     });
 }
 
-// Update models dropdown based on selected brand using fetched data
 function updateModels() {
     const brand = document.getElementById('carBrand').value;
     const modelSelect = document.getElementById('carModel');
@@ -461,15 +454,12 @@ function updateModels() {
     
     if (!brand || !cars.length) return;
 
-    // Filter models for the selected brand from fetched data
     const brandModels = cars
         .filter(car => car.make.toLowerCase() === brand.toLowerCase())
         .map(car => car.model);
 
-    // Remove duplicates and sort
     const uniqueModels = [...new Set(brandModels)].sort();
 
-    // Add models to dropdown
     uniqueModels.forEach(model => {
         const option = document.createElement('option');
         option.value = model;
@@ -478,7 +468,6 @@ function updateModels() {
     });
 }
 
-// Get car price from fetched data
 function getCarPrice(model) {
     if (!cars.length) return 750000;
 
@@ -509,7 +498,6 @@ function getCarPrice(model) {
     return carPrice;
 }
 
-// Fallback to hardcoded data if fetch fails
 function useHardcodedData() {
     const carModels = {
     };
@@ -528,7 +516,6 @@ function useHardcodedData() {
     populateBrands();
 }
 
-// Get hardcoded prices (fallback)
 function getHardcodedPrice(model) {
     const carPrices = {
 
@@ -537,13 +524,11 @@ function getHardcodedPrice(model) {
     return carPrices[model] || 750000;
 }
 
-// Enhanced toggle info function
 function toggleInfo() {
     const info = document.getElementById('expandableInfo');
     info.classList.toggle('expanded');
 }
 
-// Enhanced calculate installment function
 function calculateInstallment() {
     const brand = document.getElementById('carBrand').value;
     const model = document.getElementById('carModel').value;
@@ -551,7 +536,6 @@ function calculateInstallment() {
     const months = parseInt(document.getElementById('months').value);
     const jobTitle = document.getElementById('jobTitle').value;
 
-    // Validation with custom modal-like alert
     if (!brand || !model) {
         showValidationMessage('Please select both car brand and model');
         return;
@@ -567,28 +551,23 @@ function calculateInstallment() {
         return;
     }
 
-    // Get car price from fetched data or fallback
     const carPrice = getCarPrice(model);
     const downPaymentAmount = (carPrice * downPaymentPercent) / 100;
     const loanAmount = carPrice - downPaymentAmount;
     const monthlyPayment = loanAmount / months;
 
-    // Update the existing result display
     document.getElementById('monthlyPayment').textContent = 'EGP ' + monthlyPayment.toLocaleString('en-US', {maximumFractionDigits: 0});
     document.getElementById('totalAmount').textContent = 'EGP ' + carPrice.toLocaleString();
     document.getElementById('downPaymentAmount').textContent = 'EGP ' + downPaymentAmount.toLocaleString('en-US', {maximumFractionDigits: 0});
     document.getElementById('loanAmount').textContent = 'EGP ' + loanAmount.toLocaleString('en-US', {maximumFractionDigits: 0});
 
-    // Show the result section with animation
     document.getElementById('resultSection').classList.add('show');
 
-    // Scroll to results smoothly
     document.getElementById('resultSection').scrollIntoView({ 
         behavior: 'smooth',
         block: 'nearest'
     });
 
-    // Debug information
     console.log('Calculation Details:', {
         brand: brand,
         model: model,
