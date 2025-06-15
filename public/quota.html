@@ -524,7 +524,11 @@
                 
                 const formData = new FormData(this);
                 
-                fetch('http://localhost:8080/submit-quote.php', {
+                             const baseUrl = window.location.hostname === 'localhost' 
+                ? 'http://localhost:8080' 
+                : 'https://stradauto.onrender.com:8080';
+
+            fetch(`${baseUrl}/submit-quote.php`, {
                     method: 'POST',
                     body: formData
                 })

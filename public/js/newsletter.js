@@ -31,10 +31,14 @@ function initNewsletter() {
             const formData = new FormData();
             formData.append('email', email);
 
-            fetch('http://localhost:8080/newsletter-subscribe.php', {
-                method: 'POST',
-                body: formData
-            })
+             const baseUrl = window.location.hostname === 'localhost' 
+                ? 'http://localhost:8080' 
+                : 'https://stradauto.onrender.com';
+
+            fetch(`${baseUrl}/newsletter-subscribe.php`, {
+                        method: 'POST',
+                        body: formData
+                    })
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);

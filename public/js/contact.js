@@ -133,7 +133,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 console.log('Sending data:', formData); 
                 
-                const response = await fetch('http://localhost:8080/contact.php', {
+                 const baseUrl = window.location.hostname === 'localhost' 
+                    ? 'http://localhost:8080' 
+                    : 'https://stradauto.onrender.com';
+
+                const response = await fetch(`${baseUrl}/contact.php`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

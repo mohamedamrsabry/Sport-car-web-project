@@ -7,7 +7,13 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: http://localhost:3000');
+$allowed_origins = [
+    'http://localhost:3000',
+    'https://stradauto.onrender.com'
+];
+if (in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
+    header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
+}
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
@@ -163,8 +169,8 @@ function sendCustomerConfirmation($firstName, $lastName, $email, $phone, $carOfI
         $mail->SMTPAuth = true;
         $mail->Username = FROM_EMAIL;
         $mail->Password = GMAIL_APP_PASSWORD;
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = 465;
 
         $mail->setFrom(FROM_EMAIL, FROM_NAME);
         $mail->addAddress($email, $firstName . ' ' . $lastName);
@@ -299,8 +305,8 @@ function sendAdminNotification($firstName, $lastName, $email, $phone, $carOfInte
         $mail->SMTPAuth = true;
         $mail->Username = FROM_EMAIL;
         $mail->Password = GMAIL_APP_PASSWORD;
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = 465;
 
         $mail->setFrom(FROM_EMAIL, FROM_NAME);
         $mail->addAddress(ADMIN_EMAIL);
