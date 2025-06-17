@@ -68,22 +68,18 @@ function initNewsletter() {
                 showNewsletterMessage('error', 'There was an error processing your subscription. Please try again later.');
             });
         });
-
         newsletterInitialized = true;
     }
-
     function resetSubscribeButton() {
         subscribeBtn.disabled = false;
         subscribeText.style.display = 'inline';
         subscribeLoading.style.display = 'none';
     }
-
     function isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
 }
-
 function showNewsletterMessage(type, message) {
     const overlay = document.getElementById('newsletterOverlay');
     const successMsg = document.getElementById('newsletterSuccess');
@@ -101,7 +97,6 @@ function showNewsletterMessage(type, message) {
         successMsg.style.display = 'none';
     }
 }
-
 function closeNewsletterMessage() {
     const overlay = document.getElementById('newsletterOverlay');
     const successMsg = document.getElementById('newsletterSuccess');
@@ -111,11 +106,9 @@ function closeNewsletterMessage() {
     successMsg.style.display = 'none';
     errorMsg.style.display = 'none';
 }
-
 document.addEventListener('DOMContentLoaded', function() {
 
     setTimeout(initNewsletter, 100);
 });
-
 window.showNewsletterMessage = showNewsletterMessage;
 window.closeNewsletterMessage = closeNewsletterMessage;
