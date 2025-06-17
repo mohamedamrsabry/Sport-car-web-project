@@ -1,4 +1,3 @@
-
 const loginModal = document.getElementById('loginModal');
 const loginForm = document.getElementById('loginForm');
 const loginBtn = document.getElementById('loginBtn');

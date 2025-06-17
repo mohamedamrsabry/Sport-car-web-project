@@ -31,7 +31,7 @@ app.use('/', viewRoutes);
 app.use('/admin', authRoutes);
 app.use('/api', carRoutes);
 app.use('/api', ratingRoutes);
-app.use('/', uploadRoutes);
+app.use('/api', uploadRoutes);
 
 async function addAllCars() {
     try {
