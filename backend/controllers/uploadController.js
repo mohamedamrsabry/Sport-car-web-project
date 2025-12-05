@@ -1,5 +1,4 @@
 const path = require('path');
-const { clearFolder } = require('../utils/fileHelpers');
 const fs = require('fs');
 
 const uploadImages = (req, res) => {
@@ -13,11 +12,6 @@ const uploadImages = (req, res) => {
         const folderName = `${make} ${model}`;
         const productsDir = path.join(__dirname, '..', '..', 'public', 'partials', 'img', 'products');
         const folderPath = path.join(productsDir, folderName);
-        
-        if (fs.existsSync(folderPath)) {
-            clearFolder(folderPath);
-            console.log(`Cleared existing images for ${folderName}`);
-        }
         
         const mainImagePath = `/partials/img/products/${folderName}/${folderName}${path.extname(req.files[0].originalname)}`;
         

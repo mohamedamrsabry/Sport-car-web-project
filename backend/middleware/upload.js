@@ -21,21 +21,26 @@ const storage = multer.diskStorage({
         cb(null, folderPath);
     },
     filename: function (req, file, cb) {
+        // Track the index of the file in the current upload
+        if (typeof req.fileIndex !== 'number') req.fileIndex = 0;
         const make = req.body.make;
         const model = req.body.model;
         const folderName = `${make} ${model}`;
-        
-        const folderPath = path.join(productsDir, folderName);
-        const files = fs.readdirSync(folderPath).filter(f => f.match(/\.(jpg|jpeg|png|gif)$/i));
+        const ext = path.extname(file.originalname);
         
         let filename;
-        if (files.length === 0) {
-            filename = `${folderName}${path.extname(file.originalname)}`;
+        if (req.fileIndex === 0) {
+            filename = `${folderName}${ext}`;
+        } else if (req.fileIndex === 1) {
+            filename = `A${ext}`;
+        } else if (req.fileIndex === 2) {
+            filename = `B${ext}`;
+        } else if (req.fileIndex === 3) {
+            filename = `C${ext}`;
         } else {
-            const letters = ['A', 'B', 'C'];
-            filename = `${letters[files.length - 1]}${path.extname(file.originalname)}`;
+            filename = `extra_${req.fileIndex}${ext}`;
         }
-        
+        req.fileIndex++;
         cb(null, filename);
     }
 });
