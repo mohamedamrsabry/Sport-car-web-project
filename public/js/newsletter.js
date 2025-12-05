@@ -1,12 +1,10 @@
 
-let newsletterInitialized = false; // Flag to prevent multiple initializations
-
+let newsletterInitialized = false;
 function initNewsletter() {
 
     if (newsletterInitialized) {
         return;
     }
-    
     const newsletterForm = document.getElementById('newsletterForm');
     const subscribeBtn = document.getElementById('subscribeBtn');
     const subscribeText = document.getElementById('subscribeText');
